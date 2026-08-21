@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Jost:wght@600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=Noto+Sans+Thai:wght@400;500;700&amp;family=Noto+Sans+Khmer:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF;color:#111111;-webkit-font-smoothing:antialiased}
+a{color:#111111;text-decoration:none}
+a:hover{color:#8044FD}
+::selection{background:#E4D7FF}
+@keyframes vhaflow{0%{background-position:0 0}100%{background-position:0 -36px}}
+@keyframes vhaflowx{0%{background-position:0 0}100%{background-position:32px 0}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="font-family:'Inter','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;background:#FFFFFF;color:#111111">
+
+<div onClick="{{ closeMenu }}" style="position:fixed;inset:0;background:rgba(17,17,17,.35);z-index:85;opacity:{{ bdOp }};pointer-events:{{ bdPe }};transition:opacity .4s ease"></div>
+<aside data-screen-label="Menu drawer" style="position:fixed;top:0;left:0;bottom:0;width:340px;max-width:84vw;background:#FFFFFF;border-right:1px solid #E5E5E5;z-index:90;transform:{{ drawerX }};transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:{{ drawerShadow }};display:flex;flex-direction:column;padding:24px 30px 28px;box-sizing:border-box">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:34px">
+    <a href="#/" onClick="{{ closeMenu }}" style="display:flex;align-items:center;gap:10px">
+      <img src="uploads/Website%20Pics/24211ef7-3c49-4c67-870d-b82fdb1fdedc.JPG" alt="VHA" style="height:28px;width:28px;object-fit:cover;filter:grayscale(1) brightness(1.12) contrast(1.6);mix-blend-mode:multiply">
+      <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:15px;color:#111111">Venture Hub Academy</span>
+    </a>
+    <button onClick="{{ closeMenu }}" aria-label="Close menu" style="background:none;border:0;font-size:26px;line-height:1;color:#5A5A5A;cursor:pointer;padding:4px" style-hover="color:#8044FD">×</button>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <a href="#/about" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:18px;padding:22px 0;border-top:1px solid #F0F0F0;font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:25px;color:#111111" style-hover="color:#8044FD"><span style="font-size:12px;color:#CDB7FC">01</span>{{ t.nav.about }}</a>
+    <a href="#/accelerator" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:18px;padding:22px 0;border-top:1px solid #F0F0F0;font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:25px;color:#111111" style-hover="color:#8044FD"><span style="font-size:12px;color:#CDB7FC">02</span>{{ t.nav.acc }}</a>
+    <a href="#/community" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:18px;padding:22px 0;border-top:1px solid #F0F0F0;border-bottom:1px solid #F0F0F0;font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:25px;color:#111111" style-hover="color:#8044FD"><span style="font-size:12px;color:#CDB7FC">03</span>{{ t.nav.com }}</a>
+    <a href="#/apply" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:18px;padding:22px 0;border-bottom:1px solid #F0F0F0;font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:25px;color:#8044FD" style-hover="color:#A174FE"><span style="font-size:12px;color:#CDB7FC">04</span>{{ t.nav.applyNow }}<span style="font-size:18px;margin-left:auto">→</span></a>
+  </div>
+  <div style="margin-top:auto">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.4px;color:#9B9B9B;margin-bottom:12px">Language</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ langs }}" as="l" hint-placeholder-count="0">
+        <span data-lang-key="{{ l.k }}" onClick="{{ pickLangEv }}" style="border:1px solid #E5E5E5;border-radius:999px;padding:7px 14px;font-size:12.5px;color:#111111;cursor:pointer" style-hover="border-color:#CDB7FC;color:#8044FD">{{ l.n }}</span>
+      </sc-for>
+    </div>
+  </div>
+</aside>
+
+<nav data-screen-label="Nav" style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px;width:32px;height:34px;background:none;border:0;cursor:pointer;padding:0">
+        <span style="display:block;width:22px;height:2px;background:#111111"></span>
+        <span style="display:block;width:14px;height:2px;background:#111111"></span>
+        <span style="display:block;width:22px;height:2px;background:#111111"></span>
+      </button>
+      <a href="#/" style="display:flex;align-items:center;gap:11px">
+        <img src="uploads/Website%20Pics/24211ef7-3c49-4c67-870d-b82fdb1fdedc.JPG" alt="VHA" style="height:30px;width:30px;object-fit:cover;filter:grayscale(1) brightness(1.12) contrast(1.6);mix-blend-mode:multiply">
+        <span style="font-family:'Century Gothic','Jost','Noto Sans TC',sans-serif;font-weight:700;font-size:16px;letter-spacing:.2px;color:#111111">Venture Hub Academy</span>
+      </a>
+    </div>
+    <div style="display:flex;align-items:center;gap:34px;font-size:14.5px;font-weight:500">
+      <a href="#/" style="color:#111111;padding:6px 0;border-bottom:2px solid {{ ulHome }}" style-hover="color:#8044FD">{{ t.nav.home }}</a>
+      <a href="#/about" style="color:#111111;padding:6px 0;border-bottom:2px solid {{ ulAbout }}" style-hover="color:#8044FD">{{ t.nav.about }}</a>
+      <a href="#/accelerator" style="color:#111111;padding:6px 0;border-bottom:2px solid {{ ulAcc }}" style-hover="color:#8044FD">{{ t.nav.acc }}</a>
+      <a href="#/community" style="color:#111111;padding:6px 0;border-bottom:2px solid {{ ulCom }}" style-hover="color:#8044FD">{{ t.nav.com }}</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div data-langbox="1" style="position:relative">
+        <button onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:7px;background:#FFFFFF;border:1px solid #E5E5E5;border-radius:3px;padding:8px 12px;font-family:'Inter','Noto Sans TC','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-size:13px;font-weight:600;color:#111111;cursor:pointer" style-hover="border-color:#CDB7FC;color:#8044FD">{{ langLabel }}<span style="font-size:9px;color:#5A5A5A">▾</span></button>
+        <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;right:0;top:calc(100% + 8px);background:#FFFFFF;border:1px solid #E5E5E5;border-radius:4px;box-shadow:0 16px 40px rgba(17,17,17,.10);min-width:176px;padding:6px;display:flex;flex-direction:column">
+            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="0">
+              <div data-lang-key="{{ l.k }}" onClick="{{ pickLangEv }}" style="padding:9px 12px;border-radius:3px;font-size:13.5px;color:#111111;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px" style-hover="background:#F6F2FF;color:#8044FD"><span>{{ l.n }}</span><span style="font-size:11px;color:#CDB7FC;font-weight:600">{{ l.c }}</span></div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <a href="#/apply" style="background:#8044FD;color:#FFFFFF;font-size:14px;font-weight:600;padding:10px 18px;border-radius:3px" style-hover="background:#A174FE;color:#FFFFFF">{{ t.nav.apply }}</a>
+    </div>
+  </div>
+</nav>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Home">
+
+<section data-screen-label="Home — Hero" style="position:relative;overflow:hidden;background:#FFFFFF;border-bottom:1px solid #E5E5E5">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <canvas ref="{{ canvasRef }}" style="display:block"></canvas>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:110px 40px 150px">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.hero.eyebrow }}</div>
+    <h1 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(42px, 4.6vw, 64px);line-height:1.12;letter-spacing:-.5px;margin:20px 0 24px;max-width:800px;text-wrap:pretty">{{ t.hero.title }}</h1>
+    <p style="font-size:18px;line-height:1.68;color:#5A5A5A;max-width:560px;margin:0 0 40px">{{ t.hero.sub }}</p>
+    <a href="#/apply" style="display:inline-block;background:#8044FD;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:3px;box-shadow:0 10px 28px rgba(128,68,253,.22)" style-hover="background:#A174FE;color:#FFFFFF">{{ t.hero.cta }}</a>
+  </div>
+</section>
+
+<section data-screen-label="Home — At a glance" style="background:#FAFAFA;border-bottom:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(4, 1fr)">
+    <div style="padding:38px 36px 38px 0">
+      <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:40px;line-height:1;color:#111111"><span style="font-size:22px;font-weight:700">{{ t.stats.s1.pre }}</span><span data-count="{{ t.stats.s1.n }}">{{ t.stats.s1.n }}</span><span style="font-size:22px;font-weight:700">{{ t.stats.s1.suf }}</span></div>
+      <div style="margin-top:10px;font-size:14px;color:#5A5A5A">{{ t.stats.s1.label }}</div>
+    </div>
+    <div style="padding:38px 36px;border-left:1px solid #E5E5E5">
+      <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:40px;line-height:1;color:#111111"><span style="font-size:22px;font-weight:700">{{ t.stats.s2.pre }}</span><span data-count="{{ t.stats.s2.n }}">{{ t.stats.s2.n }}</span><span style="font-size:22px;font-weight:700">{{ t.stats.s2.suf }}</span></div>
+      <div style="margin-top:10px;font-size:14px;color:#5A5A5A">{{ t.stats.s2.label }}</div>
+    </div>
+    <div style="padding:38px 36px;border-left:1px solid #E5E5E5">
+      <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:40px;line-height:1;color:#111111"><span data-count="{{ t.stats.s3.n }}">{{ t.stats.s3.n }}</span><span style="font-size:22px;font-weight:700">{{ t.stats.s3.suf }}</span></div>
+      <div style="margin-top:10px;font-size:14px;color:#5A5A5A">{{ t.stats.s3.label }}</div>
+    </div>
+    <div style="padding:38px 0 38px 36px;border-left:1px solid #E5E5E5">
+      <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:40px;line-height:1;color:#111111"><span data-count="{{ t.stats.s4.n }}">{{ t.stats.s4.n }}</span><span style="font-size:22px;font-weight:700">{{ t.stats.s4.suf }}</span></div>
+      <div style="margin-top:10px;font-size:14px;color:#5A5A5A">{{ t.stats.s4.label }}</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Home — Why execution matters" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:130px 40px;display:grid;grid-template-columns:7fr 5fr;gap:80px;align-items:start">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.why.eb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:36px;line-height:1.22;letter-spacing:-.3px;margin:18px 0 26px;max-width:520px;text-wrap:pretty">{{ t.why.h }}</h2>
+      <p style="font-size:16.5px;line-height:1.8;color:#5A5A5A;max-width:560px;margin:0">{{ t.why.p }}</p>
+    </div>
+    <div data-reveal="1" data-rd="0.12" style="aspect-ratio:4/4.6;overflow:hidden;border:1px solid #E5E5E5">
+      <img src="uploads/Website%20Pics/260523%20hkU_0037%20(1).JPG" alt="Founder presenting at a VHA session" style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Home — How it works" style="background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px 130px">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.how.eb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:36px;letter-spacing:-.3px;margin:18px 0 0">{{ t.how.h }}</h2>
+    </div>
+    <div style="margin-top:64px;display:grid;grid-template-columns:repeat(4, 1fr);gap:40px">
+      <sc-for list="{{ t.how.steps }}" as="s" hint-placeholder-count="4">
+        <div data-reveal="1">
+          <div style="height:1px;background:#DDDDDD;position:relative;margin-bottom:28px"><span style="position:absolute;left:0;top:-3.5px;width:8px;height:8px;background:#8044FD"></span></div>
+          <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14px;color:#8044FD">{{ s.n }}</div>
+          <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:19px;margin:10px 0 10px;text-wrap:pretty">{{ s.t }}</h3>
+          <p style="font-size:14.5px;line-height:1.65;color:#5A5A5A;margin:0 0 14px">{{ s.d }}</p>
+          <sc-if value="{{ s.tag }}" hint-placeholder-val="{{ false }}">
+            <span style="display:inline-block;border:1px solid #CDB7FC;color:#8044FD;background:#FFFFFF;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:600">{{ s.tag }}</span>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Home — Event photo band" style="position:relative;height:440px;overflow:hidden">
+  <img src="uploads/Website%20Pics/260523%20hkU_0049.JPG" alt="Venture Showcase at The University of Hong Kong" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block">
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:18px 40px;background:linear-gradient(to top, rgba(17,17,17,.45), rgba(17,17,17,0))">
+    <span style="font-size:12.5px;font-weight:500;color:#FFFFFF;letter-spacing:.3px">Venture Showcase — The University of Hong Kong, May 2026</span>
+  </div>
+</section>
+
+<section data-screen-label="Home — Beyond capital" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:130px 40px">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.beyond.eb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:36px;letter-spacing:-.3px;margin:18px 0 0;max-width:640px;text-wrap:pretty">{{ t.beyond.h }}</h2>
+    </div>
+    <div style="margin-top:60px;display:grid;grid-template-columns:repeat(3, 1fr);gap:56px">
+      <div data-reveal="1">
+        <svg viewBox="0 0 32 32" style="width:34px;height:34px;display:block;margin-bottom:18px" fill="none" stroke="#8044FD" stroke-width="1.7"><rect x="9" y="9" width="14" height="14" rx="2"></rect><rect x="13.5" y="13.5" width="5" height="5"></rect><line x1="12" y1="9" x2="12" y2="4.5"></line><line x1="16" y1="9" x2="16" y2="4.5"></line><line x1="20" y1="9" x2="20" y2="4.5"></line><line x1="12" y1="27.5" x2="12" y2="23"></line><line x1="16" y1="27.5" x2="16" y2="23"></line><line x1="20" y1="27.5" x2="20" y2="23"></line><line x1="9" y1="12" x2="4.5" y2="12"></line><line x1="9" y1="16" x2="4.5" y2="16"></line><line x1="9" y1="20" x2="4.5" y2="20"></line><line x1="27.5" y1="12" x2="23" y2="12"></line><line x1="27.5" y1="16" x2="23" y2="16"></line><line x1="27.5" y1="20" x2="23" y2="20"></line></svg>
+        <div style="width:26px;height:3px;background:#8044FD;margin-bottom:18px"></div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:20px;margin:0 0 12px;text-wrap:pretty">{{ t.beyond.i1.t }}</h3>
+        <p style="font-size:15px;line-height:1.7;color:#5A5A5A;margin:0">{{ t.beyond.i1.d }}</p>
+      </div>
+      <div data-reveal="1" data-rd="0.08">
+        <svg viewBox="0 0 32 32" style="width:34px;height:34px;display:block;margin-bottom:18px" fill="none" stroke="#8044FD" stroke-width="1.7"><circle cx="16" cy="16" r="11"></circle><ellipse cx="16" cy="16" rx="4.6" ry="11"></ellipse><line x1="5" y1="16" x2="27" y2="16"></line><line x1="6.5" y1="10" x2="25.5" y2="10"></line><line x1="6.5" y1="22" x2="25.5" y2="22"></line></svg>
+        <div style="width:26px;height:3px;background:#8044FD;margin-bottom:18px"></div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:20px;margin:0 0 12px;text-wrap:pretty">{{ t.beyond.i2.t }}</h3>
+        <p style="font-size:15px;line-height:1.7;color:#5A5A5A;margin:0">{{ t.beyond.i2.d }}</p>
+      </div>
+      <div data-reveal="1" data-rd="0.16">
+        <svg viewBox="0 0 32 32" style="width:34px;height:34px;display:block;margin-bottom:18px" fill="none" stroke="#8044FD" stroke-width="1.7"><circle cx="16" cy="7.5" r="3.2"></circle><circle cx="7" cy="24" r="3.2"></circle><circle cx="25" cy="24" r="3.2"></circle><line x1="14.3" y1="10.3" x2="8.6" y2="21.3"></line><line x1="17.7" y1="10.3" x2="23.4" y2="21.3"></line><line x1="10.2" y1="24" x2="21.8" y2="24"></line></svg>
+        <div style="width:26px;height:3px;background:#8044FD;margin-bottom:18px"></div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:20px;margin:0 0 12px;text-wrap:pretty">{{ t.beyond.i3.t }}</h3>
+        <p style="font-size:15px;line-height:1.7;color:#5A5A5A;margin:0">{{ t.beyond.i3.d }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Home — Jurisdictions" style="background:#FAFAFA;border-top:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px 130px;display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:center">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.map.eb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:36px;letter-spacing:-.3px;margin:18px 0 34px">{{ t.map.h }}</h2>
+      <div style="display:flex;flex-direction:column;border-bottom:1px solid #E5E5E5">
+        <sc-for list="{{ t.map.markets }}" as="m" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-top:1px solid #E5E5E5"><span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:13px;color:#8044FD;width:22px">{{ m.n }}</span><span style="font-size:16px;font-weight:500">{{ m.name }}</span></div>
+        </sc-for>
+      </div>
+    </div>
+    <div data-reveal="1" data-rd="0.1" style="height:660px;border-radius:24px;overflow:hidden;background:#F6F3FE;border:1px solid #ECE4FC">
+      <iframe src="vha-map-dotted.html" title="VHA jurisdictions map" loading="lazy" style="width:100%;height:100%;border:0;display:block;pointer-events:none"></iframe>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Home — Closing CTA" style="background:#FFFFFF">
+  <div data-reveal="1" style="max-width:1280px;margin:0 auto;padding:150px 40px;text-align:center">
+    <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(32px, 3.4vw, 46px);letter-spacing:-.4px;margin:0 0 34px;text-wrap:pretty">{{ t.close.h }}</h2>
+    <a href="#/apply" style="display:inline-block;background:#8044FD;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:3px" style-hover="background:#A174FE;color:#FFFFFF">{{ t.hero.cta }}</a>
+  </div>
+</section>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="About">
+
+<section data-screen-label="About — Header" style="position:relative;overflow:hidden;background:#FFFFFF;border-bottom:1px solid #E5E5E5">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <canvas ref="{{ canvasRef }}" style="display:block"></canvas>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 40px 88px">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">Venture Hub Academy</div>
+    <h1 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(40px, 4vw, 56px);letter-spacing:-.5px;margin:16px 0 0">{{ t.about.title }}</h1>
+  </div>
+</section>
+
+<section data-screen-label="About — Mission" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px 110px">
+    <div data-reveal="1" style="max-width:900px">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.about.missionEb }}</div>
+      <p style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(26px, 2.6vw, 36px);line-height:1.42;letter-spacing:-.2px;margin:22px 0 0;padding-left:28px;border-left:3px solid #8044FD;text-wrap:pretty">{{ t.about.mission }}</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="About — Photo" style="position:relative;height:460px;overflow:hidden">
+  <img src="uploads/Website%20Pics/260523%20hkU_0141.JPG" alt="VHA panel discussion" style="width:100%;height:100%;object-fit:cover;object-position:center 68%;display:block">
+</section>
+
+<section data-screen-label="About — Selection criteria" style="background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px">
+    <div data-reveal="1" style="max-width:640px;margin:0 auto 56px;text-align:center">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.about.critEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:34px;line-height:1.25;letter-spacing:-.3px;margin:18px 0 0;text-wrap:pretty">{{ t.about.critH }}</h2>
+    </div>
+    <div data-reveal="1" data-rd="0.1" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+      <sc-for list="{{ t.about.crit }}" as="c" hint-placeholder-count="3">
+        <div style="background:#FFFFFF;border:1px solid #E5E5E5;padding:32px 28px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 44px rgba(17,17,17,.08);border-color:#CDB7FC">
+          <svg viewBox="0 0 32 32" style="width:30px;height:30px;display:block;margin-bottom:20px" fill="none" stroke="#8044FD" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"></circle><path d="M10.5 16.5l3.7 3.7 7.3-8.4"></path></svg>
+          <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:13px;color:#8044FD;margin-bottom:10px">{{ c.n }}</div>
+          <p style="font-size:15.5px;line-height:1.65;color:#111111;margin:0">{{ c.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="About — Who we back" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px;display:grid;grid-template-columns:7fr 5fr;gap:80px;align-items:center">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.about.whoEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:34px;line-height:1.25;letter-spacing:-.3px;margin:18px 0 20px;max-width:520px;text-wrap:pretty">{{ t.about.whoH }}</h2>
+      <div style="display:flex;gap:10px;margin:0 0 22px;flex-wrap:wrap">
+        <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #E5E5E5;background:#FAFAFA;color:#9B9B9B;padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:600"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9B9B9B" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"></path></svg>{{ t.about.notTag }}</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #CDB7FC;background:#F6F2FF;color:#8044FD;padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:600"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8044FD" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"></path></svg>{{ t.about.yesTag }}</span>
+      </div>
+      <p style="font-size:16.5px;line-height:1.8;color:#5A5A5A;max-width:560px;margin:0">{{ t.about.who }}</p>
+    </div>
+    <div data-reveal="1" data-rd="0.12" style="aspect-ratio:4/4.6;overflow:hidden;border:1px solid #E5E5E5">
+      <img src="uploads/Website%20Pics/260523%20hkU_0160.JPG" alt="VHA community session" style="width:100%;height:100%;object-fit:cover;object-position:center 62%;display:block">
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="About — Institutional backing" style="background:#FAFAFA;border-top:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:110px 40px 120px">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.about.backEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:34px;letter-spacing:-.3px;margin:18px 0 22px">{{ t.about.backH }}</h2>
+      <p style="font-size:16.5px;line-height:1.75;color:#5A5A5A;max-width:640px;margin:0 0 8px">{{ t.about.back1 }}</p>
+      <p style="font-size:16.5px;line-height:1.75;color:#5A5A5A;max-width:640px;margin:0 0 40px">{{ t.about.back2 }}</p>
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px">
+        <div style="border:1px solid #E5E5E5;background:#FFFFFF;padding:24px 20px;display:flex;flex-direction:column;gap:16px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 36px rgba(17,17,17,.07)">
+          <svg viewBox="0 0 32 32" style="width:24px;height:24px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l11-7 11 7"></path><rect x="7" y="13" width="18" height="2.2"></rect><line x1="8.5" y1="15.5" x2="8.5" y2="24"></line><line x1="13.7" y1="15.5" x2="13.7" y2="24"></line><line x1="18.3" y1="15.5" x2="18.3" y2="24"></line><line x1="23.5" y1="15.5" x2="23.5" y2="24"></line><rect x="5" y="24" width="22" height="2.2"></rect></svg>
+          <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14.5px;color:#111111">First Financial Holding</span>
+        </div>
+        <div style="border:1px solid #E5E5E5;background:#FFFFFF;padding:24px 20px;display:flex;flex-direction:column;gap:16px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 36px rgba(17,17,17,.07)">
+          <svg viewBox="0 0 32 32" style="width:24px;height:24px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
+          <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14.5px;color:#111111">HKU</span>
+        </div>
+        <div style="border:1px solid #E5E5E5;background:#FFFFFF;padding:24px 20px;display:flex;flex-direction:column;gap:16px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 36px rgba(17,17,17,.07)">
+          <svg viewBox="0 0 32 32" style="width:24px;height:24px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
+          <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14.5px;color:#111111">HKUST</span>
+        </div>
+        <div style="border:1px solid #E5E5E5;background:#FFFFFF;padding:24px 20px;display:flex;flex-direction:column;gap:16px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 36px rgba(17,17,17,.07)">
+          <svg viewBox="0 0 32 32" style="width:24px;height:24px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
+          <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14.5px;color:#111111">CUHK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ isAcc }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Accelerator">
+
+<section data-screen-label="Accelerator — Header" style="position:relative;overflow:hidden;background:#FFFFFF;border-bottom:1px solid #E5E5E5">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <canvas ref="{{ canvasRef }}" style="display:block"></canvas>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 40px 88px">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">Venture Hub Academy</div>
+    <h1 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(40px, 4vw, 56px);letter-spacing:-.5px;margin:16px 0 0">{{ t.acc.title }}</h1>
+  </div>
+</section>
+
+<section data-screen-label="Accelerator — Overview" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px;display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:start">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.acc.ovEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:34px;line-height:1.25;letter-spacing:-.3px;margin:18px 0 0;text-wrap:pretty">{{ t.acc.ovH }}</h2>
+    </div>
+    <div data-reveal="1" data-rd="0.1" style="display:flex;flex-direction:column;border-bottom:1px solid #E5E5E5">
+      <sc-for list="{{ t.acc.ov }}" as="o" hint-placeholder-count="3">
+        <div style="display:flex;gap:18px;padding:22px 18px;margin:0 -18px;border-top:1px solid #E5E5E5;align-items:center;border-radius:4px;transition:background .2s ease" style-hover="background:#FAFAFA">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;flex:none" fill="none" stroke="#8044FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L20 6.5"></path></svg>
+          <span style="font-size:16.5px;line-height:1.65;color:#111111">{{ o.text }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Accelerator — Timeline" style="background:#FAFAFA;border-top:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:110px 40px">
+
+    <div style="display:grid;grid-template-columns:64px 1fr;column-gap:30px">
+      <div data-reveal="1" style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:52px;height:52px;border-radius:999px;background:#FFFFFF;border:1.5px solid #8044FD;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg viewBox="0 0 32 32" style="width:22px;height:22px" fill="none" stroke="#8044FD" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M5 25c0-4.8 3.1-7.5 7-7.5"></path><circle cx="21.5" cy="10" r="3.2"></circle><path d="M27 21c0-3.8-2.4-6-5.7-6.4"></path></svg>
+        </div>
+        <div style="width:2px;flex:1;min-height:90px;margin-top:8px;background-image:repeating-linear-gradient(to bottom,#CDB7FC 0,#CDB7FC 7px,transparent 7px,transparent 18px);background-size:2px 36px;animation:vhaflow 1s linear infinite"></div>
+      </div>
+      <div data-reveal="1" style="padding-bottom:64px">
+        <span style="display:inline-block;border:1px solid #CDB7FC;color:#8044FD;background:#FFFFFF;border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600;margin-bottom:18px">{{ t.acc.p1tag }}</span>
+        <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.3px;margin:0 0 20px;text-wrap:pretty">{{ t.acc.p1h }}</h2>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ t.acc.p1 }}" as="li" hint-placeholder-count="3">
+            <div style="display:flex;gap:14px;align-items:baseline"><span style="width:7px;height:7px;border-radius:999px;background:#8044FD;flex:none;transform:translateY(-1px)"></span><span style="font-size:16px;line-height:1.7;color:#5A5A5A">{{ li }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:64px 1fr;column-gap:30px">
+      <div data-reveal="1" style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:52px;height:52px;border-radius:999px;background:#FFFFFF;border:1.5px solid #8044FD;display:flex;align-items:center;justify-content:center;flex:none">
+          <svg viewBox="0 0 32 32" style="width:22px;height:22px" fill="none" stroke="#8044FD" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"></circle><path d="M20.5 11.5l-3 6.5-6.5 3 3-6.5z"></path></svg>
+        </div>
+        <div style="width:2px;flex:1;min-height:90px;margin-top:8px;background-image:repeating-linear-gradient(to bottom,#CDB7FC 0,#CDB7FC 7px,transparent 7px,transparent 18px);background-size:2px 36px;animation:vhaflow 1s linear infinite"></div>
+      </div>
+      <div data-reveal="1" style="padding-bottom:64px">
+        <span style="display:inline-block;border:1px solid #CDB7FC;color:#8044FD;background:#FFFFFF;border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600;margin-bottom:18px">{{ t.acc.p2tag }}</span>
+        <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.3px;margin:0 0 20px;text-wrap:pretty">{{ t.acc.p2h }}</h2>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ t.acc.p2 }}" as="li" hint-placeholder-count="3">
+            <div style="display:flex;gap:14px;align-items:baseline"><span style="width:7px;height:7px;border-radius:999px;background:#8044FD;flex:none;transform:translateY(-1px)"></span><span style="font-size:16px;line-height:1.7;color:#5A5A5A">{{ li }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:64px 1fr;column-gap:30px">
+      <div data-reveal="1" style="display:flex;flex-direction:column;align-items:center">
+        <div style="width:52px;height:52px;border-radius:999px;background:#8044FD;border:1.5px solid #8044FD;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 22px rgba(128,68,253,.28)">
+          <svg viewBox="0 0 32 32" style="width:22px;height:22px" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"><line x1="8" y1="25" x2="8" y2="18"></line><line x1="16" y1="25" x2="16" y2="12"></line><line x1="24" y1="25" x2="24" y2="7"></line></svg>
+        </div>
+      </div>
+      <div data-reveal="1" style="display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:center">
+        <div>
+          <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">Demo Day</div>
+          <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.3px;margin:14px 0 18px;text-wrap:pretty">{{ t.acc.ddH }}</h2>
+          <p style="font-size:16px;line-height:1.8;color:#5A5A5A;margin:0">{{ t.acc.dd }}</p>
+        </div>
+        <div style="aspect-ratio:4/3.4;overflow:hidden;border:1px solid #E5E5E5">
+          <img src="uploads/Website%20Pics/260523%20hkU_0133.JPG" alt="Panel at VHA Demo Day" style="width:100%;height:100%;object-fit:cover;object-position:center 88%;display:block">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section data-screen-label="Accelerator — Selection criteria" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:110px 40px">
+    <div data-reveal="1" style="max-width:640px;margin:0 auto 56px;text-align:center">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.about.critEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:34px;line-height:1.25;letter-spacing:-.3px;margin:18px 0 0;text-wrap:pretty">{{ t.about.critH }}</h2>
+    </div>
+    <div data-reveal="1" data-rd="0.1" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+      <sc-for list="{{ t.about.crit }}" as="c" hint-placeholder-count="3">
+        <div style="background:#FAFAFA;border:1px solid #E5E5E5;padding:32px 28px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 44px rgba(17,17,17,.08);border-color:#CDB7FC">
+          <svg viewBox="0 0 32 32" style="width:30px;height:30px;display:block;margin-bottom:20px" fill="none" stroke="#8044FD" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"></circle><path d="M10.5 16.5l3.7 3.7 7.3-8.4"></path></svg>
+          <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:13px;color:#8044FD;margin-bottom:10px">{{ c.n }}</div>
+          <p style="font-size:15.5px;line-height:1.65;color:#111111;margin:0">{{ c.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Accelerator — CTA" style="background:#FAFAFA;border-top:1px solid #E5E5E5">
+  <div data-reveal="1" style="max-width:1280px;margin:0 auto;padding:130px 40px;text-align:center">
+    <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(32px, 3.4vw, 44px);letter-spacing:-.4px;margin:0 0 34px;text-wrap:pretty">{{ t.close.h }}</h2>
+    <a href="#/apply" style="display:inline-block;background:#8044FD;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:3px" style-hover="background:#A174FE;color:#FFFFFF">{{ t.hero.cta }}</a>
+  </div>
+</section>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ isCom }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Community">
+
+<section data-screen-label="Community — Header" style="position:relative;overflow:hidden;background:#FFFFFF;border-bottom:1px solid #E5E5E5">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <canvas ref="{{ canvasRef }}" style="display:block"></canvas>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 40px 88px">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">Venture Hub Academy</div>
+    <h1 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(40px, 4vw, 56px);letter-spacing:-.5px;margin:16px 0 0">{{ t.com.title }}</h1>
+  </div>
+</section>
+
+<section data-screen-label="Community — Funnel" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:120px 40px 130px">
+    <div data-reveal="1">
+      <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.com.funnelEb }}</div>
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:36px;letter-spacing:-.3px;margin:18px 0 0;max-width:640px;text-wrap:pretty">{{ t.com.funnelH }}</h2>
+    </div>
+    <div style="margin-top:64px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:20px;align-items:stretch">
+      <div data-reveal="1" style="border:1px solid #E5E5E5;background:#FFFFFF;padding:36px 32px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 44px rgba(17,17,17,.08)">
+        <svg viewBox="0 0 32 32" style="width:28px;height:28px;display:block;margin-bottom:18px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5a2.5 2.5 0 0 1 2.5-2.5h15A2.5 2.5 0 0 1 26 8.5v8a2.5 2.5 0 0 1-2.5 2.5H14l-5 4v-4H8.5A2.5 2.5 0 0 1 6 16.5z"></path></svg>
+        <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14px;color:#8044FD">01</div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:21px;margin:12px 0 12px">{{ t.com.t1n }}</h3>
+        <p style="font-size:14.5px;line-height:1.7;color:#5A5A5A;margin:0">{{ t.com.t1d }}</p>
+      </div>
+      <div style="display:flex;align-items:center;height:100%"><div style="width:40px;height:2px;background-image:repeating-linear-gradient(to right,#CDB7FC 0,#CDB7FC 6px,transparent 6px,transparent 16px);background-size:32px 2px;animation:vhaflowx 0.9s linear infinite"></div></div>
+      <div data-reveal="1" data-rd="0.08" style="border:1px solid #CDB7FC;background:#F6F2FF;padding:36px 32px;transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 20px 44px rgba(128,68,253,.14)">
+        <svg viewBox="0 0 32 32" style="width:28px;height:28px;display:block;margin-bottom:18px" fill="none" stroke="#8044FD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="12" r="6.5"></circle><path d="M11.5 17.5L9 26l7-3.2 7 3.2-2.5-8.5"></path></svg>
+        <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14px;color:#8044FD">02</div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:21px;margin:12px 0 12px">{{ t.com.t2n }}</h3>
+        <p style="font-size:14.5px;line-height:1.7;color:#5A5A5A;margin:0">{{ t.com.t2d }}</p>
+      </div>
+      <div style="display:flex;align-items:center;height:100%"><div style="width:40px;height:2px;background-image:repeating-linear-gradient(to right,#CDB7FC 0,#CDB7FC 6px,transparent 6px,transparent 16px);background-size:32px 2px;animation:vhaflowx 0.9s linear infinite"></div></div>
+      <div data-reveal="1" data-rd="0.16" style="background:#8044FD;padding:36px 32px;box-shadow:0 18px 44px rgba(128,68,253,.28);transition:transform .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-5px);box-shadow:0 26px 56px rgba(128,68,253,.36)">
+        <svg viewBox="0 0 32 32" style="width:28px;height:28px;display:block;margin-bottom:18px" fill="none" stroke="#FFFFFF" stroke-width="1.6"><circle cx="16" cy="16" r="4.3"></circle><circle cx="16" cy="16" r="8.3" stroke-opacity="0.75"></circle><circle cx="16" cy="16" r="12.3" stroke-opacity="0.5"></circle></svg>
+        <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:14px;color:#E4D7FF">03</div>
+        <h3 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:21px;margin:12px 0 12px;color:#FFFFFF">{{ t.com.t3n }}</h3>
+        <p style="font-size:14.5px;line-height:1.7;color:#E4D7FF;margin:0">{{ t.com.t3d }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Community — Join" style="background:#FAFAFA;border-top:1px solid #E5E5E5">
+  <div style="max-width:1280px;margin:0 auto;padding:110px 40px;display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center">
+    <div data-reveal="1" style="aspect-ratio:4/4.8;overflow:hidden;border:1px solid #E5E5E5">
+      <img src="uploads/Website%20Pics/260523%20hkU_0160.JPG" alt="VHA community event" style="width:100%;height:100%;object-fit:cover;object-position:center 45%;display:block">
+    </div>
+    <div data-reveal="1" data-rd="0.1">
+      <h2 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(30px, 3vw, 42px);letter-spacing:-.4px;margin:0 0 30px;max-width:480px;text-wrap:pretty">{{ t.com.ctaH }}</h2>
+      <a href="#/community" style="display:inline-block;background:#8044FD;color:#FFFFFF;font-size:15.5px;font-weight:600;padding:15px 26px;border-radius:3px" style-hover="background:#A174FE;color:#FFFFFF">{{ t.com.cta }}</a>
+    </div>
+  </div>
+</section>
+
+</div>
+</sc-if>
+
+<sc-if value="{{ isApply }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Apply">
+
+<section data-screen-label="Apply — Header" style="position:relative;overflow:hidden;background:#FFFFFF;border-bottom:1px solid #E5E5E5">
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <canvas ref="{{ canvasRef }}" style="display:block"></canvas>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 40px 70px">
+    <div style="font-size:13.5px;font-weight:600;letter-spacing:.4px;color:#8044FD">{{ t.apply.eyebrow }}</div>
+    <h1 style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:clamp(34px, 3.4vw, 50px);letter-spacing:-.4px;margin:16px 0 0;max-width:17ch;text-wrap:pretty">{{ t.apply.title }}</h1>
+  </div>
+</section>
+
+<section data-screen-label="Apply — Form" style="background:#FFFFFF">
+  <div style="max-width:1280px;margin:0 auto;padding:20px 40px 140px;display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start">
+
+    <div style="position:sticky;top:96px">
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ t.apply.steps }}" as="s" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:34px 1fr;gap:16px;padding:22px 0;border-top:1px solid #E5E5E5">
+            <div style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:18px;color:#8044FD">{{ s.n }}</div>
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:6px;font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif">{{ s.t }}</div>
+              <p style="font-size:13.5px;line-height:1.7;color:#5A5A5A;margin:0">{{ s.d }}</p>
+            </div>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid #E5E5E5"></div>
+      </div>
+      <div style="background:#FAFAFA;border:1px solid #E5E5E5;padding:24px 26px;margin-top:26px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#9B9B9B;margin-bottom:10px">{{ t.apply.noteH }}</div>
+        <p style="font-size:13.5px;line-height:1.75;color:#5A5A5A;margin:0">{{ t.apply.noteP }}</p>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E5E5E5;border-radius:8px;padding:44px;box-shadow:0 20px 60px rgba(17,17,17,.06)">
+      <sc-if value="{{ applyPending }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.co }}</div>
+            <input type="text" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.web }}</div>
+            <input type="text" placeholder="https://" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.founder }}</div>
+            <input type="text" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.email }}</div>
+            <input type="email" placeholder="you@company.com" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:10px">{{ t.apply.hq }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <sc-for list="{{ hqPills }}" as="p" hint-placeholder-count="8">
+              <button onClick="{{ p.pick }}" style="{{ p.style }}">{{ p.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:10px">{{ t.apply.stage }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <sc-for list="{{ stagePills }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ p.pick }}" style="{{ p.style }}">{{ p.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.oneLine }}</div>
+          <input type="text" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.tech }}</div>
+          <textarea rows="3" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none;resize:vertical;font-family:inherit" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)"></textarea>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.traction }}</div>
+          <textarea rows="3" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none;resize:vertical;font-family:inherit" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)"></textarea>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.why }}</div>
+          <textarea rows="3" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none;resize:vertical;font-family:inherit" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)"></textarea>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:10px">{{ t.apply.relocateQ }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <sc-for list="{{ relocPills }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ p.pick }}" style="{{ p.style }}">{{ p.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:22px">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.deck }}</div>
+            <input type="file" accept="application/pdf" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:11px 14px;font-size:13px;color:#5A5A5A;outline:none">
+            <div style="font-size:12px;color:#9B9B9B;margin-top:6px">{{ t.apply.deckHelp }}</div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.hear }}</div>
+            <input type="text" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)">
+          </div>
+        </div>
+
+        <div style="margin-top:26px">
+          <div style="font-size:13px;font-weight:600;color:#111111;margin-bottom:8px">{{ t.apply.anything }}</div>
+          <textarea rows="3" style="width:100%;box-sizing:border-box;background:#FAFAFA;border:1px solid #E5E5E5;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#111111;outline:none;resize:vertical;font-family:inherit" style-focus="border-color:#8044FD;box-shadow:0 0 0 3px rgba(128,68,253,.14)"></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:34px;flex-wrap:wrap">
+          <button onClick="{{ applySubmit }}" style="background:#8044FD;color:#FFFFFF;border:0;font-size:15px;font-weight:600;padding:14px 30px;border-radius:4px;cursor:pointer;box-shadow:0 10px 28px rgba(128,68,253,.22)" style-hover="background:#A174FE">{{ t.apply.submit }}</button>
+          <span style="font-size:12.5px;color:#9B9B9B">{{ t.apply.submitHelp }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ applyDone }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:50px 10px">
+          <div style="width:48px;height:48px;border-radius:999px;background:#F6F2FF;border:1px solid #CDB7FC;display:flex;align-items:center;justify-content:center;margin:0 auto 24px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8044FD" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+          </div>
+          <div style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:27px;margin-bottom:14px">{{ t.apply.doneTitle }}</div>
+          <p style="font-size:15px;line-height:1.75;color:#5A5A5A;max-width:44ch;margin:0 auto">{{ t.apply.doneP }}</p>
+          <p style="font-size:13px;color:#9B9B9B;margin:24px 0 0">{{ t.apply.doneLink }}</p>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+</div>
+</sc-if>
+
+<footer data-screen-label="Footer" style="background:#121212;color:#EAEAEA">
+  <div style="max-width:1280px;margin:0 auto;padding:78px 40px 40px">
+    <div style="display:grid;grid-template-columns:1.25fr 0.85fr 1.15fr 1.15fr;gap:56px;align-items:start">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px">
+          <img src="uploads/Website%20Pics/858185bc-e6a7-49cc-9867-86ecc4a6f798.JPG" alt="VHA" style="height:30px;width:30px;object-fit:cover;filter:grayscale(1) brightness(1.08) contrast(1.6);mix-blend-mode:screen">
+          <span style="font-family:'Century Gothic','Jost',sans-serif;font-weight:700;font-size:16px;color:#FFFFFF">Venture Hub Academy</span>
+        </div>
+        <div style="margin-top:26px;font-size:12.5px;font-weight:600;letter-spacing:.5px;color:#8A8A8A">{{ t.footer.contactH }}</div>
+        <a href="#" style="display:inline-block;margin-top:8px;font-size:15.5px;font-weight:500;color:#FFFFFF" style-hover="color:#A174FE">info@venturehubacademy.com</a>
+        <div style="margin-top:20px;font-size:13px;color:#9B9B9B">{{ t.footer.supported }}</div>
+      </div>
+      <div>
+        <div style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:16.5px;color:#FFFFFF;margin-bottom:22px">{{ t.footer.quickH }}</div>
+        <div style="display:flex;flex-direction:column;gap:14px;font-size:14.5px">
+          <a href="#/" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.nav.home }}</a>
+          <a href="#/about" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.nav.about }}</a>
+          <a href="#/accelerator" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.nav.acc }}</a>
+          <a href="#/community" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.nav.com }}</a>
+          <a href="#/apply" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.nav.applyNow }}</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Century Gothic','Jost','Noto Sans TC','Noto Sans SC','Noto Sans JP','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-weight:700;font-size:16.5px;color:#FFFFFF;margin-bottom:22px">{{ t.footer.stayH }}</div>
+        <p style="font-size:14.5px;line-height:1.7;color:#9B9B9B;margin:0 0 20px">{{ t.footer.stayP }}</p>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input placeholder="{{ t.footer.emailPh }}" style="flex:1;min-width:0;background:transparent;border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:13px 18px;font-family:'Inter','Noto Sans TC','Noto Sans Thai','Noto Sans Khmer',sans-serif;font-size:13.5px;color:#EAEAEA;outline:none">
+          <button aria-label="Subscribe" style="width:46px;height:46px;border-radius:999px;background:#8044FD;color:#FFFFFF;border:0;font-size:17px;cursor:pointer;flex:none" style-hover="background:#A174FE">→</button>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:14px;line-height:1.75;color:#9B9B9B;margin:0 0 24px">{{ t.about.mission }}</p>
+        <div style="display:flex;gap:10px">
+          <a href="#" aria-label="LinkedIn" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#DDDDDD;font-size:12.5px;font-weight:600" style-hover="border-color:#A174FE;color:#A174FE">in</a>
+          <a href="#" aria-label="X" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#DDDDDD;font-size:12.5px;font-weight:600" style-hover="border-color:#A174FE;color:#A174FE">X</a>
+          <a href="#" aria-label="Instagram" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#DDDDDD;font-size:12.5px;font-weight:600" style-hover="border-color:#A174FE;color:#A174FE">IG</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:12.5px;color:#8A8A8A">
+      <span>© 2026 Venture Hub Academy Limited. All rights reserved.</span>
+      <span style="display:flex;gap:18px"><a href="#" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.footer.terms }}</a><span style="color:#4A4A4A">|</span><a href="#" style="color:#B9B9B9" style-hover="color:#A174FE">{{ t.footer.privacy }}</a></span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;waveMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;section&quot;:&quot;Wave motion&quot;,&quot;tsType&quot;:&quot;boolean&quot;},&quot;waveDensity&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:34,&quot;min&quot;:10,&quot;max&quot;:60,&quot;section&quot;:&quot;Wave motion&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;waveSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.2,&quot;max&quot;:3,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;x&quot;,&quot;section&quot;:&quot;Wave motion&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { langOpen: false, menuOpen: false, lang: "en", page: "about", applyDone: false, applyHq: 0, applyStage: 0, applyReloc: 0 };
+
+  componentDidMount() {
+    this._t0 = performance.now();
+    this._resize = () => this._fit();
+    window.addEventListener("resize", this._resize);
+    this._docClick = (e) => {
+      if (this.state.langOpen && !(e.target.closest && e.target.closest("[data-langbox]"))) this.setState({ langOpen: false });
+    };
+    document.addEventListener("click", this._docClick);
+    this._onHash = () => {
+      const m = { "#/about": "about", "#/accelerator": "acc", "#/community": "com", "#/apply": "apply" };
+      const page = m[location.hash] || "about";
+      if (page !== this.state.page) {
+        this.setState({ page, langOpen: false, menuOpen: false }, () => {
+          window.scrollTo(0, 0);
+          this._refreshFx(true);
+        });
+      }
+    };
+    window.addEventListener("hashchange", this._onHash);
+    this._onHash();
+    this._refreshFx(false);
+  }
+
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    window.removeEventListener("resize", this._resize);
+    window.removeEventListener("hashchange", this._onHash);
+    document.removeEventListener("click", this._docClick);
+    if (this._io) this._io.disconnect();
+    if (this._cio) this._cio.disconnect();
+  }
+
+  _fit() {
+    const c = this._cv;
+    if (!c || !c.parentElement) return;
+    const box = c.parentElement.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    c.width = Math.max(1, box.width * dpr);
+    c.height = Math.max(1, box.height * dpr);
+    c.style.width = box.width + "px";
+    c.style.height = box.height + "px";
+    this._dpr = dpr;
+  }
+
+  _loop() {
+    const c = this._cv;
+    if (!c || !c.isConnected) { this._raf = requestAnimationFrame(() => this._loop()); return; }
+    const ctx = c.getContext("2d");
+    const dpr = this._dpr || 1;
+    const W = c.width / dpr, H = c.height / dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const speed = +(this.props.waveSpeed ?? 1);
+    const N = Math.max(8, Math.round(+(this.props.waveDensity ?? 34)));
+    const t = ((performance.now() - this._t0) / 1000) * speed;
+    const seg = 130;
+    for (let i = 0; i < N; i++) {
+      const fi = i / (N - 1);
+      const ph = fi * 1.1;
+      ctx.beginPath();
+      for (let s = 0; s <= seg; s++) {
+        const x = -40 + ((W + 80) * s) / seg;
+        const u = x / W;
+        const base = H * 0.60
+          + Math.sin(u * 2.4 + t * 0.42 + ph) * H * 0.085
+          + Math.sin(u * 4.6 - t * 0.28 + ph * 1.7) * H * 0.04;
+        const spread = H * 0.30 * (0.28 + 0.72 * Math.abs(Math.sin(u * 1.9 - t * 0.24 + 0.8)));
+        const y = base
+          + (fi - 0.5) * spread * (1 + 0.25 * Math.sin(u * 3.3 + t * 0.34 + fi * 2.0))
+          + Math.sin(u * 7 + t * 0.55 + i * 0.42) * 2.2;
+        if (s) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+      }
+      const core = 1 - Math.abs(fi - 0.5) * 2;
+      const R = Math.round(128 + (205 - 128) * (1 - core));
+      const G = Math.round(68 + (183 - 68) * (1 - core));
+      const B = Math.round(253 + (252 - 253) * (1 - core));
+      const al = 0.14 + 0.34 * Math.pow(core, 1.2);
+      ctx.strokeStyle = "rgba(" + R + "," + G + "," + B + "," + al.toFixed(3) + ")";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    if (this.props.waveMotion ?? true) this._raf = requestAnimationFrame(() => this._loop());
+    else this._raf = 0;
+  }
+
+  _refreshFx(hideAll) {
+    const root = this._root || document;
+    if (this._io) this._io.disconnect();
+    if (this._cio) this._cio.disconnect();
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = Array.from(root.querySelectorAll("[data-reveal]"));
+    if (!reduce) {
+      const vh = window.innerHeight;
+      const hidden = hideAll ? els : els.filter((el) => el.getBoundingClientRect().top > vh * 0.8);
+      hidden.forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(22px)";
+        el.style.transition = "opacity .75s cubic-bezier(.2,.6,.2,1), transform .75s cubic-bezier(.2,.6,.2,1)";
+        el.style.transitionDelay = (el.getAttribute("data-rd") || "0") + "s";
+      });
+      this._io = new IntersectionObserver((en) => {
+        en.forEach((x) => {
+          if (x.isIntersecting) {
+            x.target.style.opacity = "1";
+            x.target.style.transform = "none";
+            this._io.unobserve(x.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      hidden.forEach((el) => this._io.observe(el));
+    }
+    const cts = Array.from(root.querySelectorAll("[data-count]"));
+    this._cio = new IntersectionObserver((en) => {
+      en.forEach((x) => {
+        if (x.isIntersecting) {
+          this._runCount(x.target);
+          this._cio.unobserve(x.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    cts.forEach((el) => this._cio.observe(el));
+  }
+
+  _pills(names, selIdx, stateKey) {
+    return names.map((name, i) => ({
+      name,
+      style: selIdx === i
+        ? "all:unset;cursor:pointer;font-family:inherit;font-size:13.5px;padding:10px 17px;border-radius:999px;border:1px solid #8044FD;background:#F6F2FF;color:#111111;font-weight:600"
+        : "all:unset;cursor:pointer;font-family:inherit;font-size:13.5px;padding:10px 17px;border-radius:999px;border:1px solid #E5E5E5;background:#FFFFFF;color:#5A5A5A",
+      pick: () => this.setState({ [stateKey]: i })
+    }));
+  }
+
+  _runCount(el) {
+    const end = +el.getAttribute("data-count");
+    if (!isFinite(end)) return;
+    const dur = 1100;
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      el.textContent = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    el.textContent = "0";
+    requestAnimationFrame(step);
+  }
+
+  _data() {
+    return {
+      en: {
+        nav: { home: "Home", about: "About", acc: "Accelerator", com: "Community", apply: "Apply", applyNow: "Apply Now" },
+        hero: { eyebrow: "AI accelerator · Venture studio", title: "Backing execution-ready AI founders across Asia.", sub: "Capital, compute, and market access for operators building real AI businesses.", cta: "Apply to the Accelerator" },
+        stats: { s1: { pre: "US$", n: 150, suf: "K", label: "Invested via SAFE" }, s2: { pre: "up to ", n: 10, suf: "", label: "Companies per cohort" }, s3: { n: 6, suf: "-month", label: "Structured program" }, s4: { n: 6, suf: "", label: "Jurisdictions across Asia" } },
+        why: { eb: "Why execution matters", h: "Most AI ventures stall not from technology, but from fragmented execution.", p: "We work hands-on with founders to move beyond pilots — refining models, launching in live markets, and building traction that attracts serious capital." },
+        how: { eb: "How it works", h: "Six months, four stages.", steps: [
+          { n: "01", t: "Enter Through Community", d: "Join our open network of founders, operators, and builders.", tag: "" },
+          { n: "02", t: "Structured Program", d: "1-on-1 mentoring, corporate structuring, product strategy.", tag: "3 months" },
+          { n: "03", t: "APAC Sandbox", d: "Live market validation across 6 markets.", tag: "3 months" },
+          { n: "04", t: "Demo Day", d: "Present live metrics to investors and the community.", tag: "" }
+        ] },
+        beyond: { eb: "Beyond capital", h: "What a cohort company gets.", i1: { t: "High-Performance Compute (HPC)", d: "Immediate access to GPU clusters to accelerate model training and development." }, i2: { t: "APAC Sandbox", d: "Controlled real-world testing across 6 markets." }, i3: { t: "Ecosystem Network", d: "Direct access to customers, strategic partners, and ongoing mentorship." } },
+        map: { eb: "Where we operate", h: "Six jurisdictions.", markets: [ { n: "01", name: "Hong Kong" }, { n: "02", name: "Taiwan" }, { n: "03", name: "Singapore" }, { n: "04", name: "Japan" }, { n: "05", name: "Thailand" }, { n: "06", name: "Cambodia" } ] },
+        close: { h: "Ready to build & scale?" },
+        about: { title: "About", missionEb: "Mission", mission: "Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.", critEb: "Selection criteria", critH: "What we look for.", crit: [ { n: "01", text: "Quality of team / visionaries of an established business" }, { n: "02", text: "Potentially groundbreaking product or service based on unique technologies" }, { n: "03", text: "Clear, proven commercial proposition with global opportunities" } ], whoEb: "Who we back", whoH: "Experienced operators, not idea-stage first-timers.", who: "Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute — not validate an idea from zero.", backEb: "Institutional backing", backH: "Backed by institutions.", back1: "Supported by First Financial Holding.", back2: "Academic partners: HKU, HKUST, CUHK.", notTag: "Idea-stage first-timers", yesTag: "Experienced operators" },
+        acc: { title: "Accelerator", ovEb: "Program overview", ovH: "A 6-month program for execution.", ov: [ { n: "01", text: "6-month structure: 3-month Structured Program + 3-month APAC Sandbox." }, { n: "02", text: "Small, focused cohorts of up to 10 companies." }, { n: "03", text: "US$150K via SAFE plus GPU and compute resources." } ], p1tag: "Months 1–3", p1h: "Structured Program", p1: [ "1-on-1 mentoring by experienced founders and operators.", "Corporate structuring support, research direction, and product strategy.", "Startup execution and scaling guidance." ], p2tag: "Months 4–6", p2h: "APAC Sandbox", p2: [ "Live customer validation across 6 markets: HK, TW, SG, JP, TH, Cambodia.", "Real revenue signals through live sales, partnerships, or LOIs.", "Accelerated traction-building ahead of fundraising." ], ddH: "Present live metrics. Raise on evidence.", dd: "Founders present live metrics to investors and community. Structured investor access and community-driven momentum." },
+        com: { title: "Community", funnelEb: "How the community works", funnelH: "From open forum to core cohort.", t1n: "Open Forum", t1d: "Open network, discussing startup ideas, early intent surfacing.", t2n: "Members", t2d: "Alumni and shortlisted participants, access to exclusive events.", t3n: "Core Cohort", t3d: "10+ selectively chosen teams, direct funding and network access.", ctaH: "Join the Community", cta: "Join the Community" },
+        apply: { eyebrow: "Apply", title: "Fifteen minutes. Read by a partner.", steps: [ { n: "01", t: "Application", d: "This form. Reviewed on a rolling basis — we respond to every application within 14 days." }, { n: "02", t: "Partner interviews", d: "Two conversations, product-deep. With partners, not associates." }, { n: "03", t: "Offer", d: "US$150K via SAFE on standard terms, and a start date for the next cohort." } ], noteH: "Before you start", noteP: "Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.", co: "Company name", web: "Website or product URL", founder: "Founder name(s) & role(s)", email: "Email", hq: "HQ or operating market", stage: "Company stage", oneLine: "What does your company do, in one sentence?", tech: "What proprietary technology or unique commercial advantage do you have?", traction: "What traction do you have today?", why: "Why do you need capital, compute, or market access specifically in Asia/APAC right now?", deck: "Pitch deck or one-pager", deckHelp: "Optional upload, PDF max 10MB", hear: "How did you hear about us?", relocateQ: "Are you open to relocating or spending time on-site during the program?", anything: "Anything else you'd like us to know?", stage1: "Revenue-generating", stage2: "Launched, pre-revenue", stage3: "In development", hqExtra1: "Elsewhere in APAC", hqExtra2: "Outside APAC", reloc1: "Yes", reloc2: "No", reloc3: "Possibly", submit: "Submit application", submitHelp: "Reviewed on a rolling basis · Response within 14 days", doneTitle: "Received.", doneP: "A partner will read your application this cycle. You'll hear back within 14 days, either way.", doneLink: "Meanwhile, join the community — every cohort started there." },
+        footer: { supported: "Supported by First Financial Holding", contactH: "Contact us", quickH: "Quick links", stayH: "Stay connected", stayP: "Join our newsletter and stay updated on the latest news.", emailPh: "Type your email", terms: "Terms and conditions", privacy: "Privacy policy" }
+      },
+      sc: {
+        nav: { home: "首页", about: "关于我们", acc: "加速器", com: "社区", apply: "申请", applyNow: "立即申请" },
+        hero: { eyebrow: "AI加速器 · 创投工作室", title: "支持具备执行力的AI创始人，布局亚洲。", sub: "为正在打造真正AI业务的操盘手，提供资本、算力与市场准入。", cta: "申请加入加速器" },
+        stats: { s1: { pre: "", n: 15, suf: "万美元", label: "SAFE协议投资" }, s2: { pre: "最多", n: 10, suf: "家", label: "每期公司数" }, s3: { n: 6, suf: "个月", label: "结构化项目" }, s4: { n: 6, suf: "个", label: "亚洲司法管辖区" } },
+        why: { eb: "执行力为何重要", h: "大多数AI企业的停滞，并非源于技术，而是执行的碎片化。", p: "我们与创始人紧密合作，帮助企业跳出试点阶段——打磨模型、进入真实市场、积累能够吸引真正资本的成长动能。" },
+        how: { eb: "运作方式", h: "六个月，四个阶段。", steps: [
+          { n: "01", t: "通过社区进入", d: "加入我们开放的创始人、操盘手与建设者网络。", tag: "" },
+          { n: "02", t: "结构化项目", d: "一对一导师辅导、公司架构梳理、产品策略。", tag: "3个月" },
+          { n: "03", t: "亚太沙盒", d: "在6个市场进行真实市场验证。", tag: "3个月" },
+          { n: "04", t: "Demo Day", d: "向投资人与社区展示真实业绩数据。", tag: "" }
+        ] },
+        beyond: { eb: "不止于资本", h: "入选公司将获得什么。", i1: { t: "高性能算力（HPC）", d: "即时获取GPU集群资源，加速模型训练与开发。" }, i2: { t: "亚太沙盒", d: "在6个市场进行受控的真实世界测试。" }, i3: { t: "生态网络", d: "直接对接客户、战略伙伴，并获得持续导师支持。" } },
+        map: { eb: "运营范围", h: "六个司法管辖区。", markets: [ { n: "01", name: "香港" }, { n: "02", name: "台湾" }, { n: "03", name: "新加坡" }, { n: "04", name: "日本" }, { n: "05", name: "泰国" }, { n: "06", name: "柬埔寨" } ] },
+        close: { h: "准备好建设与扩张了吗？" },
+        about: { title: "关于我们", missionEb: "使命", mission: "Venture Hub Academy 通过与经验丰富的操盘手合作，构建并扩展AI驱动的业务——将行业专业知识转化为高增长的科技赋能企业。", critEb: "甄选标准", critH: "我们寻找什么。", crit: [ { n: "01", text: "团队素质／成熟企业的远见型领导者" }, { n: "02", text: "基于独特技术、具有突破潜力的产品或服务" }, { n: "03", text: "清晰、可验证、具备全球机遇的商业主张" } ], whoEb: "我们支持谁", whoH: "经验丰富的操盘手，而非想法阶段的首次创业者。", who: "Venture Hub Academy 优先支持经验丰富的操盘手，而非初次创业、仍处于想法阶段的创始人。我们寻找具备成熟商业基础、准备好执行落地的团队——而非从零开始验证想法的团队。", backEb: "机构背书", backH: "机构支持。", back1: "由First Financial Holding提供支持。", back2: "学术合作伙伴：香港大学、香港科技大学、香港中文大学。", notTag: "想法阶段的首次创业者", yesTag: "经验丰富的操盘手" },
+        acc: { title: "加速器", ovEb: "项目概览", ovH: "为执行而设的6个月项目。", ov: [ { n: "01", text: "6个月项目结构：3个月结构化项目 + 3个月亚太沙盒。" }, { n: "02", text: "小而精的团队规模，每期最多10家公司。" }, { n: "03", text: "15万美元SAFE协议投资，另加GPU与算力资源。" } ], p1tag: "第1–3个月", p1h: "结构化项目", p1: [ "由经验丰富的创始人与操盘手提供一对一导师辅导。", "协助公司架构梳理、研究方向制定与产品策略。", "提供创业执行与扩张指导。" ], p2tag: "第4–6个月", p2h: "亚太沙盒", p2: [ "在6个市场（香港、台湾、新加坡、日本、泰国、柬埔寨）进行真实客户验证。", "通过实际销售、合作伙伴关系或意向书获取真实营收信号。", "在融资前加速积累增长动能。" ], ddH: "展示真实数据，以实绩融资。", dd: "创始人向投资人与社区展示真实业绩数据。提供结构化的投资人对接机会与社区驱动的势能。" },
+        com: { title: "社区", funnelEb: "社区如何运作", funnelH: "从开放论坛到核心团队。", t1n: "开放论坛", t1d: "开放网络，探讨创业想法，挖掘早期意向。", t2n: "会员", t2d: "校友与入围参与者，可参与专属活动。", t3n: "核心团队", t3d: "10余支精选团队，直接获得资金与网络对接。", ctaH: "加入社区", cta: "加入社区" },
+        apply: { eyebrow: "申请", title: "十五分钟，由合伙人亲自审阅。", steps: [ { n: "01", t: "提交申请", d: "即此表格。滚动式审核——我们会在14天内回复每一份申请。" }, { n: "02", t: "合伙人面谈", d: "两轮深入产品的对话，对象是合伙人，而非分析师。" }, { n: "03", t: "发出条款", d: "以标准条款通过SAFE协议投资15万美元，并确定下一期开始日期。" } ], noteH: "开始前", noteP: "平实的回答胜过精心修饰。有数据就写数据，有链接就附链接。演示文稿非必需。", co: "公司名称", web: "网站或产品链接", founder: "创始人姓名及职务", email: "电子邮箱", hq: "总部或运营市场", stage: "公司阶段", oneLine: "请用一句话描述贵公司业务", tech: "贵公司拥有哪些专有技术或独特商业优势？", traction: "贵公司目前有哪些实际进展？", why: "贵公司为何在此刻特别需要亚太地区的资本、算力或市场准入？", deck: "商业计划书或一页纸简介", deckHelp: "选填上传，PDF，最大10MB", hear: "您是从哪里了解到我们的？", relocateQ: "您是否愿意在项目期间搬迁或驻场？", anything: "还有什么想让我们了解的吗？", stage1: "已有营收", stage2: "已上线，未有营收", stage3: "开发中", hqExtra1: "亚太其他地区", hqExtra2: "亚太以外", reloc1: "是", reloc2: "否", reloc3: "视情况而定", submit: "提交申请", submitHelp: "滚动式审核 · 14天内回复", doneTitle: "已收到。", doneP: "合伙人将在本轮审阅你的申请。无论结果如何，14天内都会给你回复。", doneLink: "与此同时，欢迎加入社区——每一期都从这里开始。" },
+        footer: { supported: "由First Financial Holding提供支持", contactH: "联系我们", quickH: "快速链接", stayH: "保持联系", stayP: "订阅我们的通讯，获取最新动态。", emailPh: "输入您的邮箱", terms: "条款与细则", privacy: "隐私政策" }
+      },
+      tc: {
+        nav: { home: "首頁", about: "關於我們", acc: "加速器", com: "社群", apply: "申請", applyNow: "立即申請" },
+        hero: { eyebrow: "AI加速器 · 創投工作室", title: "支持具備執行力的AI創辦人，佈局亞洲。", sub: "為正在打造真正AI業務的操盤手，提供資本、算力與市場準入。", cta: "申請加入加速器" },
+        stats: { s1: { pre: "", n: 15, suf: "萬美元", label: "SAFE協議投資" }, s2: { pre: "最多", n: 10, suf: "家", label: "每期公司數" }, s3: { n: 6, suf: "個月", label: "結構化項目" }, s4: { n: 6, suf: "個", label: "亞洲司法管轄區" } },
+        why: { eb: "執行力為何重要", h: "大多數AI企業的停滯，並非源於技術，而是執行的碎片化。", p: "我們與創辦人緊密合作，幫助企業跳出試點階段——打磨模型、進入真實市場、積累能夠吸引真正資本的成長動能。" },
+        how: { eb: "運作方式", h: "六個月，四個階段。", steps: [
+          { n: "01", t: "透過社群進入", d: "加入我們開放的創辦人、操盤手與建設者網路。", tag: "" },
+          { n: "02", t: "結構化項目", d: "一對一導師輔導、公司架構梳理、產品策略。", tag: "3個月" },
+          { n: "03", t: "亞太沙盒", d: "在6個市場進行真實市場驗證。", tag: "3個月" },
+          { n: "04", t: "Demo Day", d: "向投資人與社群展示真實業績數據。", tag: "" }
+        ] },
+        beyond: { eb: "不止於資本", h: "入選公司將獲得什麼。", i1: { t: "高效能算力（HPC）", d: "即時獲取GPU叢集資源，加速模型訓練與開發。" }, i2: { t: "亞太沙盒", d: "在6個市場進行受控的真實世界測試。" }, i3: { t: "生態網路", d: "直接對接客戶、策略夥伴，並獲得持續導師支持。" } },
+        map: { eb: "營運範圍", h: "六個司法管轄區。", markets: [ { n: "01", name: "香港" }, { n: "02", name: "台灣" }, { n: "03", name: "新加坡" }, { n: "04", name: "日本" }, { n: "05", name: "泰國" }, { n: "06", name: "柬埔寨" } ] },
+        close: { h: "準備好建設與擴張了嗎？" },
+        about: { title: "關於我們", missionEb: "使命", mission: "Venture Hub Academy 透過與經驗豐富的操盤手合作，構建並擴展AI驅動的業務——將行業專業知識轉化為高增長的科技賦能企業。", critEb: "甄選標準", critH: "我們尋找什麼。", crit: [ { n: "01", text: "團隊素質／成熟企業的遠見型領導者" }, { n: "02", text: "基於獨特技術、具有突破潛力的產品或服務" }, { n: "03", text: "清晰、可驗證、具備全球機遇的商業主張" } ], whoEb: "我們支持誰", whoH: "經驗豐富的操盤手，而非想法階段的首次創業者。", who: "Venture Hub Academy 優先支持經驗豐富的操盤手，而非初次創業、仍處於想法階段的創辦人。我們尋找具備成熟商業基礎、準備好執行落地的團隊——而非從零開始驗證想法的團隊。", backEb: "機構背書", backH: "機構支持。", back1: "由First Financial Holding提供支持。", back2: "學術合作夥伴：香港大學、香港科技大學、香港中文大學。", notTag: "想法階段的首次創辦人", yesTag: "經驗豐富的操盤手" },
+        acc: { title: "加速器", ovEb: "項目概覽", ovH: "為執行而設的6個月項目。", ov: [ { n: "01", text: "6個月項目結構：3個月結構化項目 + 3個月亞太沙盒。" }, { n: "02", text: "小而精的團隊規模，每期最多10家公司。" }, { n: "03", text: "15萬美元SAFE協議投資，另加GPU與算力資源。" } ], p1tag: "第1–3個月", p1h: "結構化項目", p1: [ "由經驗豐富的創辦人與操盤手提供一對一導師輔導。", "協助公司架構梳理、研究方向制定與產品策略。", "提供創業執行與擴張指導。" ], p2tag: "第4–6個月", p2h: "亞太沙盒", p2: [ "在6個市場（香港、台灣、新加坡、日本、泰國、柬埔寨）進行真實客戶驗證。", "通過實際銷售、合作夥伴關係或意向書獲取真實營收信號。", "在融資前加速積累成長動能。" ], ddH: "展示真實數據，以實績融資。", dd: "創辦人向投資人與社群展示真實業績數據。提供結構化的投資人對接機會與社群驅動的勢能。" },
+        com: { title: "社群", funnelEb: "社群如何運作", funnelH: "從開放論壇到核心團隊。", t1n: "開放論壇", t1d: "開放網路，探討創業想法，挖掘早期意向。", t2n: "會員", t2d: "校友與入圍參與者，可參與專屬活動。", t3n: "核心團隊", t3d: "10餘支精選團隊，直接獲得資金與網路對接。", ctaH: "加入社群", cta: "加入社群" },
+        apply: { eyebrow: "申請", title: "十五分鐘，由合夥人親自審閱。", steps: [ { n: "01", t: "提交申請", d: "即此表格。滾動式審核——我們會在14天內回覆每一份申請。" }, { n: "02", t: "合夥人面談", d: "兩輪深入產品的對話，對象是合夥人，而非分析師。" }, { n: "03", t: "發出條款", d: "以標準條款透過SAFE協議投資15萬美元，並確定下一期開始日期。" } ], noteH: "開始前", noteP: "平實的回答勝過精心修飾。有數據就寫數據，有連結就附連結。簡報非必需。", co: "公司名稱", web: "網站或產品連結", founder: "創辦人姓名及職務", email: "電子郵箱", hq: "總部或營運市場", stage: "公司階段", oneLine: "請用一句話描述貴公司業務", tech: "貴公司擁有哪些專有技術或獨特商業優勢？", traction: "貴公司目前有哪些實際進展？", why: "貴公司為何在此刻特別需要亞太地區的資本、算力或市場準入？", deck: "商業計劃書或一頁紙簡介", deckHelp: "選填上傳，PDF，最大10MB", hear: "您是從哪裡了解到我們的？", relocateQ: "您是否願意在項目期間搬遷或駐場？", anything: "還有什麼想讓我們了解的嗎？", stage1: "已有營收", stage2: "已上線，尚無營收", stage3: "開發中", hqExtra1: "亞太其他地區", hqExtra2: "亞太以外", reloc1: "是", reloc2: "否", reloc3: "視情況而定", submit: "提交申請", submitHelp: "滾動式審核 · 14天內回覆", doneTitle: "已收到。", doneP: "合夥人將在本輪審閱你的申請。無論結果如何，14天內都會回覆。", doneLink: "與此同時，歡迎加入社群——每一期都從這裡開始。" },
+        footer: { supported: "由First Financial Holding提供支持", contactH: "聯絡我們", quickH: "快速連結", stayH: "保持聯繫", stayP: "訂閱我們的通訊，獲取最新動態。", emailPh: "輸入您的郵箱", terms: "條款與細則", privacy: "隱私政策" }
+      },
+      jp: {
+        nav: { home: "ホーム", about: "私たちについて", acc: "アクセラレーター", com: "コミュニティ", apply: "応募", applyNow: "今すぐ応募" },
+        hero: { eyebrow: "AIアクセラレーター · ベンチャースタジオ", title: "アジア全域で、実行力を備えたAI創業者を支援する。", sub: "実在するAIビジネスを構築するオペレーターへ、資本・コンピューティング・市場アクセスを提供します。", cta: "アクセラレーターに応募する" },
+        stats: { s1: { pre: "", n: 15, suf: "万米ドル", label: "SAFE契約による出資" }, s2: { pre: "最大", n: 10, suf: "社", label: "1コホートあたり" }, s3: { n: 6, suf: "ヶ月", label: "構造化プログラム" }, s4: { n: 6, suf: "法域", label: "アジア全域" } },
+        why: { eb: "なぜ実行力が重要か", h: "多くのAIベンチャーが行き詰まる原因は、技術ではなく、断片化した実行力にあります。", p: "私たちは創業者と直接協働し、パイロット段階を超えて、モデルの精緻化、実市場でのローンチ、そして本格的な資本を惹きつける成長の実績づくりを支援します。" },
+        how: { eb: "仕組み", h: "6ヶ月、4つのステージ。", steps: [
+          { n: "01", t: "コミュニティから参加", d: "創業者、オペレーター、ビルダーによるオープンなネットワークに参加。", tag: "" },
+          { n: "02", t: "構造化プログラム", d: "1対1メンタリング、企業体制構築、プロダクト戦略。", tag: "3ヶ月" },
+          { n: "03", t: "APACサンドボックス", d: "6市場にわたる実市場での検証。", tag: "3ヶ月" },
+          { n: "04", t: "デモデイ", d: "投資家とコミュニティに実績データを発表。", tag: "" }
+        ] },
+        beyond: { eb: "資本を超えて", h: "コホート企業が得られるもの。", i1: { t: "ハイパフォーマンスコンピューティング（HPC）", d: "GPUクラスターへの即時アクセスで、モデルの学習と開発を加速。" }, i2: { t: "APACサンドボックス", d: "6市場での管理された実環境テスト。" }, i3: { t: "エコシステムネットワーク", d: "顧客、戦略的パートナー、継続的なメンタリングへの直接アクセス。" } },
+        map: { eb: "事業展開地域", h: "アジア6法域。", markets: [ { n: "01", name: "香港" }, { n: "02", name: "台湾" }, { n: "03", name: "シンガポール" }, { n: "04", name: "日本" }, { n: "05", name: "タイ" }, { n: "06", name: "カンボジア" } ] },
+        close: { h: "構築とスケールの準備はできていますか？" },
+        about: { title: "私たちについて", missionEb: "ミッション", mission: "Venture Hub Academyは、経験豊富なオペレーターとの提携を通じてAI駆動型ビジネスを構築・拡大し、専門知識を高成長のテクノロジー企業へと転換します。", critEb: "選考基準", critH: "私たちが求めるもの。", crit: [ { n: "01", text: "チームの質／確立された事業のビジョナリーであること" }, { n: "02", text: "独自技術に基づく、画期的な可能性を持つプロダクトやサービス" }, { n: "03", text: "明確で実証済み、かつグローバルな機会を伴う事業提案" } ], whoEb: "支援対象", whoH: "アイデア段階ではなく、経験豊富なオペレーターを。", who: "Venture Hub Academyは、初めての起業やアイデア段階の創業者よりも、経験豊富なオペレーターを優先的に支援します。私たちが求めるのは、確立された事業基盤を持ち、実行の準備が整ったチームです。ゼロからアイデアを検証するチームではありません。", backEb: "機関からの支援", backH: "機関に支えられて。", back1: "First Financial Holdingの支援を受けています。", back2: "アカデミックパートナー：香港大学、香港科技大学、香港中文大学。", notTag: "アイデア段階の初心者", yesTag: "経験豊富なオペレーター" },
+        acc: { title: "アクセラレーター", ovEb: "プログラム概要", ovH: "実行のための6ヶ月プログラム。", ov: [ { n: "01", text: "6ヶ月間の構成：3ヶ月間の構造化プログラム + 3ヶ月間のAPACサンドボックス。" }, { n: "02", text: "最大10社までの少数精鋭コホート。" }, { n: "03", text: "SAFE契約による15万米ドルの出資に加え、GPUおよびコンピューティングリソースを提供。" } ], p1tag: "1〜3ヶ月目", p1h: "構造化プログラム", p1: [ "経験豊富な創業者やオペレーターによる1対1のメンタリング。", "企業体制構築の支援、研究方向性の策定、プロダクト戦略。", "スタートアップの実行とスケールに関する指導。" ], p2tag: "4〜6ヶ月目", p2h: "APACサンドボックス", p2: [ "香港、台湾、シンガポール、日本、タイ、カンボジアの6市場での実顧客検証。", "実際の売上、パートナーシップ、またはLOIを通じた実際の収益シグナル。", "資金調達前の実績づくりを加速。" ], ddH: "実績データで語り、実績で調達する。", dd: "創業者が投資家とコミュニティに実績データを発表。構造化された投資家アクセスとコミュニティ主導の勢い。" },
+        com: { title: "コミュニティ", funnelEb: "コミュニティの仕組み", funnelH: "オープンフォーラムからコアコホートへ。", t1n: "オープンフォーラム", t1d: "オープンなネットワークで、スタートアップのアイデアを議論し、初期の意欲を発掘。", t2n: "メンバー", t2d: "卒業生および選抜参加者、限定イベントへのアクセス。", t3n: "コアコホート", t3d: "厳選された10社以上のチーム、直接的な資金調達とネットワークアクセス。", ctaH: "コミュニティに参加する", cta: "コミュニティに参加する" },
+        apply: { eyebrow: "応募", title: "15分。パートナー自らが目を通します。", steps: [ { n: "01", t: "応募", d: "このフォームです。ローリング審査——すべての応募に14日以内に回答します。" }, { n: "02", t: "パートナー面談", d: "プロダクトを深く掘り下げる2回の対話。相手はアソシエイトではなくパートナーです。" }, { n: "03", t: "オファー", d: "標準条件でのSAFEによる15万米ドルの出資と、次期コホートの開始日をご提示します。" } ], noteH: "応募前に", noteP: "飾った回答より率直な回答を。数字があれば数字を、リンクがあればリンクを。デッキは任意です。", co: "会社名", web: "ウェブサイトまたはプロダクトURL", founder: "創業者氏名・役職", email: "メールアドレス", hq: "本社所在地または事業展開市場", stage: "事業ステージ", oneLine: "貴社の事業を一文で説明してください", tech: "貴社独自の技術または商業的優位性は何ですか？", traction: "現在の実績は何ですか？", why: "なぜ今、アジア太平洋地域における資本・コンピューティング・市場アクセスが必要なのですか？", deck: "ピッチデックまたは1ページ概要", deckHelp: "任意アップロード、PDF最大10MB", hear: "どこで当社を知りましたか？", relocateQ: "プログラム期間中の移住または現地滞在は可能ですか？", anything: "その他お伝えしたいことはありますか？", stage1: "収益あり", stage2: "ローンチ済み・収益化前", stage3: "開発中", hqExtra1: "その他のAPAC地域", hqExtra2: "APAC域外", reloc1: "はい", reloc2: "いいえ", reloc3: "場合による", submit: "応募する", submitHelp: "ローリング審査 · 14日以内に回答", doneTitle: "受領しました。", doneP: "今期中にパートナーが応募内容を確認します。結果にかかわらず14日以内にご連絡します。", doneLink: "その間に、ぜひコミュニティにご参加ください——すべてのコホートはここから始まります。" },
+        footer: { supported: "First Financial Holdingの支援を受けています", contactH: "お問い合わせ", quickH: "クイックリンク", stayH: "ニュースレター", stayP: "ニュースレターに登録して最新情報を受け取る。", emailPh: "メールアドレスを入力", terms: "利用規約", privacy: "プライバシーポリシー" }
+      },
+      th: {
+        nav: { home: "หน้าแรก", about: "เกี่ยวกับเรา", acc: "Accelerator", com: "ชุมชน", apply: "สมัคร", applyNow: "สมัครเลย" },
+        hero: { eyebrow: "AI Accelerator · Venture Studio", title: "สนับสนุนผู้ก่อตั้ง AI ที่พร้อมลงมือทำจริงทั่วเอเชีย", sub: "เงินทุน พลังประมวลผล และการเข้าถึงตลาด สำหรับผู้ประกอบการที่กำลังสร้างธุรกิจ AI ที่แท้จริง", cta: "สมัครเข้าร่วมโครงการ Accelerator" },
+        stats: { s1: { pre: "", n: 150, suf: "K", label: "ดอลลาร์สหรัฐผ่าน SAFE" }, s2: { pre: "สูงสุด ", n: 10, suf: "", label: "บริษัทต่อรุ่น" }, s3: { n: 6, suf: " เดือน", label: "โปรแกรมโครงสร้าง" }, s4: { n: 6, suf: "", label: "เขตอำนาจศาลทั่วเอเชีย" } },
+        why: { eb: "ทำไมการลงมือทำจึงสำคัญ", h: "ธุรกิจ AI ส่วนใหญ่สะดุดไม่ใช่เพราะเทคโนโลยี แต่เพราะการดำเนินงานที่กระจัดกระจาย", p: "เราทำงานอย่างใกล้ชิดกับผู้ก่อตั้งเพื่อก้าวข้ามขั้นตอนนำร่อง ปรับปรุงโมเดล เปิดตัวในตลาดจริง และสร้างแรงดึงดูดที่ดึงดูดเงินทุนอย่างจริงจัง" },
+        how: { eb: "ขั้นตอนการทำงาน", h: "6 เดือน 4 ขั้นตอน", steps: [
+          { n: "01", t: "เข้าร่วมผ่านชุมชน", d: "เข้าร่วมเครือข่ายเปิดของผู้ก่อตั้ง ผู้ประกอบการ และนักสร้างสรรค์", tag: "" },
+          { n: "02", t: "โปรแกรมโครงสร้าง", d: "การให้คำปรึกษาแบบตัวต่อตัว การจัดโครงสร้างองค์กร กลยุทธ์ผลิตภัณฑ์", tag: "3 เดือน" },
+          { n: "03", t: "APAC Sandbox", d: "การพิสูจน์ตลาดจริงใน 6 ตลาด", tag: "3 เดือน" },
+          { n: "04", t: "Demo Day", d: "นำเสนอผลงานจริงต่อนักลงทุนและชุมชน", tag: "" }
+        ] },
+        beyond: { eb: "มากกว่าเงินทุน", h: "สิ่งที่บริษัทในรุ่นจะได้รับ", i1: { t: "การประมวลผลประสิทธิภาพสูง (HPC)", d: "เข้าถึง GPU cluster ได้ทันทีเพื่อเร่งการฝึกและพัฒนาโมเดล" }, i2: { t: "APAC Sandbox", d: "การทดสอบในสภาพแวดล้อมจริงที่ควบคุมได้ใน 6 ตลาด" }, i3: { t: "เครือข่ายระบบนิเวศ", d: "เข้าถึงลูกค้า พันธมิตรเชิงกลยุทธ์ และการให้คำปรึกษาอย่างต่อเนื่องโดยตรง" } },
+        map: { eb: "พื้นที่ดำเนินงาน", h: "6 เขตอำนาจศาล", markets: [ { n: "01", name: "ฮ่องกง" }, { n: "02", name: "ไต้หวัน" }, { n: "03", name: "สิงคโปร์" }, { n: "04", name: "ญี่ปุ่น" }, { n: "05", name: "ไทย" }, { n: "06", name: "กัมพูชา" } ] },
+        close: { h: "พร้อมที่จะสร้างและขยายธุรกิจแล้วหรือยัง?" },
+        about: { title: "เกี่ยวกับเรา", missionEb: "พันธกิจ", mission: "Venture Hub Academy สร้างและขยายธุรกิจที่ขับเคลื่อนด้วย AI โดยร่วมมือกับผู้ประกอบการที่มีประสบการณ์ — เปลี่ยนความเชี่ยวชาญเฉพาะด้านให้กลายเป็นธุรกิจเทคโนโลยีที่เติบโตสูง", critEb: "เกณฑ์การคัดเลือก", critH: "สิ่งที่เรามองหา", crit: [ { n: "01", text: "คุณภาพของทีม / วิสัยทัศน์ของผู้นำธุรกิจที่มั่นคง" }, { n: "02", text: "ผลิตภัณฑ์หรือบริการที่มีศักยภาพล้ำสมัย บนพื้นฐานเทคโนโลยีที่เป็นเอกลักษณ์" }, { n: "03", text: "ข้อเสนอเชิงพาณิชย์ที่ชัดเจน พิสูจน์ได้ และมีโอกาสในระดับโลก" } ], whoEb: "เราสนับสนุนใคร", whoH: "ผู้ประกอบการที่มีประสบการณ์ ไม่ใช่มือใหม่ขั้นไอเดีย", who: "Venture Hub Academy ให้ความสำคัญกับผู้ประกอบการที่มีประสบการณ์มากกว่าผู้ก่อตั้งมือใหม่ที่อยู่ในขั้นตอนไอเดีย เรามองหาทีมที่มีรากฐานเชิงพาณิชย์ที่มั่นคงและพร้อมลงมือปฏิบัติจริง ไม่ใช่ทีมที่เริ่มพิสูจน์ไอเดียตั้งแต่ศูนย์", backEb: "การสนับสนุนจากสถาบัน", backH: "ได้รับการสนับสนุนจากสถาบัน", back1: "ได้รับการสนับสนุนจาก First Financial Holding", back2: "พันธมิตรทางวิชาการ: HKU, HKUST, CUHK", notTag: "มือใหม่ขั้นไอเดีย", yesTag: "ผู้ประกอบการที่มีประสบการณ์" },
+        acc: { title: "Accelerator", ovEb: "ภาพรวมโปรแกรม", ovH: "โปรแกรม 6 เดือนเพื่อการลงมือทำ", ov: [ { n: "01", text: "โครงสร้าง 6 เดือน: โปรแกรมโครงสร้าง 3 เดือน + APAC Sandbox 3 เดือน" }, { n: "02", text: "รุ่นเล็กที่เน้นคุณภาพ สูงสุด 10 บริษัทต่อรุ่น" }, { n: "03", text: "เงินทุน 150,000 ดอลลาร์สหรัฐผ่าน SAFE พร้อมทรัพยากร GPU และการประมวลผล" } ], p1tag: "เดือนที่ 1–3", p1h: "โปรแกรมโครงสร้าง", p1: [ "การให้คำปรึกษาแบบตัวต่อตัวโดยผู้ก่อตั้งและผู้ประกอบการที่มีประสบการณ์", "การสนับสนุนด้านโครงสร้างองค์กร ทิศทางการวิจัย และกลยุทธ์ผลิตภัณฑ์", "คำแนะนำด้านการดำเนินธุรกิจและการขยายตัว" ], p2tag: "เดือนที่ 4–6", p2h: "APAC Sandbox", p2: [ "การพิสูจน์กับลูกค้าจริงใน 6 ตลาด: ฮ่องกง ไต้หวัน สิงคโปร์ ญี่ปุ่น ไทย กัมพูชา", "สัญญาณรายได้จริงผ่านการขายจริง ความร่วมมือ หรือหนังสือแสดงเจตจำนง (LOI)", "เร่งสร้างแรงดึงดูดก่อนการระดมทุน" ], ddH: "นำเสนอผลงานจริง ระดมทุนด้วยหลักฐาน", dd: "ผู้ก่อตั้งนำเสนอผลงานจริงต่อนักลงทุนและชุมชน การเข้าถึงนักลงทุนอย่างเป็นระบบและแรงขับเคลื่อนจากชุมชน" },
+        com: { title: "ชุมชน", funnelEb: "ชุมชนทำงานอย่างไร", funnelH: "จาก Open Forum สู่ Core Cohort", t1n: "Open Forum", t1d: "เครือข่ายเปิด พูดคุยไอเดียสตาร์ทอัพ ค้นหาความตั้งใจตั้งแต่ระยะแรก", t2n: "Members", t2d: "ศิษย์เก่าและผู้เข้ารอบ เข้าถึงกิจกรรมพิเศษเฉพาะกลุ่ม", t3n: "Core Cohort", t3d: "ทีมที่คัดสรรกว่า 10 ทีม เข้าถึงเงินทุนและเครือข่ายโดยตรง", ctaH: "เข้าร่วมชุมชน", cta: "เข้าร่วมชุมชน" },
+        apply: { eyebrow: "สมัคร", title: "15 นาที อ่านโดยพาร์ทเนอร์โดยตรง", steps: [ { n: "01", t: "ใบสมัคร", d: "แบบฟอร์มนี้ พิจารณาแบบต่อเนื่อง — เราตอบกลับทุกใบสมัครภายใน 14 วัน" }, { n: "02", t: "สัมภาษณ์กับพาร์ทเนอร์", d: "บทสนทนาเชิงลึกด้านผลิตภัณฑ์สองครั้ง กับพาร์ทเนอร์ ไม่ใช่ผู้ช่วย" }, { n: "03", t: "ข้อเสนอ", d: "เงินทุน 150,000 ดอลลาร์สหรัฐผ่าน SAFE ตามเงื่อนไขมาตรฐาน พร้อมวันเริ่มต้นของรุ่นถัดไป" } ], noteH: "ก่อนเริ่ม", noteP: "คำตอบที่ตรงไปตรงมาดีกว่าคำตอบที่ขัดเกลามากเกินไป ใส่ตัวเลขถ้ามี แนบลิงก์ถ้าทำได้ ไม่จำเป็นต้องมี deck", co: "ชื่อบริษัท", web: "เว็บไซต์หรือ URL ผลิตภัณฑ์", founder: "ชื่อผู้ก่อตั้งและตำแหน่ง", email: "อีเมล", hq: "สำนักงานใหญ่หรือตลาดที่ดำเนินงาน", stage: "ระยะของบริษัท", oneLine: "อธิบายธุรกิจของคุณในหนึ่งประโยค", tech: "เทคโนโลยีเฉพาะหรือข้อได้เปรียบเชิงพาณิชย์ที่มีเอกลักษณ์คืออะไร?", traction: "ปัจจุบันมีความคืบหน้าอะไรบ้าง?", why: "เหตุใดจึงต้องการเงินทุน การประมวลผล หรือการเข้าถึงตลาดในเอเชีย/APAC ในตอนนี้?", deck: "Pitch deck หรือ one-pager", deckHelp: "อัปโหลดไม่บังคับ, PDF สูงสุด 10MB", hear: "คุณรู้จักเราได้อย่างไร?", relocateQ: "คุณพร้อมย้ายที่อยู่หรือทำงานที่สถานที่จริงระหว่างโปรแกรมหรือไม่?", anything: "มีอะไรอื่นที่อยากให้เราทราบหรือไม่?", stage1: "มีรายได้แล้ว", stage2: "เปิดตัวแล้ว ยังไม่มีรายได้", stage3: "กำลังพัฒนา", hqExtra1: "ที่อื่นในเอเชียแปซิฟิก", hqExtra2: "นอกเอเชียแปซิฟิก", reloc1: "ได้", reloc2: "ไม่ได้", reloc3: "ขึ้นอยู่กับสถานการณ์", submit: "ส่งใบสมัคร", submitHelp: "พิจารณาแบบต่อเนื่อง · ตอบกลับภายใน 14 วัน", doneTitle: "ได้รับแล้ว", doneP: "พาร์ทเนอร์จะอ่านใบสมัครของคุณในรอบนี้ ไม่ว่าผลจะเป็นอย่างไร คุณจะได้รับการติดต่อกลับภายใน 14 วัน", doneLink: "ระหว่างนี้ เข้าร่วมชุมชนของเราได้ — ทุกรุ่นเริ่มต้นจากที่นั่น" },
+        footer: { supported: "ได้รับการสนับสนุนจาก First Financial Holding", contactH: "ติดต่อเรา", quickH: "ลิงก์ด่วน", stayH: "ติดตามข่าวสาร", stayP: "สมัครรับจดหมายข่าวเพื่อรับข่าวสารล่าสุด", emailPh: "กรอกอีเมลของคุณ", terms: "ข้อกำหนดและเงื่อนไข", privacy: "นโยบายความเป็นส่วนตัว" }
+      },
+      km: {
+        nav: { home: "ទំព័រដើម", about: "អំពីយើង", acc: "Accelerator", com: "សហគមន៍", apply: "ដាក់ពាក្យ", applyNow: "ដាក់ពាក្យឥឡូវនេះ" },
+        hero: { eyebrow: "AI Accelerator · Venture Studio", title: "គាំទ្រស្ថាបនិក AI ដែលមានសមត្ថភាពអនុវត្តន៍ពិតប្រាកដទូទាំងអាស៊ី។", sub: "ដើមទុន កម្លាំងគណនា និងលទ្ធភាពចូលទីផ្សារ សម្រាប់ប្រតិបត្តិករដែលកំពុងកសាងអាជីវកម្ម AI ពិតប្រាកដ។", cta: "ដាក់ពាក្យសុំចូលរួមកម្មវិធី Accelerator" },
+        stats: { s1: { pre: "", n: 150, suf: "K", label: "ដុល្លារអាមេរិកតាមរយៈ SAFE" }, s2: { pre: "អតិបរមា ", n: 10, suf: "", label: "ក្រុមហ៊ុនក្នុងមួយក្រុម" }, s3: { n: 6, suf: "ខែ", label: "កម្មវិធីរចនាសម្ព័ន្ធ" }, s4: { n: 6, suf: "", label: "ដែនសមត្ថកិច្ចទូទាំងអាស៊ី" } },
+        why: { eb: "ហេតុអ្វីការអនុវត្តន៍សំខាន់", h: "សហគ្រាស AI ភាគច្រើនជាប់គាំង មិនមែនដោយសារបច្ចេកវិទ្យាទេ ប៉ុន្តែដោយសារការអនុវត្តន៍មិនស៊ីគ្នា។", p: "យើងធ្វើការផ្ទាល់ជាមួយស្ថាបនិក ដើម្បីឆ្ពោះទៅមុខលើសពីដំណាក់កាលសាកល្បង—កែលម្អគំរូ បើកដំណើរការនៅទីផ្សារពិតប្រាកដ និងកសាងសន្ទុះដែលទាក់ទាញដើមទុនយ៉ាងជាក់លាក់។" },
+        how: { eb: "របៀបដំណើរការ", h: "៦ខែ ៤ដំណាក់កាល។", steps: [
+          { n: "01", t: "ចូលរួមតាមរយៈសហគមន៍", d: "ចូលរួមបណ្តាញបើកចំហរបស់ស្ថាបនិក ប្រតិបត្តិករ និងអ្នកកសាង។", tag: "" },
+          { n: "02", t: "កម្មវិធីរចនាសម្ព័ន្ធ", d: "ការណែនាំមួយទល់មួយ រចនាសម្ព័ន្ធក្រុមហ៊ុន យុទ្ធសាស្ត្រផលិតផល។", tag: "៣ខែ" },
+          { n: "03", t: "APAC Sandbox", d: "ការផ្ទៀងផ្ទាត់ទីផ្សារពិតប្រាកដនៅទីផ្សារចំនួន៦។", tag: "៣ខែ" },
+          { n: "04", t: "Demo Day", d: "បង្ហាញទិន្នន័យពិតប្រាកដដល់វិនិយោគិន និងសហគមន៍។", tag: "" }
+        ] },
+        beyond: { eb: "លើសពីដើមទុន", h: "អ្វីដែលក្រុមហ៊ុនក្នុងកម្មវិធីទទួលបាន។", i1: { t: "កម្លាំងគណនាប្រសិទ្ធភាពខ្ពស់ (HPC)", d: "ចូលប្រើប្រាស់ចង្កោម GPU ភ្លាមៗ ដើម្បីពន្លឿនការបណ្តុះបណ្តាល និងអភិវឌ្ឍគំរូ។" }, i2: { t: "APAC Sandbox", d: "ការសាកល្បងក្នុងបរិយាកាសពិតប្រាកដដែលមានការគ្រប់គ្រងនៅទីផ្សារចំនួន៦។" }, i3: { t: "បណ្តាញប្រព័ន្ធអេកូឡូស៊ី", d: "ចូលប្រើប្រាស់ផ្ទាល់ទៅកាន់អតិថិជន ដៃគូយុទ្ធសាស្ត្រ និងការណែនាំជាបន្តបន្ទាប់។" } },
+        map: { eb: "តំបន់ប្រតិបត្តិការ", h: "៦ដែនសមត្ថកិច្ច។", markets: [ { n: "01", name: "ហុងកុង" }, { n: "02", name: "តៃវ៉ាន់" }, { n: "03", name: "សិង្ហបុរី" }, { n: "04", name: "ជប៉ុន" }, { n: "05", name: "ថៃ" }, { n: "06", name: "កម្ពុជា" } ] },
+        close: { h: "តើអ្នកត្រៀមខ្លួនរួចរាល់ដើម្បីកសាង និងពង្រីកអាជីវកម្មរបស់អ្នកហើយឬនៅ?" },
+        about: { title: "អំពីយើង", missionEb: "បេសកកម្ម", mission: "Venture Hub Academy កសាង និងពង្រីកអាជីវកម្មដែលដំណើរការដោយ AI តាមរយៈភាពជាដៃគូជាមួយប្រតិបត្តិករដែលមានបទពិសោធន៍ — ដោយប្រែក្លាយជំនាញឯកទេសទៅជាសហគ្រាសបច្ចេកវិទ្យាដែលមានកំណើនខ្ពស់។", critEb: "លក្ខណៈវិនិច្ឆ័យជ្រើសរើស", critH: "អ្វីដែលយើងស្វែងរក។", crit: [ { n: "01", text: "គុណភាពនៃក្រុម / អ្នកមានចក្ខុវិស័យរបស់អាជីវកម្មដែលបានបង្កើតឡើងរួច" }, { n: "02", text: "ផលិតផល ឬសេវាកម្មដែលមានសក្តានុពលជាឧត្តមគតិ ដោយផ្អែកលើបច្ចេកវិទ្យាតែមួយគត់" }, { n: "03", text: "សំណើពាណិជ្ជកម្មច្បាស់លាស់ បានបញ្ជាក់ និងមានឱកាសកម្រិតពិភពលោក" } ], whoEb: "យើងគាំទ្រនរណា", whoH: "ប្រតិបត្តិករមានបទពិសោធន៍ មិនមែនអ្នកចាប់ផ្តើមដំណាក់កាលគំនិតទេ។", who: "Venture Hub Academy ផ្តល់អាទិភាពដល់ប្រតិបត្តិករដែលមានបទពិសោធន៍ជាងស្ថាបនិកលើកដំបូងដែលនៅដំណាក់កាលគំនិត។ យើងស្វែងរកក្រុមដែលមានមូលដ្ឋានពាណិជ្ជកម្មដែលបានបង្កើតឡើងរួច និងត្រៀមខ្លួនអនុវត្ត — មិនមែនក្រុមដែលចាប់ផ្តើមផ្ទៀងផ្ទាត់គំនិតពីសូន្យទេ។", backEb: "ការគាំទ្រពីស្ថាប័ន", backH: "គាំទ្រដោយស្ថាប័ន។", back1: "គាំទ្រដោយ First Financial Holding។", back2: "ដៃគូសិក្សា៖ HKU, HKUST, CUHK។", notTag: "អ្នកចាប់ផ្តើមថ្មីនៅដំណាក់កាលគំនិត", yesTag: "ប្រតិបត្តិករមានបទពិសោធន៍" },
+        acc: { title: "Accelerator", ovEb: "ទិដ្ឋភាពទូទៅនៃកម្មវិធី", ovH: "កម្មវិធី៦ខែសម្រាប់ការអនុវត្តន៍។", ov: [ { n: "01", text: "រចនាសម្ព័ន្ធ៦ខែ៖ កម្មវិធីរចនាសម្ព័ន្ធ៣ខែ + APAC Sandbox ៣ខែ។" }, { n: "02", text: "ក្រុមតូចដែលផ្តោតលើគុណភាព អតិបរមា១០ក្រុមហ៊ុនក្នុងមួយក្រុម។" }, { n: "03", text: "ដើមទុន១៥០.០០០ដុល្លារអាមេរិកតាមរយៈ SAFE បូករួមនឹងធនធាន GPU និងកម្លាំងគណនា។" } ], p1tag: "ខែទី១–៣", p1h: "កម្មវិធីរចនាសម្ព័ន្ធ", p1: [ "ការណែនាំមួយទល់មួយពីស្ថាបនិក និងប្រតិបត្តិករដែលមានបទពិសោធន៍។", "ការគាំទ្ររចនាសម្ព័ន្ធក្រុមហ៊ុន ទិសដៅស្រាវជ្រាវ និងយុទ្ធសាស្ត្រផលិតផល។", "ការណែនាំការអនុវត្ត និងពង្រីកអាជីវកម្មចាប់ផ្តើម។" ], p2tag: "ខែទី៤–៦", p2h: "APAC Sandbox", p2: [ "ការផ្ទៀងផ្ទាត់អតិថិជនពិតប្រាកដនៅទីផ្សារចំនួន៦៖ ហុងកុង តៃវ៉ាន់ សិង្ហបុរី ជប៉ុន ថៃ និងកម្ពុជា។", "សញ្ញាចំណូលពិតប្រាកដតាមរយៈការលក់ពិតប្រាកដ ភាពជាដៃគូ ឬលិខិតបញ្ជាក់ចេតនា (LOI)។", "ពន្លឿនការកសាងសន្ទុះមុនពេលរៃអង្គាសដើមទុន។" ], ddH: "បង្ហាញទិន្នន័យពិត រៃអង្គាសដោយភស្តុតាង។", dd: "ស្ថាបនិកបង្ហាញទិន្នន័យពិតប្រាកដដល់វិនិយោគិន និងសហគមន៍។ លទ្ធភាពចូលដល់វិនិយោគិនប្រកបដោយរចនាសម្ព័ន្ធ និងសន្ទុះជំរុញដោយសហគមន៍។" },
+        com: { title: "សហគមន៍", funnelEb: "របៀបដំណើរការសហគមន៍", funnelH: "ពី Open Forum ទៅ Core Cohort។", t1n: "វេទិកាបើកចំហ", t1d: "បណ្តាញបើកចំហ ពិភាក្សាអំពីគំនិតអាជីវកម្មចាប់ផ្តើម រកឃើញចេតនាដំបូង។", t2n: "សមាជិក", t2d: "សិស្សចាស់ និងអ្នកចូលរួមដែលបានជ្រើសរើសមុន ចូលរួមព្រឹត្តិការណ៍ផ្តាច់មុខ។", t3n: "ក្រុមស្នូល", t3d: "ក្រុមដែលបានជ្រើសរើសយ៉ាងម៉ត់ចត់ជាង១០ក្រុម ទទួលបានថវិកា និងបណ្តាញផ្ទាល់។", ctaH: "ចូលរួមសហគមន៍", cta: "ចូលរួមសហគមន៍" },
+        apply: { eyebrow: "ដាក់ពាក្យ", title: "ដប់ប្រាំនាទី។ អានដោយដៃគូផ្ទាល់។", steps: [ { n: "01", t: "ដាក់ពាក្យសុំ", d: "ទម្រង់នេះឯង។ ការពិនិត្យបន្តបន្ទាប់ — យើងឆ្លើយតបរាល់ពាក្យសុំក្នុងរយៈពេល១៤ថ្ងៃ។" }, { n: "02", t: "សម្ភាសន៍ជាមួយដៃគូ", d: "ការសន្ទនាស៊ីជម្រៅផលិតផលពីរដង ជាមួយដៃគូ មិនមែនជាមួយបុគ្គលិកទេ។" }, { n: "03", t: "ការផ្តល់ជូន", d: "ដើមទុន១៥០.០០០ដុល្លារអាមេរិកតាមរយៈ SAFE ក្រោមលក្ខខណ្ឌស្តង់ដារ និងកាលបរិច្ឆេទចាប់ផ្តើមកម្មវិធីជុំបន្ទាប់។" } ], noteH: "មុនពេលចាប់ផ្តើម", noteP: "ចម្លើយត្រង់ល្អជាងចម្លើយលំអខ្លាំង។ ដាក់លេខប្រសិនបើមាន ដាក់តំណប្រសិនបើអាច។ ឯកសារបទបង្ហាញមិនចាំបាច់ទេ។", co: "ឈ្មោះក្រុមហ៊ុន", web: "គេហទំព័រ ឬ URL ផលិតផល", founder: "ឈ្មោះ និងតួនាទីស្ថាបនិក", email: "អ៊ីមែល", hq: "ទីតាំងការិយាល័យកណ្តាល ឬទីផ្សារប្រតិបត្តិការ", stage: "ដំណាក់កាលក្រុមហ៊ុន", oneLine: "សូមពិពណ៌នាអំពីអាជីវកម្មរបស់អ្នកក្នុងមួយប្រយោគ", tech: "តើអ្នកមានបច្ចេកវិទ្យាតែមួយគត់ ឬអត្ថប្រយោជន៍ពាណិជ្ជកម្មពិសេសអ្វី?", traction: "តើបច្ចុប្បន្នអ្នកមានវឌ្ឍនភាពអ្វីខ្លះ?", why: "ហេតុអ្វីបានជាអ្នកត្រូវការដើមទុន កម្លាំងគណនា ឬលទ្ធភាពចូលទីផ្សារនៅអាស៊ី/APAC ឥឡូវនេះ?", deck: "Pitch deck ឬ one-pager", deckHelp: "ផ្ទុកឡើងស្រេចចិត្ត, PDF អតិបរមា១០MB", hear: "តើអ្នកបានដឹងអំពីយើងខ្ញុំដោយរបៀបណា?", relocateQ: "តើអ្នកត្រៀមខ្លួនផ្លាស់ទី ឬស្នាក់នៅទីតាំងក្នុងអំឡុងពេលកម្មវិធីដែរឬទេ?", anything: "តើមានអ្វីផ្សេងទៀតដែលអ្នកចង់ឱ្យយើងខ្ញុំដឹងដែរឬទេ?", stage1: "មានចំណូលរួចហើយ", stage2: "បានចាប់ផ្តើមដំណើរការ មិនទាន់មានចំណូល", stage3: "កំពុងអភិវឌ្ឍ", hqExtra1: "កន្លែងផ្សេងទៀតក្នុងអាស៊ីប៉ាស៊ីហ្វិក", hqExtra2: "ក្រៅអាស៊ីប៉ាស៊ីហ្វិក", reloc1: "បាន", reloc2: "ទេ", reloc3: "អាស្រ័យលើស្ថានភាព", submit: "ដាក់ស្នើពាក្យសុំ", submitHelp: "ការពិនិត្យបន្តបន្ទាប់ · ឆ្លើយតបក្នុងរយៈពេល១៤ថ្ងៃ", doneTitle: "ទទួលបានហើយ។", doneP: "ដៃគូនឹងអានពាក្យសុំរបស់អ្នកក្នុងជុំនេះ។ មិនថាលទ្ធផលយ៉ាងណា អ្នកនឹងទទួលបានការឆ្លើយតបក្នុងរយៈពេល១៤ថ្ងៃ។", doneLink: "ចន្លោះពេលនេះ សូមចូលរួមសហគមន៍របស់យើង — រាល់ក្រុមចាប់ផ្តើមពីទីនោះ។" },
+        footer: { supported: "គាំទ្រដោយ First Financial Holding", contactH: "ទំនាក់ទំនង", quickH: "តំណភ្ជាប់រហ័ស", stayH: "ទទួលព័ត៌មាន", stayP: "ចុះឈ្មោះទទួលព័ត៌មានថ្មីៗ។", emailPh: "បញ្ចូលអ៊ីមែលរបស់អ្នក", terms: "លក្ខខណ្ឌ", privacy: "គោលការណ៍ឯកជនភាព" }
+      }
+    };
+  }
+
+  renderVals() {
+    const L = this._data();
+    const t = L[this.state.lang] || L.en;
+    const p = this.state.page;
+    const codes = { en: "EN", sc: "简", tc: "繁", jp: "日", th: "ไทย", km: "ខ្មែរ" };
+    return {
+      t,
+      isHome: p === "home",
+      isAbout: p === "about",
+      isAcc: p === "acc",
+      isCom: p === "com",
+      isApply: p === "apply",
+      ulHome: p === "home" ? "#8044FD" : "transparent",
+      ulAbout: p === "about" ? "#8044FD" : "transparent",
+      ulAcc: p === "acc" ? "#8044FD" : "transparent",
+      ulCom: p === "com" ? "#8044FD" : "transparent",
+      drawerX: this.state.menuOpen ? "translateX(0)" : "translateX(-104%)",
+      drawerShadow: this.state.menuOpen ? "0 30px 80px rgba(17,17,17,.18)" : "none",
+      bdOp: this.state.menuOpen ? 1 : 0,
+      bdPe: this.state.menuOpen ? "auto" : "none",
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      applyPending: !this.state.applyDone,
+      applyDone: this.state.applyDone,
+      applySubmit: () => { this.setState({ applyDone: true }); window.scrollTo({ top: 0, behavior: "smooth" }); },
+      hqPills: this._pills([...t.map.markets.map((m) => m.name), t.apply.hqExtra1, t.apply.hqExtra2], this.state.applyHq, "applyHq"),
+      stagePills: this._pills([t.apply.stage1, t.apply.stage2, t.apply.stage3], this.state.applyStage, "applyStage"),
+      relocPills: this._pills([t.apply.reloc1, t.apply.reloc2, t.apply.reloc3], this.state.applyReloc, "applyReloc"),
+      rootRef: (el) => { this._root = el; },
+      canvasRef: (el) => {
+        if (el && el !== this._cv) {
+          this._cv = el;
+          this._fit();
+          if (!this._raf) this._loop();
+        }
+      },
+      langOpen: this.state.langOpen,
+      langLabel: codes[this.state.lang] || "EN",
+      langs: [
+        { k: "en", c: "EN", n: "English" },
+        { k: "sc", c: "简", n: "简体中文" },
+        { k: "tc", c: "繁", n: "繁體中文" },
+        { k: "jp", c: "日", n: "日本語" },
+        { k: "th", c: "TH", n: "ภาษาไทย" },
+        { k: "km", c: "KM", n: "ភាសាខ្មែរ" }
+      ],
+      toggleLang: (e) => { e.stopPropagation(); this.setState((s) => ({ langOpen: !s.langOpen })); },
+      pickLangEv: (e) => {
+        const k = e.currentTarget.getAttribute("data-lang-key");
+        if (k) this.setState({ lang: k, langOpen: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

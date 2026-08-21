@@ -1,0 +1,6 @@
+# Raw camera photos (79MB) — optimized derivatives actually used by the site
+# live in assets/images/ and are committed. Keep the originals locally only.
+assets/*.JPG
+assets/*.jpg
+
+.DS_Store

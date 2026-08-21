@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>html,body{margin:0;height:100%;background:#FFFFFF;overflow:hidden}svg{display:block}</style>
+</head>
+<body>
+<script>
+const MARKETS=[
+ {name:"Hong Kong",lon:114.17,lat:22.30,dx:-12,dy:4,anchor:"end"},
+ {name:"Taiwan",lon:120.96,lat:23.70,dx:13,dy:4,anchor:"start"},
+ {name:"Japan",lon:139.69,lat:35.68,dx:13,dy:-4,anchor:"start"},
+ {name:"Thailand",lon:100.52,lat:13.75,dx:-13,dy:2,anchor:"end"},
+ {name:"Cambodia",lon:104.92,lat:11.55,dx:13,dy:12,anchor:"start"},
+ {name:"Singapore",lon:103.85,lat:1.29,dx:13,dy:4,anchor:"start"}
+];
+const HI=new Set(["392","158","764","116","702"]);
+fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(r=>r.json()).then(topo=>{
+  const countries=topojson.feature(topo,topo.objects.countries);
+  const draw=()=>{
+    d3.select("svg").remove();
+    const w=innerWidth,h=innerHeight;
+    const region={type:"Polygon",coordinates:[[[88,-11],[152,-11],[152,47],[88,47],[88,-11]]]};
+    const proj=d3.geoMercator().fitSize([w,h],region);
+    const path=d3.geoPath(proj);
+    const svg=d3.select("body").append("svg").attr("width",w).attr("height",h);
+    svg.selectAll("path.c").data(countries.features).join("path")
+      .attr("d",path)
+      .attr("fill",d=>HI.has(String(d.id))?"#E4D7FF":"#F2F1F1")
+      .attr("stroke",d=>HI.has(String(d.id))?"#CDB7FC":"#E5E5E5")
+      .attr("stroke-width",0.7);
+    const g=svg.append("g");
+    MARKETS.forEach(m=>{
+      const p=proj([m.lon,m.lat]);
+      g.append("circle").attr("cx",p[0]).attr("cy",p[1]).attr("r",10).attr("fill","#8044FD").attr("fill-opacity",0.16);
+      g.append("circle").attr("cx",p[0]).attr("cy",p[1]).attr("r",4).attr("fill","#8044FD");
+      g.append("text").attr("x",p[0]+m.dx).attr("y",p[1]+m.dy).attr("text-anchor",m.anchor)
+        .attr("font-family","Inter,'Helvetica Neue',Arial,sans-serif").attr("font-size",12.5).attr("font-weight",600)
+        .attr("fill","#111111").attr("stroke","#FFFFFF").attr("stroke-width",3.5).attr("paint-order","stroke").text(m.name);
+    });
+  };
+  draw();
+  addEventListener("resize",draw);
+}).catch(()=>{
+  document.body.innerHTML="<div style=\"font:13px Inter,Arial,sans-serif;color:#999;padding:24px\">Map data unavailable</div>";
+});
+</script>
+</body>
+</html>

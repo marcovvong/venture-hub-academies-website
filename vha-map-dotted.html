@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:#F6F3FE;overflow:hidden}canvas{display:block}</style>
+</head>
+<body>
+<canvas id="map"></canvas>
+<script>
+// dx/dy chosen so each label points away from its nearest neighbor (see layout notes)
+const MARKETS=[
+ {name:"Hong Kong",lon:114.17,lat:22.30,dx:-17,dy:-3,anchor:"end"},
+ {name:"Taiwan",lon:120.96,lat:23.70,dx:18,dy:-3,anchor:"start"},
+ {name:"Japan",lon:139.69,lat:35.68,dx:18,dy:-5,anchor:"start"},
+ {name:"Singapore",lon:103.85,lat:1.29,dx:18,dy:5,anchor:"start"},
+ {name:"Thailand",lon:100.52,lat:13.75,dx:-17,dy:19,anchor:"end"},
+ {name:"Cambodia",lon:104.92,lat:11.55,dx:17,dy:21,anchor:"start"}
+];
+// China (156) intentionally excluded from the highlight set — only the 6 named markets are highlighted; a small ring of neighboring countries renders as unhighlighted context
+const HI=new Set(["392","158","764","116","702"]);
+const CONTEXT=new Set(["156","704","418","104","458","608","408","410","096"]);
+const ALLOW=new Set([...HI,...CONTEXT]);
+fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json").then(r=>r.json()).then(topo=>{
+  const allFeats=topojson.feature(topo,topo.objects.countries).features;
+  // keep only the 6 highlighted markets plus a small ring of neighboring countries for geographic context
+  const feats=allFeats.filter(f=>ALLOW.has(String(f.id)));
+  const cv=document.getElementById("map");
+  let proj;
+  const draw=()=>{
+    const w=innerWidth,h=innerHeight,dpr=Math.min(devicePixelRatio||1,2);
+    cv.width=w*dpr;cv.height=h*dpr;cv.style.width=w+"px";cv.style.height=h+"px";
+    const ctx=cv.getContext("2d");
+    // fit to the actual filtered landmass extent so the 6 markets spread across the frame instead of clumping
+    proj=d3.geoMercator().fitSize([w,h],{type:"FeatureCollection",features:feats});
+    const hiP=new Path2D(),loP=new Path2D();
+    const genHi=d3.geoPath(proj,hiP),genLo=d3.geoPath(proj,loP);
+    feats.forEach(f=>{ if(HI.has(String(f.id))) genHi(f); else genLo(f); });
+    ctx.setTransform(1,0,0,1,0,0);
+    const pts=[];
+    const sp=9;
+    for(let y=sp/2;y<h;y+=sp){
+      for(let x=sp/2;x<w;x+=sp){
+        if(ctx.isPointInPath(hiP,x,y)) pts.push([x,y,1]);
+        else if(ctx.isPointInPath(loP,x,y)) pts.push([x,y,0]);
+      }
+    }
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    pts.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p[0],p[1],p[2]?1.7:1.4,0,Math.PI*2);
+      ctx.fillStyle=p[2]?"rgba(124,58,237,0.68)":"rgba(178,158,242,0.4)";
+      ctx.fill();
+    });
+    MARKETS.forEach(m=>{
+      const pt=proj([m.lon,m.lat]);
+      const x=pt[0],y=pt[1];
+      const g=ctx.createRadialGradient(x,y,2,x,y,24);
+      g.addColorStop(0,"rgba(128,68,253,0.30)");g.addColorStop(0.55,"rgba(128,68,253,0.10)");g.addColorStop(1,"rgba(128,68,253,0)");
+      ctx.beginPath();ctx.arc(x,y,24,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,8.5,0,Math.PI*2);ctx.strokeStyle="rgba(124,58,237,0.6)";ctx.lineWidth=1.3;ctx.stroke();
+      ctx.beginPath();ctx.arc(x,y,5.2,0,Math.PI*2);ctx.fillStyle="#FFFFFF";ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,3.3,0,Math.PI*2);ctx.fillStyle="#7C3AED";ctx.fill();
+      const lx=x+m.dx,ly=y+m.dy;
+      ctx.strokeStyle="rgba(124,58,237,0.3)";ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(x+(m.anchor==="end"?-7:7),y);ctx.lineTo(m.anchor==="end"?lx+4:lx-4,ly);ctx.stroke();
+      ctx.font="600 13.5px Inter,'Helvetica Neue',Arial,sans-serif";
+      ctx.textAlign=m.anchor;
+      ctx.textBaseline="middle";
+      ctx.lineWidth=5;ctx.strokeStyle="#F6F3FE";ctx.lineJoin="round";
+      ctx.strokeText(m.name,lx,ly);
+      ctx.fillStyle="#111111";
+      ctx.fillText(m.name,lx,ly);
+    });
+  };
+  draw();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+  addEventListener("resize",draw);
+}).catch((e)=>{
+  console.error(e);
+  document.body.innerHTML="<div style=\"font:13px Inter,Arial,sans-serif;color:#999;padding:24px\">Map data unavailable</div>";
+});
+</script>
+</body>
+</html>

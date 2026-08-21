@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venture Hub Academy — AI Accelerator &amp; Venture Studio in Asia</title>
+<meta name="description" content="Backing execution-ready AI founders across Asia. Capital, compute, and market access for operators building real AI businesses.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Venture Hub Academy — AI Accelerator &amp; Venture Studio in Asia">
+<meta property="og:description" content="Backing execution-ready AI founders across Asia. Capital, compute, and market access for operators building real AI businesses.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://venturehubacademy.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jost:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" defer></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="drawer-backdrop" data-drawer-backdrop></div>
+<aside class="drawer" data-drawer aria-hidden="true" aria-label="Menu">
+  <div class="drawer__head">
+    <a href="index.html" data-internal class="logo">
+      <span class="logo__mark" aria-hidden="true">VHA</span>
+      <span class="logo__word">Venture Hub Academy</span>
+    </a>
+    <button type="button" class="drawer__close" data-menu-close aria-label="Close menu">×</button>
+  </div>
+  <nav class="drawer__nav" aria-label="Mobile">
+    <a class="drawer__link" href="about.html" data-internal><span class="drawer__link-num">01</span><span data-i18n="nav.about">About</span></a>
+    <a class="drawer__link" href="accelerator.html" data-internal><span class="drawer__link-num">02</span><span data-i18n="nav.acc">Accelerator</span></a>
+    <a class="drawer__link" href="community.html" data-internal><span class="drawer__link-num">03</span><span data-i18n="nav.com">Community</span></a>
+    <a class="drawer__link drawer__link--apply" href="apply.html" data-internal><span class="drawer__link-num">04</span><span data-i18n="nav.applyNow">Apply Now</span><span class="drawer__arrow" aria-hidden="true">→</span></a>
+  </nav>
+  <div class="drawer__langs">
+    <div class="drawer__langs-label" data-i18n="chrome.languageLabel">Language</div>
+    <div class="drawer__lang-list" data-drawer-lang-list></div>
+  </div>
+</aside>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="site-nav__inner">
+    <div class="site-nav__left">
+      <button type="button" class="hamburger" data-menu-open aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" data-internal class="logo">
+        <span class="logo__mark" aria-hidden="true">VHA</span>
+        <span class="logo__word">Venture Hub Academy</span>
+      </a>
+    </div>
+    <div class="site-nav__center">
+      <a href="index.html" data-internal data-nav-current="home"><span data-i18n="nav.home">Home</span></a>
+      <a href="about.html" data-internal data-nav-current="about"><span data-i18n="nav.about">About</span></a>
+      <a href="accelerator.html" data-internal data-nav-current="acc"><span data-i18n="nav.acc">Accelerator</span></a>
+      <a href="community.html" data-internal data-nav-current="com"><span data-i18n="nav.com">Community</span></a>
+    </div>
+    <div class="site-nav__right">
+      <div class="lang-switch" data-lang-switch data-open="false">
+        <button type="button" class="lang-switch__button" data-lang-trigger aria-haspopup="listbox" aria-expanded="false">
+          <span data-lang-label>EN</span><span class="lang-switch__caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="lang-switch__menu" data-lang-menu></div>
+      </div>
+      <a href="apply.html" data-internal class="btn btn-nav"><span data-i18n="nav.applyNow">Apply Now</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- Hero -->
+  <header class="wave-header hero">
+    <canvas data-wave-canvas data-density="34" data-speed="1" aria-hidden="true"></canvas>
+    <div class="container wave-header__content">
+      <div class="hero__inner">
+        <p class="eyebrow" data-i18n="hero.eyebrow">AI accelerator · Venture studio</p>
+        <h1 data-reveal data-i18n="hero.title">Backing execution-ready AI founders across Asia.</h1>
+        <p class="hero__sub" data-reveal data-reveal-delay="0.08" data-i18n="hero.sub">Capital, compute, and market access for operators building real AI businesses.</p>
+        <a href="apply.html" data-internal class="btn btn-primary" data-reveal data-reveal-delay="0.16">
+          <span data-i18n="hero.cta">Apply to the Accelerator</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- At a glance -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="stats">
+        <div class="stat" data-reveal>
+          <div class="stat__value"><span data-i18n="stats.s1.pre">US$</span><span class="stat-num" data-i18n-attr="data-count:stats.s1.n">150</span><span data-i18n="stats.s1.suf">K</span></div>
+          <div class="stat__label" data-i18n="stats.s1.label">Invested via SAFE</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="0.08">
+          <div class="stat__value"><span data-i18n="stats.s2.pre">up to </span><span class="stat-num" data-i18n-attr="data-count:stats.s2.n">10</span><span data-i18n="stats.s2.suf"></span></div>
+          <div class="stat__label" data-i18n="stats.s2.label">Companies per cohort</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="0.16">
+          <div class="stat__value"><span class="stat-num" data-i18n-attr="data-count:stats.s3.n">6</span><span data-i18n="stats.s3.suf">-month</span></div>
+          <div class="stat__label" data-i18n="stats.s3.label">Structured program</div>
+        </div>
+        <div class="stat" data-reveal data-reveal-delay="0.24">
+          <div class="stat__value"><span class="stat-num" data-i18n-attr="data-count:stats.s4.n">6</span><span data-i18n="stats.s4.suf"></span></div>
+          <div class="stat__label" data-i18n="stats.s4.label">Jurisdictions across Asia</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why execution matters -->
+  <section class="section bg-alt why">
+    <div class="container grid-5-7">
+      <div data-reveal>
+        <p class="eyebrow" data-i18n="why.eb">Why execution matters</p>
+        <h2 data-i18n="why.h">Most AI ventures stall not from technology, but from fragmented execution.</h2>
+      </div>
+      <div data-reveal data-reveal-delay="0.1">
+        <p data-i18n="why.p">We work hands-on with founders to move beyond pilots — refining models, launching in live markets, and building traction that attracts serious capital.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section bg-white how">
+    <div class="container">
+      <p class="eyebrow" data-reveal data-i18n="how.eb">How it works</p>
+      <h2 data-reveal data-i18n="how.h">Six months, four stages.</h2>
+      <div class="steps">
+        <div class="step" data-reveal>
+          <div class="step__num" data-i18n="how.steps.0.n">01</div>
+          <h3 class="step__title" data-i18n="how.steps.0.t">Enter Through Community</h3>
+          <p class="step__desc" data-i18n="how.steps.0.d">Join our open network of founders, operators, and builders.</p>
+        </div>
+        <div class="step" data-reveal data-reveal-delay="0.08">
+          <div class="step__num" data-i18n="how.steps.1.n">02</div>
+          <h3 class="step__title" data-i18n="how.steps.1.t">Structured Program</h3>
+          <p class="step__desc" data-i18n="how.steps.1.d">1-on-1 mentoring, corporate structuring, product strategy.</p>
+          <span class="step__tag" data-i18n="how.steps.1.tag">3 months</span>
+        </div>
+        <div class="step" data-reveal data-reveal-delay="0.16">
+          <div class="step__num" data-i18n="how.steps.2.n">03</div>
+          <h3 class="step__title" data-i18n="how.steps.2.t">APAC Sandbox</h3>
+          <p class="step__desc" data-i18n="how.steps.2.d">Live market validation across 6 markets.</p>
+          <span class="step__tag" data-i18n="how.steps.2.tag">3 months</span>
+        </div>
+        <div class="step" data-reveal data-reveal-delay="0.24">
+          <div class="step__num" data-i18n="how.steps.3.n">04</div>
+          <h3 class="step__title" data-i18n="how.steps.3.t">Demo Day</h3>
+          <p class="step__desc" data-i18n="how.steps.3.d">Present live metrics to investors and the community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event photo band -->
+  <div class="photo-band" data-reveal>
+    <img src="assets/images/home-event-1920.jpg"
+         srcset="assets/images/home-event-960.jpg 960w, assets/images/home-event-1920.jpg 1920w"
+         sizes="100vw"
+         style="object-position:center 30%"
+         data-i18n-attr="alt:images.homeEvent"
+         alt="Founders and community members at a Venture Hub Academy event in Hong Kong."
+         loading="lazy" width="1920" height="1080">
+  </div>
+
+  <!-- Beyond capital -->
+  <section class="section bg-white beyond">
+    <div class="container">
+      <p class="eyebrow" data-reveal data-i18n="beyond.eb">Beyond capital</p>
+      <h2 data-reveal data-i18n="beyond.h">What a cohort company gets.</h2>
+      <div class="cards-3">
+        <div class="card" data-reveal>
+          <div class="card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg>
+          </div>
+          <div class="card__num">01</div>
+          <h3 data-i18n="beyond.i1.t">High-Performance Compute (HPC)</h3>
+          <p data-i18n="beyond.i1.d">Immediate access to GPU clusters to accelerate model training and development.</p>
+        </div>
+        <div class="card" data-reveal data-reveal-delay="0.08">
+          <div class="card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"></circle><path d="M15.5 8.5l-2 5.2-5.2 2 2-5.2z"></path></svg>
+          </div>
+          <div class="card__num">02</div>
+          <h3 data-i18n="beyond.i2.t">APAC Sandbox</h3>
+          <p data-i18n="beyond.i2.d">Controlled real-world testing across 6 markets.</p>
+        </div>
+        <div class="card" data-reveal data-reveal-delay="0.16">
+          <div class="card__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.3"></circle><circle cx="19" cy="6" r="2.3"></circle><circle cx="12" cy="18" r="2.3"></circle><path d="M6.9 7.4L10.5 16M17.1 7.4L13.5 16M7.3 6h9.4"></path></svg>
+          </div>
+          <div class="card__num">03</div>
+          <h3 data-i18n="beyond.i3.t">Ecosystem Network</h3>
+          <p data-i18n="beyond.i3.d">Direct access to customers, strategic partners, and ongoing mentorship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jurisdictions map -->
+  <section class="section bg-alt map-section">
+    <div class="container">
+      <p class="eyebrow" data-reveal data-i18n="map.eb">Where we operate</p>
+      <h2 data-reveal data-i18n="map.h">Six jurisdictions.</h2>
+      <div class="map-layout" style="margin-top:50px">
+        <ul class="market-list" data-reveal>
+          <li><span class="market-num" data-i18n="map.markets.0.n">01</span><span data-i18n="map.markets.0.name">Hong Kong</span></li>
+          <li><span class="market-num" data-i18n="map.markets.1.n">02</span><span data-i18n="map.markets.1.name">Taiwan</span></li>
+          <li><span class="market-num" data-i18n="map.markets.2.n">03</span><span data-i18n="map.markets.2.name">Singapore</span></li>
+          <li><span class="market-num" data-i18n="map.markets.3.n">04</span><span data-i18n="map.markets.3.name">Japan</span></li>
+          <li><span class="market-num" data-i18n="map.markets.4.n">05</span><span data-i18n="map.markets.4.name">Thailand</span></li>
+          <li><span class="market-num" data-i18n="map.markets.5.n">06</span><span data-i18n="map.markets.5.name">Cambodia</span></li>
+        </ul>
+        <div class="map-canvas-wrap" data-reveal data-reveal-delay="0.1">
+          <canvas data-jurisdictions-map aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="closing-cta bg-white">
+    <div class="container">
+      <h2 data-reveal data-i18n="close.h">Ready to build &amp; scale?</h2>
+      <a href="apply.html" data-internal class="btn btn-primary" data-reveal data-reveal-delay="0.1">
+        <span data-i18n="hero.cta">Apply to the Accelerator</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand__word">Venture Hub Academy</div>
+        <p class="footer-brand__meta">
+          <a href="mailto:info@venturehubacademy.com">info@venturehubacademy.com</a><br>
+          <span data-i18n="footer.supported">Supported by First Financial Holding</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.quickH">Quick links</h4>
+        <ul>
+          <li><a href="index.html" data-internal data-i18n="nav.home">Home</a></li>
+          <li><a href="about.html" data-internal data-i18n="nav.about">About</a></li>
+          <li><a href="accelerator.html" data-internal data-i18n="nav.acc">Accelerator</a></li>
+          <li><a href="community.html" data-internal data-i18n="nav.com">Community</a></li>
+          <li><a href="apply.html" data-internal data-i18n="nav.apply">Apply</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.stayH">Stay connected</h4>
+        <p class="footer-brand__meta" data-i18n="footer.stayP" style="margin-bottom:16px">Join our newsletter and stay updated on the latest news.</p>
+        <form class="newsletter-form" data-newsletter-form>
+          <label class="visually-hidden" for="newsletter-email" data-i18n="footer.emailPh">Type your email</label>
+          <input class="newsletter-input" type="email" id="newsletter-email" name="email" required data-i18n-attr="placeholder:footer.emailPh" placeholder="Type your email">
+          <button class="newsletter-submit" type="submit" aria-label="Subscribe">→</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <p class="footer-blurb" data-i18n="hero.sub">Capital, compute, and market access for operators building real AI businesses.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4v15.25h-4zM8.5 8.25h3.84v2.08h.05c.53-1 1.83-2.08 3.77-2.08 4.03 0 4.78 2.66 4.78 6.11v9.14h-4v-8.1c0-1.93-.03-4.42-2.69-4.42-2.7 0-3.11 2.11-3.11 4.28v8.24h-4z"></path></svg>
+          </a>
+          <a class="social-btn" href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          </a>
+          <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-footer-year>© 2026 Venture Hub Academy</div>
+      <div class="footer-legal">
+        <a href="#" data-i18n="footer.terms">Terms and conditions</a>
+        <a href="#" data-i18n="footer.privacy">Privacy policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/wave.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/map.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

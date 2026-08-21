@@ -1,0 +1,303 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "acc": "Accelerator",
+    "com": "Community",
+    "apply": "Apply",
+    "applyNow": "Apply Now"
+  },
+  "hero": {
+    "eyebrow": "AI accelerator · Venture studio",
+    "title": "Backing execution-ready AI founders across Asia.",
+    "sub": "Capital, compute, and market access for operators building real AI businesses.",
+    "cta": "Apply to the Accelerator"
+  },
+  "stats": {
+    "s1": {
+      "pre": "US$",
+      "n": 150,
+      "suf": "K",
+      "label": "Invested via SAFE"
+    },
+    "s2": {
+      "pre": "up to ",
+      "n": 10,
+      "suf": "",
+      "label": "Companies per cohort"
+    },
+    "s3": {
+      "n": 6,
+      "suf": "-month",
+      "label": "Structured program"
+    },
+    "s4": {
+      "n": 6,
+      "suf": "",
+      "label": "Jurisdictions across Asia"
+    }
+  },
+  "why": {
+    "eb": "Why execution matters",
+    "h": "Most AI ventures stall not from technology, but from fragmented execution.",
+    "p": "We work hands-on with founders to move beyond pilots — refining models, launching in live markets, and building traction that attracts serious capital."
+  },
+  "how": {
+    "eb": "How it works",
+    "h": "Six months, four stages.",
+    "steps": [
+      {
+        "n": "01",
+        "t": "Enter Through Community",
+        "d": "Join our open network of founders, operators, and builders.",
+        "tag": ""
+      },
+      {
+        "n": "02",
+        "t": "Structured Program",
+        "d": "1-on-1 mentoring, corporate structuring, product strategy.",
+        "tag": "3 months"
+      },
+      {
+        "n": "03",
+        "t": "APAC Sandbox",
+        "d": "Live market validation across 6 markets.",
+        "tag": "3 months"
+      },
+      {
+        "n": "04",
+        "t": "Demo Day",
+        "d": "Present live metrics to investors and the community.",
+        "tag": ""
+      }
+    ]
+  },
+  "beyond": {
+    "eb": "Beyond capital",
+    "h": "What a cohort company gets.",
+    "i1": {
+      "t": "High-Performance Compute (HPC)",
+      "d": "Immediate access to GPU clusters to accelerate model training and development."
+    },
+    "i2": {
+      "t": "APAC Sandbox",
+      "d": "Controlled real-world testing across 6 markets."
+    },
+    "i3": {
+      "t": "Ecosystem Network",
+      "d": "Direct access to customers, strategic partners, and ongoing mentorship."
+    }
+  },
+  "map": {
+    "eb": "Where we operate",
+    "h": "Six jurisdictions.",
+    "markets": [
+      {
+        "n": "01",
+        "name": "Hong Kong"
+      },
+      {
+        "n": "02",
+        "name": "Taiwan"
+      },
+      {
+        "n": "03",
+        "name": "Singapore"
+      },
+      {
+        "n": "04",
+        "name": "Japan"
+      },
+      {
+        "n": "05",
+        "name": "Thailand"
+      },
+      {
+        "n": "06",
+        "name": "Cambodia"
+      }
+    ]
+  },
+  "close": {
+    "h": "Ready to build & scale?"
+  },
+  "about": {
+    "title": "About",
+    "missionEb": "Mission",
+    "mission": "Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.",
+    "critEb": "Selection criteria",
+    "critH": "What we look for.",
+    "crit": [
+      {
+        "n": "01",
+        "text": "Quality of team / visionaries of an established business"
+      },
+      {
+        "n": "02",
+        "text": "Potentially groundbreaking product or service based on unique technologies"
+      },
+      {
+        "n": "03",
+        "text": "Clear, proven commercial proposition with global opportunities"
+      }
+    ],
+    "whoEb": "Who we back",
+    "whoH": "Experienced operators, not idea-stage first-timers.",
+    "who": "Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute — not validate an idea from zero.",
+    "backEb": "Institutional backing",
+    "backH": "Backed by institutions.",
+    "back1": "Supported by First Financial Holding.",
+    "back2": "Academic partners: HKU, HKUST, CUHK.",
+    "notTag": "Idea-stage first-timers",
+    "yesTag": "Experienced operators"
+  },
+  "acc": {
+    "title": "Accelerator",
+    "ovEb": "Program overview",
+    "ovH": "A 6-month program for execution.",
+    "ov": [
+      {
+        "n": "01",
+        "text": "6-month structure: 3-month Structured Program + 3-month APAC Sandbox."
+      },
+      {
+        "n": "02",
+        "text": "Small, focused cohorts of up to 10 companies."
+      },
+      {
+        "n": "03",
+        "text": "US$150K via SAFE plus GPU and compute resources."
+      }
+    ],
+    "p1tag": "Months 1–3",
+    "p1h": "Structured Program",
+    "p1": [
+      "1-on-1 mentoring by experienced founders and operators.",
+      "Corporate structuring support, research direction, and product strategy.",
+      "Startup execution and scaling guidance."
+    ],
+    "p2tag": "Months 4–6",
+    "p2h": "APAC Sandbox",
+    "p2": [
+      "Live customer validation across 6 markets: HK, TW, SG, JP, TH, Cambodia.",
+      "Real revenue signals through live sales, partnerships, or LOIs.",
+      "Accelerated traction-building ahead of fundraising."
+    ],
+    "ddH": "Present live metrics. Raise on evidence.",
+    "dd": "Founders present live metrics to investors and community. Structured investor access and community-driven momentum."
+  },
+  "com": {
+    "title": "Community",
+    "funnelEb": "How the community works",
+    "funnelH": "From open forum to core cohort.",
+    "t1n": "Open Forum",
+    "t1d": "Open network, discussing startup ideas, early intent surfacing.",
+    "t2n": "Members",
+    "t2d": "Alumni and shortlisted participants, access to exclusive events.",
+    "t3n": "Core Cohort",
+    "t3d": "10+ selectively chosen teams, direct funding and network access.",
+    "ctaH": "Join the Community",
+    "cta": "Join the Community"
+  },
+  "apply": {
+    "eyebrow": "Apply",
+    "title": "Fifteen minutes. Read by a partner.",
+    "steps": [
+      {
+        "n": "01",
+        "t": "Application",
+        "d": "This form. Reviewed on a rolling basis — we respond to every application within 14 days."
+      },
+      {
+        "n": "02",
+        "t": "Partner interviews",
+        "d": "Two conversations, product-deep. With partners, not associates."
+      },
+      {
+        "n": "03",
+        "t": "Offer",
+        "d": "US$150K via SAFE on standard terms, and a start date for the next cohort."
+      }
+    ],
+    "noteH": "Before you start",
+    "noteP": "Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.",
+    "co": "Company name",
+    "web": "Website or product URL",
+    "founder": "Founder name(s) & role(s)",
+    "email": "Email",
+    "hq": "HQ or operating market",
+    "stage": "Company stage",
+    "oneLine": "What does your company do, in one sentence?",
+    "tech": "What proprietary technology or unique commercial advantage do you have?",
+    "traction": "What traction do you have today?",
+    "why": "Why do you need capital, compute, or market access specifically in Asia/APAC right now?",
+    "deck": "Pitch deck or one-pager",
+    "deckHelp": "Optional upload, PDF max 10MB",
+    "hear": "How did you hear about us?",
+    "relocateQ": "Are you open to relocating or spending time on-site during the program?",
+    "anything": "Anything else you'd like us to know?",
+    "stage1": "Revenue-generating",
+    "stage2": "Launched, pre-revenue",
+    "stage3": "In development",
+    "hqExtra1": "Elsewhere in APAC",
+    "hqExtra2": "Outside APAC",
+    "reloc1": "Yes",
+    "reloc2": "No",
+    "reloc3": "Possibly",
+    "submit": "Submit application",
+    "submitHelp": "Reviewed on a rolling basis · Response within 14 days",
+    "doneTitle": "Received.",
+    "doneP": "A partner will read your application this cycle. You'll hear back within 14 days, either way.",
+    "doneLink": "Meanwhile, join the community — every cohort started there."
+  },
+  "footer": {
+    "supported": "Supported by First Financial Holding",
+    "contactH": "Contact us",
+    "quickH": "Quick links",
+    "stayH": "Stay connected",
+    "stayP": "Join our newsletter and stay updated on the latest news.",
+    "emailPh": "Type your email",
+    "terms": "Terms and conditions",
+    "privacy": "Privacy policy"
+  },
+  "chrome": {
+    "htmlLang": "en",
+    "menuLabel": "Menu",
+    "closeMenu": "Close menu",
+    "languageLabel": "Language",
+    "skipToContent": "Skip to content",
+    "selectPlaceholder": "Select…",
+    "optional": "Optional",
+    "formError": "Something went wrong. Please try again, or email us directly.",
+    "formErrorRetry": "Try again",
+    "selectRequired": "Please select an option."
+  },
+  "seo": {
+    "home": {
+      "title": "Venture Hub Academy — AI Accelerator & Venture Studio in Asia",
+      "description": "Backing execution-ready AI founders across Asia. Capital, compute, and market access for operators building real AI businesses."
+    },
+    "about": {
+      "title": "About — Venture Hub Academy",
+      "description": "Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures."
+    },
+    "acc": {
+      "title": "Accelerator — Venture Hub Academy",
+      "description": "A 6-month program: 3-month Structured Program plus 3-month APAC Sandbox. US$150K via SAFE, small cohorts, GPU and compute resources."
+    },
+    "com": {
+      "title": "Community — Venture Hub Academy",
+      "description": "From Open Forum to Core Cohort — join the Venture Hub Academy community of founders, operators, and builders across Asia."
+    },
+    "apply": {
+      "title": "Apply — Venture Hub Academy",
+      "description": "Fifteen minutes. Read by a partner. Apply to the Venture Hub Academy accelerator."
+    }
+  },
+  "images": {
+    "homeEvent": "Founders and community members at a Venture Hub Academy event in Hong Kong.",
+    "aboutPhoto": "A Venture Hub Academy panel discussion.",
+    "communityPhoto": "Founders and members at a Venture Hub Academy community session.",
+    "demoDay": "Founders presenting at a Venture Hub Academy Demo Day."
+  }
+}
