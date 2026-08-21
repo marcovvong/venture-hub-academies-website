@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://venturehubacademy.com/sitemap.xml
+Sitemap: https://academy.venturehub.tech/sitemap.xml

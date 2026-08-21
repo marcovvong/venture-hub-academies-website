@@ -14,9 +14,31 @@
   var ALLOW = new Set(Array.from(HI).concat(Array.from(CONTEXT)));
   var TOPO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json";
 
-  function initMap(canvas, labelsByKey) {
-    if (!window.d3 || !window.topojson) return;
-    fetch(TOPO_URL).then(function (r) { return r.json(); }).then(function (topo) {
+  function showFallback(canvas, message) {
+    if (!message) return;
+    var wrap = canvas.parentElement;
+    if (!wrap || wrap.querySelector("[data-map-fallback]")) return;
+    canvas.style.display = "none";
+    var msg = document.createElement("div");
+    msg.setAttribute("data-map-fallback", "");
+    msg.className = "map-fallback";
+    msg.textContent = message;
+    wrap.appendChild(msg);
+  }
+
+  function initMap(canvas, labelsByKey, unavailableText) {
+    if (!window.d3 || !window.topojson) {
+      showFallback(canvas, unavailableText);
+      return;
+    }
+    var controller = window.AbortController ? new AbortController() : null;
+    var timeout = controller ? setTimeout(function () { controller.abort(); }, 8000) : 0;
+
+    fetch(TOPO_URL, controller ? { signal: controller.signal } : {}).then(function (r) {
+      clearTimeout(timeout);
+      if (!r.ok) throw new Error("topojson fetch failed: " + r.status);
+      return r.json();
+    }).then(function (topo) {
       var allFeats = topojson.feature(topo, topo.objects.countries).features;
       var feats = allFeats.filter(function (f) { return ALLOW.has(String(f.id)); });
       var ctx = canvas.getContext("2d");
@@ -76,7 +98,8 @@
           ctx.lineTo(m.anchor === "end" ? lx + 4 : lx - 4, ly);
           ctx.stroke();
 
-          ctx.font = "600 13.5px Inter,'Helvetica Neue',Arial,sans-serif";
+          var fontSize = w < 420 ? 11.5 : 13.5;
+          ctx.font = "600 " + fontSize + "px Inter,'Helvetica Neue',Arial,sans-serif";
           ctx.textAlign = m.anchor;
           ctx.textBaseline = "middle";
           ctx.lineWidth = 5; ctx.strokeStyle = "#F6F3FE"; ctx.lineJoin = "round";
@@ -95,6 +118,7 @@
       });
     }).catch(function (e) {
       console.error(e);
+      showFallback(canvas, unavailableText);
     });
   }
 

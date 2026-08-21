@@ -270,7 +270,8 @@
     "optional": "任意",
     "formError": "エラーが発生しました。もう一度お試しいただくか、直接メールでご連絡ください。",
     "formErrorRetry": "再試行",
-    "selectRequired": "選択してください。"
+    "selectRequired": "選択してください。",
+    "mapUnavailable": "地図を表示できません。上記の市場一覧をご覧ください。"
   },
   "seo": {
     "home": {

@@ -59,11 +59,32 @@
       raf = requestAnimationFrame(loop);
     }
 
+    function start() {
+      if (!raf) loop();
+    }
+    function stop() {
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    }
+
     fit();
     if (reduce) {
       drawFrame(0.6);
     } else {
-      loop();
+      start();
+      // The canvas is almost always near the top of the page (hero/page
+      // headers), but on longer pages there's no reason to keep spending a
+      // frame budget on it once it's scrolled out of view.
+      if (window.IntersectionObserver) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) start(); else stop();
+          });
+        }, { threshold: 0 });
+        io.observe(canvas);
+      }
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stop(); else if (canvas.getBoundingClientRect().bottom > 0) start();
+      });
     }
 
     var resizeTimer = 0;
@@ -75,9 +96,7 @@
       }, 120);
     });
 
-    return {
-      stop: function () { if (raf) cancelAnimationFrame(raf); }
-    };
+    return { stop: stop, start: start };
   }
 
   function initAll() {

@@ -13,7 +13,7 @@
         e.preventDefault();
         var email = newsletterForm.querySelector("input[type=email]").value;
         var body = "Please add this address to the Venture Hub Academy newsletter.";
-        window.location.href = "mailto:info@venturehubacademy.com?subject=" +
+        window.location.href = "mailto:info@venturehub.tech?subject=" +
           encodeURIComponent("Newsletter signup") + "&body=" + encodeURIComponent(body) +
           (email ? "%0A%0AFrom: " + encodeURIComponent(email) : "");
       });

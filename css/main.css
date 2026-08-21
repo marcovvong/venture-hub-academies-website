@@ -316,6 +316,12 @@ p { text-wrap: pretty; }
   flex-direction: column;
   padding: 24px 30px 28px;
 }
+@media (prefers-reduced-motion: reduce) {
+  /* The drawer's 340px slide is the single largest-amplitude motion on the
+     site — worth cutting to near-instant rather than just leaving it, even
+     though the other reduce-motion rules focus on continuous/ambient loops. */
+  .drawer, .drawer-backdrop { transition-duration: .01ms; }
+}
 .drawer[data-open="true"] {
   transform: translateX(0);
   box-shadow: 0 30px 80px rgba(17, 17, 17, .18);
@@ -551,9 +557,21 @@ p { text-wrap: pretty; }
   position: relative;
   background: #F6F3FE;
   aspect-ratio: 4 / 3;
+  min-height: 320px;
   overflow: hidden;
 }
 .map-canvas-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  font-size: 13.5px;
+  color: var(--muted-grey);
+}
 .market-list {
   list-style: none;
   margin: 0;
