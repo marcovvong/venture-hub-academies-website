@@ -538,8 +538,8 @@ p { text-wrap: pretty; }
 .map-section h2 { font-size: 34px; line-height: 1.25; letter-spacing: -.3px; margin-bottom: 12px; }
 .map-layout {
   display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 60px;
+  grid-template-columns: 4fr 8fr;
+  gap: 48px;
   align-items: center;
 }
 @media (max-width: 900px) {
@@ -548,7 +548,7 @@ p { text-wrap: pretty; }
 .map-canvas-wrap {
   position: relative;
   background: #F6F3FE;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   min-height: 320px;
   overflow: hidden;
 }

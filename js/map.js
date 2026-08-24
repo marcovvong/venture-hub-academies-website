@@ -10,8 +10,10 @@
     { key: "kh", lon: 104.92, lat: 11.55, dx: 17, dy: 21, anchor: "start" }
   ];
   var HI = new Set(["392", "158", "764", "116", "702"]);
-  var CONTEXT = new Set(["156", "704", "418", "104", "458", "608", "408", "410", "096"]);
-  var ALLOW = new Set(Array.from(HI).concat(Array.from(CONTEXT)));
+  // Antarctica (010) is excluded — it would dominate the bottom of the frame
+  // and has no relevance here. Every other country renders as dimmed context
+  // around the six highlighted markets.
+  var EXCLUDE = new Set(["010"]);
   var TOPO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json";
 
   function showFallback(canvas, message) {
@@ -40,7 +42,7 @@
       return r.json();
     }).then(function (topo) {
       var allFeats = topojson.feature(topo, topo.objects.countries).features;
-      var feats = allFeats.filter(function (f) { return ALLOW.has(String(f.id)); });
+      var feats = allFeats.filter(function (f) { return !EXCLUDE.has(String(f.id)); });
       var ctx = canvas.getContext("2d");
 
       function draw() {
