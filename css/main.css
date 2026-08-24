@@ -189,18 +189,10 @@ p { text-wrap: pretty; }
   gap: 11px;
 }
 .logo__mark {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
+  height: 26px;
+  width: auto;
   flex: none;
+  display: block;
 }
 .logo__word {
   font-family: var(--font-display);
@@ -967,12 +959,23 @@ p { text-wrap: pretty; }
 @media (max-width: 560px) {
   .footer-grid { grid-template-columns: 1fr; }
 }
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.footer-brand__mark {
+  height: 24px;
+  width: auto;
+  flex: none;
+  display: block;
+}
 .footer-brand__word {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 18px;
   color: #fff;
-  margin-bottom: 14px;
 }
 .footer-brand__meta {
   font-size: 13px;

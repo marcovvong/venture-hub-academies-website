@@ -52,7 +52,12 @@
         canvas.style.width = w + "px";
         canvas.style.height = h + "px";
 
-        var proj = d3.geoMercator().fitSize([w, h], { type: "FeatureCollection", features: feats });
+        // fitSize butts the projected geometry right up against the edges —
+        // Singapore (the southernmost point in the whole set) then has its
+        // marker glow and label clipped by the box. fitExtent leaves an
+        // inset so every marker has room to breathe inside the frame.
+        var pad = Math.min(44, Math.min(w, h) * 0.14);
+        var proj = d3.geoMercator().fitExtent([[pad, pad], [w - pad, h - pad]], { type: "FeatureCollection", features: feats });
         var hiP = new Path2D(), loP = new Path2D();
         var genHi = d3.geoPath(proj, hiP), genLo = d3.geoPath(proj, loP);
         feats.forEach(function (f) {
@@ -68,6 +73,23 @@
             else if (ctx.isPointInPath(loP, x, y)) pts.push([x, y, 0]);
           }
         }
+
+        // Hong Kong has no separate country polygon in this topojson (it's
+        // absorbed into China's geometry, which renders dimmed) — synthesize
+        // a small highlighted dot patch under its marker so it reads
+        // consistently with the other five markets, which do sit on their
+        // own highlighted landmass.
+        var hk = GEO.filter(function (m) { return m.key === "hk"; })[0];
+        if (hk) {
+          var hkPt = proj([hk.lon, hk.lat]);
+          var patchR = 24;
+          for (var py = hkPt[1] - patchR; py <= hkPt[1] + patchR; py += sp) {
+            for (var px = hkPt[0] - patchR; px <= hkPt[0] + patchR; px += sp) {
+              if (Math.hypot(px - hkPt[0], py - hkPt[1]) <= patchR) pts.push([px, py, 1]);
+            }
+          }
+        }
+
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.clearRect(0, 0, w, h);
         pts.forEach(function (p) {
