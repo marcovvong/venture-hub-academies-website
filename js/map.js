@@ -10,9 +10,17 @@
     { key: "kh", lon: 104.92, lat: 11.55, dx: 17, dy: 21, anchor: "start" }
   ];
   var HI = new Set(["392", "158", "764", "116", "702"]);
-  // Antarctica (010) is excluded — it would dominate the bottom of the frame
-  // and has no relevance here. Every other country renders as dimmed context
-  // around the six highlighted markets.
+  // Fitting the projection to the *whole rendered world* zooms out so far
+  // that the six markets collapse into an overlapping cluster (Singapore's
+  // marker was ending up completely hidden behind Thailand/Cambodia's glow).
+  // So the projection's scale/center is still fit to this tight Asia-Pacific
+  // basis — same as before — while the dot-matrix background itself now
+  // draws every country. Most of the world just falls outside the visible
+  // frame at this zoom, which is the intended "wider map, more countries
+  // visible at the edges" look without ruining the markets' spacing.
+  var FIT_BASIS = new Set(["392", "158", "764", "116", "702", "156", "704", "418", "104", "458", "608", "408", "410", "096"]);
+  // Antarctica (010) is excluded from the rendered background — it would
+  // dominate the bottom of the frame and has no relevance here.
   var EXCLUDE = new Set(["010"]);
   var TOPO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json";
 
@@ -43,6 +51,7 @@
     }).then(function (topo) {
       var allFeats = topojson.feature(topo, topo.objects.countries).features;
       var feats = allFeats.filter(function (f) { return !EXCLUDE.has(String(f.id)); });
+      var fitFeats = allFeats.filter(function (f) { return FIT_BASIS.has(String(f.id)); });
       var ctx = canvas.getContext("2d");
 
       function draw() {
@@ -59,7 +68,7 @@
         // marker glow and label clipped by the box. fitExtent leaves an
         // inset so every marker has room to breathe inside the frame.
         var pad = Math.min(44, Math.min(w, h) * 0.14);
-        var proj = d3.geoMercator().fitExtent([[pad, pad], [w - pad, h - pad]], { type: "FeatureCollection", features: feats });
+        var proj = d3.geoMercator().fitExtent([[pad, pad], [w - pad, h - pad]], { type: "FeatureCollection", features: fitFeats });
         var hiP = new Path2D(), loP = new Path2D();
         var genHi = d3.geoPath(proj, hiP), genLo = d3.geoPath(proj, loP);
         feats.forEach(function (f) {
