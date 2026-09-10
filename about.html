@@ -6,6 +6,7 @@
 <title>About — Venture Hub Academy</title>
 <meta name="description" content="Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F7F7F2">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About — Venture Hub Academy">
 <meta property="og:description" content="Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.">
@@ -15,235 +16,228 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jost:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/vha-v2.css">
 </head>
-<body data-page="about">
-<a class="skip-link" href="#main">Skip to content</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="drawer-backdrop" data-drawer-backdrop></div>
-<aside class="drawer" data-drawer aria-hidden="true" aria-label="Menu">
-  <div class="drawer__head">
-    <a href="index.html" data-internal class="logo">
-      <img class="logo__mark" src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true">
-      <span class="logo__word">Venture Hub Academy</span>
+<div class="backdrop" data-backdrop></div>
+<aside class="drawer" data-drawer aria-label="Menu">
+  <div class="drawer__top">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
+      <span>Venture Hub Academy</span>
     </a>
-    <button type="button" class="drawer__close" data-menu-close aria-label="Close menu">×</button>
+    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu">×</button>
   </div>
-  <nav class="drawer__nav" aria-label="Mobile">
-    <a class="drawer__link" href="about.html" data-internal><span class="drawer__link-num">01</span><span data-i18n="nav.about">About</span></a>
-    <a class="drawer__link" href="accelerator.html" data-internal><span class="drawer__link-num">02</span><span data-i18n="nav.acc">Accelerator</span></a>
-    <a class="drawer__link" href="community.html" data-internal><span class="drawer__link-num">03</span><span data-i18n="nav.com">Community</span></a>
-    <a class="drawer__link drawer__link--apply" href="apply.html" data-internal><span class="drawer__link-num">04</span><span data-i18n="nav.applyNow">Apply Now</span><span class="drawer__arrow" aria-hidden="true">→</span></a>
+  <nav aria-label="Mobile">
+    <a class="dl" href="accelerator.html"><b>01</b>Accelerator</a>
+    <a class="dl" href="index.html#studio"><b>02</b>Venture Studio</a>
+    <a class="dl" href="community.html"><b>03</b>Community</a>
+    <a class="dl" href="index.html#portfolio"><b>04</b>Portfolio</a>
+    <a class="dl" href="about.html"><b>05</b>About</a>
+    <a class="dl" href="apply.html"><b>06</b>Apply Now →</a>
   </nav>
-  <div class="drawer__langs">
-    <div class="drawer__langs-label" data-i18n="chrome.languageLabel">Language</div>
-    <div class="drawer__lang-list" data-drawer-lang-list></div>
-  </div>
 </aside>
 
-<nav class="site-nav" aria-label="Primary">
-  <div class="site-nav__inner">
-    <div class="site-nav__left">
-      <button type="button" class="hamburger" data-menu-open aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+<nav class="nav" aria-label="Primary">
+  <div class="nav__in">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true" width="30" height="30">
+      <span>Venture Hub Academy</span>
+    </a>
+    <div class="nav__links">
+      <a href="accelerator.html">Accelerator</a>
+      <a href="index.html#studio">Venture Studio</a>
+      <a href="community.html">Community</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="nav__right">
+      <a href="apply.html" class="btn btn--purple">Apply Now <i aria-hidden="true">→</i></a>
+      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <a href="index.html" data-internal class="logo">
-        <img class="logo__mark" src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true">
-        <span class="logo__word">Venture Hub Academy</span>
-      </a>
-    </div>
-    <div class="site-nav__center">
-      <a href="index.html" data-internal data-nav-current="home"><span data-i18n="nav.home">Home</span></a>
-      <a href="about.html" data-internal data-nav-current="about"><span data-i18n="nav.about">About</span></a>
-      <a href="accelerator.html" data-internal data-nav-current="acc"><span data-i18n="nav.acc">Accelerator</span></a>
-      <a href="community.html" data-internal data-nav-current="com"><span data-i18n="nav.com">Community</span></a>
-    </div>
-    <div class="site-nav__right">
-      <div class="lang-switch" data-lang-switch data-open="false">
-        <button type="button" class="lang-switch__button" data-lang-trigger aria-haspopup="listbox" aria-expanded="false">
-          <span data-lang-label>EN</span><span class="lang-switch__caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="lang-switch__menu" data-lang-menu></div>
-      </div>
-      <a href="apply.html" data-internal class="btn btn-nav"><span data-i18n="nav.applyNow">Apply Now</span></a>
     </div>
   </div>
 </nav>
 
 <main id="main">
 
-  <header class="wave-header page-header">
-    <canvas data-wave-canvas data-density="34" data-speed="1" aria-hidden="true"></canvas>
-    <div class="container wave-header__content">
-      <p class="eyebrow">Venture Hub Academy</p>
-      <h1 data-i18n="about.title">About</h1>
+  <header class="page-hero mode-energy">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <h1 class="d-l page-hero__title" data-reveal>Domain expertise,<br>turned into <em>ventures</em>.</h1>
+      <p class="body-l page-hero__lede" data-reveal data-delay="0.08">Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.</p>
+      <div class="page-hero__meta meta">
+        <span>APAC / HONG KONG / 2026</span>
+        <span>ACCELERATOR &middot; VENTURE STUDIO</span>
+      </div>
     </div>
   </header>
 
-  <section class="section bg-white">
-    <div class="container">
-      <div data-reveal style="max-width:900px">
-        <p class="eyebrow" data-i18n="about.missionEb">Mission</p>
-        <p class="mission-quote" data-i18n="about.mission">Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators — transforming domain expertise into high-growth, technology-enabled ventures.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="full-bleed-photo" data-reveal>
+  <div class="photo-band" data-reveal>
     <img src="assets/images/about-photo-1600.jpg"
          srcset="assets/images/about-photo-800.jpg 800w, assets/images/about-photo-1600.jpg 1600w"
-         sizes="100vw" style="object-position:center 68%"
-         data-i18n-attr="alt:images.aboutPhoto" alt="A Venture Hub Academy panel discussion."
-         loading="lazy" width="1600" height="900">
+         sizes="100vw"
+         alt="A Venture Hub Academy panel discussion." loading="lazy">
+    <div class="photo-band__caption">
+      <div class="mono">Panel discussion &middot; Hong Kong</div>
+    </div>
   </div>
 
-  <section class="section bg-alt">
-    <div class="container">
-      <div data-reveal style="max-width:640px;margin:0 auto 56px;text-align:center">
-        <p class="eyebrow" data-i18n="about.critEb">Selection criteria</p>
-        <h2 data-i18n="about.critH">What we look for.</h2>
-      </div>
-      <div class="cards-3" data-reveal data-reveal-delay="0.1">
-        <div class="card">
-          <div class="card__icon" aria-hidden="true">
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"></circle><path d="M10.5 16.5l3.7 3.7 7.3-8.4"></path></svg>
-          </div>
-          <div class="card__num" data-i18n="about.crit.0.n">01</div>
-          <p data-i18n="about.crit.0.text">Quality of team / visionaries of an established business</p>
+  <!-- Who we back -->
+  <section class="section mode-inst">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Who we back</p>
+          <h2 class="d-m" data-reveal>Experienced operators,<br>not idea-stage<br>first-timers.</h2>
         </div>
-        <div class="card">
-          <div class="card__icon" aria-hidden="true">
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"></circle><path d="M10.5 16.5l3.7 3.7 7.3-8.4"></path></svg>
+        <div data-reveal data-delay="0.08">
+          <p class="body-l muted">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute — not validate an idea from zero.</p>
+          <div class="compare">
+            <div class="compare__box">
+              <div class="compare__label">Not our fit</div>
+              <div class="compare__v">Idea-stage first-timers</div>
+            </div>
+            <div class="compare__box compare__box--yes">
+              <div class="compare__label">Our fit</div>
+              <div class="compare__v">Experienced operators</div>
+            </div>
           </div>
-          <div class="card__num" data-i18n="about.crit.1.n">02</div>
-          <p data-i18n="about.crit.1.text">Potentially groundbreaking product or service based on unique technologies</p>
-        </div>
-        <div class="card">
-          <div class="card__icon" aria-hidden="true">
-            <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="13"></circle><path d="M10.5 16.5l3.7 3.7 7.3-8.4"></path></svg>
-          </div>
-          <div class="card__num" data-i18n="about.crit.2.n">03</div>
-          <p data-i18n="about.crit.2.text">Clear, proven commercial proposition with global opportunities</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-white">
-    <div class="container grid-7-5">
-      <div data-reveal>
-        <p class="eyebrow" data-i18n="about.whoEb">Who we back</p>
-        <h2 style="max-width:520px" data-i18n="about.whoH">Experienced operators, not idea-stage first-timers.</h2>
-        <div class="tag-row">
-          <span class="tag tag--no" aria-hidden="true">✕</span>
-          <span class="tag tag--no" data-i18n="about.notTag">Idea-stage first-timers</span>
-        </div>
-        <div class="tag-row" style="margin-top:-14px">
-          <span class="tag tag--yes" aria-hidden="true">✓</span>
-          <span class="tag tag--yes" data-i18n="about.yesTag">Experienced operators</span>
-        </div>
-        <p style="color:var(--body-grey);font-size:16.5px;line-height:1.8;max-width:560px" data-i18n="about.who">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute — not validate an idea from zero.</p>
-      </div>
-      <div data-reveal data-reveal-delay="0.12" style="aspect-ratio:4/4.6;overflow:hidden;border:1px solid var(--hairline)">
-        <img src="assets/images/community-photo-1600.jpg"
-             srcset="assets/images/community-photo-800.jpg 800w, assets/images/community-photo-1600.jpg 1600w"
-             sizes="(min-width: 900px) 40vw, 100vw" style="width:100%;height:100%;object-fit:cover;object-position:center 62%"
-             data-i18n-attr="alt:images.communityPhoto" alt="Founders and members at a Venture Hub Academy community session."
-             loading="lazy" width="800" height="920">
+  <!-- Selection criteria -->
+  <section class="section mode-energy">
+    <div class="wrap">
+      <p class="eyebrow">Selection criteria</p>
+      <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:52px">What we look for.</h2>
+      <div class="numlist">
+        <article class="numitem" data-reveal>
+          <div class="numitem__n">01</div>
+          <div>
+            <h3 class="numitem__t">Team quality</h3>
+            <p class="numitem__d">Quality of team / visionaries of an established business.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.06">
+          <div class="numitem__n">02</div>
+          <div>
+            <h3 class="numitem__t">Unique technology</h3>
+            <p class="numitem__d">Potentially groundbreaking product or service based on unique technologies.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.12">
+          <div class="numitem__n">03</div>
+          <div>
+            <h3 class="numitem__t">Commercial proposition</h3>
+            <p class="numitem__d">Clear, proven commercial proposition with global opportunities.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="section bg-alt">
-    <div class="container">
-      <div data-reveal>
-        <p class="eyebrow" data-i18n="about.backEb">Institutional backing</p>
-        <h2 style="margin-bottom:22px" data-i18n="about.backH">Backed by institutions.</h2>
-        <p style="font-size:16.5px;line-height:1.75;color:var(--body-grey);max-width:640px;margin:0 0 8px" data-i18n="about.back1">Supported by First Financial Holding.</p>
-        <p style="font-size:16.5px;line-height:1.75;color:var(--body-grey);max-width:640px;margin:0 0 40px" data-i18n="about.back2">Academic partners: HKU, HKUST, CUHK.</p>
-        <div class="cards-4">
-          <div class="backing-card">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary)"><path d="M5 13l11-7 11 7"></path><rect x="7" y="13" width="18" height="2.2"></rect><line x1="8.5" y1="15.5" x2="8.5" y2="24"></line><line x1="13.7" y1="15.5" x2="13.7" y2="24"></line><line x1="18.3" y1="15.5" x2="18.3" y2="24"></line><line x1="23.5" y1="15.5" x2="23.5" y2="24"></line><rect x="5" y="24" width="22" height="2.2"></rect></svg>
-            <span>First Financial Holding</span>
-          </div>
-          <div class="backing-card">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary)"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
-            <span>HKU</span>
-          </div>
-          <div class="backing-card">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary)"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
-            <span>HKUST</span>
-          </div>
-          <div class="backing-card">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary)"><path d="M16 6l13 6-13 6-13-6z"></path><path d="M9.5 14.8v5.6c0 1.8 2.9 4.1 6.5 4.1s6.5-2.3 6.5-4.1v-5.6"></path><line x1="29" y1="12" x2="29" y2="19"></line></svg>
-            <span>CUHK</span>
+  <!-- Institutional backing -->
+  <section class="section mode-dark mode-dark--black">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Institutional backing</p>
+          <h2 class="d-m" data-reveal>Backed by institutions.</h2>
+        </div>
+        <div data-reveal data-delay="0.08">
+          <div class="backing">
+            <div class="backing__box">
+              <div class="backing__label">Financial</div>
+              <div class="backing__v">First Financial Holding</div>
+            </div>
+            <div class="backing__box">
+              <div class="backing__label">Academic</div>
+              <div class="backing__v">HKU &middot; HKUST &middot; CUHK</div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-field">
+    <div class="wrap">
+      <h2 class="d-l" data-reveal>Ready to build<br>what's next?</h2>
+      <div class="row" data-reveal data-delay="0.08">
+        <a href="apply.html" class="btn btn--dark">Apply Now <i aria-hidden="true">&rarr;</i></a>
+        <a href="community.html" class="btn btn--ghost">Join the Community <i aria-hidden="true">&rarr;</i></a>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand"><img class="footer-brand__mark" src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true"><span class="footer-brand__word">Venture Hub Academy</span></div>
-        <p class="footer-brand__meta">
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__g">
+      <div>
+        <div class="foot__brand">
+          <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
+          <span>Venture Hub Academy</span>
+        </div>
+        <p class="muted" style="font-size:15px">
           <a href="mailto:info@venturehub.tech">info@venturehub.tech</a><br>
-          <span data-i18n="footer.supported">Supported by First Financial Holding</span>
+          Supported by First Financial Holding
         </p>
       </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer.quickH">Quick links</h4>
+      <div>
+        <h4>Explore</h4>
         <ul>
-          <li><a href="index.html" data-internal data-i18n="nav.home">Home</a></li>
-          <li><a href="about.html" data-internal data-i18n="nav.about">About</a></li>
-          <li><a href="accelerator.html" data-internal data-i18n="nav.acc">Accelerator</a></li>
-          <li><a href="community.html" data-internal data-i18n="nav.com">Community</a></li>
-          <li><a href="apply.html" data-internal data-i18n="nav.apply">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="accelerator.html">Accelerator</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="apply.html">Apply</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer.stayH">Stay connected</h4>
-        <p class="footer-brand__meta" data-i18n="footer.stayP" style="margin-bottom:16px">Join our newsletter and stay updated on the latest news.</p>
-        <form class="newsletter-form" data-newsletter-form>
-          <label class="visually-hidden" for="newsletter-email" data-i18n="footer.emailPh">Type your email</label>
-          <input class="newsletter-input" type="email" id="newsletter-email" name="email" required data-i18n-attr="placeholder:footer.emailPh" placeholder="Type your email">
-          <button class="newsletter-submit" type="submit" aria-label="Subscribe">→</button>
-        </form>
+      <div>
+        <h4>Markets</h4>
+        <ul>
+          <li>Hong Kong</li><li>Taiwan</li><li>Singapore</li>
+          <li>Japan</li><li>Thailand</li><li>Cambodia</li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <p class="footer-blurb" data-i18n="about.mission">Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators.</p>
-        <div class="social-row">
-          <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4v15.25h-4zM8.5 8.25h3.84v2.08h.05c.53-1 1.83-2.08 3.77-2.08 4.03 0 4.78 2.66 4.78 6.11v9.14h-4v-8.1c0-1.93-.03-4.42-2.69-4.42-2.7 0-3.11 2.11-3.11 4.28v8.24h-4z"></path></svg>
+      <div>
+        <h4>Stay connected</h4>
+        <p class="muted" style="font-size:15px">Join our newsletter for cohort news and events.</p>
+        <form class="news" data-newsletter>
+          <label class="vh" for="nl">Email address</label>
+          <input type="email" id="nl" name="email" placeholder="Type your email" required>
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+        <div class="social">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4v15.25h-4zM8.5 8.25h3.84v2.08h.05c.53-1 1.83-2.08 3.77-2.08 4.03 0 4.78 2.66 4.78 6.11v9.14h-4v-8.1c0-1.93-.03-4.42-2.69-4.42-2.7 0-3.11 2.11-3.11 4.28v8.24h-4z"></path></svg>
           </a>
-          <a class="social-btn" href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
           </a>
-          <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
           </a>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div data-footer-year>© 2026 Venture Hub Academy</div>
-      <div class="footer-legal">
-        <a href="#" data-i18n="footer.terms">Terms and conditions</a>
-        <a href="#" data-i18n="footer.privacy">Privacy policy</a>
-      </div>
+    <div class="foot__b">
+      <span data-year>© 2026 Venture Hub Academy</span>
+      <div><a href="#">Terms</a><a href="#">Privacy</a></div>
     </div>
   </div>
 </footer>
 
-<script src="js/i18n.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/wave.js"></script>
-<script src="js/reveal.js"></script>
-<script src="js/page-common.js"></script>
+<script src="js/vha-network.js"></script>
+<script src="js/vha-v2.js"></script>
 </body>
 </html>

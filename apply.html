@@ -6,6 +6,7 @@
 <title>Apply — Venture Hub Academy</title>
 <meta name="description" content="Fifteen minutes. Read by a partner. Apply to the Venture Hub Academy accelerator.">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F7F7F2">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Apply — Venture Hub Academy">
 <meta property="og:description" content="Fifteen minutes. Read by a partner. Apply to the Venture Hub Academy accelerator.">
@@ -15,299 +16,300 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jost:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/vha-v2.css">
 </head>
-<body data-page="apply">
-<a class="skip-link" href="#main">Skip to content</a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="drawer-backdrop" data-drawer-backdrop></div>
-<aside class="drawer" data-drawer aria-hidden="true" aria-label="Menu">
-  <div class="drawer__head">
-    <a href="index.html" data-internal class="logo">
-      <img class="logo__mark" src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true">
-      <span class="logo__word">Venture Hub Academy</span>
+<div class="backdrop" data-backdrop></div>
+<aside class="drawer" data-drawer aria-label="Menu">
+  <div class="drawer__top">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
+      <span>Venture Hub Academy</span>
     </a>
-    <button type="button" class="drawer__close" data-menu-close aria-label="Close menu">×</button>
+    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu">×</button>
   </div>
-  <nav class="drawer__nav" aria-label="Mobile">
-    <a class="drawer__link" href="about.html" data-internal><span class="drawer__link-num">01</span><span data-i18n="nav.about">About</span></a>
-    <a class="drawer__link" href="accelerator.html" data-internal><span class="drawer__link-num">02</span><span data-i18n="nav.acc">Accelerator</span></a>
-    <a class="drawer__link" href="community.html" data-internal><span class="drawer__link-num">03</span><span data-i18n="nav.com">Community</span></a>
-    <a class="drawer__link drawer__link--apply" href="apply.html" data-internal><span class="drawer__link-num">04</span><span data-i18n="nav.applyNow">Apply Now</span><span class="drawer__arrow" aria-hidden="true">→</span></a>
+  <nav aria-label="Mobile">
+    <a class="dl" href="accelerator.html"><b>01</b>Accelerator</a>
+    <a class="dl" href="index.html#studio"><b>02</b>Venture Studio</a>
+    <a class="dl" href="community.html"><b>03</b>Community</a>
+    <a class="dl" href="index.html#portfolio"><b>04</b>Portfolio</a>
+    <a class="dl" href="about.html"><b>05</b>About</a>
+    <a class="dl" href="apply.html"><b>06</b>Apply Now →</a>
   </nav>
-  <div class="drawer__langs">
-    <div class="drawer__langs-label" data-i18n="chrome.languageLabel">Language</div>
-    <div class="drawer__lang-list" data-drawer-lang-list></div>
-  </div>
 </aside>
 
-<nav class="site-nav" aria-label="Primary">
-  <div class="site-nav__inner">
-    <div class="site-nav__left">
-      <button type="button" class="hamburger" data-menu-open aria-label="Menu" aria-expanded="false" aria-controls="drawer">
+<nav class="nav" aria-label="Primary">
+  <div class="nav__in">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true" width="30" height="30">
+      <span>Venture Hub Academy</span>
+    </a>
+    <div class="nav__links">
+      <a href="accelerator.html">Accelerator</a>
+      <a href="index.html#studio">Venture Studio</a>
+      <a href="community.html">Community</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="about.html">About</a>
+    </div>
+    <div class="nav__right">
+      <a href="apply.html" class="btn btn--purple">Apply Now <i aria-hidden="true">→</i></a>
+      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <a href="index.html" data-internal class="logo">
-        <img class="logo__mark" src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true">
-        <span class="logo__word">Venture Hub Academy</span>
-      </a>
-    </div>
-    <div class="site-nav__center">
-      <a href="index.html" data-internal data-nav-current="home"><span data-i18n="nav.home">Home</span></a>
-      <a href="about.html" data-internal data-nav-current="about"><span data-i18n="nav.about">About</span></a>
-      <a href="accelerator.html" data-internal data-nav-current="acc"><span data-i18n="nav.acc">Accelerator</span></a>
-      <a href="community.html" data-internal data-nav-current="com"><span data-i18n="nav.com">Community</span></a>
-    </div>
-    <div class="site-nav__right">
-      <div class="lang-switch" data-lang-switch data-open="false">
-        <button type="button" class="lang-switch__button" data-lang-trigger aria-haspopup="listbox" aria-expanded="false">
-          <span data-lang-label>EN</span><span class="lang-switch__caret" aria-hidden="true">▾</span>
-        </button>
-        <div class="lang-switch__menu" data-lang-menu></div>
-      </div>
-      <a href="apply.html" data-internal class="btn btn-nav" aria-current="page"><span data-i18n="nav.applyNow">Apply Now</span></a>
     </div>
   </div>
 </nav>
 
 <main id="main">
 
-  <header class="wave-header page-header" style="padding-bottom:60px">
-    <canvas data-wave-canvas data-density="34" data-speed="1" aria-hidden="true"></canvas>
-    <div class="container wave-header__content">
-      <p class="eyebrow" data-i18n="apply.eyebrow">Apply</p>
-      <h1 style="max-width:17ch" data-i18n="apply.title">Fifteen minutes. Read by a partner.</h1>
+  <header class="page-hero mode-energy">
+    <div class="wrap">
+      <p class="eyebrow">Apply</p>
+      <h1 class="d-l page-hero__title" data-reveal>Fifteen minutes.<br>Read by a <em>partner</em>.</h1>
+      <p class="body-l page-hero__lede" data-reveal data-delay="0.08">Applications are reviewed on a rolling basis. We respond to every application within 14 days, either way.</p>
     </div>
   </header>
 
-  <section style="padding:20px 0 130px">
-    <div class="container apply-layout">
+  <!-- Process -->
+  <section class="section mode-inst" style="padding-top:0">
+    <div class="wrap">
+      <div class="numlist">
+        <article class="numitem" data-reveal>
+          <div class="numitem__n">01</div>
+          <div>
+            <h3 class="numitem__t">Application</h3>
+            <p class="numitem__d">This form. Reviewed on a rolling basis &mdash; we respond to every application within 14 days.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.06">
+          <div class="numitem__n">02</div>
+          <div>
+            <h3 class="numitem__t">Partner interviews</h3>
+            <p class="numitem__d">Two conversations, product-deep. With partners, not associates.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.12">
+          <div class="numitem__n">03</div>
+          <div>
+            <h3 class="numitem__t">Offer</h3>
+            <p class="numitem__d">US$150K via SAFE on standard terms, and a start date for the next cohort.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-      <div data-reveal>
-        <div class="apply-steps">
-          <div class="apply-step">
-            <div class="apply-step__num" data-i18n="apply.steps.0.n">01</div>
-            <div>
-              <div class="apply-step__title" data-i18n="apply.steps.0.t">Application</div>
-              <p class="apply-step__desc" data-i18n="apply.steps.0.d">This form. Reviewed on a rolling basis — we respond to every application within 14 days.</p>
-            </div>
-          </div>
-          <div class="apply-step">
-            <div class="apply-step__num" data-i18n="apply.steps.1.n">02</div>
-            <div>
-              <div class="apply-step__title" data-i18n="apply.steps.1.t">Partner interviews</div>
-              <p class="apply-step__desc" data-i18n="apply.steps.1.d">Two conversations, product-deep. With partners, not associates.</p>
-            </div>
-          </div>
-          <div class="apply-step">
-            <div class="apply-step__num" data-i18n="apply.steps.2.n">03</div>
-            <div>
-              <div class="apply-step__title" data-i18n="apply.steps.2.t">Offer</div>
-              <p class="apply-step__desc" data-i18n="apply.steps.2.d">US$150K via SAFE on standard terms, and a start date for the next cohort.</p>
-            </div>
-          </div>
-        </div>
-        <div class="apply-note">
-          <div class="apply-note__h" data-i18n="apply.noteH">Before you start</div>
-          <p data-i18n="apply.noteP">Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.</p>
-        </div>
+  <!-- Form -->
+  <section class="section mode-energy" style="padding-top:var(--s-0, 64px)">
+    <div class="wrap">
+      <!-- Success state -->
+      <div class="success" data-apply-success hidden>
+        <div class="success__mark" aria-hidden="true">&check;</div>
+        <h2 class="d-m">Received.</h2>
+        <p>A partner will read your application this cycle. You&rsquo;ll hear back within 14 days, either way.</p>
+        <p><a class="tlink" href="community.html">Meanwhile, join the community &mdash; every cohort started there <i aria-hidden="true">&rarr;</i></a></p>
       </div>
 
-      <div class="apply-card" data-reveal data-reveal-delay="0.1">
+      <div class="form-wrap" data-form-wrap>
+        <aside class="form-aside">
+          <p class="eyebrow">Before you start</p>
+          <div class="note">
+            <h3>Note</h3>
+            <p class="muted">Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.</p>
+          </div>
+          <div class="page-hero__meta meta" style="margin-top:32px">
+            <span>ROLLING BASIS</span>
+            <span>RESPONSE WITHIN 14 DAYS</span>
+          </div>
+        </aside>
 
-        <form id="apply-form" action="https://formspree.io/f/maqrelbb" method="POST" enctype="multipart/form-data" novalidate>
-
-          <div class="form-honeypot" aria-hidden="true">
-            <label for="apply-hp">Leave this field empty</label>
-            <input type="text" id="apply-hp" name="_gotcha" tabindex="-1" autocomplete="off">
+        <div>
+          <div class="form-error" data-form-error role="alert">
+            Something went wrong sending your application. Please try again, or email
+            <a href="mailto:info@venturehub.tech">info@venturehub.tech</a>.
           </div>
 
-          <div class="form-row">
-            <div class="form-field">
-              <label for="f-company" data-i18n="apply.co">Company name</label>
-              <input type="text" id="f-company" name="Company name" required>
+          <form id="apply-form" action="https://formspree.io/f/maqrelbb" method="POST" enctype="multipart/form-data" novalidate>
+            <div class="gotcha" aria-hidden="true">
+              <label for="f-gotcha">Leave this field empty</label>
+              <input type="text" id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
-            <div class="form-field">
-              <label for="f-web" data-i18n="apply.web">Website or product URL</label>
-              <input type="text" id="f-web" name="Website or product URL" placeholder="https://">
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-co">Company name <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="f-co" name="Company name" required>
+              </div>
+              <div class="field">
+                <label for="f-web">Website or product URL</label>
+                <input class="input" type="text" id="f-web" name="Website or product URL" placeholder="https://">
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="f-founder" data-i18n="apply.founder">Founder name(s) &amp; role(s)</label>
-              <input type="text" id="f-founder" name="Founder name(s) and role(s)" required>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-founder">Founder name(s) &amp; role(s) <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="f-founder" name="Founder name(s) and role(s)" required>
+              </div>
+              <div class="field">
+                <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="email" id="f-email" name="Email" required>
+              </div>
             </div>
-            <div class="form-field">
-              <label for="f-email" data-i18n="apply.email">Email</label>
-              <input type="email" id="f-email" name="Email" placeholder="you@company.com" required>
-            </div>
-          </div>
 
-          <div class="form-field">
-            <span class="form-group__label" data-i18n="apply.hq">HQ or operating market</span>
-            <select name="HQ or operating market" required data-select="hq">
-              <option value="" data-i18n="chrome.selectPlaceholder">Select…</option>
-              <option value="Hong Kong" data-i18n="map.markets.0.name">Hong Kong</option>
-              <option value="Taiwan" data-i18n="map.markets.1.name">Taiwan</option>
-              <option value="Singapore" data-i18n="map.markets.2.name">Singapore</option>
-              <option value="Japan" data-i18n="map.markets.3.name">Japan</option>
-              <option value="Thailand" data-i18n="map.markets.4.name">Thailand</option>
-              <option value="Cambodia" data-i18n="map.markets.5.name">Cambodia</option>
-              <option value="Elsewhere in APAC" data-i18n="apply.hqExtra1">Elsewhere in APAC</option>
-              <option value="Outside APAC" data-i18n="apply.hqExtra2">Outside APAC</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <span class="form-group__label" data-i18n="apply.stage">Company stage</span>
-            <div class="pill-group" role="radiogroup" data-pill-group="Company stage">
-              <button type="button" class="pill-choice" data-value="Revenue-generating" data-i18n="apply.stage1">Revenue-generating</button>
-              <button type="button" class="pill-choice" data-value="Launched, pre-revenue" data-i18n="apply.stage2">Launched, pre-revenue</button>
-              <button type="button" class="pill-choice" data-value="In development" data-i18n="apply.stage3">In development</button>
-            </div>
-            <div class="pill-group-error" data-i18n="chrome.selectRequired">Please select an option.</div>
-            <input type="hidden" name="Company stage" data-pill-input="Company stage" required>
-          </div>
-
-          <div class="form-field">
-            <label for="f-oneline" data-i18n="apply.oneLine">What does your company do, in one sentence?</label>
-            <input type="text" id="f-oneline" name="What does your company do, in one sentence" required>
-          </div>
-
-          <div class="form-field">
-            <label for="f-tech" data-i18n="apply.tech">What proprietary technology or unique commercial advantage do you have?</label>
-            <textarea id="f-tech" name="Proprietary technology or unique commercial advantage" rows="3" required></textarea>
-          </div>
-
-          <div class="form-field">
-            <label for="f-traction" data-i18n="apply.traction">What traction do you have today?</label>
-            <textarea id="f-traction" name="Traction today" rows="3" required></textarea>
-          </div>
-
-          <div class="form-field">
-            <label for="f-why" data-i18n="apply.why">Why do you need capital, compute, or market access specifically in Asia/APAC right now?</label>
-            <textarea id="f-why" name="Why capital, compute, or market access in Asia/APAC now" rows="3" required></textarea>
-          </div>
-
-          <div class="form-field">
-            <span class="form-group__label" data-i18n="apply.relocateQ">Are you open to relocating or spending time on-site during the program?</span>
-            <div class="pill-group" role="radiogroup" data-pill-group="Open to relocating">
-              <button type="button" class="pill-choice" data-value="Yes" data-i18n="apply.reloc1">Yes</button>
-              <button type="button" class="pill-choice" data-value="No" data-i18n="apply.reloc2">No</button>
-              <button type="button" class="pill-choice" data-value="Possibly" data-i18n="apply.reloc3">Possibly</button>
-            </div>
-            <div class="pill-group-error" data-i18n="chrome.selectRequired">Please select an option.</div>
-            <input type="hidden" name="Open to relocating" data-pill-input="Open to relocating" required>
-          </div>
-
-          <div class="form-row">
-            <div class="form-field">
-              <label for="f-deck" data-i18n="apply.deck">Pitch deck or one-pager</label>
-              <input type="file" id="f-deck" name="Pitch deck or one-pager" accept="application/pdf">
-              <div class="form-field-help" data-i18n="apply.deckHelp">Optional upload, PDF max 10MB</div>
-            </div>
-            <div class="form-field">
-              <label for="f-hear" data-i18n="apply.hear">How did you hear about us?</label>
-              <select id="f-hear" name="How did you hear about us">
-                <option value="" data-i18n="chrome.selectPlaceholder">Select…</option>
-                <option value="Community">Community</option>
-                <option value="Referral">Referral</option>
-                <option value="Event">Event</option>
-                <option value="Social">Social</option>
-                <option value="Other">Other</option>
+            <div class="field">
+              <label for="f-hq">HQ or operating market <span class="req" aria-hidden="true">*</span></label>
+              <select class="select" id="f-hq" name="HQ or operating market" required>
+                <option value="">Select&hellip;</option>
+                <option>Hong Kong</option>
+                <option>Taiwan</option>
+                <option>Singapore</option>
+                <option>Japan</option>
+                <option>Thailand</option>
+                <option>Cambodia</option>
+                <option>Elsewhere in APAC</option>
+                <option>Outside APAC</option>
               </select>
             </div>
-          </div>
 
-          <div class="form-field">
-            <label for="f-anything" data-i18n="apply.anything">Anything else you'd like us to know?</label>
-            <textarea id="f-anything" name="Anything else" rows="3"></textarea>
-          </div>
+            <div class="field">
+              <span class="field__label" id="lbl-stage">Company stage <span class="req" aria-hidden="true">*</span></span>
+              <div class="pills" data-pill-group="Company stage" role="group" aria-labelledby="lbl-stage">
+                <button type="button" class="pill" data-value="Revenue-generating">Revenue-generating</button>
+                <button type="button" class="pill" data-value="Launched, pre-revenue">Launched, pre-revenue</button>
+                <button type="button" class="pill" data-value="In development">In development</button>
+              </div>
+              <input type="hidden" name="Company stage" data-pill-input="Company stage" required>
+            </div>
 
-          <div class="form-submit-row">
-            <button type="submit" class="btn btn-primary" id="apply-submit-btn">
-              <span data-i18n="apply.submit">Submit application</span>
+            <div class="field">
+              <label for="f-one">What does your company do, in one sentence? <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="f-one" name="What does your company do, in one sentence" required>
+            </div>
+
+            <div class="field">
+              <label for="f-tech">What proprietary technology or unique commercial advantage do you have? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-tech" name="Proprietary technology or unique commercial advantage" rows="3" required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="f-traction">What traction do you have today? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-traction" name="Traction today" rows="3" required></textarea>
+              <p class="field__help">Revenue, users, pilots, LOIs &mdash; numbers where you have them.</p>
+            </div>
+
+            <div class="field">
+              <label for="f-why">Why do you need capital, compute, or market access specifically in Asia/APAC right now? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-why" name="Why capital, compute, or market access in Asia/APAC now" rows="3" required></textarea>
+            </div>
+
+            <div class="field">
+              <span class="field__label" id="lbl-reloc">Are you open to relocating or spending time on-site during the program? <span class="req" aria-hidden="true">*</span></span>
+              <div class="pills" data-pill-group="Open to relocating" role="group" aria-labelledby="lbl-reloc">
+                <button type="button" class="pill" data-value="Yes">Yes</button>
+                <button type="button" class="pill" data-value="No">No</button>
+                <button type="button" class="pill" data-value="Possibly">Possibly</button>
+              </div>
+              <input type="hidden" name="Open to relocating" data-pill-input="Open to relocating" required>
+            </div>
+
+            <div class="field">
+              <label for="f-deck">Pitch deck or one-pager</label>
+              <input class="file-input" type="file" id="f-deck" name="Pitch deck or one-pager" accept=".pdf">
+              <p class="field__help">Optional upload, PDF max 10MB</p>
+            </div>
+
+            <div class="field">
+              <label for="f-hear">How did you hear about us?</label>
+              <select class="select" id="f-hear" name="How did you hear about us">
+                <option value="">Select&hellip;</option>
+                <option>Community</option>
+                <option>Referral</option>
+                <option>Event</option>
+                <option>Social</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="f-anything">Anything else you&rsquo;d like us to know?</label>
+              <textarea class="textarea" id="f-anything" name="Anything else" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--sharp" id="apply-submit-btn">
+              Submit application <i aria-hidden="true">&rarr;</i>
             </button>
-            <span class="form-submit-help" data-i18n="apply.submitHelp">Reviewed on a rolling basis · Response within 14 days</span>
-          </div>
-
-          <div class="form-error" data-form-error data-i18n="chrome.formError">Something went wrong. Please try again, or email us directly.</div>
-        </form>
-
-        <div class="apply-success" data-apply-success hidden>
-          <div class="apply-success__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"></path></svg>
-          </div>
-          <div class="apply-success__title" data-i18n="apply.doneTitle">Received.</div>
-          <p data-i18n="apply.doneP">A partner will read your application this cycle. You'll hear back within 14 days, either way.</p>
-          <p class="apply-success__link" data-i18n="apply.doneLink">Meanwhile, join the community — every cohort started there.</p>
+            <p class="field__help" style="margin-top:14px">Reviewed on a rolling basis &middot; Response within 14 days</p>
+          </form>
         </div>
-
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand"><img class="footer-brand__mark" src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true"><span class="footer-brand__word">Venture Hub Academy</span></div>
-        <p class="footer-brand__meta">
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__g">
+      <div>
+        <div class="foot__brand">
+          <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
+          <span>Venture Hub Academy</span>
+        </div>
+        <p class="muted" style="font-size:15px">
           <a href="mailto:info@venturehub.tech">info@venturehub.tech</a><br>
-          <span data-i18n="footer.supported">Supported by First Financial Holding</span>
+          Supported by First Financial Holding
         </p>
       </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer.quickH">Quick links</h4>
+      <div>
+        <h4>Explore</h4>
         <ul>
-          <li><a href="index.html" data-internal data-i18n="nav.home">Home</a></li>
-          <li><a href="about.html" data-internal data-i18n="nav.about">About</a></li>
-          <li><a href="accelerator.html" data-internal data-i18n="nav.acc">Accelerator</a></li>
-          <li><a href="community.html" data-internal data-i18n="nav.com">Community</a></li>
-          <li><a href="apply.html" data-internal data-i18n="nav.apply">Apply</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="accelerator.html">Accelerator</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="apply.html">Apply</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4 data-i18n="footer.stayH">Stay connected</h4>
-        <p class="footer-brand__meta" data-i18n="footer.stayP" style="margin-bottom:16px">Join our newsletter and stay updated on the latest news.</p>
-        <form class="newsletter-form" data-newsletter-form>
-          <label class="visually-hidden" for="newsletter-email" data-i18n="footer.emailPh">Type your email</label>
-          <input class="newsletter-input" type="email" id="newsletter-email" name="email" required data-i18n-attr="placeholder:footer.emailPh" placeholder="Type your email">
-          <button class="newsletter-submit" type="submit" aria-label="Subscribe">→</button>
-        </form>
+      <div>
+        <h4>Markets</h4>
+        <ul>
+          <li>Hong Kong</li><li>Taiwan</li><li>Singapore</li>
+          <li>Japan</li><li>Thailand</li><li>Cambodia</li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <p class="footer-blurb" data-i18n="apply.noteP">Plain answers beat polished ones.</p>
-        <div class="social-row">
-          <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4v15.25h-4zM8.5 8.25h3.84v2.08h.05c.53-1 1.83-2.08 3.77-2.08 4.03 0 4.78 2.66 4.78 6.11v9.14h-4v-8.1c0-1.93-.03-4.42-2.69-4.42-2.7 0-3.11 2.11-3.11 4.28v8.24h-4z"></path></svg>
+      <div>
+        <h4>Stay connected</h4>
+        <p class="muted" style="font-size:15px">Join our newsletter for cohort news and events.</p>
+        <form class="news" data-newsletter>
+          <label class="vh" for="nl">Email address</label>
+          <input type="email" id="nl" name="email" placeholder="Type your email" required>
+          <button type="submit" aria-label="Subscribe">→</button>
+        </form>
+        <div class="social">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.25h4v15.25h-4zM8.5 8.25h3.84v2.08h.05c.53-1 1.83-2.08 3.77-2.08 4.03 0 4.78 2.66 4.78 6.11v9.14h-4v-8.1c0-1.93-.03-4.42-2.69-4.42-2.7 0-3.11 2.11-3.11 4.28v8.24h-4z"></path></svg>
           </a>
-          <a class="social-btn" href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
           </a>
-          <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"></circle></svg>
           </a>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div data-footer-year>© 2026 Venture Hub Academy</div>
-      <div class="footer-legal">
-        <a href="#" data-i18n="footer.terms">Terms and conditions</a>
-        <a href="#" data-i18n="footer.privacy">Privacy policy</a>
-      </div>
+    <div class="foot__b">
+      <span data-year>© 2026 Venture Hub Academy</span>
+      <div><a href="#">Terms</a><a href="#">Privacy</a></div>
     </div>
   </div>
 </footer>
 
-<script src="js/i18n.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/wave.js"></script>
-<script src="js/reveal.js"></script>
-<script src="js/apply.js"></script>
+<script src="js/vha-network.js"></script>
+<script src="js/vha-v2.js"></script>
+<script src="js/vha-apply.js"></script>
 </body>
 </html>
