@@ -35,6 +35,37 @@
       });
   }
 
+  /* Deep-merge `over` onto a copy of `base`. Arrays are replaced wholesale,
+     not merged element-wise: a translated list that is shorter than the
+     English one should not inherit leftover English tail entries. */
+  function merge(base, over) {
+    if (Array.isArray(over)) return over;
+    if (over === null || typeof over !== "object") {
+      return over === undefined ? base : over;
+    }
+    if (base === null || typeof base !== "object" || Array.isArray(base)) return over;
+    var out = {};
+    Object.keys(base).forEach(function (k) { out[k] = base[k]; });
+    Object.keys(over).forEach(function (k) {
+      out[k] = k in base ? merge(base[k], over[k]) : over[k];
+    });
+    return out;
+  }
+
+  /* Load a locale layered over English. New copy can ship in en.json alone and
+     every language keeps rendering — untranslated keys fall back to English
+     instead of disappearing from the page. */
+  function loadLocaleWithFallback(lang) {
+    if (lang === DEFAULT_LANG) return loadLocale(DEFAULT_LANG);
+    return Promise.all([
+      loadLocale(DEFAULT_LANG),
+      loadLocale(lang).catch(function (e) {
+        console.error(e);
+        return {};
+      })
+    ]).then(function (parts) { return merge(parts[0], parts[1]); });
+  }
+
   function get(obj, path) {
     return path.split(".").reduce(function (acc, key) {
       return acc && acc[key] !== undefined ? acc[key] : undefined;
@@ -159,7 +190,7 @@
   // sets meta, wires the language switcher, and resolves with { t, lang }.
   function init(page) {
     var lang = getLangFromUrl();
-    return loadLocale(lang).then(function (t) {
+    return loadLocaleWithFallback(lang).then(function (t) {
       applyStaticBindings(document, t);
       rewriteInternalLinks(document, lang);
       setDocumentMeta(t, page, t.chrome.htmlLang);
@@ -178,6 +209,8 @@
     getLangFromUrl: getLangFromUrl,
     urlForLang: urlForLang,
     loadLocale: loadLocale,
+    loadLocaleWithFallback: loadLocaleWithFallback,
+    merge: merge,
     get: get,
     applyStaticBindings: applyStaticBindings,
     rewriteInternalLinks: rewriteInternalLinks,

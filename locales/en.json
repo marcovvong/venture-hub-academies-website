@@ -276,7 +276,7 @@
   "seo": {
     "home": {
       "title": "Venture Hub Academy — AI Accelerator & Venture Studio in Asia",
-      "description": "Backing execution-ready AI founders across Asia. Capital, compute, and market access for operators building real AI businesses."
+      "description": "Capital, compute and market access for AI founders building across Asia. US$150K, six months, six markets."
     },
     "about": {
       "title": "About — Venture Hub Academy",
@@ -300,5 +300,194 @@
     "aboutPhoto": "A Venture Hub Academy panel discussion.",
     "communityPhoto": "Founders and members at a Venture Hub Academy community session.",
     "demoDay": "Founders presenting at a Venture Hub Academy Demo Day."
+  },
+  "home": {
+    "nav": {
+      "portfolio": "Portfolio"
+    },
+    "cta": {
+      "apply": "Apply to VHA",
+      "program": "See the program",
+      "learn": "How the program works"
+    },
+    "hero": {
+      "eyebrow": "AI Accelerator · Venture Studio",
+      "title": "Build the next AI companies across Asia.",
+      "sub": "Capital. Compute. Market access."
+    },
+    "stats": {
+      "capital": "Initial investment",
+      "months": "Structured execution",
+      "monthsUnit": "months",
+      "companies": "Companies per cohort",
+      "markets": "Asian markets"
+    },
+    "proof": {
+      "eyebrow": "Proof",
+      "title": "We back execution.",
+      "sub": "We work with operators who already have a commercial foundation — not first-time founders validating an idea from zero.",
+      "i1": {
+        "label": "Per company",
+        "note": "Invested via SAFE at the start of the program."
+      },
+      "i2": {
+        "label": "Companies per cohort",
+        "note": "Small by design. Every team gets real operator time."
+      },
+      "i3": {
+        "label": "Months of execution",
+        "note": "Three months structured. Three months in live markets."
+      },
+      "i4": {
+        "label": "Markets",
+        "note": "One program, six jurisdictions across Asia."
+      }
+    },
+    "platform": {
+      "eyebrow": "The platform",
+      "title": "Everything you need to move faster.",
+      "sub": "Capital to build. Compute to scale. Markets to prove it.",
+      "p1": {
+        "name": "Capital",
+        "desc": "Invested via SAFE, with follow-on support into your next round.",
+        "meta": "SAFE · Pre-seed"
+      },
+      "p2": {
+        "name": "Compute",
+        "figure": "HPC / GPU",
+        "desc": "Immediate access to high-performance clusters for training and deployment.",
+        "meta": "Infrastructure · Day one"
+      },
+      "p3": {
+        "name": "Market access",
+        "figure": "APAC Sandbox",
+        "desc": "Controlled, real-world deployment with partners across six markets.",
+        "meta": "6 markets · Live pilots"
+      }
+    },
+    "program": {
+      "eyebrow": "Program engine",
+      "title": "From community to demo day.",
+      "sub": "Four stages. Six months. Built to produce traction, not coursework.",
+      "s1": {
+        "title": "Community",
+        "duration": "Open · Ongoing",
+        "desc": "Entry point to the network. Founders, operators and builders meet before any commitment is made.",
+        "o1": "Events across six markets",
+        "o2": "Operator and mentor introductions"
+      },
+      "s2": {
+        "title": "Structured program",
+        "duration": "3 months",
+        "desc": "Intensive build phase. One-on-one operator time, corporate structuring and product strategy.",
+        "o1": "Corporate and cap-table structuring",
+        "o2": "Model and product development on VHA compute",
+        "o3": "Go-to-market plan per target jurisdiction"
+      },
+      "s3": {
+        "title": "APAC Sandbox",
+        "duration": "3 months",
+        "desc": "Live deployment. Companies run real pilots with real customers in real markets.",
+        "o1": "Corporate and government pilot placements",
+        "o2": "Regulatory and entity setup support",
+        "o3": "Commercial traction and reference customers"
+      },
+      "s4": {
+        "title": "Demo Day",
+        "duration": "Cohort close",
+        "desc": "Live metrics presented to investors, corporates and the wider community.",
+        "o1": "Investor and corporate audience",
+        "o2": "Follow-on introductions into the next round"
+      }
+    },
+    "photo": {
+      "meta": "Community night · Hong Kong",
+      "quote": "The network is the entry point. Execution is the filter."
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio",
+      "title": "Meet the founders.",
+      "sub": "Companies. People. Markets. Outcomes.",
+      "placeholder": "Awaiting content",
+      "labels": {
+        "market": "Market",
+        "stage": "Stage"
+      },
+      "c1": {
+        "name": "Company one",
+        "desc": "Short description of what the company builds and who it serves.",
+        "market": "—",
+        "stage": "—"
+      },
+      "c2": {
+        "name": "Company two",
+        "desc": "Short description of what the company builds and who it serves.",
+        "market": "—",
+        "stage": "—"
+      },
+      "c3": {
+        "name": "Company three",
+        "desc": "Short description of what the company builds and who it serves.",
+        "market": "—",
+        "stage": "—"
+      }
+    },
+    "apac": {
+      "eyebrow": "APAC network",
+      "title": "One program. Six markets.",
+      "mapAlt": "Network map of Venture Hub Academy's six Asian markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."
+    },
+    "eco": {
+      "eyebrow": "Ecosystem",
+      "title": "Built with the people moving Asia forward.",
+      "g1": {
+        "name": "Founders",
+        "desc": "Operators building AI companies with commercial foundations."
+      },
+      "g2": {
+        "name": "Operators",
+        "desc": "People who have built and scaled companies in these markets."
+      },
+      "g3": {
+        "name": "Investors",
+        "desc": "Institutional and angel capital for follow-on rounds."
+      },
+      "g4": {
+        "name": "Corporates",
+        "desc": "Pilot partners and first customers across the region."
+      },
+      "g5": {
+        "name": "Researchers",
+        "desc": "Academic partners including HKU, HKUST and CUHK."
+      }
+    },
+    "events": {
+      "eyebrow": "Momentum",
+      "title": "Something is always happening.",
+      "sub": "Demo days, founder dinners and infrastructure sessions across the network.",
+      "placeholder": "Schedule to be confirmed",
+      "details": "Details soon",
+      "e1": {
+        "date": "Date TBC",
+        "name": "Demo Day",
+        "loc": "Hong Kong"
+      },
+      "e2": {
+        "date": "Date TBC",
+        "name": "Founder Dinner",
+        "loc": "Singapore"
+      },
+      "e3": {
+        "date": "Date TBC",
+        "name": "AI Infrastructure Session",
+        "loc": "Tokyo"
+      }
+    },
+    "final": {
+      "title": "Ready to build across Asia?"
+    },
+    "footer": {
+      "marketsH": "Markets"
+    }
   }
 }
