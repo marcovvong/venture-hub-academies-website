@@ -2,7 +2,11 @@
    Design system §20 (Geographic System) + §44.01 (signature motif).
    Used twice on the homepage (hero visual + APAC section) so the map reads as
    a recurring motif rather than a one-off illustration.
-   Depends on d3-geo + topojson-client (loaded via CDN, defer). */
+   Depends on d3-geo + topojson-client (loaded via CDN, defer).
+
+   Accent colour is --signal (#A174FE / rgb(161,116,254)). Canvas cannot read
+   CSS custom properties, so the value is mirrored here — keep it in sync with
+   the token in css/vha.css. */
 (function () {
   var MARKETS = [
     { key: "hk", code: "HKG", lon: 114.17, lat: 22.30, dx: -16, dy: -4, anchor: "end" },
@@ -139,7 +143,7 @@
         dots.forEach(function (d) {
           ctx.beginPath();
           ctx.arc(d[0], d[1], d[2] ? 1.7 : 1.35, 0, Math.PI * 2);
-          ctx.fillStyle = d[2] ? "rgba(200,255,61,0.30)" : "rgba(247,247,242,0.14)";
+          ctx.fillStyle = d[2] ? "rgba(161,116,254,0.38)" : "rgba(247,247,242,0.14)";
           ctx.fill();
         });
 
@@ -150,7 +154,7 @@
           ctx.beginPath();
           ctx.moveTo(a[0], a[1]);
           ctx.lineTo(b[0], b[1]);
-          ctx.strokeStyle = "rgba(200,255,61,0.16)";
+          ctx.strokeStyle = "rgba(161,116,254,0.20)";
           ctx.lineWidth = 1;
           ctx.stroke();
 
@@ -165,7 +169,7 @@
           var fade = Math.sin(Math.PI * t);
           ctx.beginPath();
           ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(200,255,61," + (0.85 * fade).toFixed(3) + ")";
+          ctx.fillStyle = "rgba(161,116,254," + (0.85 * fade).toFixed(3) + ")";
           ctx.fill();
         });
 
@@ -181,19 +185,19 @@
             var pulse = Math.sin(Math.PI * t);
             ctx.beginPath();
             ctx.arc(x, y, 9 + pulse * 9, 0, Math.PI * 2);
-            ctx.strokeStyle = "rgba(200,255,61," + (0.28 * (1 - pulse)).toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(161,116,254," + (0.28 * (1 - pulse)).toFixed(3) + ")";
             ctx.lineWidth = 1;
             ctx.stroke();
           }
 
           var g = ctx.createRadialGradient(x, y, 1, x, y, 20);
-          g.addColorStop(0, "rgba(200,255,61,0.30)");
-          g.addColorStop(1, "rgba(200,255,61,0)");
+          g.addColorStop(0, "rgba(161,116,254,0.34)");
+          g.addColorStop(1, "rgba(161,116,254,0)");
           ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI * 2);
           ctx.fillStyle = g; ctx.fill();
 
           ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = "#C8FF3D"; ctx.fill();
+          ctx.fillStyle = "#A174FE"; ctx.fill();
 
           if (!showLabels) return;
           var label = labels[m.key] || m.code;
@@ -201,7 +205,7 @@
           ctx.beginPath();
           ctx.moveTo(x + (m.anchor === "end" ? -7 : 7), y);
           ctx.lineTo(m.anchor === "end" ? lx + 4 : lx - 4, ly);
-          ctx.strokeStyle = "rgba(200,255,61,0.32)";
+          ctx.strokeStyle = "rgba(161,116,254,0.32)";
           ctx.lineWidth = 1; ctx.stroke();
 
           var size = w < 420 ? 11 : 12.5;

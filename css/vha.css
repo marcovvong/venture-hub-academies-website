@@ -18,12 +18,16 @@
   --muted: #666E6A;
   --line: #D9DED9;
 
-  /* VHA Green */
-  --vha-green: #1F6B45;
-  --vha-green-dark: #123D2B;
+  /* VHA Purple — the brand identity colour */
+  --purple: #8044FD;       /* fills, large elements, map nodes */
+  --purple-text: #7433F0;  /* small text on light — 6.04:1 on --paper, 5.62:1 on --white */
+  --purple-deep: #5F23CC;
+  --purple-tint: rgba(128, 68, 253, .10);
 
-  /* Energy accent — target 5-10% of the interface */
-  --signal: #C8FF3D;
+  /* Energy accent — target 5-10% of the interface.
+     A lighter purple so the accent still reads at speed on the dark
+     surfaces, where the brand purple alone falls to 3.97:1. */
+  --signal: #A174FE;
 
   /* Intelligence palette */
   --intel-black: #050907;
@@ -32,7 +36,7 @@
   --intel-line: rgba(247, 247, 242, .14);
   --intel-text: #FFFFFF;
   --intel-muted: rgba(247, 247, 242, .65);
-  --intel-signal: #C8FF3D;
+  --intel-signal: #A174FE;
 
   /* ===== 09/10. Typography ===== */
   --font-sans: "Plus Jakarta Sans", "Inter", "Noto Sans TC", "Noto Sans SC",
@@ -188,7 +192,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: .12em;
-  color: var(--vha-green);
+  color: var(--purple-text);
   margin: 0 0 var(--s-24);
   display: flex; align-items: center; gap: var(--s-12);
 }
@@ -198,7 +202,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .mode-intel .eyebrow, .mode-energy .eyebrow, .hero .eyebrow { color: var(--signal); }
 
 /* Signal-lime highlight on a word — never the only signal of meaning (39) */
-.signal-text { color: var(--vha-green); }
+.signal-text { color: var(--purple-text); }
 .mode-intel .signal-text, .mode-energy .signal-text, .hero .signal-text { color: var(--signal); }
 
 /* ==========================================================================
@@ -220,7 +224,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 
 .btn--primary { background: var(--ink); color: var(--white); }
-.btn--primary:hover { background: var(--vha-green); }
+.btn--primary:hover { background: var(--purple); }
 
 .btn--signal { background: var(--signal); color: var(--black); }
 .btn--signal:hover { background: var(--white); }
@@ -242,7 +246,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: color var(--t-micro) var(--ease);
 }
 .link-arrow span { transition: transform var(--t-component) var(--ease); }
-.link-arrow:hover { color: var(--vha-green); }
+.link-arrow:hover { color: var(--purple-text); }
 .link-arrow:hover span { transform: translateX(4px); }
 .mode-intel .link-arrow:hover, .mode-energy .link-arrow:hover, .hero .link-arrow:hover { color: var(--signal); }
 
@@ -271,11 +275,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .nav__link::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0;
-  height: 2px; background: var(--signal); transform: scaleX(0);
+  height: 2px; background: var(--purple); transform: scaleX(0);
   transform-origin: left; transition: transform var(--t-component) var(--ease);
 }
 .nav__link:hover::after, .nav__link[aria-current="page"]::after { transform: scaleX(1); }
-.nav__link[aria-current="page"] { color: var(--vha-green); }
+.nav__link[aria-current="page"] { color: var(--purple-text); }
 .nav__right { margin-left: auto; display: flex; align-items: center; gap: var(--s-16); }
 
 .lang {
@@ -470,12 +474,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-top: 1px solid var(--line);
 }
 .proof-item {
-  padding: var(--s-40) var(--s-24) var(--s-40) 0;
+  padding: var(--s-40) var(--s-32) var(--s-40) 0;
   border-right: 1px solid var(--line);
 }
 .proof-item:last-child { border-right: 0; }
 .proof-item .stat__value {
-  font-size: clamp(30px, 8vw, 68px);
+  font-size: clamp(30px, 7vw, 60px);
   color: var(--ink);
 }
 .proof-item .stat__label { color: var(--muted); }
@@ -506,7 +510,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .pillar__figure {
   font-size: clamp(26px, 3vw, 38px); font-weight: 800; letter-spacing: -.03em;
-  color: var(--vha-green); line-height: 1;
+  color: var(--purple-text); line-height: 1;
 }
 .pillar__desc { color: var(--muted); font-size: 15.5px; }
 .pillar__meta {
@@ -583,8 +587,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .placeholder-tag {
   display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
   font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--vha-green-dark);
-  background: rgba(31, 107, 69, .1); border: 1px dashed var(--vha-green);
+  text-transform: uppercase; color: var(--purple-deep);
+  background: var(--purple-tint); border: 1px dashed var(--purple);
   border-radius: var(--r-pill); padding: 4px 10px;
 }
 @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; } }
@@ -642,7 +646,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .event__name { font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; letter-spacing: -.02em; }
 .event__loc { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
-.event__cta { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--vha-green); }
+.event__cta { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--purple-text); }
 @media (max-width: 760px) {
   .event { grid-template-columns: 1fr; gap: var(--s-8); }
 }
@@ -655,10 +659,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .photo-band__caption {
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: var(--s-40) var(--pad);
-  background: linear-gradient(transparent, rgba(8, 13, 11, .82));
+  background: linear-gradient(transparent, rgba(8, 13, 11, .92));
   color: var(--white);
 }
-.photo-band__caption .mono { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--signal); }
+.photo-band__caption .mono { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); }
 .photo-band__caption p { max-width: 46ch; margin-top: var(--s-8); font-size: clamp(17px, 2vw, 22px); font-weight: 700; }
 
 /* ==========================================================================
