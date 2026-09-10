@@ -113,11 +113,11 @@
       labels: { hk: "Hong Kong", tw: "Taiwan", sg: "Singapore", jp: "Japan", th: "Thailand", kh: "Cambodia" },
       showLabels: true,
       colors: {
-        accent: "66,103,255",   /* --electric-blue */
-        land:   "120,130,122",
-        landHi: "66,103,255",
-        label:  "#0E1A14",      /* --ink */
-        node:   "#4267FF"
+        accent: "128,68,253",   /* --purple #8044FD */
+        land:   "122,122,132",
+        landHi: "128,68,253",
+        label:  "#101014",      /* --ink */
+        node:   "#8044FD"
       },
       unavailableText: "Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia."
     });

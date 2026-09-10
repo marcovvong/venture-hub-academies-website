@@ -6,7 +6,7 @@
 
    Canvas cannot read CSS custom properties, so colours are passed in via
    options.colors and mirrored from the stylesheet's tokens. Defaults below
-   match the v2 APAC section (electric blue on warm white). */
+   match the APAC section (brand purple on warm white). */
 (function () {
   var MARKETS = [
     { key: "hk", code: "HKG", lon: 114.17, lat: 22.30, dx: -16, dy: -4, anchor: "end" },
@@ -61,11 +61,11 @@
   }
 
   var DEFAULT_COLORS = {
-    accent: "66,103,255",        /* --electric-blue #4267FF */
-    land: "100,110,104",         /* dimmed land dots */
-    landHi: "66,103,255",        /* highlighted market landmasses */
-    label: "#0E1A14",            /* --ink */
-    node: "#4267FF"
+    accent: "128,68,253",        /* --purple #8044FD */
+    land: "122,122,132",         /* dimmed land dots */
+    landHi: "128,68,253",        /* highlighted market landmasses */
+    label: "#101014",            /* --ink */
+    node: "#8044FD"
   };
 
   function init(canvas, options) {
