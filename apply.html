@@ -65,13 +65,47 @@
 
 <main id="main">
 
-  <header class="page-hero mode-energy">
+  <header class="hero hero--inner mode-energy">
     <div class="wrap">
-      <p class="eyebrow">Apply</p>
-      <h1 class="d-l page-hero__title" data-reveal>Fifteen minutes.<br>Read by a <em>partner</em>.</h1>
-      <p class="body-l page-hero__lede" data-reveal data-delay="0.08">Applications are reviewed on a rolling basis. We respond to every application within 14 days, either way.</p>
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow">Apply</p>
+          <h1 class="d-xl hero__title" data-reveal>Fifteen minutes.<br>Read by a <em>partner</em>.</h1>
+          <p class="body-l hero__sub" data-reveal data-delay="0.08">Applications are reviewed on a rolling basis. We respond to every application within 14 days, either way.</p>
+          <div class="hero__cta" data-reveal data-delay="0.14">
+            <a href="#apply-form" class="btn btn--sharp">Start application <i aria-hidden="true">&rarr;</i></a>
+            <a href="accelerator.html" class="btn btn--ghost">See the program <i aria-hidden="true">&rarr;</i></a>
+          </div>
+        </div>
+        <div class="hero__media" data-reveal data-delay="0.2">
+          <img src="assets/images/home-event-1920.jpg"
+               srcset="assets/images/home-event-960.jpg 800w, assets/images/home-event-1920.jpg 1600w"
+               sizes="(max-width: 980px) 100vw, 45vw" style="object-position:center 32%"
+               alt="Founders and investors at a Venture Hub Academy session in Hong Kong." width="1600" height="1067" fetchpriority="high">
+          <div class="hero__coord meta">22.3193&deg; N / 114.1694&deg; E</div>
+        </div>
+      </div>
+      <div class="hero__meta-row meta">
+        <span>ROLLING BASIS</span>
+        <span>RESPONSE WITHIN 14 DAYS</span>
+        <span>COHORT 01 &mdash; APPLICATIONS OPEN</span>
+      </div>
     </div>
   </header>
+
+  <!-- Ticker -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__t" data-marquee>
+      <div class="marquee__g" data-marquee-group>
+        <span class="marquee__i">Hong Kong</span>
+        <span class="marquee__i">Taiwan</span>
+        <span class="marquee__i">Singapore</span>
+        <span class="marquee__i">Japan</span>
+        <span class="marquee__i">Thailand</span>
+        <span class="marquee__i">Cambodia</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Process -->
   <section class="section mode-inst" style="padding-top:0">

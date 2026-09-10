@@ -65,26 +65,48 @@
 
 <main id="main">
 
-  <header class="page-hero mode-energy">
+  <header class="hero hero--inner mode-energy">
     <div class="wrap">
-      <p class="eyebrow">Community</p>
-      <h1 class="d-l page-hero__title" data-reveal>From open forum<br>to <em>core cohort</em>.</h1>
-      <p class="body-l page-hero__lede" data-reveal data-delay="0.08">Every cohort starts in the community. It is the open door into the network — founders, operators and builders, meeting before any commitment is made.</p>
-      <div class="hero__cta" style="margin-top:36px" data-reveal data-delay="0.14">
-        <a href="apply.html" class="btn btn--sharp">Join the Community <i aria-hidden="true">&rarr;</i></a>
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow">Community</p>
+          <h1 class="d-xl hero__title" data-reveal>From open forum<br>to <em>core cohort</em>.</h1>
+          <p class="body-l hero__sub" data-reveal data-delay="0.08">Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made.</p>
+          <div class="hero__cta" data-reveal data-delay="0.14">
+            <a href="apply.html" class="btn btn--sharp">Join the Community <i aria-hidden="true">&rarr;</i></a>
+            <a href="accelerator.html" class="btn btn--ghost">See the program <i aria-hidden="true">&rarr;</i></a>
+          </div>
+        </div>
+        <div class="hero__media" data-reveal data-delay="0.2">
+          <img src="assets/images/community-photo-1600.jpg"
+               srcset="assets/images/community-photo-800.jpg 800w, assets/images/community-photo-1600.jpg 1600w"
+               sizes="(max-width: 980px) 100vw, 45vw" style="object-position:center 68%"
+               alt="Founders and members at a Venture Hub Academy community session." width="1600" height="1067" fetchpriority="high">
+          <div class="hero__coord meta">22.3193&deg; N / 114.1694&deg; E</div>
+        </div>
+      </div>
+      <div class="hero__meta-row meta">
+        <span>OPEN FORUM</span>
+        <span>MEMBERS</span>
+        <span>CORE COHORT</span>
       </div>
     </div>
   </header>
 
-  <div class="photo-band" data-reveal>
-    <img src="assets/images/community-photo-1600.jpg"
-         srcset="assets/images/community-photo-800.jpg 800w, assets/images/community-photo-1600.jpg 1600w"
-         sizes="100vw" style="object-position:center 68%"
-         alt="Founders and members at a Venture Hub Academy community session." loading="lazy">
-    <div class="photo-band__caption">
-      <div class="mono">Community session &middot; Hong Kong</div>
+  <!-- Ticker -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__t" data-marquee>
+      <div class="marquee__g" data-marquee-group>
+        <span class="marquee__i">Hong Kong</span>
+        <span class="marquee__i">Taiwan</span>
+        <span class="marquee__i">Singapore</span>
+        <span class="marquee__i">Japan</span>
+        <span class="marquee__i">Thailand</span>
+        <span class="marquee__i">Cambodia</span>
+      </div>
     </div>
   </div>
+
 
   <!-- Tiers -->
   <section class="section mode-inst">
