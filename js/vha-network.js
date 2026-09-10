@@ -4,9 +4,9 @@
    a recurring motif rather than a one-off illustration.
    Depends on d3-geo + topojson-client (loaded via CDN, defer).
 
-   Accent colour is --signal (#A174FE / rgb(161,116,254)). Canvas cannot read
-   CSS custom properties, so the value is mirrored here — keep it in sync with
-   the token in css/vha.css. */
+   Canvas cannot read CSS custom properties, so colours are passed in via
+   options.colors and mirrored from the stylesheet's tokens. Defaults below
+   match the v2 APAC section (electric blue on warm white). */
 (function () {
   var MARKETS = [
     { key: "hk", code: "HKG", lon: 114.17, lat: 22.30, dx: -16, dy: -4, anchor: "end" },
@@ -60,8 +60,18 @@
     wrap.appendChild(el);
   }
 
+  var DEFAULT_COLORS = {
+    accent: "66,103,255",        /* --electric-blue #4267FF */
+    land: "100,110,104",         /* dimmed land dots */
+    landHi: "66,103,255",        /* highlighted market landmasses */
+    label: "#0E1A14",            /* --ink */
+    node: "#4267FF"
+  };
+
   function init(canvas, options) {
     options = options || {};
+    var C = options.colors || DEFAULT_COLORS;
+    function rgba(channel, a) { return "rgba(" + channel + "," + a + ")"; }
     var labels = options.labels || {};
     var showLabels = options.showLabels !== false;
     var dotSpacing = options.dotSpacing || 9;
@@ -143,7 +153,7 @@
         dots.forEach(function (d) {
           ctx.beginPath();
           ctx.arc(d[0], d[1], d[2] ? 1.7 : 1.35, 0, Math.PI * 2);
-          ctx.fillStyle = d[2] ? "rgba(161,116,254,0.38)" : "rgba(247,247,242,0.14)";
+          ctx.fillStyle = d[2] ? rgba(C.landHi, 0.42) : rgba(C.land, 0.30);
           ctx.fill();
         });
 
@@ -154,7 +164,7 @@
           ctx.beginPath();
           ctx.moveTo(a[0], a[1]);
           ctx.lineTo(b[0], b[1]);
-          ctx.strokeStyle = "rgba(161,116,254,0.20)";
+          ctx.strokeStyle = rgba(C.accent, 0.28);
           ctx.lineWidth = 1;
           ctx.stroke();
 
@@ -169,7 +179,7 @@
           var fade = Math.sin(Math.PI * t);
           ctx.beginPath();
           ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(161,116,254," + (0.85 * fade).toFixed(3) + ")";
+          ctx.fillStyle = rgba(C.accent, (0.9 * fade).toFixed(3));
           ctx.fill();
         });
 
@@ -185,19 +195,19 @@
             var pulse = Math.sin(Math.PI * t);
             ctx.beginPath();
             ctx.arc(x, y, 9 + pulse * 9, 0, Math.PI * 2);
-            ctx.strokeStyle = "rgba(161,116,254," + (0.28 * (1 - pulse)).toFixed(3) + ")";
+            ctx.strokeStyle = rgba(C.accent, (0.34 * (1 - pulse)).toFixed(3));
             ctx.lineWidth = 1;
             ctx.stroke();
           }
 
           var g = ctx.createRadialGradient(x, y, 1, x, y, 20);
-          g.addColorStop(0, "rgba(161,116,254,0.34)");
-          g.addColorStop(1, "rgba(161,116,254,0)");
+          g.addColorStop(0, rgba(C.accent, 0.26));
+          g.addColorStop(1, rgba(C.accent, 0));
           ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI * 2);
           ctx.fillStyle = g; ctx.fill();
 
           ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = "#A174FE"; ctx.fill();
+          ctx.fillStyle = C.node; ctx.fill();
 
           if (!showLabels) return;
           var label = labels[m.key] || m.code;
@@ -205,14 +215,14 @@
           ctx.beginPath();
           ctx.moveTo(x + (m.anchor === "end" ? -7 : 7), y);
           ctx.lineTo(m.anchor === "end" ? lx + 4 : lx - 4, ly);
-          ctx.strokeStyle = "rgba(161,116,254,0.32)";
+          ctx.strokeStyle = rgba(C.accent, 0.40);
           ctx.lineWidth = 1; ctx.stroke();
 
           var size = w < 420 ? 11 : 12.5;
           ctx.font = "700 " + size + "px 'Plus Jakarta Sans', Inter, Arial, sans-serif";
           ctx.textAlign = m.anchor;
           ctx.textBaseline = "middle";
-          ctx.fillStyle = "rgba(247,247,242,0.92)";
+          ctx.fillStyle = C.label;
           ctx.fillText(label, lx, ly);
         });
       }
