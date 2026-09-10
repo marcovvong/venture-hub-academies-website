@@ -1,0 +1,146 @@
+  <!-- Form -->
+  <section class="section mode-energy" id="apply-form-section">
+    <div class="wrap">
+      <!-- Success state -->
+      <div class="success" data-apply-success hidden>
+        <div class="success__mark" aria-hidden="true">&check;</div>
+        <h2 class="d-m">Received.</h2>
+        <p>A partner will read your application this cycle. You&rsquo;ll hear back within 14 days, either way.</p>
+        <p><a class="tlink" href="community.html">Meanwhile, join the community &mdash; every cohort started there <i aria-hidden="true">&rarr;</i></a></p>
+      </div>
+
+      <div class="form-wrap" data-form-wrap>
+        <aside class="form-aside">
+          <p class="eyebrow">Before you start</p>
+          <div class="note">
+            <h3>Note</h3>
+            <p class="muted">Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.</p>
+          </div>
+          <div class="page-hero__meta meta" style="margin-top:32px">
+            <span>ROLLING BASIS</span>
+            <span>RESPONSE WITHIN 14 DAYS</span>
+          </div>
+        </aside>
+
+        <div>
+          <div class="form-error" data-form-error role="alert">
+            Something went wrong sending your application. Please try again, or email
+            <a href="mailto:info@venturehub.tech">info@venturehub.tech</a>.
+          </div>
+
+          <form id="apply-form" action="https://formspree.io/f/maqrelbb" method="POST" enctype="multipart/form-data" novalidate>
+            <div class="gotcha" aria-hidden="true">
+              <label for="f-gotcha">Leave this field empty</label>
+              <input type="text" id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-co">Company name <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="f-co" name="Company name" required>
+              </div>
+              <div class="field">
+                <label for="f-web">Website or product URL</label>
+                <input class="input" type="text" id="f-web" name="Website or product URL" placeholder="https://">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-founder">Founder name(s) &amp; role(s) <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="f-founder" name="Founder name(s) and role(s)" required>
+              </div>
+              <div class="field">
+                <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="email" id="f-email" name="Email" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-hq">HQ or operating market <span class="req" aria-hidden="true">*</span></label>
+              <select class="select" id="f-hq" name="HQ or operating market" required>
+                <option value="">Select&hellip;</option>
+                <option>Hong Kong</option>
+                <option>Taiwan</option>
+                <option>Singapore</option>
+                <option>Japan</option>
+                <option>Thailand</option>
+                <option>Cambodia</option>
+                <option>Elsewhere in APAC</option>
+                <option>Outside APAC</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span class="field__label" id="lbl-stage">Company stage <span class="req" aria-hidden="true">*</span></span>
+              <div class="pills" data-pill-group="Company stage" role="group" aria-labelledby="lbl-stage">
+                <button type="button" class="pill" data-value="Revenue-generating">Revenue-generating</button>
+                <button type="button" class="pill" data-value="Launched, pre-revenue">Launched, pre-revenue</button>
+                <button type="button" class="pill" data-value="In development">In development</button>
+              </div>
+              <input type="hidden" name="Company stage" data-pill-input="Company stage" required>
+            </div>
+
+            <div class="field">
+              <label for="f-one">What does your company do, in one sentence? <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" type="text" id="f-one" name="What does your company do, in one sentence" required>
+            </div>
+
+            <div class="field">
+              <label for="f-tech">What proprietary technology or unique commercial advantage do you have? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-tech" name="Proprietary technology or unique commercial advantage" rows="3" required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="f-traction">What traction do you have today? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-traction" name="Traction today" rows="3" required></textarea>
+              <p class="field__help">Revenue, users, pilots, LOIs &mdash; numbers where you have them.</p>
+            </div>
+
+            <div class="field">
+              <label for="f-why">Why do you need capital, compute, or market access specifically in Asia/APAC right now? <span class="req" aria-hidden="true">*</span></label>
+              <textarea class="textarea" id="f-why" name="Why capital, compute, or market access in Asia/APAC now" rows="3" required></textarea>
+            </div>
+
+            <div class="field">
+              <span class="field__label" id="lbl-reloc">Are you open to relocating or spending time on-site during the program? <span class="req" aria-hidden="true">*</span></span>
+              <div class="pills" data-pill-group="Open to relocating" role="group" aria-labelledby="lbl-reloc">
+                <button type="button" class="pill" data-value="Yes">Yes</button>
+                <button type="button" class="pill" data-value="No">No</button>
+                <button type="button" class="pill" data-value="Possibly">Possibly</button>
+              </div>
+              <input type="hidden" name="Open to relocating" data-pill-input="Open to relocating" required>
+            </div>
+
+            <div class="field">
+              <label for="f-deck">Pitch deck or one-pager</label>
+              <input class="file-input" type="file" id="f-deck" name="Pitch deck or one-pager" accept=".pdf">
+              <p class="field__help">Optional upload, PDF max 10MB</p>
+            </div>
+
+            <div class="field">
+              <label for="f-hear">How did you hear about us?</label>
+              <select class="select" id="f-hear" name="How did you hear about us">
+                <option value="">Select&hellip;</option>
+                <option>Community</option>
+                <option>Referral</option>
+                <option>Event</option>
+                <option>Social</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="f-anything">Anything else you&rsquo;d like us to know?</label>
+              <textarea class="textarea" id="f-anything" name="Anything else" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--sharp" id="apply-submit-btn">
+              Submit application <i aria-hidden="true">&rarr;</i>
+            </button>
+            <p class="field__help" style="margin-top:14px">Reviewed on a rolling basis &middot; Response within 14 days</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
