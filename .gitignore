@@ -4,3 +4,6 @@ assets/*.JPG
 assets/*.jpg
 
 .DS_Store
+
+# Editor workspace files
+*.code-workspace
