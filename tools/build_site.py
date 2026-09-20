@@ -358,33 +358,25 @@ def page_home():
       <p class="eyebrow">The platform</p>
       <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:56px">Everything you need to move faster.</h2>
 
-      <div class="pillar" data-reveal>
-        <div class="pillar__i">01</div>
-        <div class="pillar__name">Capital</div>
-        <div>
+      <div class="pillars">
+        <article class="pillar" data-reveal>
+          <div class="pillar__i">01</div>
+          <h3 class="pillar__name">Capital</h3>
           <div class="pillar__v">US$150K</div>
           <p class="pillar__d">Initial capital to accelerate execution, invested via SAFE at the start of the program &mdash; with follow-on support into your next round.</p>
-        </div>
-      </div>
-      <div class="pillar__arrow" aria-hidden="true">&darr;</div>
-
-      <div class="pillar" data-reveal>
-        <div class="pillar__i">02</div>
-        <div class="pillar__name">Compute</div>
-        <div>
+        </article>
+        <article class="pillar" data-reveal data-delay="0.06">
+          <div class="pillar__i">02</div>
+          <h3 class="pillar__name">Compute</h3>
           <div class="pillar__v">HPC / GPU</div>
           <p class="pillar__d">Infrastructure for building and testing. Immediate access to high-performance clusters for model training and deployment, from day one.</p>
-        </div>
-      </div>
-      <div class="pillar__arrow" aria-hidden="true">&darr;</div>
-
-      <div class="pillar" data-reveal>
-        <div class="pillar__i">03</div>
-        <div class="pillar__name">Access</div>
-        <div>
+        </article>
+        <article class="pillar" data-reveal data-delay="0.12">
+          <div class="pillar__i">03</div>
+          <h3 class="pillar__name">Access</h3>
           <div class="pillar__v">6 APAC Markets</div>
           <p class="pillar__d">A network designed for regional expansion &mdash; corporate and government pilots, regulatory support, and reference customers across six jurisdictions.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
