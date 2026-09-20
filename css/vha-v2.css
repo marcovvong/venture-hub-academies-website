@@ -392,16 +392,20 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* ==========================================================================
    22. Final CTA — colour field
    ========================================================================== */
-.cta-field { background: var(--sharp); color: var(--ink); padding: clamp(72px, 11vw, 150px) 0; }
+.cta-field {
+  background: var(--paper); color: var(--ink);
+  padding: clamp(72px, 11vw, 150px) 0;
+  border-top: 1px solid var(--line);
+}
 .cta-field h2 { text-transform: uppercase; margin-bottom: 36px; }
 .cta-field .row { display: flex; gap: 16px; flex-wrap: wrap; }
 .cta-field .btn--ghost { border-color: var(--ink); }
 .cta-field .btn--ghost:hover { background: var(--ink); color: var(--sharp); }
 
 /* ==========================================================================
-   Footer — dark green
+   Footer — black
    ========================================================================== */
-.foot { background: var(--purple-deep); color: var(--on-dark); padding: 88px 0 32px; }
+.foot { background: var(--black); color: var(--on-dark); padding: 88px 0 32px; }
 .foot__g { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr); gap: 48px; }
 .foot h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-dark-muted); margin-bottom: 18px; }
 .foot ul { display: grid; gap: 12px; }
