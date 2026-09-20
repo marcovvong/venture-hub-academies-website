@@ -4,8 +4,8 @@ Bundle the whole site into ONE self-contained .html file.
 
     python3 tools/build_single_file.py [output_path]
 
-All seven pages, the CSS, the JS and the photographs are embedded. The nav
-switches pages in place, so it behaves like the real site rather than seven
+All five pages, the CSS, the JS and the photographs are embedded. The nav
+switches pages in place, so it behaves like the real site rather than five
 pages stacked end to end. Only d3/topojson (for the APAC map) load from a CDN.
 """
 import base64, os, re, sys
@@ -14,8 +14,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/Desktop/VHA-website.html")
 
 PAGES = [("home", "index.html", "Home"), ("accelerator", "accelerator.html", "Accelerator"),
-         ("venture-studio", "venture-studio.html", "Venture Studio"),
-         ("community", "community.html", "Community"), ("portfolio", "portfolio.html", "Portfolio"),
+         ("community", "community.html", "Community"),
          ("about", "about.html", "About"), ("apply", "apply.html", "Apply")]
 SLUG = {f: s for s, f, _ in PAGES}
 
@@ -163,7 +162,7 @@ def build():
 </style>
 </head>
 <body>
-<!-- Complete Venture Hub Academy site in a single file: all seven pages, CSS,
+<!-- Complete Venture Hub Academy site in a single file: all five pages, CSS,
      JS and photographs embedded. The nav switches pages in place. The APAC map
      needs a connection (d3/topojson from CDN); without one it shows its
      fallback text and everything else still works. -->

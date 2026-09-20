@@ -20,9 +20,7 @@ SITE = "https://academy.venturehub.tech/"
 # --- navigation: the single source of truth for site structure -------------
 NAV = [
     ("Accelerator",    "accelerator.html"),
-    ("Venture Studio", "venture-studio.html"),
     ("Community",      "community.html"),
-    ("Portfolio",      "portfolio.html"),
     ("About",          "about.html"),
 ]
 
@@ -471,22 +469,6 @@ def page_home():
     </div>
   </section>
 
-  <!-- Portfolio teaser -->
-  <section class="section mode-inst">
-    <div class="wrap">
-      <div class="split">
-        <div>
-          <p class="eyebrow">Portfolio</p>
-          <h2 class="d-m" data-reveal>A living collection<br>of companies.</h2>
-        </div>
-        <div data-reveal data-delay="0.08">
-          <p class="body-l muted" style="margin-bottom:24px">Companies, founders, markets and outcomes from across the VHA network.</p>
-          <a class="tlink" href="portfolio.html">See the portfolio <i aria-hidden="true">&rarr;</i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Ecosystem -->
   <section class="section mode-energy" id="ecosystem">
     <div class="wrap">
@@ -627,225 +609,6 @@ def page_accelerator():
                  "Accelerator &mdash; Venture Hub Academy",
                  "A 6-month program: 3-month Structured Program plus 3-month APAC Sandbox. US$150K via SAFE, small cohorts, GPU and compute resources.",
                  body, "accelerator.html")
-
-
-def page_studio():
-    body = hero(
-        "Venture Studio",
-        "From idea<br>to <em>company</em>.",
-        "The accelerator backs founders. The studio builds with them &mdash; from thesis and incorporation through product, first customers and the raise.",
-        ("Talk to the studio", "apply.html"), ("See the accelerator", "accelerator.html"),
-        "about-photo", "Operators in discussion at a Venture Hub Academy session.", "center 40%",
-        ["VENTURE STUDIO", "CO-BUILT FROM THESIS", "APAC / HONG KONG"])
-    body += MARQUEE + """
-  <!-- The difference -->
-  <section class="section mode-energy">
-    <div class="wrap">
-      <p class="eyebrow">The difference</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px">Two ways we work.</h2>
-      <p class="body-l muted" data-reveal style="max-width:54ch;margin-bottom:40px">Both routes lead to a company that can execute across Asia. They differ in where the idea starts and how much we build alongside you.</p>
-      <div class="compare">
-        <div class="compare__box">
-          <div class="compare__label">Accelerator</div>
-          <div class="compare__v">We back founders.</div>
-          <p class="muted" style="margin-top:12px;font-size:15.5px">You bring the company and the commercial foundation. We bring capital, compute and market access for six months.</p>
-        </div>
-        <div class="compare__box compare__box--yes">
-          <div class="compare__label">Venture Studio</div>
-          <div class="compare__v">We build with founders.</div>
-          <p class="muted" style="margin-top:12px;font-size:15.5px">We start from a thesis and build the company alongside you &mdash; entity, product, first customers and team.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How the studio works -->
-  <section class="section mode-purple">
-    <div class="wrap">
-      <p class="eyebrow">How the studio works</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Thesis to launch.</h2>
-      <div class="numlist">
-        <article class="numitem" data-reveal>
-          <div class="numitem__n">01</div>
-          <div>
-            <h3 class="numitem__t">Thesis</h3>
-            <p class="numitem__d">We identify where AI changes the economics of a sector in these markets, and what has to be true for a company to win there.</p>
-          </div>
-        </article>
-        <article class="numitem" data-reveal data-delay="0.06">
-          <div class="numitem__n">02</div>
-          <div>
-            <h3 class="numitem__t">Build</h3>
-            <p class="numitem__d">Prototype on VHA compute, tested against real operators before a company exists.</p>
-          </div>
-        </article>
-        <article class="numitem" data-reveal data-delay="0.12">
-          <div class="numitem__n">03</div>
-          <div>
-            <h3 class="numitem__t">Incorporate</h3>
-            <p class="numitem__d">Founding team, entity, cap table and jurisdiction &mdash; structured for the markets the company will sell into.</p>
-          </div>
-        </article>
-        <article class="numitem" data-reveal data-delay="0.18">
-          <div class="numitem__n">04</div>
-          <div>
-            <h3 class="numitem__t">Scale</h3>
-            <p class="numitem__d">First customers through the APAC Sandbox, then into the accelerator cohort and the raise.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- What we bring -->
-  <section class="section mode-inst">
-    <div class="wrap">
-      <p class="eyebrow">What we bring</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px">Founding-team resources, on day zero.</h2>
-      <div class="tiers">
-        <article class="tier" data-reveal>
-          <div class="tier__n">01</div>
-          <h3 class="tier__t">Operators</h3>
-          <p class="tier__d">People who have built in these markets, working on the company rather than advising it.</p>
-          <div class="tier__foot muted">Hands-on</div>
-        </article>
-        <article class="tier" data-reveal data-delay="0.06">
-          <div class="tier__n">02</div>
-          <h3 class="tier__t">Infrastructure</h3>
-          <p class="tier__d">HPC and GPU access for building and evaluating models before there is a budget for it.</p>
-          <div class="tier__foot muted">HPC / GPU</div>
-        </article>
-        <article class="tier tier--core" data-reveal data-delay="0.12">
-          <div class="tier__n">03</div>
-          <h3 class="tier__t">Market access</h3>
-          <p class="tier__d">Pilot partners across six jurisdictions, so the first customer conversation is not cold.</p>
-          <div class="tier__foot">6 markets</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Studio companies -->
-  <section class="section mode-energy">
-    <div class="wrap">
-      <div class="split">
-        <div>
-          <p class="eyebrow">Studio companies</p>
-          <h2 class="d-m" data-reveal>What we are building.</h2>
-        </div>
-        <div data-reveal data-delay="0.08">
-          <span class="tag tag--pending" style="margin-bottom:18px">Awaiting content</span>
-          <p class="body-l muted">Studio companies are announced once they are incorporated and in market. Details to follow.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-""" + cta("Have a thesis<br>worth building?")
-    return write("venture-studio.html",
-                 "Venture Studio &mdash; Venture Hub Academy",
-                 "The accelerator backs founders. The venture studio builds with them - from thesis and incorporation through product, first customers and the raise.",
-                 body, "venture-studio.html")
-
-
-def _company(name, delay=""):
-    d = f' data-delay="{delay}"' if delay else ""
-    return f"""        <article class="co" data-reveal{d}>
-          <span class="tag tag--pending">Awaiting content</span>
-          <div class="co__n">{name}</div>
-          <p class="co__d">One line on what the company builds and who it serves.</p>
-          <dl class="co__m">
-            <div><dt>Market</dt><dd>&mdash;</dd></div>
-            <div><dt>Stage</dt><dd>&mdash;</dd></div>
-          </dl>
-        </article>"""
-
-
-def page_portfolio():
-    cards = "\n".join([_company("Company name"), _company("Company name", "0.06"),
-                       _company("Company name", "0.12"), _company("Company name", "0.18"),
-                       _company("Company name", "0.24"), _company("Company name", "0.3")])
-    body = hero(
-        "Portfolio",
-        "A living collection<br>of <em>companies</em>.",
-        "Companies, founders, markets and outcomes from across the VHA network. Backed with capital, compute and market access, then proven in live APAC markets.",
-        ("Apply Now", "apply.html"), ("See the program", "accelerator.html"),
-        "community-photo", "Founders and members at a Venture Hub Academy session.", "center 68%",
-        ["COHORT 01", "6 APAC MARKETS", "PRE-SEED &mdash; SEED"])
-    body += MARQUEE + f"""
-  <!-- Companies -->
-  <section class="section mode-inst" id="companies">
-    <div class="wrap">
-      <div class="split" style="margin-bottom:48px">
-        <div>
-          <p class="eyebrow">Companies</p>
-          <h2 class="d-m" data-reveal>Cohort 01.</h2>
-        </div>
-        <div data-reveal data-delay="0.08">
-          <p class="body-l muted">The first cohort is being selected now. Company profiles are published once each team is in market.</p>
-        </div>
-      </div>
-      <div class="folio">
-{cards}
-      </div>
-    </div>
-  </section>
-
-  <!-- Founder story -->
-  <section class="section mode-energy">
-    <div class="wrap">
-      <div class="story">
-        <div data-reveal>
-          <img src="assets/images/about-photo-1600.jpg"
-               srcset="assets/images/about-photo-800.jpg 800w, assets/images/about-photo-1600.jpg 1600w"
-               sizes="(max-width: 900px) 100vw, 46vw"
-               alt="Panel discussion with investors and operators at a Venture Hub Academy session."
-               width="1600" height="1066" loading="lazy">
-        </div>
-        <div data-reveal data-delay="0.1">
-          <p class="eyebrow">Founder stories</p>
-          <blockquote class="story__q">&ldquo;We needed more than capital. We needed access.&rdquo;</blockquote>
-          <p class="meta" style="margin-bottom:20px">FOUNDER / COMPANY / MARKET</p>
-          <span class="tag tag--pending">Placeholder &mdash; awaiting a real founder quote</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What backing looks like -->
-  <section class="section mode-purple">
-    <div class="wrap">
-      <p class="eyebrow">What backing looks like</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Every company gets the same three things.</h2>
-      <div class="numlist">
-        <article class="numitem" data-reveal>
-          <div class="numitem__n">01</div>
-          <div>
-            <h3 class="numitem__t">US$150K via SAFE</h3>
-            <p class="numitem__d">Invested at the start of the program, with follow-on support into the next round.</p>
-          </div>
-        </article>
-        <article class="numitem" data-reveal data-delay="0.06">
-          <div class="numitem__n">02</div>
-          <div>
-            <h3 class="numitem__t">HPC and GPU access</h3>
-            <p class="numitem__d">Compute for training, evaluation and deployment from day one.</p>
-          </div>
-        </article>
-        <article class="numitem" data-reveal data-delay="0.12">
-          <div class="numitem__n">03</div>
-          <div>
-            <h3 class="numitem__t">Six markets</h3>
-            <p class="numitem__d">Pilots, partners and reference customers across Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-""" + cta("Want to be<br>in cohort 01?")
-    return write("portfolio.html",
-                 "Portfolio &mdash; Venture Hub Academy",
-                 "Companies, founders, markets and outcomes from across the Venture Hub Academy network.",
-                 body, "portfolio.html")
 
 
 def page_community():
@@ -1031,8 +794,45 @@ def page_about():
           <div class="compare__label">Venture Studio</div>
           <div class="compare__v">We build with founders.</div>
           <p class="muted" style="margin-top:12px;font-size:15.5px">Companies co-built from thesis to launch.</p>
-          <p style="margin-top:16px"><a class="tlink" href="venture-studio.html">See the studio <i aria-hidden="true">&rarr;</i></a></p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How the studio works -->
+  <section class="section mode-energy">
+    <div class="wrap">
+      <p class="eyebrow">How the studio works</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Thesis to launch.</h2>
+      <div class="numlist">
+        <article class="numitem" data-reveal>
+          <div class="numitem__n">01</div>
+          <div>
+            <h3 class="numitem__t">Thesis</h3>
+            <p class="numitem__d">We identify where AI changes the economics of a sector in these markets, and what has to be true for a company to win there.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.06">
+          <div class="numitem__n">02</div>
+          <div>
+            <h3 class="numitem__t">Build</h3>
+            <p class="numitem__d">Prototype on VHA compute, tested against real operators before a company exists.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.12">
+          <div class="numitem__n">03</div>
+          <div>
+            <h3 class="numitem__t">Incorporate</h3>
+            <p class="numitem__d">Founding team, entity, cap table and jurisdiction &mdash; structured for the markets the company will sell into.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.18">
+          <div class="numitem__n">04</div>
+          <div>
+            <h3 class="numitem__t">Scale</h3>
+            <p class="numitem__d">First customers through the APAC Sandbox, then into the accelerator cohort and the raise.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -1120,8 +920,7 @@ def page_apply():
 
 def build_sitemap(pages):
     prio = {"index.html": ("weekly", "1.0"), "apply.html": ("monthly", "0.9"),
-            "accelerator.html": ("monthly", "0.9"), "venture-studio.html": ("monthly", "0.8"),
-            "portfolio.html": ("monthly", "0.8"), "community.html": ("monthly", "0.8"),
+            "accelerator.html": ("monthly", "0.9"), "community.html": ("monthly", "0.8"),
             "about.html": ("monthly", "0.7")}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', '']
@@ -1136,8 +935,8 @@ def build_sitemap(pages):
 
 
 if __name__ == "__main__":
-    built = [page_home(), page_accelerator(), page_studio(), page_portfolio(),
-             page_community(), page_about(), page_apply()]
+    built = [page_home(), page_accelerator(), page_community(),
+             page_about(), page_apply()]
     for name, size in built:
         print(f"  {name:22} {size:>7,} bytes")
     build_sitemap([n for n, _ in built])

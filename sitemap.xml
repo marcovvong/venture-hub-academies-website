@@ -14,18 +14,6 @@
   </url>
 
   <url>
-    <loc>https://academy.venturehub.tech/venture-studio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://academy.venturehub.tech/portfolio.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://academy.venturehub.tech/community.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
