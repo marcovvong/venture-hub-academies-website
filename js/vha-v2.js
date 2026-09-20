@@ -1,4 +1,4 @@
-/* Homepage controller — Design System v2.0 "Venture Energy". English only. */
+/* Homepage controller — Design System v2.0 "Venture Energy". */
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -106,11 +106,32 @@
   }
 
   /* ===== APAC network — electric blue on warm white (§16) ===== */
+
+  /* Map labels are painted into the canvas, so no data-i18n binding can reach
+     them. Read them off the markets list beside the map, which is translated
+     like any other markup - one source for the six names instead of two. */
+  var FALLBACK_LABELS = {
+    hk: "Hong Kong", tw: "Taiwan", sg: "Singapore",
+    jp: "Japan", th: "Thailand", kh: "Cambodia"
+  };
+
+  function mapLabels() {
+    var labels = {}, items = document.querySelectorAll(".markets li");
+    items.forEach(function (li) {
+      var code = li.querySelector("b"), name = li.querySelector("span[data-i18n]");
+      if (code && name) labels[code.textContent.trim().toLowerCase()] = name.textContent.trim();
+    });
+    for (var k in FALLBACK_LABELS) {
+      if (!labels[k]) labels[k] = FALLBACK_LABELS[k];
+    }
+    return labels;
+  }
+
   function initMap() {
     var canvas = document.querySelector("[data-apac-map]");
     if (!canvas || !window.VhaNetwork) return;
     VhaNetwork.init(canvas, {
-      labels: { hk: "Hong Kong", tw: "Taiwan", sg: "Singapore", jp: "Japan", th: "Thailand", kh: "Cambodia" },
+      labels: mapLabels(),
       showLabels: true,
       colors: {
         accent: "128,68,253",   /* --purple #8044FD */
@@ -119,7 +140,10 @@
         label:  "#101014",      /* --ink */
         node:   "#8044FD"
       },
-      unavailableText: "Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia."
+      /* Read off the canvas rather than hard-coded here, so the string can
+         carry a data-i18n-attr binding and translate with the rest of the page. */
+      unavailableText: (canvas.getAttribute("data-map-unavailable") ||
+        "Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia.")
     });
   }
 
@@ -140,6 +164,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initNav(); initMarquee(); initFooter(); initReveal(); initCounters(); initMap();
+    initNav(); initMarquee(); initFooter(); initReveal(); initCounters();
+    /* i18n resolves asynchronously; painting before it lands would bake the
+       English labels into the canvas. */
+    var ready = window.VhaI18nReady || Promise.resolve();
+    ready.then(initMap, initMap);
   });
 })();

@@ -4,141 +4,141 @@
       <!-- Success state -->
       <div class="success" data-apply-success hidden>
         <div class="success__mark" aria-hidden="true">&check;</div>
-        <h2 class="d-m">Received.</h2>
-        <p>A partner will read your application this cycle. You&rsquo;ll hear back within 14 days, either way.</p>
-        <p><a class="tlink" href="community.html">Meanwhile, join the community &mdash; every cohort started there <i aria-hidden="true">&rarr;</i></a></p>
+        <h2 class="d-m" data-i18n="apply.done.title">Received.</h2>
+        <p data-i18n="apply.done.body">A partner will read your application this cycle. You&rsquo;ll hear back within 14 days, either way.</p>
+        <p><a class="tlink" href="community.html" data-internal><span data-i18n="apply.done.link">Meanwhile, join the community &mdash; every cohort started there</span> <i aria-hidden="true">&rarr;</i></a></p>
       </div>
 
       <div class="form-wrap" data-form-wrap>
         <aside class="form-aside">
-          <p class="eyebrow">Before you start</p>
+          <p class="eyebrow" data-i18n="apply.aside.eyebrow">Before you start</p>
           <div class="note">
-            <h3>Note</h3>
-            <p class="muted">Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.</p>
+            <h3 data-i18n="apply.aside.noteH">Note</h3>
+            <p class="muted" data-i18n="apply.aside.noteP">Plain answers beat polished ones. Numbers where you have them, links where you can. A deck is optional.</p>
           </div>
           <div class="page-hero__meta meta" style="margin-top:32px">
-            <span>ROLLING BASIS</span>
-            <span>RESPONSE WITHIN 14 DAYS</span>
+            <span data-i18n="apply.aside.meta.0">ROLLING BASIS</span>
+            <span data-i18n="apply.aside.meta.1">RESPONSE WITHIN 14 DAYS</span>
           </div>
         </aside>
 
         <div>
-          <div class="form-error" data-form-error role="alert">
+          <div class="form-error" data-form-error role="alert" data-i18n-html="apply.form.error">
             Something went wrong sending your application. Please try again, or email
             <a href="mailto:info@venturehub.tech">info@venturehub.tech</a>.
           </div>
 
           <form id="apply-form" action="https://formspree.io/f/maqrelbb" method="POST" enctype="multipart/form-data" novalidate>
             <div class="gotcha" aria-hidden="true">
-              <label for="f-gotcha">Leave this field empty</label>
+              <label for="f-gotcha" data-i18n="apply.form.gotcha">Leave this field empty</label>
               <input type="text" id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
 
             <div class="field-row">
               <div class="field">
-                <label for="f-co">Company name <span class="req" aria-hidden="true">*</span></label>
+                <label for="f-co"><span data-i18n="apply.form.co">Company name</span> <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" type="text" id="f-co" name="Company name" required>
               </div>
               <div class="field">
-                <label for="f-web">Website or product URL</label>
+                <label for="f-web"><span data-i18n="apply.form.web">Website or product URL</span></label>
                 <input class="input" type="text" id="f-web" name="Website or product URL" placeholder="https://">
               </div>
             </div>
 
             <div class="field-row">
               <div class="field">
-                <label for="f-founder">Founder name(s) &amp; role(s) <span class="req" aria-hidden="true">*</span></label>
+                <label for="f-founder"><span data-i18n="apply.form.founder">Founder name(s) &amp; role(s)</span> <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" type="text" id="f-founder" name="Founder name(s) and role(s)" required>
               </div>
               <div class="field">
-                <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <label for="f-email"><span data-i18n="apply.form.email">Email</span> <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" type="email" id="f-email" name="Email" required>
               </div>
             </div>
 
             <div class="field">
-              <label for="f-hq">HQ or operating market <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-hq"><span data-i18n="apply.form.hq">HQ or operating market</span> <span class="req" aria-hidden="true">*</span></label>
               <select class="select" id="f-hq" name="HQ or operating market" required>
-                <option value="">Select&hellip;</option>
-                <option>Hong Kong</option>
-                <option>Taiwan</option>
-                <option>Singapore</option>
-                <option>Japan</option>
-                <option>Thailand</option>
-                <option>Cambodia</option>
-                <option>Elsewhere in APAC</option>
-                <option>Outside APAC</option>
+                <option value="" data-i18n="chrome.selectPlaceholder">Select&hellip;</option>
+                <option value="Hong Kong" data-i18n="markets.hk">Hong Kong</option>
+                <option value="Taiwan" data-i18n="markets.tw">Taiwan</option>
+                <option value="Singapore" data-i18n="markets.sg">Singapore</option>
+                <option value="Japan" data-i18n="markets.jp">Japan</option>
+                <option value="Thailand" data-i18n="markets.th">Thailand</option>
+                <option value="Cambodia" data-i18n="markets.kh">Cambodia</option>
+                <option value="Elsewhere in APAC" data-i18n="apply.form.hqElsewhere">Elsewhere in APAC</option>
+                <option value="Outside APAC" data-i18n="apply.form.hqOutside">Outside APAC</option>
               </select>
             </div>
 
             <div class="field">
-              <span class="field__label" id="lbl-stage">Company stage <span class="req" aria-hidden="true">*</span></span>
+              <span class="field__label" id="lbl-stage"><span data-i18n="apply.form.stage">Company stage</span> <span class="req" aria-hidden="true">*</span></span>
               <div class="pills" data-pill-group="Company stage" role="group" aria-labelledby="lbl-stage">
-                <button type="button" class="pill" data-value="Revenue-generating">Revenue-generating</button>
-                <button type="button" class="pill" data-value="Launched, pre-revenue">Launched, pre-revenue</button>
-                <button type="button" class="pill" data-value="In development">In development</button>
+                <button type="button" class="pill" data-value="Revenue-generating" data-i18n="apply.form.stageRevenue">Revenue-generating</button>
+                <button type="button" class="pill" data-value="Launched, pre-revenue" data-i18n="apply.form.stageLaunched">Launched, pre-revenue</button>
+                <button type="button" class="pill" data-value="In development" data-i18n="apply.form.stageDev">In development</button>
               </div>
               <input type="hidden" name="Company stage" data-pill-input="Company stage" required>
             </div>
 
             <div class="field">
-              <label for="f-one">What does your company do, in one sentence? <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-one"><span data-i18n="apply.form.oneLine">What does your company do, in one sentence?</span> <span class="req" aria-hidden="true">*</span></label>
               <input class="input" type="text" id="f-one" name="What does your company do, in one sentence" required>
             </div>
 
             <div class="field">
-              <label for="f-tech">What proprietary technology or unique commercial advantage do you have? <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-tech"><span data-i18n="apply.form.tech">What proprietary technology or unique commercial advantage do you have?</span> <span class="req" aria-hidden="true">*</span></label>
               <textarea class="textarea" id="f-tech" name="Proprietary technology or unique commercial advantage" rows="3" required></textarea>
             </div>
 
             <div class="field">
-              <label for="f-traction">What traction do you have today? <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-traction"><span data-i18n="apply.form.traction">What traction do you have today?</span> <span class="req" aria-hidden="true">*</span></label>
               <textarea class="textarea" id="f-traction" name="Traction today" rows="3" required></textarea>
-              <p class="field__help">Revenue, users, pilots, LOIs &mdash; numbers where you have them.</p>
+              <p class="field__help" data-i18n="apply.form.tractionHelp">Revenue, users, pilots, LOIs &mdash; numbers where you have them.</p>
             </div>
 
             <div class="field">
-              <label for="f-why">Why do you need capital, compute, or market access specifically in Asia/APAC right now? <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-why"><span data-i18n="apply.form.why">Why do you need capital, compute, or market access specifically in Asia/APAC right now?</span> <span class="req" aria-hidden="true">*</span></label>
               <textarea class="textarea" id="f-why" name="Why capital, compute, or market access in Asia/APAC now" rows="3" required></textarea>
             </div>
 
             <div class="field">
-              <span class="field__label" id="lbl-reloc">Are you open to relocating or spending time on-site during the program? <span class="req" aria-hidden="true">*</span></span>
+              <span class="field__label" id="lbl-reloc"><span data-i18n="apply.form.relocate">Are you open to relocating or spending time on-site during the program?</span> <span class="req" aria-hidden="true">*</span></span>
               <div class="pills" data-pill-group="Open to relocating" role="group" aria-labelledby="lbl-reloc">
-                <button type="button" class="pill" data-value="Yes">Yes</button>
-                <button type="button" class="pill" data-value="No">No</button>
-                <button type="button" class="pill" data-value="Possibly">Possibly</button>
+                <button type="button" class="pill" data-value="Yes" data-i18n="apply.form.relocYes">Yes</button>
+                <button type="button" class="pill" data-value="No" data-i18n="apply.form.relocNo">No</button>
+                <button type="button" class="pill" data-value="Possibly" data-i18n="apply.form.relocMaybe">Possibly</button>
               </div>
               <input type="hidden" name="Open to relocating" data-pill-input="Open to relocating" required>
             </div>
 
             <div class="field">
-              <label for="f-deck">Pitch deck or one-pager</label>
+              <label for="f-deck"><span data-i18n="apply.form.deck">Pitch deck or one-pager</span></label>
               <input class="file-input" type="file" id="f-deck" name="Pitch deck or one-pager" accept=".pdf">
-              <p class="field__help">Optional upload, PDF max 10MB</p>
+              <p class="field__help" data-i18n="apply.form.deckHelp">Optional upload, PDF max 10MB</p>
             </div>
 
             <div class="field">
-              <label for="f-hear">How did you hear about us?</label>
+              <label for="f-hear"><span data-i18n="apply.form.hear">How did you hear about us?</span></label>
               <select class="select" id="f-hear" name="How did you hear about us">
-                <option value="">Select&hellip;</option>
-                <option>Community</option>
-                <option>Referral</option>
-                <option>Event</option>
-                <option>Social</option>
-                <option>Other</option>
+                <option value="" data-i18n="chrome.selectPlaceholder">Select&hellip;</option>
+                <option value="Community" data-i18n="apply.form.hearCommunity">Community</option>
+                <option value="Referral" data-i18n="apply.form.hearReferral">Referral</option>
+                <option value="Event" data-i18n="apply.form.hearEvent">Event</option>
+                <option value="Social" data-i18n="apply.form.hearSocial">Social</option>
+                <option value="Other" data-i18n="apply.form.hearOther">Other</option>
               </select>
             </div>
 
             <div class="field">
-              <label for="f-anything">Anything else you&rsquo;d like us to know?</label>
+              <label for="f-anything"><span data-i18n="apply.form.anything">Anything else you&rsquo;d like us to know?</span></label>
               <textarea class="textarea" id="f-anything" name="Anything else" rows="3"></textarea>
             </div>
 
             <button type="submit" class="btn btn--sharp" id="apply-submit-btn">
-              Submit application <i aria-hidden="true">&rarr;</i>
+              <span data-i18n="apply.form.submit">Submit application</span> <i aria-hidden="true">&rarr;</i>
             </button>
-            <p class="field__help" style="margin-top:14px">Reviewed on a rolling basis &middot; Response within 14 days</p>
+            <p class="field__help" style="margin-top:14px" data-i18n="apply.form.submitHelp">Reviewed on a rolling basis &middot; Response within 14 days</p>
           </form>
         </div>
       </div>

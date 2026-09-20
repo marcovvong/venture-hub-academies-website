@@ -55,6 +55,7 @@
     canvas.style.display = "none";
     var el = document.createElement("div");
     el.setAttribute("data-map-fallback", "");
+    el.setAttribute("data-i18n", "chrome.mapUnavailable");
     el.className = "map-fallback";
     el.textContent = message;
     wrap.appendChild(el);

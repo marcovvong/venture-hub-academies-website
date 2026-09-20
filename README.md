@@ -13,10 +13,8 @@ No framework, no dependencies to install. The `.html` files at the root are the 
 |---|---|---|
 | Home | `index.html` | The narrative: proof, platform, program, APAC, ecosystem |
 | Accelerator | `accelerator.html` | The 6-month program, the two phases, compute, Demo Day |
-| Venture Studio | `venture-studio.html` | Companies co-built from thesis to launch |
-| Portfolio | `portfolio.html` | Companies, founder stories, what backing includes |
 | Community | `community.html` | The three tiers, activity, events |
-| About | `about.html` | Mission, who we back, criteria, backing |
+| About | `about.html` | Who we back, criteria, the two engines, the studio, backing |
 | Apply | `apply.html` | Process and the application form |
 
 ---
@@ -73,10 +71,15 @@ renames the column and splits the history**, so keep them as they are.
 
 ## Notes
 
-- **English only.** The site previously ran in six languages; `locales/*.json` still
-  holds those translations if it is ever reinstated.
-- **Awaiting content:** portfolio companies, the founder quote, and event dates are
-  marked "awaiting content" rather than invented. Search for `tag--pending`.
+- **Six languages**, selected with `?lang=sc|tc|jp|th|km` (no parameter means English).
+  `js/i18n.js` layers the chosen locale over English, so an untranslated key renders
+  in English rather than blank. `locales/en.json` is **generated** from the markup by
+  `build_site.py` - never edit it by hand; change the copy in the generator instead.
+  The other five are hand-maintained. English, Simplified and Traditional Chinese are
+  complete; Japanese, Thai and Khmer are partial - see `docs/translation-gaps.md`,
+  regenerated with `python3 tools/gap_list.py`.
+- **Awaiting content:** event dates are marked "awaiting content" rather than
+  invented. Search for `tag--pending`.
 - **Photography:** only four images exist, all from one event, so pages reuse them at
   different crops. More photography would let each page stand on its own.
 - `reference/` holds design-canvas exports, the brief and older prototypes. It is not

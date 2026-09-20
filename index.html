@@ -17,45 +17,59 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/vha-v2.css?v=9189abcd">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/vha-v2.css?v=c161ce0c">
 <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" defer></script>
 <script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="chrome.skipToContent">Skip to content</a>
 
 <div class="backdrop" data-backdrop></div>
-<aside class="drawer" data-drawer aria-label="Menu">
+<aside class="drawer" data-drawer aria-label="Menu" data-i18n-attr="aria-label:chrome.menuLabel">
   <div class="drawer__top">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" data-internal>
       <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
       <span>Venture Hub Academy</span>
     </a>
-    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu">&times;</button>
+    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu"
+            data-i18n-attr="aria-label:chrome.closeMenu">&times;</button>
   </div>
   <nav aria-label="Mobile">
-    <a class="dl" href="accelerator.html"><b>01</b>Accelerator</a>
-    <a class="dl" href="community.html"><b>02</b>Community</a>
-    <a class="dl" href="about.html"><b>03</b>About</a>
-    <a class="dl" href="apply.html"><b>04</b>Apply Now &rarr;</a>
+    <a class="dl" href="accelerator.html" data-internal><b>01</b><span data-i18n="nav.acc">Accelerator</span></a>
+    <a class="dl" href="community.html" data-internal><b>02</b><span data-i18n="nav.com">Community</span></a>
+    <a class="dl" href="about.html" data-internal><b>03</b><span data-i18n="nav.about">About</span></a>
+    <a class="dl" href="apply.html" data-internal><b>04</b><span data-i18n="nav.applyNow">Apply Now</span> &rarr;</a>
   </nav>
+  <div class="drawer__langs">
+    <div class="drawer__langs-label" data-i18n="chrome.languageLabel">Language</div>
+    <div class="drawer__lang-list" data-drawer-lang-list></div>
+  </div>
 </aside>
 
 <nav class="nav" aria-label="Primary">
   <div class="nav__in">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" data-internal>
       <img src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true" width="30" height="30">
       <span>Venture Hub Academy</span>
     </a>
     <div class="nav__links">
-      <a href="accelerator.html">Accelerator</a>
-      <a href="community.html">Community</a>
-      <a href="about.html">About</a>
+      <a href="accelerator.html" data-internal data-i18n="nav.acc">Accelerator</a>
+      <a href="community.html" data-internal data-i18n="nav.com">Community</a>
+      <a href="about.html" data-internal data-i18n="nav.about">About</a>
     </div>
     <div class="nav__right">
-      <a href="apply.html" class="btn btn--purple">Apply Now <i aria-hidden="true">&rarr;</i></a>
-      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false">
+      <div class="lang-switch" data-lang-switch data-open="false">
+        <button type="button" class="lang-switch__button" data-lang-trigger
+                aria-haspopup="listbox" aria-expanded="false" aria-label="Language"
+                data-i18n-attr="aria-label:chrome.languageLabel">
+          <span data-lang-label>EN</span><span class="lang-switch__caret" aria-hidden="true">&#9662;</span>
+        </button>
+        <div class="lang-switch__menu" data-lang-menu></div>
+      </div>
+      <a href="apply.html" class="btn btn--purple" data-internal><span data-i18n="nav.applyNow">Apply Now</span> <i aria-hidden="true">&rarr;</i></a>
+      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false"
+              data-i18n-attr="aria-label:chrome.menuLabel">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -67,25 +81,26 @@
     <div class="wrap">
       <div class="hero__grid">
         <div>
-          <p class="eyebrow">AI Venture Studio &middot; Accelerator &middot; APAC</p>
-          <h1 class="d-xl hero__title" data-reveal>Build the next generation of <em>AI companies</em>.</h1>
-          <p class="body-l hero__sub" data-reveal data-delay="0.08"><b>Capital. Operators. Infrastructure. APAC Markets.</b><br>Venture Hub Academy helps ambitious founders build, validate and scale AI-driven businesses across APAC.</p>
+          <p class="eyebrow" data-i18n="home.hero.eyebrow">AI Venture Studio &middot; Accelerator &middot; APAC</p>
+          <h1 class="d-xl hero__title" data-reveal data-i18n-html="home.hero.title">Build the next generation of <em>AI companies</em>.</h1>
+          <p class="body-l hero__sub" data-reveal data-delay="0.08" data-i18n-html="home.hero.lede"><b>Capital. Operators. Infrastructure. APAC Markets.</b><br>Venture Hub Academy helps ambitious founders build, validate and scale AI-driven businesses across APAC.</p>
           <div class="hero__cta" data-reveal data-delay="0.14">
-            <a href="apply.html" class="btn btn--sharp">Apply to VHA <i aria-hidden="true">&rarr;</i></a>
-            <a href="#ecosystem" class="btn btn--ghost">Explore the Ecosystem <i aria-hidden="true">&rarr;</i></a>
+            <a href="apply.html" class="btn btn--sharp" data-internal><span data-i18n="home.hero.cta1">Apply to VHA</span> <i aria-hidden="true">&rarr;</i></a>
+            <a href="#ecosystem" class="btn btn--ghost" data-internal><span data-i18n="home.hero.cta2">Explore the Ecosystem</span> <i aria-hidden="true">&rarr;</i></a>
           </div>
         </div>
         <div class="hero__media" data-reveal data-delay="0.2">
           <img src="assets/images/home-event-1920.jpg" srcset="assets/images/home-event-960.jpg 960w, assets/images/home-event-1920.jpg 1920w"
                sizes="(max-width: 980px) 100vw, 45vw" style="object-position:center 32%"
-               alt="Founders and investors at a Venture Hub Academy session in Hong Kong." width="1920" height="1280" fetchpriority="high">
+               alt="Founders and investors at a Venture Hub Academy session in Hong Kong." width="1920" height="1280" fetchpriority="high"
+               data-i18n-attr="alt:home.hero.alt">
           <div class="hero__coord meta">22.3193&deg; N / 114.1694&deg; E</div>
         </div>
       </div>
       <div class="hero__meta-row meta">
-        <span>APAC / HONG KONG / 2026</span>
-        <span>APPLICATIONS OPEN</span>
-        <span>HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH</span>
+        <span data-i18n="home.hero.meta.0">APAC / HONG KONG / 2026</span>
+        <span data-i18n="home.hero.meta.1">APPLICATIONS OPEN</span>
+        <span data-i18n="home.hero.meta.2">HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH</span>
       </div>
     </div>
   </header>
@@ -95,19 +110,19 @@
       <div class="proof">
         <div class="proof__item" data-reveal>
           <div class="proof__n"><small>US$</small><span data-count="150">150</span>K</div>
-          <div class="proof__l">Invested via SAFE</div>
+          <div class="proof__l" data-i18n="proof.safe">Invested via SAFE</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.06">
           <div class="proof__n"><span data-count="10">10</span></div>
-          <div class="proof__l">Companies per cohort</div>
+          <div class="proof__l" data-i18n="proof.companies">Companies per cohort</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.12">
           <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l">Months of execution</div>
+          <div class="proof__l" data-i18n="proof.months">Months of execution</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.18">
           <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l">APAC markets</div>
+          <div class="proof__l" data-i18n="proof.markets">APAC markets</div>
         </div>
       </div>
     </div>
@@ -116,12 +131,12 @@
   <div class="marquee" aria-hidden="true">
     <div class="marquee__t" data-marquee>
       <div class="marquee__g" data-marquee-group>
-        <span class="marquee__i">Hong Kong</span>
-        <span class="marquee__i">Taiwan</span>
-        <span class="marquee__i">Singapore</span>
-        <span class="marquee__i">Japan</span>
-        <span class="marquee__i">Thailand</span>
-        <span class="marquee__i">Cambodia</span>
+        <span class="marquee__i" data-i18n="markets.hk">Hong Kong</span>
+        <span class="marquee__i" data-i18n="markets.tw">Taiwan</span>
+        <span class="marquee__i" data-i18n="markets.sg">Singapore</span>
+        <span class="marquee__i" data-i18n="markets.jp">Japan</span>
+        <span class="marquee__i" data-i18n="markets.th">Thailand</span>
+        <span class="marquee__i" data-i18n="markets.kh">Cambodia</span>
       </div>
     </div>
   </div>
@@ -129,34 +144,34 @@
   <!-- What VHA does -->
   <section class="section mode-purple" id="platform">
     <div class="wrap">
-      <p class="eyebrow">What VHA does</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:24px">We don&rsquo;t just accelerate startups.<br>We help build them.</h2>
-      <p class="body-l muted" data-reveal style="max-width:60ch;margin-bottom:52px">VHA brings together the resources required to turn ambitious ideas into scalable businesses &mdash; from experienced operators and strategic capital to AI infrastructure and access to real markets across APAC.</p>
+      <p class="eyebrow" data-i18n="home.platform.eyebrow">What VHA does</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:24px" data-i18n-html="home.platform.title">We don&rsquo;t just accelerate startups.<br>We help build them.</h2>
+      <p class="body-l muted" data-reveal style="max-width:60ch;margin-bottom:52px" data-i18n="home.platform.lede">VHA brings together the resources required to turn ambitious ideas into scalable businesses &mdash; from experienced operators and strategic capital to AI infrastructure and access to real markets across APAC.</p>
 
       <div class="pillars">
         <article class="pillar" data-reveal>
           <div class="pillar__i">01</div>
-          <h3 class="pillar__name">Capital</h3>
-          <div class="pillar__v">US$150K</div>
-          <p class="pillar__d">Invested via SAFE, alongside access to investors and strategic partners.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.capital.name">Capital</h3>
+          <div class="pillar__v" data-i18n="home.pillars.capital.value">US$150K</div>
+          <p class="pillar__d" data-i18n="home.pillars.capital.desc">Invested via SAFE, alongside access to investors and strategic partners.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.06">
           <div class="pillar__i">02</div>
-          <h3 class="pillar__name">Operators</h3>
-          <div class="pillar__v">Hands-on</div>
-          <p class="pillar__d">Support from experienced founders, executives and industry leaders who have built in these markets.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.operators.name">Operators</h3>
+          <div class="pillar__v" data-i18n="home.pillars.operators.value">Hands-on</div>
+          <p class="pillar__d" data-i18n="home.pillars.operators.desc">Support from experienced founders, executives and industry leaders who have built in these markets.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.12">
           <div class="pillar__i">03</div>
-          <h3 class="pillar__name">Markets</h3>
-          <div class="pillar__v">6 APAC</div>
-          <p class="pillar__d">Access to customers, partners and market-validation opportunities across the region.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.markets.name">Markets</h3>
+          <div class="pillar__v" data-i18n="home.pillars.markets.value">6 APAC</div>
+          <p class="pillar__d" data-i18n="home.pillars.markets.desc">Access to customers, partners and market-validation opportunities across the region.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.18">
           <div class="pillar__i">04</div>
-          <h3 class="pillar__name">Infrastructure</h3>
-          <div class="pillar__v">HPC / GPU</div>
-          <p class="pillar__d">AI computing, technical resources and infrastructure supporting venture development.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.infra.name">Infrastructure</h3>
+          <div class="pillar__v" data-i18n="home.pillars.infra.value">HPC / GPU</div>
+          <p class="pillar__d" data-i18n="home.pillars.infra.desc">AI computing, technical resources and infrastructure supporting venture development.</p>
         </article>
       </div>
     </div>
@@ -165,30 +180,30 @@
   <!-- Build / Validate / Scale -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">The journey</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px">Build. Validate. Scale.</h2>
-      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px">From an early venture to a business that can move across markets.</p>
+      <p class="eyebrow" data-i18n="home.journey.eyebrow">The journey</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px" data-i18n-html="home.journey.title">Build. Validate. Scale.</h2>
+      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px" data-i18n="home.journey.lede">From an early venture to a business that can move across markets.</p>
       <div class="journey journey--three">
         <article class="stage" data-reveal>
           <div class="stage__n">01</div>
-          <h3 class="stage__t">Build</h3>
-          <p class="stage__d">Develop the product, business model and core team.</p>
-          <span class="tag">Product &middot; Team</span>
+          <h3 class="stage__t" data-i18n="home.journey.build.title">Build</h3>
+          <p class="stage__d" data-i18n="home.journey.build.desc">Develop the product, business model and core team.</p>
+          <span class="tag" data-i18n="home.journey.build.tag">Product &middot; Team</span>
         </article>
         <article class="stage" data-reveal data-delay="0.06">
           <div class="stage__n">02</div>
-          <h3 class="stage__t">Validate</h3>
-          <p class="stage__d">Test the venture with real customers, partners and markets through the APAC Sandbox.</p>
-          <span class="tag">APAC Sandbox</span>
+          <h3 class="stage__t" data-i18n="home.journey.validate.title">Validate</h3>
+          <p class="stage__d" data-i18n="home.journey.validate.desc">Test the venture with real customers, partners and markets through the APAC Sandbox.</p>
+          <span class="tag" data-i18n="home.journey.validate.tag">APAC Sandbox</span>
         </article>
         <article class="stage" data-reveal data-delay="0.12">
           <div class="stage__n">03</div>
-          <h3 class="stage__t">Scale</h3>
-          <p class="stage__d">Connect validated ventures with capital, strategic partners, infrastructure and broader markets.</p>
-          <span class="tag">Capital &middot; Partners</span>
+          <h3 class="stage__t" data-i18n="home.journey.scale.title">Scale</h3>
+          <p class="stage__d" data-i18n="home.journey.scale.desc">Connect validated ventures with capital, strategic partners, infrastructure and broader markets.</p>
+          <span class="tag" data-i18n="home.journey.scale.tag">Capital &middot; Partners</span>
         </article>
       </div>
-      <p style="margin-top:40px"><a class="tlink" href="accelerator.html">See the full programme <i aria-hidden="true">&rarr;</i></a></p>
+      <p style="margin-top:40px"><a class="tlink" href="accelerator.html" data-internal><span data-i18n="home.journey.link">See the full programme</span> <i aria-hidden="true">&rarr;</i></a></p>
     </div>
   </section>
 
@@ -197,34 +212,36 @@
     <div class="wrap">
       <div class="apac">
         <div>
-          <p class="eyebrow">APAC Sandbox</p>
+          <p class="eyebrow" data-i18n="home.sandbox.eyebrow">APAC Sandbox</p>
           <div class="apac__big" data-reveal aria-hidden="true">06</div>
-          <h2 class="d-m" data-reveal style="margin-top:12px">Build here.<br>Validate everywhere.</h2>
-          <p class="body-l muted" data-reveal style="margin-top:20px;max-width:46ch">The APAC Sandbox gives founders access to real-world market validation opportunities across a growing network of Asian markets &mdash; market access, validation opportunities and regional connections.</p>
+          <h2 class="d-m" data-reveal style="margin-top:12px" data-i18n-html="home.sandbox.title">Build here.<br>Validate everywhere.</h2>
+          <p class="body-l muted" data-reveal style="margin-top:20px;max-width:46ch" data-i18n="home.sandbox.lede">The APAC Sandbox gives founders access to real-world market validation opportunities across a growing network of Asian markets &mdash; market access, validation opportunities and regional connections.</p>
           <ul class="markets" data-reveal data-delay="0.1">
-            <li><b>HK</b>Hong Kong<span>22.32&deg; N</span></li>
-            <li><b>TW</b>Taiwan<span>23.70&deg; N</span></li>
-            <li><b>SG</b>Singapore<span>1.29&deg; N</span></li>
-            <li><b>JP</b>Japan<span>35.68&deg; N</span></li>
-            <li><b>TH</b>Thailand<span>13.75&deg; N</span></li>
-            <li><b>KH</b>Cambodia<span>11.55&deg; N</span></li>
+            <li><b>HK</b><span data-i18n="markets.hk">Hong Kong</span><span>22.32&deg; N</span></li>
+            <li><b>TW</b><span data-i18n="markets.tw">Taiwan</span><span>23.70&deg; N</span></li>
+            <li><b>SG</b><span data-i18n="markets.sg">Singapore</span><span>1.29&deg; N</span></li>
+            <li><b>JP</b><span data-i18n="markets.jp">Japan</span><span>35.68&deg; N</span></li>
+            <li><b>TH</b><span data-i18n="markets.th">Thailand</span><span>13.75&deg; N</span></li>
+            <li><b>KH</b><span data-i18n="markets.kh">Cambodia</span><span>11.55&deg; N</span></li>
           </ul>
         </div>
         <div class="map" data-reveal data-delay="0.12">
           <canvas data-apac-map role="img"
-                  aria-label="Network map of the Venture Hub Academy APAC Sandbox markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."></canvas>
+                  aria-label="Network map of the Venture Hub Academy APAC Sandbox markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."
+                  data-map-unavailable="Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia."
+                  data-i18n-attr="aria-label:home.sandbox.mapLabel;data-map-unavailable:chrome.mapUnavailable"></canvas>
         </div>
       </div>
       <div class="chain" data-reveal>
-        <span class="chain__step">MVP</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.0">MVP</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Pilot</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.1">Pilot</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Customer feedback</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.2">Customer feedback</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Market validation</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.3">Market validation</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step chain__step--end">Scale</span>
+        <span class="chain__step chain__step--end" data-i18n="home.sandbox.chain.4">Scale</span>
       </div>
     </div>
   </section>
@@ -232,28 +249,28 @@
   <!-- How VHA works -->
   <section class="section mode-purple">
     <div class="wrap">
-      <p class="eyebrow">How VHA works</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:52px">Match. Nurture. Connect.</h2>
+      <p class="eyebrow" data-i18n="home.how.eyebrow">How VHA works</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:52px" data-i18n-html="home.how.title">Match. Nurture. Connect.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Match</h3>
-            <p class="numitem__d">Connect founders with the right operators, mentors, partners, resources and opportunities.</p>
+            <h3 class="numitem__t" data-i18n="home.how.match.title">Match</h3>
+            <p class="numitem__d" data-i18n="home.how.match.desc">Connect founders with the right operators, mentors, partners, resources and opportunities.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Nurture</h3>
-            <p class="numitem__d">Support ventures through product development, market validation, business development and execution.</p>
+            <h3 class="numitem__t" data-i18n="home.how.nurture.title">Nurture</h3>
+            <p class="numitem__d" data-i18n="home.how.nurture.desc">Support ventures through product development, market validation, business development and execution.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Connect</h3>
-            <p class="numitem__d">Create connections to customers, strategic partners, investors and the wider APAC ecosystem.</p>
+            <h3 class="numitem__t" data-i18n="home.how.connect.title">Connect</h3>
+            <p class="numitem__d" data-i18n="home.how.connect.desc">Create connections to customers, strategic partners, investors and the wider APAC ecosystem.</p>
           </div>
         </article>
       </div>
@@ -265,19 +282,19 @@
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">Who we back</p>
-          <h2 class="d-m" data-reveal>Experienced operators,<br>not idea-stage<br>first-timers.</h2>
+          <p class="eyebrow" data-i18n="who.eyebrow">Who we back</p>
+          <h2 class="d-m" data-reveal data-i18n-html="who.title">Experienced operators,<br>not idea-stage<br>first-timers.</h2>
         </div>
         <div data-reveal data-delay="0.08">
-          <p class="body-l muted">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
+          <p class="body-l muted" data-i18n="who.body">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
           <div class="compare">
             <div class="compare__box">
-              <div class="compare__label">Not our fit</div>
-              <div class="compare__v">Idea-stage first-timers</div>
+              <div class="compare__label" data-i18n="who.notLabel">Not our fit</div>
+              <div class="compare__v" data-i18n="who.notValue">Idea-stage first-timers</div>
             </div>
             <div class="compare__box compare__box--yes">
-              <div class="compare__label">Our fit</div>
-              <div class="compare__v">Experienced operators</div>
+              <div class="compare__label" data-i18n="who.yesLabel">Our fit</div>
+              <div class="compare__v" data-i18n="who.yesValue">Experienced operators</div>
             </div>
           </div>
         </div>
@@ -288,26 +305,26 @@
   <!-- Ecosystem -->
   <section class="section mode-energy" id="ecosystem">
     <div class="wrap">
-      <p class="eyebrow">Ecosystem</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px">Built with the people moving Asia forward.</h2>
+      <p class="eyebrow" data-i18n="home.eco.eyebrow">Ecosystem</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px" data-i18n-html="home.eco.title">Built with the people moving Asia forward.</h2>
       <div class="tiers">
         <article class="tier" data-reveal>
           <div class="tier__n">01</div>
-          <h3 class="tier__t">Founders &amp; Operators</h3>
-          <p class="tier__d">People who have built and scaled companies in these markets.</p>
-          <div class="tier__foot muted">The network</div>
+          <h3 class="tier__t" data-i18n="home.eco.founders.title">Founders &amp; Operators</h3>
+          <p class="tier__d" data-i18n="home.eco.founders.desc">People who have built and scaled companies in these markets.</p>
+          <div class="tier__foot muted" data-i18n="home.eco.founders.foot">The network</div>
         </article>
         <article class="tier" data-reveal data-delay="0.06">
           <div class="tier__n">02</div>
-          <h3 class="tier__t">Investors &amp; Corporates</h3>
-          <p class="tier__d">Investors, pilot partners and first customers across the region.</p>
-          <div class="tier__foot muted">The demand side</div>
+          <h3 class="tier__t" data-i18n="home.eco.investors.title">Investors &amp; Corporates</h3>
+          <p class="tier__d" data-i18n="home.eco.investors.desc">Investors, pilot partners and first customers across the region.</p>
+          <div class="tier__foot muted" data-i18n="home.eco.investors.foot">The demand side</div>
         </article>
         <article class="tier tier--core" data-reveal data-delay="0.12">
           <div class="tier__n">03</div>
-          <h3 class="tier__t">Researchers</h3>
-          <p class="tier__d">Academic partners including HKU, HKUST and CUHK.</p>
-          <div class="tier__foot">Institutional</div>
+          <h3 class="tier__t" data-i18n="home.eco.researchers.title">Researchers</h3>
+          <p class="tier__d" data-i18n="home.eco.researchers.desc">Academic partners including HKU, HKUST and CUHK.</p>
+          <div class="tier__foot" data-i18n="home.eco.researchers.foot">Institutional</div>
         </article>
       </div>
     </div>
@@ -315,10 +332,10 @@
 
   <section class="cta-field">
     <div class="wrap">
-      <h2 class="d-l" data-reveal>Ready to build<br>what's next?</h2>
+      <h2 class="d-l" data-reveal data-i18n-html="cta.title">Ready to build<br>what's next?</h2>
       <div class="row" data-reveal data-delay="0.08">
-        <a href="apply.html" class="btn btn--dark">Apply Now <i aria-hidden="true">&rarr;</i></a>
-        <a href="community.html" class="btn btn--ghost">Join the Community <i aria-hidden="true">&rarr;</i></a>
+        <a href="apply.html" class="btn btn--dark" data-internal><span data-i18n="nav.applyNow">Apply Now</span> <i aria-hidden="true">&rarr;</i></a>
+        <a href="community.html" class="btn btn--ghost" data-internal><span data-i18n="cta.join">Join the Community</span> <i aria-hidden="true">&rarr;</i></a>
       </div>
     </div>
   </section>
@@ -334,32 +351,33 @@
         </div>
         <p class="muted" style="font-size:15px">
           <a href="mailto:info@venturehub.tech">info@venturehub.tech</a><br>
-          Supported by First Financial Holding
+          <span data-i18n="footer.supported">Supported by First Financial Holding</span>
         </p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h4 data-i18n="footer.exploreH">Explore</h4>
         <ul>
-          <li><a href="accelerator.html">Accelerator</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="apply.html">Apply</a></li>
+          <li><a href="accelerator.html" data-internal data-i18n="nav.acc">Accelerator</a></li>
+          <li><a href="community.html" data-internal data-i18n="nav.com">Community</a></li>
+          <li><a href="about.html" data-internal data-i18n="nav.about">About</a></li>
+          <li><a href="apply.html" data-internal data-i18n="nav.apply">Apply</a></li>
         </ul>
       </div>
       <div>
-        <h4>Markets</h4>
+        <h4 data-i18n="footer.marketsH">Markets</h4>
         <ul>
-          <li>Hong Kong</li><li>Taiwan</li><li>Singapore</li>
-          <li>Japan</li><li>Thailand</li><li>Cambodia</li>
+          <li data-i18n="markets.hk">Hong Kong</li><li data-i18n="markets.tw">Taiwan</li><li data-i18n="markets.sg">Singapore</li>
+          <li data-i18n="markets.jp">Japan</li><li data-i18n="markets.th">Thailand</li><li data-i18n="markets.kh">Cambodia</li>
         </ul>
       </div>
       <div>
-        <h4>Stay connected</h4>
-        <p class="muted" style="font-size:15px">Join our newsletter for cohort news and events.</p>
+        <h4 data-i18n="footer.stayH">Stay connected</h4>
+        <p class="muted" style="font-size:15px" data-i18n="footer.stayP">Join our newsletter for cohort news and events.</p>
         <form class="news" data-newsletter>
-          <label class="vh" for="nl">Email address</label>
-          <input type="email" id="nl" name="email" placeholder="Type your email" required>
-          <button type="submit" aria-label="Subscribe">&rarr;</button>
+          <label class="vh" for="nl" data-i18n="footer.emailLabel">Email address</label>
+          <input type="email" id="nl" name="email" placeholder="Type your email" required
+                 data-i18n-attr="placeholder:footer.emailPh">
+          <button type="submit" aria-label="Subscribe" data-i18n-attr="aria-label:footer.subscribe">&rarr;</button>
         </form>
         <div class="social">
           <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -376,12 +394,14 @@
     </div>
     <div class="foot__b">
       <span data-year>&copy; 2026 Venture Hub Academy</span>
-      <div><a href="#">Terms</a><a href="#">Privacy</a></div>
+      <div><a href="#" data-i18n="footer.terms">Terms</a><a href="#" data-i18n="footer.privacy">Privacy</a></div>
     </div>
   </div>
 </footer>
 
-<script src="js/vha-network.js?v=f24ef2f6"></script>
-<script src="js/vha-v2.js?v=2786398c"></script>
+<script src="js/i18n.js?v=843e07a8"></script>
+<script src="js/vha-network.js?v=b6149139"></script>
+<script src="js/vha-v2.js?v=4a2cc23e"></script>
+<script>window.VhaI18nReady = VhaI18n.init('home').catch(function (e) { console.error(e); });</script>
 </body>
 </html>

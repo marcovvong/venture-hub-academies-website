@@ -12,16 +12,19 @@ generated pages: the next build overwrites them.
 
 Design System v2.0 "Venture Energy" — Black / White / Purple / Sharp Purple.
 """
-import hashlib, os, sys
+import hashlib, json, os, sys
+from html import unescape
+from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://academy.venturehub.tech/"
 
 # --- navigation: the single source of truth for site structure -------------
 NAV = [
-    ("Accelerator",    "accelerator.html"),
-    ("Community",      "community.html"),
-    ("About",          "about.html"),
+    ("Accelerator",    "accelerator.html", "nav.acc"),
+    ("Community",      "community.html",   "nav.com"),
+    ("About",          "about.html",       "nav.about"),
 ]
 
 # --- photography: only four images exist, so crops carry the variation -----
@@ -69,42 +72,53 @@ def head(title, desc, url, extra=""):
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{css}">
 {extra}</head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="chrome.skipToContent">Skip to content</a>
 """
 
 
 def chrome(current):
+    """Nav, mobile drawer and language switcher.
+
+    Internal links carry data-internal so i18n.js can re-append ?lang= to them:
+    without it, following any link silently drops the visitor back to English.
+    The switcher itself is built at runtime from i18n.js's LANGS list, so the
+    language list lives in one place rather than being duplicated per page."""
     drawer_links = "\n".join(
-        f'    <a class="dl" href="{href}"><b>{i:02d}</b>{label}</a>'
-        for i, (label, href) in enumerate(NAV, start=1))
+        f'    <a class="dl" href="{href}" data-internal><b>{i:02d}</b><span data-i18n="{key}">{label}</span></a>'
+        for i, (label, href, key) in enumerate(NAV, start=1))
     rows = []
-    for label, href in NAV:
+    for label, href, key in NAV:
         aria = ' aria-current="page"' if href == current else ""
-        rows.append('      <a href="%s"%s>%s</a>' % (href, aria, label))
+        rows.append('      <a href="%s"%s data-internal data-i18n="%s">%s</a>' % (href, aria, key, label))
     nav_links = "\n".join(rows)
     return f"""
 <div class="backdrop" data-backdrop></div>
-<aside class="drawer" data-drawer aria-label="Menu">
+<aside class="drawer" data-drawer aria-label="Menu" data-i18n-attr="aria-label:chrome.menuLabel">
   <div class="drawer__top">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" data-internal>
       <img src="assets/logo/vha-mark-white-256.png" alt="" aria-hidden="true" width="30" height="30">
       <span>Venture Hub Academy</span>
     </a>
-    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu">&times;</button>
+    <button type="button" class="drawer__x" data-close-menu aria-label="Close menu"
+            data-i18n-attr="aria-label:chrome.closeMenu">&times;</button>
   </div>
   <nav aria-label="Mobile">
 {drawer_links}
-    <a class="dl" href="apply.html"><b>{len(NAV)+1:02d}</b>Apply Now &rarr;</a>
+    <a class="dl" href="apply.html" data-internal><b>{len(NAV)+1:02d}</b><span data-i18n="nav.applyNow">Apply Now</span> &rarr;</a>
   </nav>
+  <div class="drawer__langs">
+    <div class="drawer__langs-label" data-i18n="chrome.languageLabel">Language</div>
+    <div class="drawer__lang-list" data-drawer-lang-list></div>
+  </div>
 </aside>
 
 <nav class="nav" aria-label="Primary">
   <div class="nav__in">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" data-internal>
       <img src="assets/logo/vha-mark-black-256.png" alt="" aria-hidden="true" width="30" height="30">
       <span>Venture Hub Academy</span>
     </a>
@@ -112,8 +126,17 @@ def chrome(current):
 {nav_links}
     </div>
     <div class="nav__right">
-      <a href="apply.html" class="btn btn--purple">Apply Now <i aria-hidden="true">&rarr;</i></a>
-      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false">
+      <div class="lang-switch" data-lang-switch data-open="false">
+        <button type="button" class="lang-switch__button" data-lang-trigger
+                aria-haspopup="listbox" aria-expanded="false" aria-label="Language"
+                data-i18n-attr="aria-label:chrome.languageLabel">
+          <span data-lang-label>EN</span><span class="lang-switch__caret" aria-hidden="true">&#9662;</span>
+        </button>
+        <div class="lang-switch__menu" data-lang-menu></div>
+      </div>
+      <a href="apply.html" class="btn btn--purple" data-internal><span data-i18n="nav.applyNow">Apply Now</span> <i aria-hidden="true">&rarr;</i></a>
+      <button type="button" class="burger" data-open-menu aria-label="Menu" aria-expanded="false"
+              data-i18n-attr="aria-label:chrome.menuLabel">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -124,26 +147,35 @@ def chrome(current):
 """
 
 
-def hero(eyebrow, title, lede, cta1, cta2, photo, alt, obj, meta):
+def hero(k, eyebrow, title, lede, cta1, cta2, photo, alt, obj, meta):
+    """The shared hero. `k` is the page's locale prefix, e.g. "home".
+
+    Headline and lede bind through data-i18n-html, not data-i18n: both carry
+    markup the design depends on - the <em> highlighter band and the <br>
+    breaks that set the line rhythm - and textContent would render those as
+    literal angle brackets. Translations must keep the same tags."""
     big, small, w, h, sw = PHOTO[photo]
-    second = (f'\n            <a href="{cta2[1]}" class="btn btn--ghost">{cta2[0]} '
+    second = (f'\n            <a href="{cta2[1]}" class="btn btn--ghost" data-internal>'
+              f'<span data-i18n="{k}.hero.cta2">{cta2[0]}</span> '
               f'<i aria-hidden="true">&rarr;</i></a>') if cta2 else ""
-    metas = "\n".join(f"        <span>{m}</span>" for m in meta)
+    metas = "\n".join(f'        <span data-i18n="{k}.hero.meta.{i}">{m}</span>'
+                      for i, m in enumerate(meta))
     return f"""  <header class="hero hero--inner mode-energy">
     <div class="wrap">
       <div class="hero__grid">
         <div>
-          <p class="eyebrow">{eyebrow}</p>
-          <h1 class="d-xl hero__title" data-reveal>{title}</h1>
-          <p class="body-l hero__sub" data-reveal data-delay="0.08">{lede}</p>
+          <p class="eyebrow" data-i18n="{k}.hero.eyebrow">{eyebrow}</p>
+          <h1 class="d-xl hero__title" data-reveal data-i18n-html="{k}.hero.title">{title}</h1>
+          <p class="body-l hero__sub" data-reveal data-delay="0.08" data-i18n-html="{k}.hero.lede">{lede}</p>
           <div class="hero__cta" data-reveal data-delay="0.14">
-            <a href="{cta1[1]}" class="btn btn--sharp">{cta1[0]} <i aria-hidden="true">&rarr;</i></a>{second}
+            <a href="{cta1[1]}" class="btn btn--sharp" data-internal><span data-i18n="{k}.hero.cta1">{cta1[0]}</span> <i aria-hidden="true">&rarr;</i></a>{second}
           </div>
         </div>
         <div class="hero__media" data-reveal data-delay="0.2">
           <img src="{big}" srcset="{small} {sw}w, {big} {w}w"
                sizes="(max-width: 980px) 100vw, 45vw" style="object-position:{obj}"
-               alt="{alt}" width="{w}" height="{h}" fetchpriority="high">
+               alt="{alt}" width="{w}" height="{h}" fetchpriority="high"
+               data-i18n-attr="alt:{k}.hero.alt">
           <div class="hero__coord meta">22.3193&deg; N / 114.1694&deg; E</div>
         </div>
       </div>
@@ -159,12 +191,12 @@ MARQUEE = """
   <div class="marquee" aria-hidden="true">
     <div class="marquee__t" data-marquee>
       <div class="marquee__g" data-marquee-group>
-        <span class="marquee__i">Hong Kong</span>
-        <span class="marquee__i">Taiwan</span>
-        <span class="marquee__i">Singapore</span>
-        <span class="marquee__i">Japan</span>
-        <span class="marquee__i">Thailand</span>
-        <span class="marquee__i">Cambodia</span>
+        <span class="marquee__i" data-i18n="markets.hk">Hong Kong</span>
+        <span class="marquee__i" data-i18n="markets.tw">Taiwan</span>
+        <span class="marquee__i" data-i18n="markets.sg">Singapore</span>
+        <span class="marquee__i" data-i18n="markets.jp">Japan</span>
+        <span class="marquee__i" data-i18n="markets.th">Thailand</span>
+        <span class="marquee__i" data-i18n="markets.kh">Cambodia</span>
       </div>
     </div>
   </div>
@@ -176,19 +208,19 @@ PROOF = """
       <div class="proof">
         <div class="proof__item" data-reveal>
           <div class="proof__n"><small>US$</small><span data-count="150">150</span>K</div>
-          <div class="proof__l">Invested via SAFE</div>
+          <div class="proof__l" data-i18n="proof.safe">Invested via SAFE</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.06">
           <div class="proof__n"><span data-count="10">10</span></div>
-          <div class="proof__l">Companies per cohort</div>
+          <div class="proof__l" data-i18n="proof.companies">Companies per cohort</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.12">
           <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l">Months of execution</div>
+          <div class="proof__l" data-i18n="proof.months">Months of execution</div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.18">
           <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l">APAC markets</div>
+          <div class="proof__l" data-i18n="proof.markets">APAC markets</div>
         </div>
       </div>
     </div>
@@ -200,21 +232,23 @@ APAC = """
     <div class="wrap">
       <div class="apac">
         <div>
-          <p class="eyebrow">APAC network</p>
+          <p class="eyebrow" data-i18n="apac.eyebrow">APAC network</p>
           <div class="apac__big" data-reveal aria-hidden="true">06</div>
-          <h2 class="d-m" data-reveal style="margin-top:12px">One program.<br>Six markets.</h2>
+          <h2 class="d-m" data-reveal style="margin-top:12px" data-i18n-html="apac.title">One program.<br>Six markets.</h2>
           <ul class="markets" data-reveal data-delay="0.1">
-            <li><b>HK</b>Hong Kong<span>22.32&deg; N</span></li>
-            <li><b>TW</b>Taiwan<span>23.70&deg; N</span></li>
-            <li><b>SG</b>Singapore<span>1.29&deg; N</span></li>
-            <li><b>JP</b>Japan<span>35.68&deg; N</span></li>
-            <li><b>TH</b>Thailand<span>13.75&deg; N</span></li>
-            <li><b>KH</b>Cambodia<span>11.55&deg; N</span></li>
+            <li><b>HK</b><span data-i18n="markets.hk">Hong Kong</span><span>22.32&deg; N</span></li>
+            <li><b>TW</b><span data-i18n="markets.tw">Taiwan</span><span>23.70&deg; N</span></li>
+            <li><b>SG</b><span data-i18n="markets.sg">Singapore</span><span>1.29&deg; N</span></li>
+            <li><b>JP</b><span data-i18n="markets.jp">Japan</span><span>35.68&deg; N</span></li>
+            <li><b>TH</b><span data-i18n="markets.th">Thailand</span><span>13.75&deg; N</span></li>
+            <li><b>KH</b><span data-i18n="markets.kh">Cambodia</span><span>11.55&deg; N</span></li>
           </ul>
         </div>
         <div class="map" data-reveal data-delay="0.12">
           <canvas data-apac-map role="img"
-                  aria-label="Network map of Venture Hub Academy's six APAC markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."></canvas>
+                  aria-label="Network map of Venture Hub Academy's six APAC markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."
+                  data-map-unavailable="Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia."
+                  data-i18n-attr="aria-label:apac.mapLabel;data-map-unavailable:chrome.mapUnavailable"></canvas>
         </div>
       </div>
     </div>
@@ -222,14 +256,16 @@ APAC = """
 """
 
 
-def cta(title="Ready to build<br>what's next?"):
+def cta(title="Ready to build<br>what's next?", k="cta.title"):
+    """Closing CTA. `k` lets a page carry its own headline; the two buttons
+    are identical everywhere, so they share one pair of keys."""
     return f"""
   <section class="cta-field">
     <div class="wrap">
-      <h2 class="d-l" data-reveal>{title}</h2>
+      <h2 class="d-l" data-reveal data-i18n-html="{k}">{title}</h2>
       <div class="row" data-reveal data-delay="0.08">
-        <a href="apply.html" class="btn btn--dark">Apply Now <i aria-hidden="true">&rarr;</i></a>
-        <a href="community.html" class="btn btn--ghost">Join the Community <i aria-hidden="true">&rarr;</i></a>
+        <a href="apply.html" class="btn btn--dark" data-internal><span data-i18n="nav.applyNow">Apply Now</span> <i aria-hidden="true">&rarr;</i></a>
+        <a href="community.html" class="btn btn--ghost" data-internal><span data-i18n="cta.join">Join the Community</span> <i aria-hidden="true">&rarr;</i></a>
       </div>
     </div>
   </section>
@@ -237,9 +273,12 @@ def cta(title="Ready to build<br>what's next?"):
 
 
 def footer():
+    i18n = asset("js/i18n.js")
     net = asset("js/vha-network.js")
     main = asset("js/vha-v2.js")
-    explore = "\n".join(f'          <li><a href="{href}">{label}</a></li>' for label, href in NAV)
+    explore = "\n".join(
+        f'          <li><a href="{href}" data-internal data-i18n="{key}">{label}</a></li>'
+        for label, href, key in NAV)
     return f"""</main>
 
 <footer class="foot">
@@ -252,30 +291,31 @@ def footer():
         </div>
         <p class="muted" style="font-size:15px">
           <a href="mailto:info@venturehub.tech">info@venturehub.tech</a><br>
-          Supported by First Financial Holding
+          <span data-i18n="footer.supported">Supported by First Financial Holding</span>
         </p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h4 data-i18n="footer.exploreH">Explore</h4>
         <ul>
 {explore}
-          <li><a href="apply.html">Apply</a></li>
+          <li><a href="apply.html" data-internal data-i18n="nav.apply">Apply</a></li>
         </ul>
       </div>
       <div>
-        <h4>Markets</h4>
+        <h4 data-i18n="footer.marketsH">Markets</h4>
         <ul>
-          <li>Hong Kong</li><li>Taiwan</li><li>Singapore</li>
-          <li>Japan</li><li>Thailand</li><li>Cambodia</li>
+          <li data-i18n="markets.hk">Hong Kong</li><li data-i18n="markets.tw">Taiwan</li><li data-i18n="markets.sg">Singapore</li>
+          <li data-i18n="markets.jp">Japan</li><li data-i18n="markets.th">Thailand</li><li data-i18n="markets.kh">Cambodia</li>
         </ul>
       </div>
       <div>
-        <h4>Stay connected</h4>
-        <p class="muted" style="font-size:15px">Join our newsletter for cohort news and events.</p>
+        <h4 data-i18n="footer.stayH">Stay connected</h4>
+        <p class="muted" style="font-size:15px" data-i18n="footer.stayP">Join our newsletter for cohort news and events.</p>
         <form class="news" data-newsletter>
-          <label class="vh" for="nl">Email address</label>
-          <input type="email" id="nl" name="email" placeholder="Type your email" required>
-          <button type="submit" aria-label="Subscribe">&rarr;</button>
+          <label class="vh" for="nl" data-i18n="footer.emailLabel">Email address</label>
+          <input type="email" id="nl" name="email" placeholder="Type your email" required
+                 data-i18n-attr="placeholder:footer.emailPh">
+          <button type="submit" aria-label="Subscribe" data-i18n-attr="aria-label:footer.subscribe">&rarr;</button>
         </form>
         <div class="social">
           <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -292,11 +332,12 @@ def footer():
     </div>
     <div class="foot__b">
       <span data-year>&copy; 2026 Venture Hub Academy</span>
-      <div><a href="#">Terms</a><a href="#">Privacy</a></div>
+      <div><a href="#" data-i18n="footer.terms">Terms</a><a href="#" data-i18n="footer.privacy">Privacy</a></div>
     </div>
   </div>
 </footer>
 
+<script src="{i18n}"></script>
 <script src="{net}"></script>
 <script src="{main}"></script>
 """
@@ -310,12 +351,21 @@ MAP_LIBS = """<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity=
 """
 
 
-def write(filename, title, desc, body, current, extra_head="", extra_js=""):
+def write(filename, title, desc, body, current, seo_key, extra_head="", extra_js=""):
     if "data-apac-map" in body:
         extra_head = MAP_LIBS + extra_head
     url = "" if filename == "index.html" else filename   # canonical is the bare root
+    # The generated markup is English; i18n.js swaps it in place on load when
+    # ?lang= names another language, and rewrites internal links to carry it.
+    # i18n.js assigns these with document.title = ... and setAttribute, neither
+    # of which decodes entities: "&mdash;" would reach the tab as six literal
+    # characters. The markup keeps its entities; the locale gets plain text.
+    SEO[seo_key] = {"title": unescape(title), "description": unescape(desc)}
+    # Held on window so the map can wait for it before painting its labels.
+    init = ('<script>window.VhaI18nReady = VhaI18n.init(%r)'
+            '.catch(function (e) { console.error(e); });</script>\n' % seo_key)
     html = (head(title, desc, url, extra_head) + chrome(current) + body
-            + footer() + extra_js + "</body>\n</html>\n")
+            + footer() + extra_js + init + "</body>\n</html>\n")
     with open(os.path.join(ROOT, filename), "w") as f:
         f.write(html)
     return filename, len(html)
@@ -327,6 +377,7 @@ def write(filename, title, desc, body, current, extra_head="", extra_js=""):
 
 def page_home():
     body = hero(
+        "home",
         "AI Venture Studio &middot; Accelerator &middot; APAC",
         "Build the next generation of <em>AI companies</em>.",
         "<b>Capital. Operators. Infrastructure. APAC Markets.</b><br>Venture Hub Academy helps ambitious founders build, validate and scale AI-driven businesses across APAC.",
@@ -338,34 +389,34 @@ def page_home():
   <!-- What VHA does -->
   <section class="section mode-purple" id="platform">
     <div class="wrap">
-      <p class="eyebrow">What VHA does</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:24px">We don&rsquo;t just accelerate startups.<br>We help build them.</h2>
-      <p class="body-l muted" data-reveal style="max-width:60ch;margin-bottom:52px">VHA brings together the resources required to turn ambitious ideas into scalable businesses &mdash; from experienced operators and strategic capital to AI infrastructure and access to real markets across APAC.</p>
+      <p class="eyebrow" data-i18n="home.platform.eyebrow">What VHA does</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:24px" data-i18n-html="home.platform.title">We don&rsquo;t just accelerate startups.<br>We help build them.</h2>
+      <p class="body-l muted" data-reveal style="max-width:60ch;margin-bottom:52px" data-i18n="home.platform.lede">VHA brings together the resources required to turn ambitious ideas into scalable businesses &mdash; from experienced operators and strategic capital to AI infrastructure and access to real markets across APAC.</p>
 
       <div class="pillars">
         <article class="pillar" data-reveal>
           <div class="pillar__i">01</div>
-          <h3 class="pillar__name">Capital</h3>
-          <div class="pillar__v">US$150K</div>
-          <p class="pillar__d">Invested via SAFE, alongside access to investors and strategic partners.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.capital.name">Capital</h3>
+          <div class="pillar__v" data-i18n="home.pillars.capital.value">US$150K</div>
+          <p class="pillar__d" data-i18n="home.pillars.capital.desc">Invested via SAFE, alongside access to investors and strategic partners.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.06">
           <div class="pillar__i">02</div>
-          <h3 class="pillar__name">Operators</h3>
-          <div class="pillar__v">Hands-on</div>
-          <p class="pillar__d">Support from experienced founders, executives and industry leaders who have built in these markets.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.operators.name">Operators</h3>
+          <div class="pillar__v" data-i18n="home.pillars.operators.value">Hands-on</div>
+          <p class="pillar__d" data-i18n="home.pillars.operators.desc">Support from experienced founders, executives and industry leaders who have built in these markets.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.12">
           <div class="pillar__i">03</div>
-          <h3 class="pillar__name">Markets</h3>
-          <div class="pillar__v">6 APAC</div>
-          <p class="pillar__d">Access to customers, partners and market-validation opportunities across the region.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.markets.name">Markets</h3>
+          <div class="pillar__v" data-i18n="home.pillars.markets.value">6 APAC</div>
+          <p class="pillar__d" data-i18n="home.pillars.markets.desc">Access to customers, partners and market-validation opportunities across the region.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.18">
           <div class="pillar__i">04</div>
-          <h3 class="pillar__name">Infrastructure</h3>
-          <div class="pillar__v">HPC / GPU</div>
-          <p class="pillar__d">AI computing, technical resources and infrastructure supporting venture development.</p>
+          <h3 class="pillar__name" data-i18n="home.pillars.infra.name">Infrastructure</h3>
+          <div class="pillar__v" data-i18n="home.pillars.infra.value">HPC / GPU</div>
+          <p class="pillar__d" data-i18n="home.pillars.infra.desc">AI computing, technical resources and infrastructure supporting venture development.</p>
         </article>
       </div>
     </div>
@@ -374,30 +425,30 @@ def page_home():
   <!-- Build / Validate / Scale -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">The journey</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px">Build. Validate. Scale.</h2>
-      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px">From an early venture to a business that can move across markets.</p>
+      <p class="eyebrow" data-i18n="home.journey.eyebrow">The journey</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px" data-i18n-html="home.journey.title">Build. Validate. Scale.</h2>
+      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px" data-i18n="home.journey.lede">From an early venture to a business that can move across markets.</p>
       <div class="journey journey--three">
         <article class="stage" data-reveal>
           <div class="stage__n">01</div>
-          <h3 class="stage__t">Build</h3>
-          <p class="stage__d">Develop the product, business model and core team.</p>
-          <span class="tag">Product &middot; Team</span>
+          <h3 class="stage__t" data-i18n="home.journey.build.title">Build</h3>
+          <p class="stage__d" data-i18n="home.journey.build.desc">Develop the product, business model and core team.</p>
+          <span class="tag" data-i18n="home.journey.build.tag">Product &middot; Team</span>
         </article>
         <article class="stage" data-reveal data-delay="0.06">
           <div class="stage__n">02</div>
-          <h3 class="stage__t">Validate</h3>
-          <p class="stage__d">Test the venture with real customers, partners and markets through the APAC Sandbox.</p>
-          <span class="tag">APAC Sandbox</span>
+          <h3 class="stage__t" data-i18n="home.journey.validate.title">Validate</h3>
+          <p class="stage__d" data-i18n="home.journey.validate.desc">Test the venture with real customers, partners and markets through the APAC Sandbox.</p>
+          <span class="tag" data-i18n="home.journey.validate.tag">APAC Sandbox</span>
         </article>
         <article class="stage" data-reveal data-delay="0.12">
           <div class="stage__n">03</div>
-          <h3 class="stage__t">Scale</h3>
-          <p class="stage__d">Connect validated ventures with capital, strategic partners, infrastructure and broader markets.</p>
-          <span class="tag">Capital &middot; Partners</span>
+          <h3 class="stage__t" data-i18n="home.journey.scale.title">Scale</h3>
+          <p class="stage__d" data-i18n="home.journey.scale.desc">Connect validated ventures with capital, strategic partners, infrastructure and broader markets.</p>
+          <span class="tag" data-i18n="home.journey.scale.tag">Capital &middot; Partners</span>
         </article>
       </div>
-      <p style="margin-top:40px"><a class="tlink" href="accelerator.html">See the full programme <i aria-hidden="true">&rarr;</i></a></p>
+      <p style="margin-top:40px"><a class="tlink" href="accelerator.html" data-internal><span data-i18n="home.journey.link">See the full programme</span> <i aria-hidden="true">&rarr;</i></a></p>
     </div>
   </section>
 
@@ -406,34 +457,36 @@ def page_home():
     <div class="wrap">
       <div class="apac">
         <div>
-          <p class="eyebrow">APAC Sandbox</p>
+          <p class="eyebrow" data-i18n="home.sandbox.eyebrow">APAC Sandbox</p>
           <div class="apac__big" data-reveal aria-hidden="true">06</div>
-          <h2 class="d-m" data-reveal style="margin-top:12px">Build here.<br>Validate everywhere.</h2>
-          <p class="body-l muted" data-reveal style="margin-top:20px;max-width:46ch">The APAC Sandbox gives founders access to real-world market validation opportunities across a growing network of Asian markets &mdash; market access, validation opportunities and regional connections.</p>
+          <h2 class="d-m" data-reveal style="margin-top:12px" data-i18n-html="home.sandbox.title">Build here.<br>Validate everywhere.</h2>
+          <p class="body-l muted" data-reveal style="margin-top:20px;max-width:46ch" data-i18n="home.sandbox.lede">The APAC Sandbox gives founders access to real-world market validation opportunities across a growing network of Asian markets &mdash; market access, validation opportunities and regional connections.</p>
           <ul class="markets" data-reveal data-delay="0.1">
-            <li><b>HK</b>Hong Kong<span>22.32&deg; N</span></li>
-            <li><b>TW</b>Taiwan<span>23.70&deg; N</span></li>
-            <li><b>SG</b>Singapore<span>1.29&deg; N</span></li>
-            <li><b>JP</b>Japan<span>35.68&deg; N</span></li>
-            <li><b>TH</b>Thailand<span>13.75&deg; N</span></li>
-            <li><b>KH</b>Cambodia<span>11.55&deg; N</span></li>
+            <li><b>HK</b><span data-i18n="markets.hk">Hong Kong</span><span>22.32&deg; N</span></li>
+            <li><b>TW</b><span data-i18n="markets.tw">Taiwan</span><span>23.70&deg; N</span></li>
+            <li><b>SG</b><span data-i18n="markets.sg">Singapore</span><span>1.29&deg; N</span></li>
+            <li><b>JP</b><span data-i18n="markets.jp">Japan</span><span>35.68&deg; N</span></li>
+            <li><b>TH</b><span data-i18n="markets.th">Thailand</span><span>13.75&deg; N</span></li>
+            <li><b>KH</b><span data-i18n="markets.kh">Cambodia</span><span>11.55&deg; N</span></li>
           </ul>
         </div>
         <div class="map" data-reveal data-delay="0.12">
           <canvas data-apac-map role="img"
-                  aria-label="Network map of the Venture Hub Academy APAC Sandbox markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."></canvas>
+                  aria-label="Network map of the Venture Hub Academy APAC Sandbox markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."
+                  data-map-unavailable="Interactive map unavailable. Markets: Hong Kong, Taiwan, Singapore, Japan, Thailand, Cambodia."
+                  data-i18n-attr="aria-label:home.sandbox.mapLabel;data-map-unavailable:chrome.mapUnavailable"></canvas>
         </div>
       </div>
       <div class="chain" data-reveal>
-        <span class="chain__step">MVP</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.0">MVP</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Pilot</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.1">Pilot</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Customer feedback</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.2">Customer feedback</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step">Market validation</span>
+        <span class="chain__step" data-i18n="home.sandbox.chain.3">Market validation</span>
         <span class="chain__arrow" aria-hidden="true">&rarr;</span>
-        <span class="chain__step chain__step--end">Scale</span>
+        <span class="chain__step chain__step--end" data-i18n="home.sandbox.chain.4">Scale</span>
       </div>
     </div>
   </section>
@@ -441,28 +494,28 @@ def page_home():
   <!-- How VHA works -->
   <section class="section mode-purple">
     <div class="wrap">
-      <p class="eyebrow">How VHA works</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:52px">Match. Nurture. Connect.</h2>
+      <p class="eyebrow" data-i18n="home.how.eyebrow">How VHA works</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:52px" data-i18n-html="home.how.title">Match. Nurture. Connect.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Match</h3>
-            <p class="numitem__d">Connect founders with the right operators, mentors, partners, resources and opportunities.</p>
+            <h3 class="numitem__t" data-i18n="home.how.match.title">Match</h3>
+            <p class="numitem__d" data-i18n="home.how.match.desc">Connect founders with the right operators, mentors, partners, resources and opportunities.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Nurture</h3>
-            <p class="numitem__d">Support ventures through product development, market validation, business development and execution.</p>
+            <h3 class="numitem__t" data-i18n="home.how.nurture.title">Nurture</h3>
+            <p class="numitem__d" data-i18n="home.how.nurture.desc">Support ventures through product development, market validation, business development and execution.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Connect</h3>
-            <p class="numitem__d">Create connections to customers, strategic partners, investors and the wider APAC ecosystem.</p>
+            <h3 class="numitem__t" data-i18n="home.how.connect.title">Connect</h3>
+            <p class="numitem__d" data-i18n="home.how.connect.desc">Create connections to customers, strategic partners, investors and the wider APAC ecosystem.</p>
           </div>
         </article>
       </div>
@@ -474,19 +527,19 @@ def page_home():
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">Who we back</p>
-          <h2 class="d-m" data-reveal>Experienced operators,<br>not idea-stage<br>first-timers.</h2>
+          <p class="eyebrow" data-i18n="who.eyebrow">Who we back</p>
+          <h2 class="d-m" data-reveal data-i18n-html="who.title">Experienced operators,<br>not idea-stage<br>first-timers.</h2>
         </div>
         <div data-reveal data-delay="0.08">
-          <p class="body-l muted">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
+          <p class="body-l muted" data-i18n="who.body">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
           <div class="compare">
             <div class="compare__box">
-              <div class="compare__label">Not our fit</div>
-              <div class="compare__v">Idea-stage first-timers</div>
+              <div class="compare__label" data-i18n="who.notLabel">Not our fit</div>
+              <div class="compare__v" data-i18n="who.notValue">Idea-stage first-timers</div>
             </div>
             <div class="compare__box compare__box--yes">
-              <div class="compare__label">Our fit</div>
-              <div class="compare__v">Experienced operators</div>
+              <div class="compare__label" data-i18n="who.yesLabel">Our fit</div>
+              <div class="compare__v" data-i18n="who.yesValue">Experienced operators</div>
             </div>
           </div>
         </div>
@@ -497,26 +550,26 @@ def page_home():
   <!-- Ecosystem -->
   <section class="section mode-energy" id="ecosystem">
     <div class="wrap">
-      <p class="eyebrow">Ecosystem</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px">Built with the people moving Asia forward.</h2>
+      <p class="eyebrow" data-i18n="home.eco.eyebrow">Ecosystem</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px" data-i18n-html="home.eco.title">Built with the people moving Asia forward.</h2>
       <div class="tiers">
         <article class="tier" data-reveal>
           <div class="tier__n">01</div>
-          <h3 class="tier__t">Founders &amp; Operators</h3>
-          <p class="tier__d">People who have built and scaled companies in these markets.</p>
-          <div class="tier__foot muted">The network</div>
+          <h3 class="tier__t" data-i18n="home.eco.founders.title">Founders &amp; Operators</h3>
+          <p class="tier__d" data-i18n="home.eco.founders.desc">People who have built and scaled companies in these markets.</p>
+          <div class="tier__foot muted" data-i18n="home.eco.founders.foot">The network</div>
         </article>
         <article class="tier" data-reveal data-delay="0.06">
           <div class="tier__n">02</div>
-          <h3 class="tier__t">Investors &amp; Corporates</h3>
-          <p class="tier__d">Investors, pilot partners and first customers across the region.</p>
-          <div class="tier__foot muted">The demand side</div>
+          <h3 class="tier__t" data-i18n="home.eco.investors.title">Investors &amp; Corporates</h3>
+          <p class="tier__d" data-i18n="home.eco.investors.desc">Investors, pilot partners and first customers across the region.</p>
+          <div class="tier__foot muted" data-i18n="home.eco.investors.foot">The demand side</div>
         </article>
         <article class="tier tier--core" data-reveal data-delay="0.12">
           <div class="tier__n">03</div>
-          <h3 class="tier__t">Researchers</h3>
-          <p class="tier__d">Academic partners including HKU, HKUST and CUHK.</p>
-          <div class="tier__foot">Institutional</div>
+          <h3 class="tier__t" data-i18n="home.eco.researchers.title">Researchers</h3>
+          <p class="tier__d" data-i18n="home.eco.researchers.desc">Academic partners including HKU, HKUST and CUHK.</p>
+          <div class="tier__foot" data-i18n="home.eco.researchers.foot">Institutional</div>
         </article>
       </div>
     </div>
@@ -525,11 +578,12 @@ def page_home():
     return write("index.html",
                  "Venture Hub Academy &mdash; Build the next generation of AI companies",
                  "An AI venture-building ecosystem for ambitious founders across APAC. Capital, operators, infrastructure and market access to build, validate and scale.",
-                 body, "index.html")
+                 body, "index.html", "home")
 
 
 def page_accelerator():
     body = hero(
+        "acc",
         "Accelerator",
         "A 6-month program<br>for <em>execution</em>.",
         "Three months of structured execution, then three months proving it in live APAC markets. US$150K via SAFE, small cohorts, and the compute to build on.",
@@ -540,28 +594,28 @@ def page_accelerator():
   <!-- Overview -->
   <section class="section mode-energy">
     <div class="wrap">
-      <p class="eyebrow">Program overview</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">How the program is built.</h2>
+      <p class="eyebrow" data-i18n="acc.overview.eyebrow">Program overview</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px" data-i18n-html="acc.overview.title">How the program is built.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Six-month structure</h3>
-            <p class="numitem__d">3-month Structured Program followed by a 3-month APAC Sandbox.</p>
+            <h3 class="numitem__t" data-i18n="acc.overview.structure.title">Six-month structure</h3>
+            <p class="numitem__d" data-i18n="acc.overview.structure.desc">3-month Structured Program followed by a 3-month APAC Sandbox.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Small, focused cohorts</h3>
-            <p class="numitem__d">Up to 10 companies per cohort, so every team gets real operator time.</p>
+            <h3 class="numitem__t" data-i18n="acc.overview.cohorts.title">Small, focused cohorts</h3>
+            <p class="numitem__d" data-i18n="acc.overview.cohorts.desc">Up to 10 companies per cohort, so every team gets real operator time.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Capital and compute</h3>
-            <p class="numitem__d">US$150K via SAFE, plus GPU and compute resources from day one.</p>
+            <h3 class="numitem__t" data-i18n="acc.overview.capital.title">Capital and compute</h3>
+            <p class="numitem__d" data-i18n="acc.overview.capital.desc">US$150K via SAFE, plus GPU and compute resources from day one.</p>
           </div>
         </article>
       </div>
@@ -571,30 +625,30 @@ def page_accelerator():
   <!-- Phases -->
   <section class="section mode-purple" id="phases">
     <div class="wrap">
-      <p class="eyebrow">The two phases</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:44px">Build, then prove it.</h2>
+      <p class="eyebrow" data-i18n="acc.phases.eyebrow">The two phases</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:44px" data-i18n-html="acc.phases.title">Build, then prove it.</h2>
 
       <div class="phase" data-reveal>
         <div>
-          <span class="tag">Months 1&ndash;3</span>
-          <h3 class="phase__t">Structured Program</h3>
+          <span class="tag" data-i18n="acc.phases.p1.tag">Months 1&ndash;3</span>
+          <h3 class="phase__t" data-i18n="acc.phases.p1.title">Structured Program</h3>
         </div>
         <ul class="phase__list">
-          <li>1-on-1 mentoring by experienced founders and operators.</li>
-          <li>Corporate structuring support, research direction, and product strategy.</li>
-          <li>Startup execution and scaling guidance.</li>
+          <li data-i18n="acc.phases.p1.items.0">1-on-1 mentoring by experienced founders and operators.</li>
+          <li data-i18n="acc.phases.p1.items.1">Corporate structuring support, research direction, and product strategy.</li>
+          <li data-i18n="acc.phases.p1.items.2">Startup execution and scaling guidance.</li>
         </ul>
       </div>
 
       <div class="phase" data-reveal>
         <div>
-          <span class="tag">Months 4&ndash;6</span>
-          <h3 class="phase__t">APAC Sandbox</h3>
+          <span class="tag" data-i18n="acc.phases.p2.tag">Months 4&ndash;6</span>
+          <h3 class="phase__t" data-i18n="acc.phases.p2.title">APAC Sandbox</h3>
         </div>
         <ul class="phase__list">
-          <li>Live customer validation across 6 markets: HK, TW, SG, JP, TH, Cambodia.</li>
-          <li>Real revenue signals through live sales, partnerships, or LOIs.</li>
-          <li>Accelerated traction-building ahead of fundraising.</li>
+          <li data-i18n="acc.phases.p2.items.0">Live customer validation across 6 markets: HK, TW, SG, JP, TH, Cambodia.</li>
+          <li data-i18n="acc.phases.p2.items.1">Real revenue signals through live sales, partnerships, or LOIs.</li>
+          <li data-i18n="acc.phases.p2.items.2">Accelerated traction-building ahead of fundraising.</li>
         </ul>
       </div>
     </div>
@@ -605,11 +659,11 @@ def page_accelerator():
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">Compute</p>
-          <h2 class="d-m" data-reveal>HPC and GPU,<br>from day one.</h2>
+          <p class="eyebrow" data-i18n="acc.compute.eyebrow">Compute</p>
+          <h2 class="d-m" data-reveal data-i18n-html="acc.compute.title">HPC and GPU,<br>from day one.</h2>
         </div>
         <div data-reveal data-delay="0.08">
-          <p class="body-l muted">Access to high-performance clusters for model training, evaluation and deployment &mdash; so infrastructure is never the reason a cohort company slows down.</p>
+          <p class="body-l muted" data-i18n="acc.compute.body">Access to high-performance clusters for model training, evaluation and deployment &mdash; so infrastructure is never the reason a cohort company slows down.</p>
         </div>
       </div>
     </div>
@@ -620,11 +674,11 @@ def page_accelerator():
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow eyebrow--orange">Demo Day</p>
-          <h2 class="d-m" data-reveal>Present live metrics.<br>Raise on evidence.</h2>
+          <p class="eyebrow eyebrow--orange" data-i18n="acc.demo.eyebrow">Demo Day</p>
+          <h2 class="d-m" data-reveal data-i18n-html="acc.demo.title">Present live metrics.<br>Raise on evidence.</h2>
         </div>
         <div data-reveal data-delay="0.08">
-          <p class="body-l muted">Founders present live metrics to investors and community. Structured investor access and community-driven momentum.</p>
+          <p class="body-l muted" data-i18n="acc.demo.body">Founders present live metrics to investors and community. Structured investor access and community-driven momentum.</p>
         </div>
       </div>
     </div>
@@ -633,11 +687,12 @@ def page_accelerator():
     return write("accelerator.html",
                  "Accelerator &mdash; Venture Hub Academy",
                  "A 6-month program: 3-month Structured Program plus 3-month APAC Sandbox. US$150K via SAFE, small cohorts, GPU and compute resources.",
-                 body, "accelerator.html")
+                 body, "accelerator.html", "acc")
 
 
 def page_community():
     body = hero(
+        "com",
         "Community",
         "From open forum<br>to <em>core cohort</em>.",
         "Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made.",
@@ -648,27 +703,27 @@ def page_community():
   <!-- Tiers -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">How the community works</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px">Three ways in.</h2>
-      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px">The community narrows as commitment deepens &mdash; from an open forum, to members, to the funded cohort.</p>
+      <p class="eyebrow" data-i18n="com.tiers.eyebrow">How the community works</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px" data-i18n-html="com.tiers.title">Three ways in.</h2>
+      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px" data-i18n="com.tiers.lede">The community narrows as commitment deepens &mdash; from an open forum, to members, to the funded cohort.</p>
       <div class="tiers">
         <article class="tier" data-reveal>
           <div class="tier__n">01</div>
-          <h3 class="tier__t">Open Forum</h3>
-          <p class="tier__d">Open network, discussing startup ideas, early intent surfacing.</p>
-          <div class="tier__foot muted">Open to all</div>
+          <h3 class="tier__t" data-i18n="com.tiers.forum.title">Open Forum</h3>
+          <p class="tier__d" data-i18n="com.tiers.forum.desc">Open network, discussing startup ideas, early intent surfacing.</p>
+          <div class="tier__foot muted" data-i18n="com.tiers.forum.foot">Open to all</div>
         </article>
         <article class="tier" data-reveal data-delay="0.06">
           <div class="tier__n">02</div>
-          <h3 class="tier__t">Members</h3>
-          <p class="tier__d">Alumni and shortlisted participants, access to exclusive events.</p>
-          <div class="tier__foot muted">By shortlist</div>
+          <h3 class="tier__t" data-i18n="com.tiers.members.title">Members</h3>
+          <p class="tier__d" data-i18n="com.tiers.members.desc">Alumni and shortlisted participants, access to exclusive events.</p>
+          <div class="tier__foot muted" data-i18n="com.tiers.members.foot">By shortlist</div>
         </article>
         <article class="tier tier--core" data-reveal data-delay="0.12">
           <div class="tier__n">03</div>
-          <h3 class="tier__t">Core Cohort</h3>
-          <p class="tier__d">10+ selectively chosen teams, direct funding and network access.</p>
-          <div class="tier__foot">Funded &middot; US$150K</div>
+          <h3 class="tier__t" data-i18n="com.tiers.core.title">Core Cohort</h3>
+          <p class="tier__d" data-i18n="com.tiers.core.desc">10+ selectively chosen teams, direct funding and network access.</p>
+          <div class="tier__foot" data-i18n="com.tiers.core.foot">Funded &middot; US$150K</div>
         </article>
       </div>
     </div>
@@ -677,24 +732,24 @@ def page_community():
   <!-- Activity -->
   <section class="section mode-energy">
     <div class="wrap">
-      <p class="eyebrow">Activity</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px">Something is always happening.</h2>
+      <p class="eyebrow" data-i18n="com.activity.eyebrow">Activity</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px" data-i18n-html="com.activity.title">Something is always happening.</h2>
       <div class="collage" data-reveal>
         <figure class="c-wide">
-          <img src="assets/images/home-event-1920.jpg" alt="Founders networking at a Venture Hub Academy event." width="1920" height="1280" loading="lazy">
-          <figcaption>Community night &middot; Hong Kong</figcaption>
+          <img src="assets/images/home-event-1920.jpg" alt="Founders networking at a Venture Hub Academy event." data-i18n-attr="alt:com.activity.night.alt" width="1920" height="1280" loading="lazy">
+          <figcaption data-i18n="com.activity.night.caption">Community night &middot; Hong Kong</figcaption>
         </figure>
         <figure class="c-tall">
-          <img src="assets/images/demo-day-800.jpg" alt="Panel session with investors at a Venture Hub Academy event." width="533" height="800" loading="lazy">
-          <figcaption>Investor panel</figcaption>
+          <img src="assets/images/demo-day-800.jpg" alt="Panel session with investors at a Venture Hub Academy event." data-i18n-attr="alt:com.activity.panel.alt" width="533" height="800" loading="lazy">
+          <figcaption data-i18n="com.activity.panel.caption">Investor panel</figcaption>
         </figure>
         <figure>
-          <img src="assets/images/community-photo-800.jpg" alt="Audience at a Venture Hub Academy session." width="533" height="800" loading="lazy">
-          <figcaption>Founder session</figcaption>
+          <img src="assets/images/community-photo-800.jpg" alt="Audience at a Venture Hub Academy session." data-i18n-attr="alt:com.activity.session.alt" width="533" height="800" loading="lazy">
+          <figcaption data-i18n="com.activity.session.caption">Founder session</figcaption>
         </figure>
         <figure>
-          <img src="assets/images/about-photo-800.jpg" alt="Operators in discussion at a Venture Hub Academy session." width="800" height="533" loading="lazy">
-          <figcaption>Operator discussion</figcaption>
+          <img src="assets/images/about-photo-800.jpg" alt="Operators in discussion at a Venture Hub Academy session." data-i18n-attr="alt:com.activity.operators.alt" width="800" height="533" loading="lazy">
+          <figcaption data-i18n="com.activity.operators.caption">Operator discussion</figcaption>
         </figure>
       </div>
     </div>
@@ -703,42 +758,43 @@ def page_community():
   <!-- Events -->
   <section class="section mode-inst" id="events">
     <div class="wrap">
-      <p class="eyebrow eyebrow--orange">Up next</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px">Events across the network.</h2>
-      <span class="tag tag--pending" data-reveal style="margin-bottom:36px">Schedule to be confirmed</span>
+      <p class="eyebrow eyebrow--orange" data-i18n="com.events.eyebrow">Up next</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px" data-i18n-html="com.events.title">Events across the network.</h2>
+      <span class="tag tag--pending" data-reveal style="margin-bottom:36px" data-i18n="com.events.pending">Schedule to be confirmed</span>
       <div class="event-list" style="margin-top:8px">
         <div class="event-row">
-          <div class="meta">DATE TBC / HKG</div>
-          <div><div class="event-row__t">Demo Day</div></div>
-          <div class="meta">HONG KONG</div>
+          <div class="meta" data-i18n="com.events.demo.date">DATE TBC / HKG</div>
+          <div><div class="event-row__t" data-i18n="com.events.demo.title">Demo Day</div></div>
+          <div class="meta" data-i18n="com.events.demo.city">HONG KONG</div>
         </div>
         <div class="event-row">
-          <div class="meta">DATE TBC / HKG</div>
-          <div><div class="event-row__t">Founder Dinner</div></div>
-          <div class="meta">HONG KONG</div>
+          <div class="meta" data-i18n="com.events.dinner.date">DATE TBC / HKG</div>
+          <div><div class="event-row__t" data-i18n="com.events.dinner.title">Founder Dinner</div></div>
+          <div class="meta" data-i18n="com.events.dinner.city">HONG KONG</div>
         </div>
         <div class="event-row">
-          <div class="meta">DATE TBC / SIN</div>
-          <div><div class="event-row__t">AI Infrastructure Session</div></div>
-          <div class="meta">SINGAPORE</div>
+          <div class="meta" data-i18n="com.events.infra.date">DATE TBC / SIN</div>
+          <div><div class="event-row__t" data-i18n="com.events.infra.title">AI Infrastructure Session</div></div>
+          <div class="meta" data-i18n="com.events.infra.city">SINGAPORE</div>
         </div>
         <div class="event-row">
-          <div class="meta">DATE TBC / TYO</div>
-          <div><div class="event-row__t">Investor Roundtable</div></div>
-          <div class="meta">TOKYO</div>
+          <div class="meta" data-i18n="com.events.roundtable.date">DATE TBC / TYO</div>
+          <div><div class="event-row__t" data-i18n="com.events.roundtable.title">Investor Roundtable</div></div>
+          <div class="meta" data-i18n="com.events.roundtable.city">TOKYO</div>
         </div>
       </div>
     </div>
   </section>
-""" + cta("Ready to join<br>the network?")
+""" + cta("Ready to join<br>the network?", "com.cta.title")
     return write("community.html",
                  "Community &mdash; Venture Hub Academy",
                  "From Open Forum to Core Cohort - join the Venture Hub Academy community of founders, operators, and builders across Asia.",
-                 body, "community.html")
+                 body, "community.html", "com")
 
 
 def page_about():
     body = hero(
+        "about",
         "About",
         "Domain expertise,<br>turned into <em>ventures</em>.",
         "Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators &mdash; transforming domain expertise into high-growth, technology-enabled ventures.",
@@ -751,19 +807,19 @@ def page_about():
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">Who we back</p>
-          <h2 class="d-m" data-reveal>Experienced operators,<br>not idea-stage<br>first-timers.</h2>
+          <p class="eyebrow" data-i18n="who.eyebrow">Who we back</p>
+          <h2 class="d-m" data-reveal data-i18n-html="who.title">Experienced operators,<br>not idea-stage<br>first-timers.</h2>
         </div>
         <div data-reveal data-delay="0.08">
-          <p class="body-l muted">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
+          <p class="body-l muted" data-i18n="who.body">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
           <div class="compare">
             <div class="compare__box">
-              <div class="compare__label">Not our fit</div>
-              <div class="compare__v">Idea-stage first-timers</div>
+              <div class="compare__label" data-i18n="who.notLabel">Not our fit</div>
+              <div class="compare__v" data-i18n="who.notValue">Idea-stage first-timers</div>
             </div>
             <div class="compare__box compare__box--yes">
-              <div class="compare__label">Our fit</div>
-              <div class="compare__v">Experienced operators</div>
+              <div class="compare__label" data-i18n="who.yesLabel">Our fit</div>
+              <div class="compare__v" data-i18n="who.yesValue">Experienced operators</div>
             </div>
           </div>
         </div>
@@ -774,28 +830,28 @@ def page_about():
   <!-- Selection criteria -->
   <section class="section mode-energy">
     <div class="wrap">
-      <p class="eyebrow">Selection criteria</p>
-      <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:52px">What we look for.</h2>
+      <p class="eyebrow" data-i18n="about.criteria.eyebrow">Selection criteria</p>
+      <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:52px" data-i18n-html="about.criteria.title">What we look for.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Team quality</h3>
-            <p class="numitem__d">Quality of team / visionaries of an established business.</p>
+            <h3 class="numitem__t" data-i18n="about.criteria.team.title">Team quality</h3>
+            <p class="numitem__d" data-i18n="about.criteria.team.desc">Quality of team / visionaries of an established business.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Unique technology</h3>
-            <p class="numitem__d">Potentially groundbreaking product or service based on unique technologies.</p>
+            <h3 class="numitem__t" data-i18n="about.criteria.tech.title">Unique technology</h3>
+            <p class="numitem__d" data-i18n="about.criteria.tech.desc">Potentially groundbreaking product or service based on unique technologies.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Commercial proposition</h3>
-            <p class="numitem__d">Clear, proven commercial proposition with global opportunities.</p>
+            <h3 class="numitem__t" data-i18n="about.criteria.commercial.title">Commercial proposition</h3>
+            <p class="numitem__d" data-i18n="about.criteria.commercial.desc">Clear, proven commercial proposition with global opportunities.</p>
           </div>
         </article>
       </div>
@@ -805,20 +861,20 @@ def page_about():
   <!-- Two engines -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">Two engines</p>
-      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px">Back founders. Build companies.</h2>
-      <p class="body-l muted" data-reveal style="max-width:54ch;margin-bottom:40px">VHA runs an accelerator and a venture studio from the same platform of capital, compute and market access.</p>
+      <p class="eyebrow" data-i18n="about.engines.eyebrow">Two engines</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:20px" data-i18n-html="about.engines.title">Back founders. Build companies.</h2>
+      <p class="body-l muted" data-reveal style="max-width:54ch;margin-bottom:40px" data-i18n="about.engines.lede">VHA runs an accelerator and a venture studio from the same platform of capital, compute and market access.</p>
       <div class="compare">
         <div class="compare__box">
-          <div class="compare__label">Accelerator</div>
-          <div class="compare__v">We back founders.</div>
-          <p class="muted" style="margin-top:12px;font-size:15.5px">A 6-month program for execution-ready teams.</p>
-          <p style="margin-top:16px"><a class="tlink" href="accelerator.html">See the program <i aria-hidden="true">&rarr;</i></a></p>
+          <div class="compare__label" data-i18n="about.engines.acc.label">Accelerator</div>
+          <div class="compare__v" data-i18n="about.engines.acc.value">We back founders.</div>
+          <p class="muted" style="margin-top:12px;font-size:15.5px" data-i18n="about.engines.acc.desc">A 6-month program for execution-ready teams.</p>
+          <p style="margin-top:16px"><a class="tlink" href="accelerator.html" data-internal><span data-i18n="about.engines.acc.link">See the program</span> <i aria-hidden="true">&rarr;</i></a></p>
         </div>
         <div class="compare__box compare__box--yes">
-          <div class="compare__label">Venture Studio</div>
-          <div class="compare__v">We build with founders.</div>
-          <p class="muted" style="margin-top:12px;font-size:15.5px">Companies co-built from thesis to launch.</p>
+          <div class="compare__label" data-i18n="about.engines.studio.label">Venture Studio</div>
+          <div class="compare__v" data-i18n="about.engines.studio.value">We build with founders.</div>
+          <p class="muted" style="margin-top:12px;font-size:15.5px" data-i18n="about.engines.studio.desc">Companies co-built from thesis to launch.</p>
         </div>
       </div>
     </div>
@@ -827,35 +883,35 @@ def page_about():
   <!-- How the studio works -->
   <section class="section mode-energy">
     <div class="wrap">
-      <p class="eyebrow">How the studio works</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Thesis to launch.</h2>
+      <p class="eyebrow" data-i18n="about.studio.eyebrow">How the studio works</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px" data-i18n-html="about.studio.title">Thesis to launch.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Thesis</h3>
-            <p class="numitem__d">We identify where AI changes the economics of a sector in these markets, and what has to be true for a company to win there.</p>
+            <h3 class="numitem__t" data-i18n="about.studio.thesis.title">Thesis</h3>
+            <p class="numitem__d" data-i18n="about.studio.thesis.desc">We identify where AI changes the economics of a sector in these markets, and what has to be true for a company to win there.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Build</h3>
-            <p class="numitem__d">Prototype on VHA compute, tested against real operators before a company exists.</p>
+            <h3 class="numitem__t" data-i18n="about.studio.build.title">Build</h3>
+            <p class="numitem__d" data-i18n="about.studio.build.desc">Prototype on VHA compute, tested against real operators before a company exists.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Incorporate</h3>
-            <p class="numitem__d">Founding team, entity, cap table and jurisdiction &mdash; structured for the markets the company will sell into.</p>
+            <h3 class="numitem__t" data-i18n="about.studio.incorporate.title">Incorporate</h3>
+            <p class="numitem__d" data-i18n="about.studio.incorporate.desc">Founding team, entity, cap table and jurisdiction &mdash; structured for the markets the company will sell into.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.18">
           <div class="numitem__n">04</div>
           <div>
-            <h3 class="numitem__t">Scale</h3>
-            <p class="numitem__d">First customers through the APAC Sandbox, then into the accelerator cohort and the raise.</p>
+            <h3 class="numitem__t" data-i18n="about.studio.scale.title">Scale</h3>
+            <p class="numitem__d" data-i18n="about.studio.scale.desc">First customers through the APAC Sandbox, then into the accelerator cohort and the raise.</p>
           </div>
         </article>
       </div>
@@ -867,17 +923,17 @@ def page_about():
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">Institutional backing</p>
-          <h2 class="d-m" data-reveal>Backed by institutions.</h2>
+          <p class="eyebrow" data-i18n="about.backing.eyebrow">Institutional backing</p>
+          <h2 class="d-m" data-reveal data-i18n-html="about.backing.title">Backed by institutions.</h2>
         </div>
         <div data-reveal data-delay="0.08">
           <div class="backing">
             <div class="backing__box">
-              <div class="backing__label">Financial</div>
+              <div class="backing__label" data-i18n="about.backing.financial">Financial</div>
               <div class="backing__v">First Financial Holding</div>
             </div>
             <div class="backing__box">
-              <div class="backing__label">Academic</div>
+              <div class="backing__label" data-i18n="about.backing.academic">Academic</div>
               <div class="backing__v">HKU &middot; HKUST &middot; CUHK</div>
             </div>
           </div>
@@ -889,7 +945,7 @@ def page_about():
     return write("about.html",
                  "About &mdash; Venture Hub Academy",
                  "Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators across Asia.",
-                 body, "about.html")
+                 body, "about.html", "about")
 
 
 APPLY_FORM = open(os.path.join(ROOT, "tools", "apply-form.html")).read() if os.path.exists(
@@ -898,6 +954,7 @@ APPLY_FORM = open(os.path.join(ROOT, "tools", "apply-form.html")).read() if os.p
 
 def page_apply():
     body = hero(
+        "apply",
         "Apply",
         "Fifteen minutes.<br>Read by a <em>partner</em>.",
         "Applications are reviewed on a rolling basis. We respond to every application within 14 days, either way.",
@@ -908,28 +965,28 @@ def page_apply():
   <!-- Process -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">The process</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Three steps.</h2>
+      <p class="eyebrow" data-i18n="apply.process.eyebrow">The process</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px" data-i18n-html="apply.process.title">Three steps.</h2>
       <div class="numlist">
         <article class="numitem" data-reveal>
           <div class="numitem__n">01</div>
           <div>
-            <h3 class="numitem__t">Application</h3>
-            <p class="numitem__d">This form. Reviewed on a rolling basis &mdash; we respond to every application within 14 days.</p>
+            <h3 class="numitem__t" data-i18n="apply.process.application.title">Application</h3>
+            <p class="numitem__d" data-i18n="apply.process.application.desc">This form. Reviewed on a rolling basis &mdash; we respond to every application within 14 days.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.06">
           <div class="numitem__n">02</div>
           <div>
-            <h3 class="numitem__t">Partner interviews</h3>
-            <p class="numitem__d">Two conversations, product-deep. With partners, not associates.</p>
+            <h3 class="numitem__t" data-i18n="apply.process.interviews.title">Partner interviews</h3>
+            <p class="numitem__d" data-i18n="apply.process.interviews.desc">Two conversations, product-deep. With partners, not associates.</p>
           </div>
         </article>
         <article class="numitem" data-reveal data-delay="0.12">
           <div class="numitem__n">03</div>
           <div>
-            <h3 class="numitem__t">Offer</h3>
-            <p class="numitem__d">US$150K via SAFE on standard terms, and a start date for the next cohort.</p>
+            <h3 class="numitem__t" data-i18n="apply.process.offer.title">Offer</h3>
+            <p class="numitem__d" data-i18n="apply.process.offer.desc">US$150K via SAFE on standard terms, and a start date for the next cohort.</p>
           </div>
         </article>
       </div>
@@ -939,8 +996,149 @@ def page_apply():
     return write("apply.html",
                  "Apply &mdash; Venture Hub Academy",
                  "Fifteen minutes. Read by a partner. Apply to the Venture Hub Academy accelerator.",
-                 body, "apply.html",
+                 body, "apply.html", "apply",
                  extra_js='<script src="%s"></script>\n' % asset("js/vha-apply.js"))
+
+
+# ==========================================================================
+# locales/en.json is derived from the generated markup
+# ==========================================================================
+
+# Titles and descriptions are not in the body, so write() records them here.
+SEO = {}
+
+# Keys i18n.js needs at runtime that no element carries.
+EXTRA_EN = {
+    "chrome": {"htmlLang": "en"},
+    "nav": {"apply": "Apply", "applyNow": "Apply Now"},
+}
+
+
+class _LocaleExtractor(HTMLParser):
+    """Pull every data-i18n binding out of a generated page.
+
+    en.json is derived rather than hand-written so the two cannot drift: a
+    string that changes in the generator changes in the locale on the next
+    build, and a key no element references stops being emitted.
+
+    Each open element gets a frame holding its own start tag and a buffer. A
+    frame is only folded into its parent when it closes, so the inner HTML a
+    key records is exactly what the browser would see as innerHTML."""
+
+    VOID = {"br", "img", "input", "meta", "link", "hr", "source", "area"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=False)
+        self.found = {}
+        self._stack = []          # [tag, key, buffer, start_tag_text]
+
+    def handle_starttag(self, tag, attrs):
+        d = dict(attrs)
+        for attr, val in d.items():
+            if attr == "data-i18n-attr":
+                for pair in val.split(";"):
+                    if ":" not in pair:
+                        continue
+                    target, key = pair.split(":", 1)
+                    target, key = target.strip(), key.strip()
+                    if target in d:
+                        self._record(key, d[target])
+        html_key = d.get("data-i18n-html")
+        key = html_key or d.get("data-i18n")
+        text = self.get_starttag_text()
+        if tag in self.VOID:
+            if key:
+                self._record(key, "")
+            self._emit(text)
+            return
+        self._stack.append([tag, key, [], text, html_key is not None])
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID and self._stack:
+            self._stack.pop()
+
+    def handle_endtag(self, tag):
+        for i in range(len(self._stack) - 1, -1, -1):
+            if self._stack[i][0] == tag:
+                # Anything still open inside is unclosed markup; fold it in.
+                lost = self._stack[i + 1:]
+                del self._stack[i + 1:]
+                frame = self._stack.pop()
+                inner = "".join(frame[2]) + "".join(
+                    f[3] + "".join(f[2]) for f in lost)
+                if frame[1]:
+                    value = " ".join(inner.split())
+                    # A text binding goes through textContent, so "&mdash;"
+                    # would reach the page as those eight literal characters.
+                    # Decode it here; HTML bindings keep their entities, since
+                    # innerHTML parses them.
+                    if not frame[4]:
+                        value = unescape(value)
+                    self._record(frame[1], value)
+                self._emit(frame[3] + inner + "</%s>" % tag)
+                return
+
+    def _emit(self, chunk):
+        if self._stack and chunk:
+            self._stack[-1][2].append(chunk)
+
+    def handle_data(self, data):
+        self._emit(data)
+
+    def handle_entityref(self, name):
+        self._emit("&%s;" % name)
+
+    def handle_charref(self, name):
+        self._emit("&#%s;" % name)
+
+    def _record(self, key, value):
+        prev = self.found.get(key)
+        if prev is not None and prev != value:
+            raise SystemExit("locale key %r has two different values:\n  %r\n  %r"
+                             % (key, prev, value))
+        self.found[key] = value
+
+
+def _nest(flat):
+    out = {}
+    for key in sorted(flat):
+        node = out
+        parts = key.split(".")
+        for part in parts[:-1]:
+            node = node.setdefault(part, {})
+            if not isinstance(node, dict):
+                raise SystemExit("locale key %r collides with a shorter key" % key)
+        node[parts[-1]] = flat[key]
+    return out
+
+
+def _deep_update(base, extra):
+    for k, v in extra.items():
+        if isinstance(v, dict) and isinstance(base.get(k), dict):
+            _deep_update(base[k], v)
+        else:
+            base[k] = v
+    return base
+
+
+def build_locale_en(pages):
+    flat = {}
+    for name in pages:
+        ex = _LocaleExtractor()
+        with open(os.path.join(ROOT, name), encoding="utf-8") as f:
+            ex.feed(f.read())
+        for k, v in ex.found.items():
+            if k in flat and flat[k] != v:
+                raise SystemExit("locale key %r differs between pages:\n  %r\n  %r"
+                                 % (k, flat[k], v))
+            flat[k] = v
+    data = _deep_update(_nest(flat), EXTRA_EN)
+    data["seo"] = SEO
+    with open(os.path.join(ROOT, "locales", "en.json"), "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2, sort_keys=True)
+        f.write("\n")
+    return len(flat)
 
 
 def build_sitemap(pages):
@@ -964,6 +1162,12 @@ if __name__ == "__main__":
              page_about(), page_apply()]
     for name, size in built:
         print(f"  {name:22} {size:>7,} bytes")
-    build_sitemap([n for n, _ in built])
+    names = [n for n, _ in built]
+    build_sitemap(names)
     print(f"  {'sitemap.xml':22} rebuilt")
+    n_keys = build_locale_en(names)
+    print(f"  {'locales/en.json':22} {n_keys:>7,} keys")
+    import check_locales
+    if check_locales.check()[0]:
+        sys.exit("locale check failed")
     print(f"\n{len(built)} pages built.")
