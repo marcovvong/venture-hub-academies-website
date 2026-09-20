@@ -340,7 +340,7 @@ def page_home():
   </section>
 
   <!-- Capital / Compute / Access -->
-  <section class="section mode-dark" id="platform">
+  <section class="section mode-purple" id="platform">
     <div class="wrap">
       <p class="eyebrow">The platform</p>
       <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:56px">Everything you need to move faster.</h2>
@@ -503,7 +503,7 @@ def page_accelerator():
   </section>
 
   <!-- Phases -->
-  <section class="section mode-dark" id="phases">
+  <section class="section mode-purple" id="phases">
     <div class="wrap">
       <p class="eyebrow">The two phases</p>
       <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:44px">Build, then prove it.</h2>
@@ -601,7 +601,7 @@ def page_studio():
   </section>
 
   <!-- How the studio works -->
-  <section class="section mode-dark">
+  <section class="section mode-purple">
     <div class="wrap">
       <p class="eyebrow">How the studio works</p>
       <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Thesis to launch.</h2>
@@ -753,7 +753,7 @@ def page_portfolio():
   </section>
 
   <!-- What backing looks like -->
-  <section class="section mode-dark">
+  <section class="section mode-purple">
     <div class="wrap">
       <p class="eyebrow">What backing looks like</p>
       <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:52px">Every company gets the same three things.</h2>
@@ -979,7 +979,7 @@ def page_about():
   </section>
 
   <!-- Backing -->
-  <section class="section mode-dark">
+  <section class="section mode-purple">
     <div class="wrap">
       <div class="split">
         <div>
