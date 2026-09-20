@@ -96,7 +96,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .mode-energy { background: var(--white); }
 .mode-inst { background: var(--white); }
 .mode-dark { background: var(--purple-deep); color: var(--on-dark); }
-.mode-dark--black { background: var(--black); }
+.mode-dark--black { background: var(--black); }  /* escape hatch; black is otherwise reserved for footer + drawer */
 .mode-dark .muted { color: var(--on-dark-muted); }
 .mode-dark .rule { background: var(--on-dark-line); }
 
@@ -492,7 +492,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: border-color var(--t-mid) var(--ease), transform var(--t-mid) var(--ease);
 }
 .tier:hover { border-color: var(--purple); transform: translateY(-3px); }
-.tier--core { background: var(--black); color: var(--on-dark); border-color: var(--black); }
+.tier--core { background: var(--purple-deep); color: var(--on-dark); border-color: var(--purple-deep); }
 .tier--core .tier__d { color: var(--on-dark-muted); }
 .tier--core .tier__n { color: var(--sharp); }
 .tier__n { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; color: var(--purple-text); }
