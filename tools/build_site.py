@@ -329,96 +329,150 @@ def write(filename, title, desc, body, current, extra_head="", extra_js=""):
 
 def page_home():
     body = hero(
-        "AI Accelerator &middot; Venture Studio",
-        "Backing execution-ready <em>AI founders</em> across Asia.",
-        "Capital, compute, and market access for operators building real AI businesses.",
-        ("Apply Now", "apply.html"), ("Explore VHA", "accelerator.html"),
+        "AI Venture Studio &middot; Accelerator &middot; APAC",
+        "Build the next generation of <em>AI companies</em>.",
+        "<b>Capital. Operators. Infrastructure. APAC Markets.</b><br>Venture Hub Academy helps ambitious founders build, validate and scale AI-driven businesses across APAC.",
+        ("Apply to VHA", "apply.html"), ("Explore the Ecosystem", "#ecosystem"),
         "home-event", "Founders and investors at a Venture Hub Academy session in Hong Kong.",
         "center 32%",
         ["APAC / HONG KONG / 2026", "COHORT 01 &mdash; APPLICATIONS OPEN", "HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH"])
     body += PROOF + MARQUEE + """
-  <!-- Why VHA -->
-  <section class="section mode-energy">
-    <div class="wrap">
-      <div class="statement">
-        <div>
-          <p class="eyebrow eyebrow--orange">Why VHA</p>
-          <h2 class="d-l statement__q" data-reveal>AI is moving fast.<br><b>Founders should too.</b></h2>
-        </div>
-        <div data-reveal data-delay="0.1">
-          <p class="body-l muted">Most AI ventures stall not on technology, but on fragmented execution. We work hands-on with operators &mdash; refining models, launching in live markets, and building the traction that attracts serious capital.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Capital / Compute / Access -->
+  <!-- What VHA does -->
   <section class="section mode-purple" id="platform">
     <div class="wrap">
-      <p class="eyebrow">The platform</p>
-      <h2 class="d-m" data-reveal style="max-width:16ch;margin-bottom:56px">Everything you need to move faster.</h2>
+      <p class="eyebrow">What VHA does</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:24px">We don&rsquo;t just accelerate startups.<br>We help build them.</h2>
+      <p class="body-l muted" data-reveal style="max-width:60ch;margin-bottom:52px">VHA brings together the resources required to turn ambitious ideas into scalable businesses &mdash; from experienced operators and strategic capital to AI infrastructure and access to real markets across APAC.</p>
 
       <div class="pillars">
         <article class="pillar" data-reveal>
           <div class="pillar__i">01</div>
           <h3 class="pillar__name">Capital</h3>
           <div class="pillar__v">US$150K</div>
-          <p class="pillar__d">Initial capital to accelerate execution, invested via SAFE at the start of the program &mdash; with follow-on support into your next round.</p>
+          <p class="pillar__d">Invested via SAFE, alongside access to investors, strategic partners and follow-on funding pathways.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.06">
           <div class="pillar__i">02</div>
-          <h3 class="pillar__name">Compute</h3>
-          <div class="pillar__v">HPC / GPU</div>
-          <p class="pillar__d">Infrastructure for building and testing. Immediate access to high-performance clusters for model training and deployment, from day one.</p>
+          <h3 class="pillar__name">Operators</h3>
+          <div class="pillar__v">Hands-on</div>
+          <p class="pillar__d">Support from experienced founders, executives and industry leaders who have built in these markets.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.12">
           <div class="pillar__i">03</div>
-          <h3 class="pillar__name">Access</h3>
-          <div class="pillar__v">6 APAC Markets</div>
-          <p class="pillar__d">A network designed for regional expansion &mdash; corporate and government pilots, regulatory support, and reference customers across six jurisdictions.</p>
+          <h3 class="pillar__name">Markets</h3>
+          <div class="pillar__v">6 APAC</div>
+          <p class="pillar__d">Access to customers, partners and market-validation opportunities across the region.</p>
+        </article>
+        <article class="pillar" data-reveal data-delay="0.18">
+          <div class="pillar__i">04</div>
+          <h3 class="pillar__name">Infrastructure</h3>
+          <div class="pillar__v">HPC / GPU</div>
+          <p class="pillar__d">AI computing, technical resources and infrastructure supporting venture development.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Program -->
+  <!-- Build / Validate / Scale -->
   <section class="section mode-inst">
     <div class="wrap">
-      <p class="eyebrow">The program</p>
-      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px">From community to demo day.</h2>
-      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px">Four stages. Six months. Built to produce traction, not coursework.</p>
-      <div class="journey">
+      <p class="eyebrow">The journey</p>
+      <h2 class="d-m" data-reveal style="max-width:18ch;margin-bottom:20px">Build. Validate. Scale.</h2>
+      <p class="body-l muted" data-reveal style="max-width:52ch;margin-bottom:48px">From an early venture to a business that can move across markets.</p>
+      <div class="journey journey--three">
         <article class="stage" data-reveal>
           <div class="stage__n">01</div>
-          <h3 class="stage__t">Community</h3>
-          <p class="stage__d">Enter through the ecosystem. Meet founders, operators and builders before any commitment.</p>
-          <span class="tag">Ongoing</span>
+          <h3 class="stage__t">Build</h3>
+          <p class="stage__d">Develop the product, business model and core team.</p>
+          <span class="tag">Product &middot; Team</span>
         </article>
         <article class="stage" data-reveal data-delay="0.06">
           <div class="stage__n">02</div>
-          <h3 class="stage__t">Structured Program</h3>
-          <p class="stage__d">Three months of focused execution &mdash; mentoring, corporate structuring and product strategy.</p>
-          <span class="tag">3 months</span>
+          <h3 class="stage__t">Validate</h3>
+          <p class="stage__d">Test the venture with real customers, partners and markets through the APAC Sandbox.</p>
+          <span class="tag">APAC Sandbox</span>
         </article>
         <article class="stage" data-reveal data-delay="0.12">
           <div class="stage__n">03</div>
-          <h3 class="stage__t">APAC Sandbox</h3>
-          <p class="stage__d">Three months of live market validation. Real pilots, real customers, real jurisdictions.</p>
-          <span class="tag">3 months</span>
-        </article>
-        <article class="stage" data-reveal data-delay="0.18">
-          <div class="stage__n">04</div>
-          <h3 class="stage__t">Demo Day</h3>
-          <p class="stage__d">Meet capital, partners and the ecosystem. Present live metrics, not projections.</p>
-          <span class="tag">Cohort close</span>
+          <h3 class="stage__t">Scale</h3>
+          <p class="stage__d">Connect validated ventures with capital, strategic partners, infrastructure and broader markets.</p>
+          <span class="tag">Capital &middot; Partners</span>
         </article>
       </div>
-      <p style="margin-top:40px"><a class="tlink" href="accelerator.html">See the full program <i aria-hidden="true">&rarr;</i></a></p>
+      <p style="margin-top:40px"><a class="tlink" href="accelerator.html">See the full programme <i aria-hidden="true">&rarr;</i></a></p>
     </div>
   </section>
-""" + APAC + """
+
+  <!-- APAC Sandbox -->
+  <section class="section mode-energy" id="apac">
+    <div class="wrap">
+      <div class="apac">
+        <div>
+          <p class="eyebrow">APAC Sandbox</p>
+          <div class="apac__big" data-reveal aria-hidden="true">06</div>
+          <h2 class="d-m" data-reveal style="margin-top:12px">Build here.<br>Validate everywhere.</h2>
+          <p class="body-l muted" data-reveal style="margin-top:20px;max-width:46ch">The APAC Sandbox gives founders access to real-world market validation opportunities across a growing network of Asian markets &mdash; market access, validation opportunities and regional connections.</p>
+          <ul class="markets" data-reveal data-delay="0.1">
+            <li><b>HK</b>Hong Kong<span>22.32&deg; N</span></li>
+            <li><b>TW</b>Taiwan<span>23.70&deg; N</span></li>
+            <li><b>SG</b>Singapore<span>1.29&deg; N</span></li>
+            <li><b>JP</b>Japan<span>35.68&deg; N</span></li>
+            <li><b>TH</b>Thailand<span>13.75&deg; N</span></li>
+            <li><b>KH</b>Cambodia<span>11.55&deg; N</span></li>
+          </ul>
+        </div>
+        <div class="map" data-reveal data-delay="0.12">
+          <canvas data-apac-map role="img"
+                  aria-label="Network map of the Venture Hub Academy APAC Sandbox markets: Hong Kong, Taiwan, Singapore, Japan, Thailand and Cambodia."></canvas>
+        </div>
+      </div>
+      <div class="chain" data-reveal>
+        <span class="chain__step">MVP</span>
+        <span class="chain__arrow" aria-hidden="true">&rarr;</span>
+        <span class="chain__step">Pilot</span>
+        <span class="chain__arrow" aria-hidden="true">&rarr;</span>
+        <span class="chain__step">Customer feedback</span>
+        <span class="chain__arrow" aria-hidden="true">&rarr;</span>
+        <span class="chain__step">Market validation</span>
+        <span class="chain__arrow" aria-hidden="true">&rarr;</span>
+        <span class="chain__step chain__step--end">Scale</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- How VHA works -->
+  <section class="section mode-purple">
+    <div class="wrap">
+      <p class="eyebrow">How VHA works</p>
+      <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:52px">Match. Nurture. Connect.</h2>
+      <div class="numlist">
+        <article class="numitem" data-reveal>
+          <div class="numitem__n">01</div>
+          <div>
+            <h3 class="numitem__t">Match</h3>
+            <p class="numitem__d">Connect founders with the right operators, mentors, partners, resources and opportunities.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.06">
+          <div class="numitem__n">02</div>
+          <div>
+            <h3 class="numitem__t">Nurture</h3>
+            <p class="numitem__d">Support ventures through product development, market validation, business development and execution.</p>
+          </div>
+        </article>
+        <article class="numitem" data-reveal data-delay="0.12">
+          <div class="numitem__n">03</div>
+          <div>
+            <h3 class="numitem__t">Connect</h3>
+            <p class="numitem__d">Create connections to customers, strategic partners, investors and the wider APAC ecosystem.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Portfolio teaser -->
-  <section class="section mode-energy">
+  <section class="section mode-inst">
     <div class="wrap">
       <div class="split">
         <div>
@@ -434,7 +488,7 @@ def page_home():
   </section>
 
   <!-- Ecosystem -->
-  <section class="section mode-inst">
+  <section class="section mode-energy" id="ecosystem">
     <div class="wrap">
       <p class="eyebrow">Ecosystem</p>
       <h2 class="d-m" data-reveal style="max-width:20ch;margin-bottom:48px">Built with the people moving Asia forward.</h2>
@@ -462,8 +516,8 @@ def page_home():
   </section>
 """ + cta()
     return write("index.html",
-                 "Venture Hub Academy &mdash; Backing execution-ready AI founders across Asia",
-                 "Capital, compute, and market access for operators building real AI businesses. US$150K, six months, six APAC markets.",
+                 "Venture Hub Academy &mdash; Build the next generation of AI companies",
+                 "An AI venture-building ecosystem for ambitious founders across APAC. Capital, operators, infrastructure and market access to build, validate and scale.",
                  body, "index.html")
 
 
