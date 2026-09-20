@@ -333,7 +333,7 @@ def page_home():
         ("Apply to VHA", "apply.html"), ("Explore the Ecosystem", "#ecosystem"),
         "home-event", "Founders and investors at a Venture Hub Academy session in Hong Kong.",
         "center 32%",
-        ["APAC / HONG KONG / 2026", "COHORT 01 &mdash; APPLICATIONS OPEN", "HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH"])
+        ["APAC / HONG KONG / 2026", "APPLICATIONS OPEN", "HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH"])
     body += PROOF + MARQUEE + """
   <!-- What VHA does -->
   <section class="section mode-purple" id="platform">
@@ -347,7 +347,7 @@ def page_home():
           <div class="pillar__i">01</div>
           <h3 class="pillar__name">Capital</h3>
           <div class="pillar__v">US$150K</div>
-          <p class="pillar__d">Invested via SAFE, alongside access to investors, strategic partners and follow-on funding pathways.</p>
+          <p class="pillar__d">Invested via SAFE, alongside access to investors and strategic partners.</p>
         </article>
         <article class="pillar" data-reveal data-delay="0.06">
           <div class="pillar__i">02</div>
@@ -469,6 +469,31 @@ def page_home():
     </div>
   </section>
 
+  <!-- Who we back -->
+  <section class="section mode-inst">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Who we back</p>
+          <h2 class="d-m" data-reveal>Experienced operators,<br>not idea-stage<br>first-timers.</h2>
+        </div>
+        <div data-reveal data-delay="0.08">
+          <p class="body-l muted">Venture Hub Academy prioritizes experienced operators over first-time, idea-stage founders. We look for teams with an established commercial foundation who are ready to execute &mdash; not validate an idea from zero.</p>
+          <div class="compare">
+            <div class="compare__box">
+              <div class="compare__label">Not our fit</div>
+              <div class="compare__v">Idea-stage first-timers</div>
+            </div>
+            <div class="compare__box compare__box--yes">
+              <div class="compare__label">Our fit</div>
+              <div class="compare__v">Experienced operators</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Ecosystem -->
   <section class="section mode-energy" id="ecosystem">
     <div class="wrap">
@@ -484,7 +509,7 @@ def page_home():
         <article class="tier" data-reveal data-delay="0.06">
           <div class="tier__n">02</div>
           <h3 class="tier__t">Investors &amp; Corporates</h3>
-          <p class="tier__d">Follow-on capital, pilot partners and first customers across the region.</p>
+          <p class="tier__d">Investors, pilot partners and first customers across the region.</p>
           <div class="tier__foot muted">The demand side</div>
         </article>
         <article class="tier tier--core" data-reveal data-delay="0.12">
@@ -878,7 +903,7 @@ def page_apply():
         "Applications are reviewed on a rolling basis. We respond to every application within 14 days, either way.",
         ("Start application", "#apply-form"), ("See the program", "accelerator.html"),
         "demo-day", "Investors on stage during a Venture Hub Academy panel.", "center 22%",
-        ["ROLLING BASIS", "RESPONSE WITHIN 14 DAYS", "COHORT 01 &mdash; APPLICATIONS OPEN"])
+        ["ROLLING BASIS", "RESPONSE WITHIN 14 DAYS", "APPLICATIONS OPEN"])
     body += MARQUEE + """
   <!-- Process -->
   <section class="section mode-inst">
