@@ -92,7 +92,7 @@
       "meta": {
         "0": "3 MONTHS STRUCTURED + 3 MONTHS SANDBOX",
         "1": "US$150K VIA SAFE",
-        "2": "10 COMPANIES PER COHORT"
+        "2": "UP TO 10 COMPANIES PER COHORT"
       },
       "title": "A 6-month program<br>for <em>execution</em>."
     },
@@ -293,7 +293,7 @@
     },
     "tiers": {
       "core": {
-        "desc": "10+ selectively chosen teams, direct funding and network access.",
+        "desc": "Up to 10 selectively chosen teams, with direct funding and network access.",
         "foot": "Funded · US$150K",
         "title": "Core Cohort"
       },
@@ -385,7 +385,7 @@
       },
       "eyebrow": "The journey",
       "lede": "From an early venture to a business that can move across markets.",
-      "link": "See the full programme",
+      "link": "See the full program",
       "scale": {
         "desc": "Connect validated ventures with capital, strategic partners, infrastructure and broader markets.",
         "tag": "Capital · Partners",

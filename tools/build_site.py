@@ -448,7 +448,7 @@ def page_home():
           <span class="tag" data-i18n="home.journey.scale.tag">Capital &middot; Partners</span>
         </article>
       </div>
-      <p style="margin-top:40px"><a class="tlink" href="accelerator.html" data-internal><span data-i18n="home.journey.link">See the full programme</span> <i aria-hidden="true">&rarr;</i></a></p>
+      <p style="margin-top:40px"><a class="tlink" href="accelerator.html" data-internal><span data-i18n="home.journey.link">See the full program</span> <i aria-hidden="true">&rarr;</i></a></p>
     </div>
   </section>
 
@@ -589,7 +589,7 @@ def page_accelerator():
         "Three months of structured execution, then three months proving it in live APAC markets. US$150K via SAFE, small cohorts, and the compute to build on.",
         ("Apply Now", "apply.html"), ("See the phases", "#phases"),
         "demo-day", "Investors on stage during a Venture Hub Academy panel.", "center 22%",
-        ["3 MONTHS STRUCTURED + 3 MONTHS SANDBOX", "US$150K VIA SAFE", "10 COMPANIES PER COHORT"])
+        ["3 MONTHS STRUCTURED + 3 MONTHS SANDBOX", "US$150K VIA SAFE", "UP TO 10 COMPANIES PER COHORT"])
     body += PROOF + MARQUEE + """
   <!-- Overview -->
   <section class="section mode-energy">
@@ -722,7 +722,7 @@ def page_community():
         <article class="tier tier--core" data-reveal data-delay="0.12">
           <div class="tier__n">03</div>
           <h3 class="tier__t" data-i18n="com.tiers.core.title">Core Cohort</h3>
-          <p class="tier__d" data-i18n="com.tiers.core.desc">10+ selectively chosen teams, direct funding and network access.</p>
+          <p class="tier__d" data-i18n="com.tiers.core.desc">Up to 10 selectively chosen teams, with direct funding and network access.</p>
           <div class="tier__foot" data-i18n="com.tiers.core.foot">Funded &middot; US$150K</div>
         </article>
       </div>

@@ -675,3 +675,48 @@ ul { margin: 0; padding: 0; list-style: none; }
 .chain__step--end { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .chain__arrow { color: var(--purple-text); font-weight: 700; }
 @media (max-width: 700px) { .chain__arrow { display: none; } }
+
+/* ===== Per-script typography =====
+   i18n.js sets <html lang> from the locale's htmlLang, and these rules key off
+   it. Jakarta and JetBrains Mono stay first so Latin runs (brand, SAFE,
+   US$150K) keep the house faces; the script's Noto face picks up everything
+   they have no glyphs for. Noto is the only CJK/Thai/Khmer face we load, so
+   without these stacks those scripts fell through to whatever the OS had.
+   Noto ships 400/500/700: the 800 display weight resolves to 700, no faux bold. */
+html:lang(zh-Hans) { --font: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
+                     --mono: "JetBrains Mono", "Noto Sans SC", ui-monospace, monospace; }
+html:lang(zh-Hant) { --font: "Plus Jakarta Sans", "Noto Sans TC", sans-serif;
+                     --mono: "JetBrains Mono", "Noto Sans TC", ui-monospace, monospace; }
+html:lang(ja)      { --font: "Plus Jakarta Sans", "Noto Sans JP", sans-serif;
+                     --mono: "JetBrains Mono", "Noto Sans JP", ui-monospace, monospace; }
+html:lang(th)      { --font: "Plus Jakarta Sans", "Noto Sans Thai", sans-serif;
+                     --mono: "JetBrains Mono", "Noto Sans Thai", ui-monospace, monospace; }
+html:lang(km)      { --font: "Plus Jakarta Sans", "Noto Sans Khmer", sans-serif;
+                     --mono: "JetBrains Mono", "Noto Sans Khmer", ui-monospace, monospace; }
+
+/* The display scale is tuned for Latin caps: negative tracking and a line
+   height under 1. CJK glyphs fill the whole em square, so negative tracking
+   crushes them together and a sub-1 leading makes wrapped lines touch. */
+html:is(:lang(zh), :lang(ja)) :is(h1, h2, h3, h4, .d-xl, .d-l, .d-m, .h,
+    .proof__n, .numitem__n, .phase__t, .story__q) { letter-spacing: 0; line-height: 1.18; }
+/* Japanese has no spaces, so display headings otherwise break mid-word and
+   can start a line with ー. strict forbids that; auto-phrase (Chrome 119+,
+   ignored elsewhere) keeps phrases whole, and anywhere lets a phrase wider
+   than the column still break rather than overflow. */
+html:lang(ja) :is(h1, h2, h3, h4) { line-break: strict; word-break: auto-phrase; overflow-wrap: anywhere; }
+
+/* Thai and Khmer have no letter case, so the uppercase labels are harmless,
+   but any tracking is not: Thai sets without inter-letter space, and spacing
+   Khmer pulls subscript consonants (coeng) away from their base. Tracking is
+   zeroed everywhere, which is why this one needs !important - it has to beat
+   every component rule that sets it. Both scripts stack marks above and
+   below the line, so the display leading opens right up or they clip. */
+html:is(:lang(th), :lang(km)) * { letter-spacing: 0 !important; }
+html:lang(th) :is(h1, h2, h3, h4, .d-xl, .d-l, .d-m, .h, .phase__t, .story__q) { line-height: 1.35; }
+html:lang(km) :is(h1, h2, h3, h4, .d-xl, .d-l, .d-m, .h, .phase__t, .story__q) { line-height: 1.5; }
+html:lang(km) body { line-height: 1.8; }
+/* Kana run about twice the width of Latin at the same size, so a hero line
+   that fits in English overflows its column in Japanese. Step the top of the
+   display scale down for ja only; Chinese is terse enough not to need it. */
+html:lang(ja) .d-xl { font-size: clamp(36px, 6.2vw, 86px); }
+html:lang(ja) .d-l  { font-size: clamp(32px, 4.6vw, 64px); }

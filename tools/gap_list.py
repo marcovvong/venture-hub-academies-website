@@ -14,6 +14,12 @@ NAMES = {"sc": "Simplified Chinese", "tc": "Traditional Chinese",
          "jp": "Japanese", "th": "Thai", "km": "Khmer"}
 
 # Strings deliberately left in English; they are not gaps.
+# Languages whose translations have not had a native-speaker review. A
+# complete file is not a finished one: these render in full but every string
+# is provisional until a native reviewer signs it off. Remove a language from
+# this set only after that review.
+PROVISIONAL = {"jp", "th", "km"}
+
 KEEP_ENGLISH_NOTE = """\
 Some strings are intentionally not translated and are excluded from the
 counts below: the brand name *Venture Hub Academy*, the backer *First
@@ -55,6 +61,14 @@ def main():
                 "",
                 "%d of %d strings translated - **%d still in English**."
                 % (done, len(en), len(missing))]
+        if not missing and lang in PROVISIONAL:
+            out += ["", "**PROVISIONAL.** Every string is translated, but none has had a",
+                    "native-speaker review. 198 of them were first drafted on 2026-09-21",
+                    "to close the English fallback, and the 102 carried over from v1 were",
+                    "never checked either. Review the whole file for tone and accuracy",
+                    "before treating it as final, then remove `%s` from `PROVISIONAL`"
+                    " in `tools/gap_list.py`." % lang, ""]
+            continue
         if not missing:
             out += ["", "Complete. Still worth a native-speaker review before launch.", ""]
             continue
@@ -71,15 +85,17 @@ def main():
             "   *APAC Sandbox* is TH `แซนด์บ็อกซ์เอเชียแปซิฟิก` / KM",
             "   `កម្មវិធីសាកល្បងអាស៊ីប៉ាស៊ីហ្វិក`. Decide whether a native coinage reads better",
             "   to founders in those markets.",
-            "2. **`who.title` is translated in JP, TH and KM but without the two `<br>`",
-            "   tags** the English has. It renders and wraps naturally, but loses the",
-            "   intended three-line break. Add them where the lines should fall.",
-            "3. **Institution names are left in English** (First Financial Holding,",
+            "2. **\"Operators\"** is JP `オペレーター`, TH `ผู้ประกอบการ` (which also reads",
+            "   as \"entrepreneurs\") and KM `ប្រតិបត្តិករ`. SC/TC settled on",
+            "   `实战型经营者` / `實戰型經營者`. Confirm each lands as *experienced",
+            "   business builders*, not operations staff.",
+            "3. **\"Cohort\"** is JP `コホート`, TH `รุ่น`, KM `ជំនាន់`. In SC/TC the tier",
+            "   name *Core Cohort* is rendered `入选当期` / `入選當期` (\"selected into the",
+            "   cohort\"), since `核心期` is not idiomatic.",
+            "4. **Institution names are left in English** (First Financial Holding,",
             "   HKU, HKUST, CUHK). If an official local name exists, supply it.",
-            "4. **Japanese, Thai and Khmer have had no native-speaker review at all.**",
-            "   The strings that are translated came from the earlier v1 site and",
-            "   were carried across on an exact-English match, so they are in the",
-            "   right place but have not been checked for tone or accuracy.",
+            "5. **Japanese, Thai and Khmer have had no native-speaker review at all.**",
+            "   See the PROVISIONAL note under each language above.",
             ""]
 
     path = os.path.join(lt.ROOT, "docs", "translation-gaps.md")

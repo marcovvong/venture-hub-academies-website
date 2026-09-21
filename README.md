@@ -75,9 +75,11 @@ renames the column and splits the history**, so keep them as they are.
   `js/i18n.js` layers the chosen locale over English, so an untranslated key renders
   in English rather than blank. `locales/en.json` is **generated** from the markup by
   `build_site.py` - never edit it by hand; change the copy in the generator instead.
-  The other five are hand-maintained. English, Simplified and Traditional Chinese are
-  complete; Japanese, Thai and Khmer are partial - see `docs/translation-gaps.md`,
-  regenerated with `python3 tools/gap_list.py`.
+  The other five are hand-maintained. All six are complete. Traditional Chinese
+  follows Hong Kong usage. Japanese, Thai and Khmer are **provisional** until a
+  native speaker reviews them - see `docs/translation-gaps.md`, regenerated with
+  `python3 tools/gap_list.py`. Each script gets its Noto face through `:lang()`
+  rules at the end of `css/vha-v2.css`.
 - **Awaiting content:** event dates are marked "awaiting content" rather than
   invented. Search for `tag--pending`.
 - **Photography:** only four images exist, all from one event, so pages reuse them at
