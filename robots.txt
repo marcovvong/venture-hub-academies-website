@@ -1,4 +1,20 @@
+# Venture Hub Academy — academy.venturehub.tech
+# The five pages are all indexable. No page carries a noindex, and none should.
+
 User-agent: *
 Allow: /
+
+# Repository directories that are not part of the site but are served when the
+# whole repo is deployed from its root. They hold design-canvas exports of
+# earlier page versions, internal planning notes and the build scripts — none
+# of which should appear in search results, and the canvas exports would
+# compete with the real pages as near-duplicates.
+#
+# This keeps them out of the index; it does not keep them private. If the host
+# can publish a subset of the repo, excluding these three directories from the
+# deploy is the better fix.
+Disallow: /reference/
+Disallow: /docs/
+Disallow: /tools/
 
 Sitemap: https://academy.venturehub.tech/sitemap.xml

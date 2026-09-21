@@ -26,17 +26,14 @@ coordinates.
 
 ## Japanese (`jp.json`)
 
-92 of 300 strings translated - **208 still in English**.
+102 of 300 strings translated - **198 still in English**.
 
 | key | English source |
 | --- | --- |
 | `about.backing.academic` | Academic |
 | `about.backing.financial` | Financial |
-| `about.criteria.commercial.desc` | Clear, proven commercial proposition with global opportunities. |
 | `about.criteria.commercial.title` | Commercial proposition |
-| `about.criteria.team.desc` | Quality of team / visionaries of an established business. |
 | `about.criteria.team.title` | Team quality |
-| `about.criteria.tech.desc` | Potentially groundbreaking product or service based on unique technologies. |
 | `about.criteria.tech.title` | Unique technology |
 | `about.engines.acc.desc` | A 6-month program for execution-ready teams. |
 | `about.engines.acc.label` | Accelerator |
@@ -145,9 +142,6 @@ coordinates.
 | `com.hero.cta2` | See the program |
 | `com.hero.eyebrow` | Community |
 | `com.hero.lede` | Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made. |
-| `com.hero.meta.0` | OPEN FORUM |
-| `com.hero.meta.1` | MEMBERS |
-| `com.hero.meta.2` | CORE COHORT |
 | `com.hero.title` **(markup)** | From open forum<br>to <em>core cohort</em>. |
 | `com.tiers.core.foot` | Funded · US$150K |
 | `com.tiers.forum.foot` | Open to all |
@@ -229,11 +223,7 @@ coordinates.
 | `proof.markets` | APAC markets |
 | `proof.months` | Months of execution |
 | `seo.about.description` | Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators across Asia. |
-| `seo.about.title` | About — Venture Hub Academy |
-| `seo.acc.title` | Accelerator — Venture Hub Academy |
-| `seo.apply.title` | Apply — Venture Hub Academy |
 | `seo.com.description` | From Open Forum to Core Cohort - join the Venture Hub Academy community of founders, operators, and builders across Asia. |
-| `seo.com.title` | Community — Venture Hub Academy |
 | `seo.home.description` | An AI venture-building ecosystem for ambitious founders across APAC. Capital, operators, infrastructure and market access to build, validate and scale. |
 | `seo.home.title` | Venture Hub Academy — Build the next generation of AI companies |
 | `who.notLabel` | Not our fit |
@@ -244,17 +234,14 @@ coordinates.
 
 ## Thai (`th.json`)
 
-92 of 300 strings translated - **208 still in English**.
+102 of 300 strings translated - **198 still in English**.
 
 | key | English source |
 | --- | --- |
 | `about.backing.academic` | Academic |
 | `about.backing.financial` | Financial |
-| `about.criteria.commercial.desc` | Clear, proven commercial proposition with global opportunities. |
 | `about.criteria.commercial.title` | Commercial proposition |
-| `about.criteria.team.desc` | Quality of team / visionaries of an established business. |
 | `about.criteria.team.title` | Team quality |
-| `about.criteria.tech.desc` | Potentially groundbreaking product or service based on unique technologies. |
 | `about.criteria.tech.title` | Unique technology |
 | `about.engines.acc.desc` | A 6-month program for execution-ready teams. |
 | `about.engines.acc.label` | Accelerator |
@@ -363,9 +350,6 @@ coordinates.
 | `com.hero.cta2` | See the program |
 | `com.hero.eyebrow` | Community |
 | `com.hero.lede` | Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made. |
-| `com.hero.meta.0` | OPEN FORUM |
-| `com.hero.meta.1` | MEMBERS |
-| `com.hero.meta.2` | CORE COHORT |
 | `com.hero.title` **(markup)** | From open forum<br>to <em>core cohort</em>. |
 | `com.tiers.core.foot` | Funded · US$150K |
 | `com.tiers.forum.foot` | Open to all |
@@ -447,11 +431,7 @@ coordinates.
 | `proof.markets` | APAC markets |
 | `proof.months` | Months of execution |
 | `seo.about.description` | Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators across Asia. |
-| `seo.about.title` | About — Venture Hub Academy |
-| `seo.acc.title` | Accelerator — Venture Hub Academy |
-| `seo.apply.title` | Apply — Venture Hub Academy |
 | `seo.com.description` | From Open Forum to Core Cohort - join the Venture Hub Academy community of founders, operators, and builders across Asia. |
-| `seo.com.title` | Community — Venture Hub Academy |
 | `seo.home.description` | An AI venture-building ecosystem for ambitious founders across APAC. Capital, operators, infrastructure and market access to build, validate and scale. |
 | `seo.home.title` | Venture Hub Academy — Build the next generation of AI companies |
 | `who.notLabel` | Not our fit |
@@ -462,17 +442,14 @@ coordinates.
 
 ## Khmer (`km.json`)
 
-92 of 300 strings translated - **208 still in English**.
+102 of 300 strings translated - **198 still in English**.
 
 | key | English source |
 | --- | --- |
 | `about.backing.academic` | Academic |
 | `about.backing.financial` | Financial |
-| `about.criteria.commercial.desc` | Clear, proven commercial proposition with global opportunities. |
 | `about.criteria.commercial.title` | Commercial proposition |
-| `about.criteria.team.desc` | Quality of team / visionaries of an established business. |
 | `about.criteria.team.title` | Team quality |
-| `about.criteria.tech.desc` | Potentially groundbreaking product or service based on unique technologies. |
 | `about.criteria.tech.title` | Unique technology |
 | `about.engines.acc.desc` | A 6-month program for execution-ready teams. |
 | `about.engines.acc.label` | Accelerator |
@@ -581,9 +558,6 @@ coordinates.
 | `com.hero.cta2` | See the program |
 | `com.hero.eyebrow` | Community |
 | `com.hero.lede` | Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made. |
-| `com.hero.meta.0` | OPEN FORUM |
-| `com.hero.meta.1` | MEMBERS |
-| `com.hero.meta.2` | CORE COHORT |
 | `com.hero.title` **(markup)** | From open forum<br>to <em>core cohort</em>. |
 | `com.tiers.core.foot` | Funded · US$150K |
 | `com.tiers.forum.foot` | Open to all |
@@ -665,11 +639,7 @@ coordinates.
 | `proof.markets` | APAC markets |
 | `proof.months` | Months of execution |
 | `seo.about.description` | Venture Hub Academy builds and scales AI-driven businesses by partnering with experienced operators across Asia. |
-| `seo.about.title` | About — Venture Hub Academy |
-| `seo.acc.title` | Accelerator — Venture Hub Academy |
-| `seo.apply.title` | Apply — Venture Hub Academy |
 | `seo.com.description` | From Open Forum to Core Cohort - join the Venture Hub Academy community of founders, operators, and builders across Asia. |
-| `seo.com.title` | Community — Venture Hub Academy |
 | `seo.home.description` | An AI venture-building ecosystem for ambitious founders across APAC. Capital, operators, infrastructure and market access to build, validate and scale. |
 | `seo.home.title` | Venture Hub Academy — Build the next generation of AI companies |
 | `who.notLabel` | Not our fit |

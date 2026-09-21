@@ -12,7 +12,7 @@ generated pages: the next build overwrites them.
 
 Design System v2.0 "Venture Energy" — Black / White / Purple / Sharp Purple.
 """
-import hashlib, json, os, sys
+import hashlib, json, os, re, sys
 from html import unescape
 from html.parser import HTMLParser
 
@@ -1141,6 +1141,50 @@ def build_locale_en(pages):
     return len(flat)
 
 
+def check_seo(pages):
+    """Guard the indexing surface after every build.
+
+    The sitemap, the canonicals and the page list are derived from NAV, so
+    they agree by construction - this catches the case where someone later
+    hand-edits one of them, and the case where a noindex creeps back onto a
+    page (the previous Wix site carried one and stayed out of Google
+    entirely)."""
+    problems = []
+
+    expected = {SITE if p == "index.html" else SITE + p for p in pages}
+    with open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8") as f:
+        listed = set(re.findall(r"<loc>([^<]+)</loc>", f.read()))
+    if listed != expected:
+        problems.append("sitemap URLs %s != built pages %s"
+                        % (sorted(listed - expected), sorted(expected - listed)))
+
+    for name in pages:
+        with open(os.path.join(ROOT, name), encoding="utf-8") as f:
+            html = f.read()
+        url = SITE if name == "index.html" else SITE + name
+        canon = re.findall(r'<link rel="canonical" href="([^"]+)"', html)
+        og = re.findall(r'<meta property="og:url" content="([^"]+)"', html)
+        if canon != [url]:
+            problems.append("%s: canonical %s, expected [%s]" % (name, canon, url))
+        if og != [url]:
+            problems.append("%s: og:url %s, expected [%s]" % (name, og, url))
+        if re.search(r'content="[^"]*noindex', html):
+            problems.append("%s: carries a noindex" % name)
+
+    robots = os.path.join(ROOT, "robots.txt")
+    if os.path.exists(robots):
+        with open(robots, encoding="utf-8") as f:
+            text = f.read()
+        if ("Sitemap: %ssitemap.xml" % SITE) not in text:
+            problems.append("robots.txt does not point at %ssitemap.xml" % SITE)
+    else:
+        problems.append("robots.txt is missing")
+
+    for row in problems:
+        print("    ERROR %s" % row)
+    return problems
+
+
 def build_sitemap(pages):
     prio = {"index.html": ("weekly", "1.0"), "apply.html": ("monthly", "0.9"),
             "accelerator.html": ("monthly", "0.9"), "community.html": ("monthly", "0.8"),
@@ -1168,6 +1212,9 @@ if __name__ == "__main__":
     n_keys = build_locale_en(names)
     print(f"  {'locales/en.json':22} {n_keys:>7,} keys")
     import check_locales
-    if check_locales.check()[0]:
-        sys.exit("locale check failed")
+    locale_errors = check_locales.check()[0]
+    seo_errors = check_seo(names)
+    print(f"  {'seo check':22} {'ok' if not seo_errors else 'FAILED'}")
+    if locale_errors or seo_errors:
+        sys.exit("build checks failed")
     print(f"\n{len(built)} pages built.")

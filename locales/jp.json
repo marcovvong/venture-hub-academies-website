@@ -5,7 +5,16 @@
       "title": "機関に支えられて。"
     },
     "criteria": {
+      "commercial": {
+        "desc": "明確で実証済み、かつグローバルな機会を伴う事業提案"
+      },
       "eyebrow": "選考基準",
+      "team": {
+        "desc": "チームの質／確立された事業のビジョナリーであること"
+      },
+      "tech": {
+        "desc": "独自技術に基づく、画期的な可能性を持つプロダクトやサービス"
+      },
       "title": "私たちが求めるもの。"
     },
     "hero": {
@@ -104,6 +113,13 @@
     "skipToContent": "コンテンツへスキップ"
   },
   "com": {
+    "hero": {
+      "meta": {
+        "0": "オープンフォーラム",
+        "1": "メンバー",
+        "2": "コアコホート"
+      }
+    },
     "tiers": {
       "core": {
         "desc": "厳選された10社以上のチーム、直接的な資金調達とネットワークアクセス。",
@@ -147,11 +163,19 @@
     "safe": "SAFE契約による出資"
   },
   "seo": {
+    "about": {
+      "title": "私たちについて — Venture Hub Academy"
+    },
     "acc": {
-      "description": "6ヶ月プログラム：3ヶ月間の構造化プログラム + 3ヶ月間のAPACサンドボックス。SAFEによる15万米ドルの出資、少数精鋭コホート、GPU・コンピューティングリソース。"
+      "description": "6ヶ月プログラム：3ヶ月間の構造化プログラム + 3ヶ月間のAPACサンドボックス。SAFEによる15万米ドルの出資、少数精鋭コホート、GPU・コンピューティングリソース。",
+      "title": "アクセラレーター — Venture Hub Academy"
     },
     "apply": {
-      "description": "15分。パートナー自らが目を通します。Venture Hub Academyアクセラレーターに応募する。"
+      "description": "15分。パートナー自らが目を通します。Venture Hub Academyアクセラレーターに応募する。",
+      "title": "応募 — Venture Hub Academy"
+    },
+    "com": {
+      "title": "コミュニティ — Venture Hub Academy"
     }
   },
   "who": {
