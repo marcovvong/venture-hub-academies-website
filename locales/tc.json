@@ -220,6 +220,32 @@
       "title": "三個步驟。"
     }
   },
+  "blog": {
+    "all": "全部文章",
+    "earlier": "往期文章",
+    "empty": {
+      "body": "我們關於 AI、企業建立與亞太市場的首批文章即將上線。",
+      "tag": "首篇文章即將發佈"
+    },
+    "hero": {
+      "eyebrow": "網誌",
+      "lede": "Venture Hub Academy 團隊關於 AI、企業建立與亞太市場的思考——我們看到了甚麼，以及這對創辦人意味著甚麼。",
+      "meta": {
+        "0": "AI",
+        "1": "企業建立",
+        "2": "亞太市場"
+      },
+      "title": "我們對 AI 的<em>觀點</em>。"
+    },
+    "langNote": "文章以英文發佈。",
+    "latest": "最新",
+    "minRead": "分鐘閱讀",
+    "more": "更多文章",
+    "newer": "下一篇",
+    "older": "上一篇",
+    "read": "閱讀全文",
+    "rss": "RSS 訂閱"
+  },
   "chrome": {
     "closeMenu": "關閉選單",
     "htmlLang": "zh-Hant",
@@ -295,7 +321,7 @@
       "title": "遍布網絡的活動。"
     },
     "hero": {
-      "alt": "Venture Hub Academy 活動現場，觀眾席上的創辦人與投資者開懷大笑。",
+      "alt": "創辦人在 Venture Hub Academy 香港活動上交流。",
       "cta1": "加入社群",
       "cta2": "查看計劃",
       "eyebrow": "社群",
@@ -365,7 +391,7 @@
       "title": "與推動亞洲前行的人共同建設。"
     },
     "hero": {
-      "alt": "創辦人與投資者出席 Venture Hub Academy 在香港舉辦的座談。",
+      "alt": "Venture Hub Academy 活動現場，觀眾席上的創辦人與投資者開懷大笑。",
       "cta1": "申請加入 VHA",
       "cta2": "探索生態",
       "eyebrow": "AI 創投工作室 · 加速器 · 亞太",
@@ -468,6 +494,7 @@
     "acc": "加速器",
     "apply": "申請",
     "applyNow": "立即申請",
+    "blog": "網誌",
     "com": "社群"
   },
   "proof": {
@@ -488,6 +515,10 @@
     "apply": {
       "description": "十五分鐘，由合夥人親自閱讀。立即申請 Venture Hub Academy 加速器。",
       "title": "申請 — Venture Hub Academy"
+    },
+    "blog": {
+      "description": "Venture Hub Academy 團隊關於 AI、企業建立與亞太市場的觀點。",
+      "title": "網誌 — Venture Hub Academy"
     },
     "com": {
       "description": "從開放論壇到入選當期——加入 Venture Hub Academy 遍布亞洲的創辦人、實戰型經營者與實幹家社群。",

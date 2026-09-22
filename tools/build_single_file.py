@@ -15,7 +15,8 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/Desktop/VHA-we
 
 PAGES = [("home", "index.html", "Home"), ("accelerator", "accelerator.html", "Accelerator"),
          ("community", "community.html", "Community"),
-         ("about", "about.html", "About"), ("apply", "apply.html", "Apply")]
+         ("about", "about.html", "About"), ("apply", "apply.html", "Apply"),
+         ("blog", "blog.html", "Blog")]
 SLUG = {f: s for s, f, _ in PAGES}
 
 # Photographs are referenced many times; embed each once and assign at runtime

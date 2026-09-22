@@ -12,12 +12,13 @@ generated pages: the next build overwrites them.
 
 Design System v2.0 "Venture Energy" — Black / White / Purple / Sharp Purple.
 """
-import hashlib, json, os, re, sys
-from html import unescape
+import glob, hashlib, json, os, re, sys
+from html import escape, unescape
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import blog
 SITE = "https://academy.venturehub.tech/"
 
 # --- navigation: the single source of truth for site structure -------------
@@ -25,6 +26,7 @@ NAV = [
     ("Accelerator",    "accelerator.html", "nav.acc"),
     ("Community",      "community.html",   "nav.com"),
     ("About",          "about.html",       "nav.about"),
+    ("Blog",           "blog.html",        "nav.blog"),
 ]
 
 # --- photography: all from the Venture Showcase at HKU, 23 May 2026 ---------
@@ -354,7 +356,25 @@ MAP_LIBS = """<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity=
 """
 
 
+def _from_subfolder(html, depth):
+    """Point root-relative URLs back up to the site root.
+
+    Every partial is written for a page at the root (href="css/...",
+    src="assets/..."), so a page in blog/ prefixes each relative URL with ../
+    rather than every partial learning about folders."""
+    up = "../" * depth
+    skip = re.compile(r"^(?:[a-z][a-z0-9+.-]*:|#|/|\?)", re.I)
+    def one(u):
+        return u if not u or skip.match(u) else up + u
+    html = re.sub(r'\b(href|src)="([^"]*)"', lambda m: '%s="%s"' % (m.group(1), one(m.group(2))), html)
+    return re.sub(r'\bsrcset="([^"]*)"', lambda m: 'srcset="%s"' % ", ".join(
+        " ".join([one(part.split()[0])] + part.split()[1:]) for part in m.group(1).split(",")), html)
+
+
 def write(filename, title, desc, body, current, seo_key, extra_head="", extra_js=""):
+    """seo_key=None leaves the page out of the locale's seo table - blog posts
+    are English-only, and listing them there would make every new post show up
+    as untranslated in all five languages."""
     if "data-apac-map" in body:
         extra_head = MAP_LIBS + extra_head
     url = "" if filename == "index.html" else filename   # canonical is the bare root
@@ -363,12 +383,16 @@ def write(filename, title, desc, body, current, seo_key, extra_head="", extra_js
     # i18n.js assigns these with document.title = ... and setAttribute, neither
     # of which decodes entities: "&mdash;" would reach the tab as six literal
     # characters. The markup keeps its entities; the locale gets plain text.
-    SEO[seo_key] = {"title": unescape(title), "description": unescape(desc)}
+    if seo_key:
+        SEO[seo_key] = {"title": unescape(title), "description": unescape(desc)}
     # Held on window so the map can wait for it before painting its labels.
     init = ('<script>window.VhaI18nReady = VhaI18n.init(%r)'
-            '.catch(function (e) { console.error(e); });</script>\n' % seo_key)
+            '.catch(function (e) { console.error(e); });</script>\n' % (seo_key or "post"))
     html = (head(title, desc, url, extra_head) + chrome(current) + body
             + footer() + extra_js + init + "</body>\n</html>\n")
+    if "/" in filename:
+        html = _from_subfolder(html, filename.count("/"))
+        os.makedirs(os.path.join(ROOT, os.path.dirname(filename)), exist_ok=True)
     with open(os.path.join(ROOT, filename), "w") as f:
         f.write(html)
     return filename, len(html)
@@ -385,8 +409,8 @@ def page_home():
         "Build the next generation of <em>AI companies</em>.",
         "<b>Capital. Operators. Infrastructure. APAC Markets.</b><br>Venture Hub Academy helps ambitious founders build, validate and scale AI-driven businesses across APAC.",
         ("Apply to VHA", "apply.html"), ("Explore the Ecosystem", "#ecosystem"),
-        "home-event", "Founders and investors at a Venture Hub Academy session in Hong Kong.",
-        "center 32%",
+        "audience-laugh", "Founders and investors sharing a laugh in the audience at a Venture Hub Academy event.",
+        "center 58%",
         ["APAC / HONG KONG / 2026", "APPLICATIONS OPEN", "HK &middot; TW &middot; SG &middot; JP &middot; TH &middot; KH"])
     body += PROOF + MARQUEE + """
   <!-- What VHA does -->
@@ -700,7 +724,7 @@ def page_community():
         "From open forum<br>to <em>core cohort</em>.",
         "Every cohort starts in the community. It is the open door into the network &mdash; founders, operators and builders, meeting before any commitment is made.",
         ("Join the Community", "apply.html"), ("See the program", "accelerator.html"),
-        "audience-laugh", "Founders and investors sharing a laugh in the audience at a Venture Hub Academy event.", "center 58%",
+        "home-event", "Founders networking at a Venture Hub Academy event in Hong Kong.", "center 30%",
         ["OPEN FORUM", "MEMBERS", "CORE COHORT"])
     body += MARQUEE + """
   <!-- Tiers -->
@@ -1020,6 +1044,152 @@ def page_apply():
 
 
 # ==========================================================================
+# Blog - posts are Markdown files in posts/, read by tools/blog.py
+# ==========================================================================
+
+# Labels that only render in some states (no posts yet, a single post, the
+# first or last post). Registered in en.json whatever the state, so the locale
+# does not grow and shrink as posts come and go; the templates read the same
+# strings.
+BLOG_TEXT = {
+    "latest": "Latest", "read": "Read the post", "minRead": "min read",
+    "earlier": "Earlier posts", "older": "Previous post", "newer": "Next post",
+    "all": "All posts", "more": "More posts",
+    "empty": {"tag": "First post coming soon",
+              "body": "Our first notes on AI, company building and APAC markets are on the way."},
+}
+T = BLOG_TEXT
+
+RSS_LINK = ('<link rel="alternate" type="application/rss+xml" '
+            'title="Venture Hub Academy Blog" href="%sblog/feed.xml">\n' % SITE)
+
+
+def post_meta(p, author=False):
+    """Date and reading time. The date is numeric so it reads the same in
+    every language; only "min read" is translated."""
+    by = f'\n          <span lang="en">{escape(p["author"])}</span>' if author else ""
+    return f"""<div class="meta post-meta">
+          <time datetime="{p["date"].isoformat()}">{blog.stamp(p["date"])}</time>
+          <span>{p["minutes"]} <span data-i18n="blog.minRead">{T["minRead"]}</span></span>{by}
+        </div>"""
+
+
+def page_blog(posts):
+    if posts:
+        p = posts[0]
+        media = (f'\n        <div class="post-feature__media"><img src="{escape(p["cover"])}" '
+                 f'alt="{escape(p["cover_alt"])}" loading="lazy"></div>') if p["cover"] else ""
+        listing = f"""
+      <a class="post-feature{' post-feature--media' if p['cover'] else ''}" href="{p["file"]}" data-internal data-reveal>{media}
+        <div class="post-feature__body">
+          <p class="eyebrow" data-i18n="blog.latest">{T["latest"]}</p>
+          {post_meta(p)}
+          <h2 class="post-feature__t" lang="en">{escape(p["title"])}</h2>
+          <p class="body-l muted" lang="en">{escape(p["summary"])}</p>
+          <span class="tlink"><span data-i18n="blog.read">{T["read"]}</span> <i aria-hidden="true">&rarr;</i></span>
+        </div>
+      </a>"""
+        if len(posts) > 1:
+            rows = "\n".join(f"""        <a class="post-row" href="{q["file"]}" data-internal>
+          <time class="meta" datetime="{q["date"].isoformat()}">{blog.stamp(q["date"])}</time>
+          <span class="post-row__main">
+            <span class="post-row__t" lang="en">{escape(q["title"])}</span>
+            <span class="post-row__s" lang="en">{escape(q["summary"])}</span>
+          </span>
+          <span class="meta post-row__m">{q["minutes"]} <span data-i18n="blog.minRead">{T["minRead"]}</span></span>
+        </a>""" for q in posts[1:])
+            listing += f"""
+      <h2 class="eyebrow eyebrow--orange blog-earlier" data-i18n="blog.earlier">{T["earlier"]}</h2>
+      <div class="post-list">
+{rows}
+      </div>"""
+    else:
+        listing = f"""
+      <div class="blog-empty" data-reveal>
+        <span class="tag tag--pending" data-i18n="blog.empty.tag">{T["empty"]["tag"]}</span>
+        <p class="body-l muted" data-i18n="blog.empty.body">{T["empty"]["body"]}</p>
+      </div>"""
+
+    body = f"""  <header class="page-hero mode-energy">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="blog.hero.eyebrow">Blog</p>
+      <h1 class="d-xl page-hero__title" data-reveal data-i18n-html="blog.hero.title">Our <em>point of view</em> on AI.</h1>
+      <p class="body-l page-hero__lede" data-reveal data-delay="0.08" data-i18n="blog.hero.lede">Notes from the Venture Hub Academy team on AI, company building and APAC markets &mdash; what we are seeing, and what we think it means for founders.</p>
+      <div class="page-hero__meta meta" data-reveal data-delay="0.14">
+        <span data-i18n="blog.hero.meta.0">AI</span>
+        <span data-i18n="blog.hero.meta.1">COMPANY BUILDING</span>
+        <span data-i18n="blog.hero.meta.2">APAC MARKETS</span>
+        <a href="blog/feed.xml" class="blog-rss" data-i18n="blog.rss">RSS feed</a>
+      </div>
+      <p class="lang-note meta" data-i18n="blog.langNote">Posts are published in English.</p>
+    </div>
+  </header>
+
+  <section class="section mode-inst blog-index">
+    <div class="wrap">{listing}
+    </div>
+  </section>
+""" + cta()
+    return write("blog.html",
+                 "Blog &mdash; Venture Hub Academy",
+                 "Our point of view on AI, company building and APAC markets, from the Venture Hub Academy team.",
+                 body, "blog.html", "blog", extra_head=RSS_LINK)
+
+
+def page_post(posts, i):
+    p = posts[i]
+    newer = posts[i - 1] if i > 0 else None
+    older = posts[i + 1] if i + 1 < len(posts) else None
+    tags = ""
+    if p["tags"]:
+        tags = '\n        <div class="post__tags" lang="en">%s</div>' % "".join(
+            '<span class="tag">%s</span>' % escape(t) for t in p["tags"])
+    cover = ""
+    if p["cover"]:
+        cover = f"""
+    <div class="wrap"><figure class="post__cover"><img src="{escape(p["cover"])}" alt="{escape(p["cover_alt"])}" fetchpriority="high"></figure></div>"""
+    def pager(q, key, label, cls):
+        if not q:
+            return "<span></span>"
+        return (f'<a class="post-pager__a {cls}" href="{q["file"]}" data-internal>'
+                f'<span class="meta" data-i18n="{key}">{label}</span>'
+                f'<span class="post-pager__t" lang="en">{escape(q["title"])}</span></a>')
+    body = f"""  <article class="post">
+    <header class="post__head">
+      <div class="wrap post__col">
+        <a href="blog.html" class="post__back meta" data-internal>&larr; <span data-i18n="blog.all">{T["all"]}</span></a>
+        {post_meta(p, author=True)}
+        <h1 class="post__title" lang="en">{escape(p["title"])}</h1>
+        <p class="body-l post__lede" lang="en">{escape(p["summary"])}</p>{tags}
+        <p class="lang-note meta" data-i18n="blog.langNote">Posts are published in English.</p>
+      </div>
+    </header>{cover}
+    <div class="wrap post__col">
+      <div class="prose" lang="en">
+{p["html"]}
+      </div>
+      <nav class="post-pager" aria-label="{T["more"]}" data-i18n-attr="aria-label:blog.more">
+        {pager(older, "blog.older", T["older"], "post-pager__a--prev")}
+        {pager(newer, "blog.newer", T["newer"], "post-pager__a--next")}
+      </nav>
+    </div>
+  </article>
+""" + cta()
+    return write(p["file"],
+                 "%s &mdash; Venture Hub Academy" % escape(p["title"]),
+                 escape(p["summary"]),
+                 body, "blog.html", None, extra_head=RSS_LINK)
+
+
+def clear_old_posts():
+    """A renamed or deleted post must not linger at its old URL."""
+    for path in glob.glob(os.path.join(ROOT, "blog", "*.html")):
+        with open(path, encoding="utf-8") as f:
+            if GENERATED in f.read():
+                os.remove(path)
+
+
+# ==========================================================================
 # locales/en.json is derived from the generated markup
 # ==========================================================================
 
@@ -1030,6 +1200,7 @@ SEO = {}
 EXTRA_EN = {
     "chrome": {"htmlLang": "en"},
     "nav": {"apply": "Apply", "applyNow": "Apply Now"},
+    "blog": BLOG_TEXT,
 }
 
 
@@ -1204,29 +1375,38 @@ def check_seo(pages):
     return problems
 
 
-def build_sitemap(pages):
+def build_sitemap(pages, lastmod=None):
+    lastmod = lastmod or {}
     prio = {"index.html": ("weekly", "1.0"), "apply.html": ("monthly", "0.9"),
+            "blog.html": ("daily", "0.8"),
             "accelerator.html": ("monthly", "0.9"), "community.html": ("monthly", "0.8"),
             "about.html": ("monthly", "0.7")}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', '']
     for p in pages:
-        cf, pr = prio.get(p, ("monthly", "0.7"))
+        cf, pr = prio.get(p, ("monthly", "0.6" if p.startswith("blog/") else "0.7"))
         loc = SITE if p == "index.html" else SITE + p
-        out += ['  <url>', f'    <loc>{loc}</loc>',
-                f'    <changefreq>{cf}</changefreq>', f'    <priority>{pr}</priority>', '  </url>', '']
+        out += ['  <url>', f'    <loc>{loc}</loc>']
+        if p in lastmod:
+            out.append(f'    <lastmod>{lastmod[p]}</lastmod>')
+        out += [f'    <changefreq>{cf}</changefreq>', f'    <priority>{pr}</priority>', '  </url>', '']
     out.append('</urlset>')
     with open(os.path.join(ROOT, "sitemap.xml"), "w") as f:
         f.write("\n".join(out) + "\n")
 
 
 if __name__ == "__main__":
+    posts = blog.load_posts()
+    clear_old_posts()
     built = [page_home(), page_accelerator(), page_community(),
-             page_about(), page_apply()]
+             page_about(), page_apply(), page_blog(posts)]
+    built += [page_post(posts, i) for i in range(len(posts))]
     for name, size in built:
         print(f"  {name:22} {size:>7,} bytes")
+    blog.build_feed(posts, SITE)
+    print(f"  {'blog/feed.xml':22} {len(posts)} posts")
     names = [n for n, _ in built]
-    build_sitemap(names)
+    build_sitemap(names, {p["file"]: p["date"].isoformat() for p in posts})
     print(f"  {'sitemap.xml':22} rebuilt")
     n_keys = build_locale_en(names)
     print(f"  {'locales/en.json':22} {n_keys:>7,} keys")

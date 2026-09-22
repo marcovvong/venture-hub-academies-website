@@ -220,6 +220,32 @@
       "title": "Three steps."
     }
   },
+  "blog": {
+    "all": "All posts",
+    "earlier": "Earlier posts",
+    "empty": {
+      "body": "Our first notes on AI, company building and APAC markets are on the way.",
+      "tag": "First post coming soon"
+    },
+    "hero": {
+      "eyebrow": "Blog",
+      "lede": "Notes from the Venture Hub Academy team on AI, company building and APAC markets — what we are seeing, and what we think it means for founders.",
+      "meta": {
+        "0": "AI",
+        "1": "COMPANY BUILDING",
+        "2": "APAC MARKETS"
+      },
+      "title": "Our <em>point of view</em> on AI."
+    },
+    "langNote": "Posts are published in English.",
+    "latest": "Latest",
+    "minRead": "min read",
+    "more": "More posts",
+    "newer": "Next post",
+    "older": "Previous post",
+    "read": "Read the post",
+    "rss": "RSS feed"
+  },
   "chrome": {
     "closeMenu": "Close menu",
     "htmlLang": "en",
@@ -295,7 +321,7 @@
       "title": "Events across the network."
     },
     "hero": {
-      "alt": "Founders and investors sharing a laugh in the audience at a Venture Hub Academy event.",
+      "alt": "Founders networking at a Venture Hub Academy event in Hong Kong.",
       "cta1": "Join the Community",
       "cta2": "See the program",
       "eyebrow": "Community",
@@ -365,7 +391,7 @@
       "title": "Built with the people moving Asia forward."
     },
     "hero": {
-      "alt": "Founders and investors at a Venture Hub Academy session in Hong Kong.",
+      "alt": "Founders and investors sharing a laugh in the audience at a Venture Hub Academy event.",
       "cta1": "Apply to VHA",
       "cta2": "Explore the Ecosystem",
       "eyebrow": "AI Venture Studio · Accelerator · APAC",
@@ -468,6 +494,7 @@
     "acc": "Accelerator",
     "apply": "Apply",
     "applyNow": "Apply Now",
+    "blog": "Blog",
     "com": "Community"
   },
   "proof": {
@@ -488,6 +515,10 @@
     "apply": {
       "description": "Fifteen minutes. Read by a partner. Apply to the Venture Hub Academy accelerator.",
       "title": "Apply — Venture Hub Academy"
+    },
+    "blog": {
+      "description": "Our point of view on AI, company building and APAC markets, from the Venture Hub Academy team.",
+      "title": "Blog — Venture Hub Academy"
     },
     "com": {
       "description": "From Open Forum to Core Cohort - join the Venture Hub Academy community of founders, operators, and builders across Asia.",

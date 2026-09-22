@@ -9,6 +9,10 @@
     { k: "km", c: "KM", n: "ភាសាខ្មែរ" }
   ];
   var DEFAULT_LANG = "en";
+  // Locales live beside js/, so resolve them from this script's own URL rather
+  // than the page's: blog posts sit one folder down, and a page-relative
+  // "locales/" would 404 there.
+  var LOCALES = new URL("../locales/", (document.currentScript || {}).src || window.location.href);
 
   function getLangFromUrl() {
     var params = new URLSearchParams(window.location.search);
@@ -28,7 +32,7 @@
   }
 
   function loadLocale(lang) {
-    return fetch("locales/" + lang + ".json", { cache: "no-store" })
+    return fetch(new URL(lang + ".json", LOCALES), { cache: "no-store" })
       .then(function (r) {
         if (!r.ok) throw new Error("locale fetch failed: " + lang);
         return r.json();

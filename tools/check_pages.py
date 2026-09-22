@@ -19,10 +19,14 @@ convincing false positives before they were fixed:
 The map's world atlas comes from a CDN, so a missing map is retried once
 before it is called a failure.
 """
-import sys
+import glob, os, sys
 from playwright.sync_api import sync_playwright
 
-PAGES = ["index.html", "accelerator.html", "community.html", "about.html", "apply.html"]
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# The newest post stands in for all of them: they share one template.
+POSTS = sorted(glob.glob(os.path.join(ROOT, "blog", "*.html")), key=os.path.getmtime)[-1:]
+PAGES = (["index.html", "accelerator.html", "community.html", "about.html", "apply.html", "blog.html"]
+         + [os.path.relpath(p, ROOT) for p in POSTS])
 LANGS = {"en": "en", "sc": "zh-Hans", "tc": "zh-Hant", "jp": "ja", "th": "th", "km": "km"}
 WIDTHS = [360, 390, 768, 1024, 1440]
 LITERALS = ["&mdash;", "&rsquo;", "&middot;", "&hellip;", "&amp;", "<br>", "<em>", "<b>"]
@@ -92,6 +96,8 @@ def main():
                     pg.close()
                     checked += 1
             # the map only needs proving once per page, at one width
+            if page.startswith("blog"):
+                continue
             pg = ctx.new_page()
             pg.set_viewport_size({"width": 1280, "height": 900})
             pg.goto("%s/%s" % (base, page), wait_until="domcontentloaded")
@@ -105,8 +111,8 @@ def main():
         b.close()
 
     print("\n".join(fails) if fails else
-          "PASS: %d page/language/width combinations, maps painted on all %d pages"
-          % (checked, len(PAGES)))
+          "PASS: %d page/language/width combinations, maps painted on all %d site pages"
+          % (checked, len([p for p in PAGES if not p.startswith("blog")])))
     return 1 if fails else 0
 
 

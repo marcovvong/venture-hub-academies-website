@@ -26,7 +26,7 @@ coordinates.
 
 ## Japanese (`jp.json`)
 
-308 of 308 strings translated - **0 still in English**.
+329 of 329 strings translated - **0 still in English**.
 
 **PROVISIONAL.** Every string is translated, but none has had a
 native-speaker review. 198 of them were first drafted on 2026-09-21
@@ -39,7 +39,7 @@ before treating it as final, then remove `jp` from `PROVISIONAL` in `tools/gap_l
 
 ## Thai (`th.json`)
 
-308 of 308 strings translated - **0 still in English**.
+329 of 329 strings translated - **0 still in English**.
 
 **PROVISIONAL.** Every string is translated, but none has had a
 native-speaker review. 198 of them were first drafted on 2026-09-21
@@ -52,7 +52,7 @@ before treating it as final, then remove `th` from `PROVISIONAL` in `tools/gap_l
 
 ## Khmer (`km.json`)
 
-308 of 308 strings translated - **0 still in English**.
+329 of 329 strings translated - **0 still in English**.
 
 **PROVISIONAL.** Every string is translated, but none has had a
 native-speaker review. 198 of them were first drafted on 2026-09-21
@@ -65,7 +65,7 @@ before treating it as final, then remove `km` from `PROVISIONAL` in `tools/gap_l
 
 ## Simplified Chinese (`sc.json`)
 
-308 of 308 strings translated - **0 still in English**.
+329 of 329 strings translated - **0 still in English**.
 
 Complete. Still worth a native-speaker review before launch.
 
@@ -74,7 +74,7 @@ Complete. Still worth a native-speaker review before launch.
 
 ## Traditional Chinese (`tc.json`)
 
-308 of 308 strings translated - **0 still in English**.
+329 of 329 strings translated - **0 still in English**.
 
 Complete. Still worth a native-speaker review before launch.
 

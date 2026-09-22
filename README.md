@@ -16,6 +16,7 @@ No framework, no dependencies to install. The `.html` files at the root are the 
 | Community | `community.html` | The three tiers, activity, events |
 | About | `about.html` | Who we back, criteria, the two engines, the studio, backing |
 | Apply | `apply.html` | Process and the application form |
+| Blog | `blog.html` + `blog/*.html` | Our point of view on AI, one page per post |
 
 ---
 
@@ -42,6 +43,35 @@ Styles and behaviour are hand-maintained and not generated:
 - `js/vha-v2.js` — nav drawer, scroll reveals, counters, ticker, map init.
 - `js/vha-network.js` — the APAC network canvas (d3 + topojson from CDN).
 - `js/vha-apply.js` — application form: pill groups and Formspree submission.
+
+---
+
+## Posting to the blog
+
+Each post is one Markdown file in `posts/`. No HTML needed.
+
+```bash
+python3 tools/new_post.py "Why AI agents need a sandbox first"   # 1. start a post, dated today
+# 2. write it in posts/2026-09-23-why-ai-agents-need-a-sandbox-first.md
+#    and delete the "draft: true" line when it is ready
+python3 tools/build_site.py                                       # 3. build
+git add -A && git commit -m "Post: Why AI agents need a sandbox first" && git push   # 4. publish
+```
+
+- The date and the web address come from the file name:
+  `posts/2026-09-23-agents.md` becomes `blog/agents.html`, dated 23 Sep 2026.
+- `posts/_template.md` shows every formatting option: headings, bold, links,
+  quotes, lists and photos. Put photos for posts in `assets/blog/` (about
+  1600px wide, JPEG) and write their path as `assets/blog/name.jpg`.
+- The header needs a `title` and a `summary`. `author`, `tags` and a `cover`
+  photo are optional. `draft: true` keeps a post off the site.
+- The blog page, each post page, `sitemap.xml` and the RSS feed
+  (`blog/feed.xml`) are all rebuilt from `posts/`, and so is anything a renamed
+  or deleted post leaves behind. Posts are English-only: the page labels
+  around them are translated, and non-English visitors see a short note
+  saying so.
+- Build logic is in `tools/blog.py`; the page templates are `page_blog` and
+  `page_post` in `tools/build_site.py`.
 
 ---
 

@@ -220,6 +220,32 @@
       "title": "3つのステップ。"
     }
   },
+  "blog": {
+    "all": "記事一覧",
+    "earlier": "過去の記事",
+    "empty": {
+      "body": "AI、事業づくり、アジア太平洋市場についての最初の記事を準備中です。",
+      "tag": "最初の記事は近日公開"
+    },
+    "hero": {
+      "eyebrow": "ブログ",
+      "lede": "AI、事業づくり、アジア太平洋市場について、Venture Hub Academyチームが見ていること、そしてそれが創業者にとって何を意味するか。",
+      "meta": {
+        "0": "AI",
+        "1": "事業づくり",
+        "2": "アジア太平洋市場"
+      },
+      "title": "AIについての<em>私たちの視点</em>。"
+    },
+    "langNote": "記事は英語で公開しています。",
+    "latest": "最新",
+    "minRead": "分で読めます",
+    "more": "その他の記事",
+    "newer": "次の記事",
+    "older": "前の記事",
+    "read": "記事を読む",
+    "rss": "RSSフィード"
+  },
   "chrome": {
     "closeMenu": "メニューを閉じる",
     "htmlLang": "ja",
@@ -295,7 +321,7 @@
       "title": "ネットワーク各地でのイベント。"
     },
     "hero": {
-      "alt": "Venture Hub Academyのイベントで、客席で笑い合う創業者と投資家たち。",
+      "alt": "香港で開催されたVenture Hub Academyのイベントで交流する創業者たち。",
       "cta1": "コミュニティに参加",
       "cta2": "プログラムを見る",
       "eyebrow": "コミュニティ",
@@ -365,7 +391,7 @@
       "title": "アジアを前進させる人々と共に。"
     },
     "hero": {
-      "alt": "香港で開催されたVenture Hub Academyのセッションに集う創業者と投資家。",
+      "alt": "Venture Hub Academyのイベントで、客席で笑い合う創業者と投資家たち。",
       "cta1": "VHAに応募する",
       "cta2": "エコシステムを見る",
       "eyebrow": "AIベンチャースタジオ · アクセラレーター · APAC",
@@ -468,6 +494,7 @@
     "acc": "アクセラレーター",
     "apply": "応募",
     "applyNow": "今すぐ応募",
+    "blog": "ブログ",
     "com": "コミュニティ"
   },
   "proof": {
@@ -488,6 +515,10 @@
     "apply": {
       "description": "15分。パートナー自らが目を通します。Venture Hub Academyアクセラレーターに応募する。",
       "title": "応募 — Venture Hub Academy"
+    },
+    "blog": {
+      "description": "AI、事業づくり、アジア太平洋市場についてのVenture Hub Academyチームの視点。",
+      "title": "ブログ — Venture Hub Academy"
     },
     "com": {
       "description": "オープンフォーラムからコアコホートへ。アジア各地の創業者、オペレーター、ビルダーが集うVenture Hub Academyのコミュニティに参加しませんか。",
