@@ -212,28 +212,36 @@ MARQUEE = """
 # footer's social icons; PROOF is shared, so every page that shows the stats
 # shows the same four.
 PROOF = """
-  <section class="section mode-inst" aria-label="By the numbers">
+  <section class="section mode-inst proof-section" aria-label="By the numbers">
     <div class="wrap">
       <div class="proof">
         <div class="proof__item" data-reveal>
           <svg class="proof__i" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.6"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
-          <div class="proof__n"><small>US$</small><span data-count="150">150</span>K</div>
-          <div class="proof__l" data-i18n="proof.safe">Invested via SAFE</div>
+          <div class="proof__b">
+            <div class="proof__n"><small>US$</small><span data-count="150">150</span>K</div>
+            <div class="proof__l" data-i18n="proof.safe">Invested via SAFE</div>
+          </div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.06">
           <svg class="proof__i" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"></rect><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"></rect></svg>
-          <div class="proof__n"><span data-count="10">10</span></div>
-          <div class="proof__l" data-i18n="proof.companies">Companies per cohort</div>
+          <div class="proof__b">
+            <div class="proof__n"><span data-count="10">10</span></div>
+            <div class="proof__l" data-i18n="proof.companies">Companies per cohort</div>
+          </div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.12">
           <svg class="proof__i" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"></rect><path d="M3 9.5h18M8 2.5v4M16 2.5v4M7.5 13.5h.01M12 13.5h.01M16.5 13.5h.01M7.5 17h.01M12 17h.01"></path></svg>
-          <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l" data-i18n="proof.months">Months of execution</div>
+          <div class="proof__b">
+            <div class="proof__n"><span data-count="6">6</span></div>
+            <div class="proof__l" data-i18n="proof.months">Months of execution</div>
+          </div>
         </div>
         <div class="proof__item" data-reveal data-delay="0.18">
           <svg class="proof__i" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><path d="M3 12h18"></path></svg>
-          <div class="proof__n"><span data-count="6">6</span></div>
-          <div class="proof__l" data-i18n="proof.markets">APAC markets</div>
+          <div class="proof__b">
+            <div class="proof__n"><span data-count="6">6</span></div>
+            <div class="proof__l" data-i18n="proof.markets">APAC markets</div>
+          </div>
         </div>
       </div>
     </div>

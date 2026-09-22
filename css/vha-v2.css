@@ -303,16 +303,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ===== 12. Proof — oversized numbers ===== */
 .proof { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
-.proof__item { border-top: 3px solid var(--ink); padding-top: 20px; }
+.proof__b { border-top: 3px solid var(--ink); padding-top: 20px; }
 .proof__n { font-size: clamp(38px, 5vw, 72px); font-weight: 800; letter-spacing: -.045em; line-height: .9; }
 .proof__n small { font-size: .52em; font-weight: 800; letter-spacing: -.02em; margin-right: 1px; }
 .proof__l { margin-top: 10px; font-size: 15px; color: var(--muted); font-weight: 500; }
-.proof__i { display: block; width: clamp(30px, 2.8vw, 40px); height: auto; margin-bottom: 20px; color: var(--purple); }
+/* The icon sits above the rule, in the same colour as the rule under it. */
+.proof__i { display: block; width: clamp(44px, 4vw, 58px); height: auto; margin-bottom: 20px; color: var(--purple); }
+/* The stats follow the hero directly; the hero's meta row already leaves room
+   above, so a full section pad here read as an empty band. */
+.proof-section { padding-top: clamp(8px, 1.5vw, 20px); padding-bottom: clamp(56px, 6vw, 88px); }
+.proof__item:nth-child(odd) .proof__b { border-color: var(--purple); }
+.proof__item:nth-child(even) .proof__b { border-color: var(--black); }
 .proof__item:nth-child(even) .proof__i { color: var(--ink); }
-.proof__item:nth-child(1) { border-color: var(--purple); }
-.proof__item:nth-child(2) { border-color: var(--black); }
-.proof__item:nth-child(3) { border-color: var(--purple); }
-.proof__item:nth-child(4) { border-color: var(--black); }
 @media (max-width: 860px) { .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
 
 /* ===== 08.05 Marquee ===== */
