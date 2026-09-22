@@ -112,10 +112,10 @@ renames the column and splits the history**, so keep them as they are.
   rules at the end of `css/vha-v2.css`.
 - **Awaiting content:** event dates are marked "awaiting content" rather than
   invented. Search for `tag--pending`.
-- **Photography:** ten images, all from the Venture Showcase at HKU (23 May 2026).
-  Each hero has its own photo except Apply, which shares the VC Challenge shot with
-  the Community gallery. Web copies live in `assets/images/` at two widths; camera
-  originals stay in `assets/` and are gitignored.
+- **Photography:** eleven images, all from the Venture Showcase at HKU (23 May 2026).
+  Every page hero uses a different photo; the Community gallery reuses some of
+  them. Web copies live in `assets/images/` at two widths, listed in `PHOTO` in
+  `tools/build_site.py`; camera originals stay in `assets/` and are gitignored.
 - `reference/` holds design-canvas exports, the brief and older prototypes. It is not
   part of the site, but it *is* served if the whole repo is deployed.
 

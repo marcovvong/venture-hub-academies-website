@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/vha-v2.css?v=7289392d">
+<link rel="stylesheet" href="css/vha-v2.css?v=e2b10f94">
 <link rel="alternate" type="application/rss+xml" title="Venture Hub Academy Blog" href="https://academy.venturehub.tech/blog/feed.xml">
 </head>
 <body>
@@ -78,23 +78,53 @@
 </nav>
 
 <main id="main">
-  <header class="page-hero mode-energy">
+  <header class="hero hero--inner mode-energy">
     <div class="wrap">
-      <p class="eyebrow" data-i18n="blog.hero.eyebrow">Blog</p>
-      <h1 class="d-xl page-hero__title" data-reveal data-i18n-html="blog.hero.title">Our <em>point of view</em> on AI.</h1>
-      <p class="body-l page-hero__lede" data-reveal data-delay="0.08" data-i18n="blog.hero.lede">Notes from the Venture Hub Academy team on AI, company building and APAC markets &mdash; what we are seeing, and what we think it means for founders.</p>
-      <div class="page-hero__meta meta" data-reveal data-delay="0.14">
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow" data-i18n="blog.hero.eyebrow">Blog</p>
+          <h1 class="d-xl hero__title" data-reveal data-i18n-html="blog.hero.title">Our <em>point of view</em> on AI.</h1>
+          <p class="body-l hero__sub" data-reveal data-delay="0.08" data-i18n-html="blog.hero.lede">Notes from the Venture Hub Academy team on AI, company building and APAC markets &mdash; what we are seeing, and what we think it means for founders.</p>
+          <div class="hero__cta" data-reveal data-delay="0.14">
+            <a href="#posts" class="btn btn--sharp" data-internal><span data-i18n="blog.hero.cta1">Read the posts</span> <i aria-hidden="true">&rarr;</i></a>
+            <a href="apply.html" class="btn btn--ghost" data-internal><span data-i18n="blog.hero.cta2">Apply to VHA</span> <i aria-hidden="true">&rarr;</i></a>
+          </div>
+        </div>
+        <div class="hero__media" data-reveal data-delay="0.2">
+          <img src="assets/images/blog-hero-1600.jpg" srcset="assets/images/blog-hero-800.jpg 533w, assets/images/blog-hero-1600.jpg 1066w"
+               sizes="(max-width: 980px) 100vw, 45vw" style="object-position:center 50%"
+               alt="Audience members listening closely at a Venture Hub Academy event." width="1066" height="1599" fetchpriority="high"
+               data-i18n-attr="alt:blog.hero.alt">
+          <div class="hero__coord meta">22.3193&deg; N / 114.1694&deg; E</div>
+        </div>
+      </div>
+      <div class="hero__meta-row meta">
         <span data-i18n="blog.hero.meta.0">AI</span>
         <span data-i18n="blog.hero.meta.1">COMPANY BUILDING</span>
         <span data-i18n="blog.hero.meta.2">APAC MARKETS</span>
-        <a href="blog/feed.xml" class="blog-rss" data-i18n="blog.rss">RSS feed</a>
       </div>
-      <p class="lang-note meta" data-i18n="blog.langNote">Posts are published in English.</p>
     </div>
   </header>
 
-  <section class="section mode-inst blog-index">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__t" data-marquee>
+      <div class="marquee__g" data-marquee-group>
+        <span class="marquee__i" data-i18n="markets.hk">Hong Kong</span>
+        <span class="marquee__i" data-i18n="markets.tw">Taiwan</span>
+        <span class="marquee__i" data-i18n="markets.sg">Singapore</span>
+        <span class="marquee__i" data-i18n="markets.jp">Japan</span>
+        <span class="marquee__i" data-i18n="markets.th">Thailand</span>
+        <span class="marquee__i" data-i18n="markets.kh">Cambodia</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section mode-inst blog-index" id="posts">
     <div class="wrap">
+      <div class="blog-bar meta">
+        <p class="lang-note" data-i18n="blog.langNote">Posts are published in English.</p>
+        <a href="blog/feed.xml" class="blog-rss" data-i18n="blog.rss">RSS feed</a>
+      </div>
       <div class="blog-empty" data-reveal>
         <span class="tag tag--pending" data-i18n="blog.empty.tag">First post coming soon</span>
         <p class="body-l muted" data-i18n="blog.empty.body">Our first notes on AI, company building and APAC markets are on the way.</p>

@@ -228,8 +228,11 @@
       "tag": "First post coming soon"
     },
     "hero": {
+      "alt": "Audience members listening closely at a Venture Hub Academy event.",
+      "cta1": "Read the posts",
+      "cta2": "Apply to VHA",
       "eyebrow": "Blog",
-      "lede": "Notes from the Venture Hub Academy team on AI, company building and APAC markets — what we are seeing, and what we think it means for founders.",
+      "lede": "Notes from the Venture Hub Academy team on AI, company building and APAC markets &mdash; what we are seeing, and what we think it means for founders.",
       "meta": {
         "0": "AI",
         "1": "COMPANY BUILDING",

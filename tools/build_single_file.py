@@ -25,7 +25,8 @@ SMALL = {"home-event-1920.jpg": "home-event-960.jpg", "about-photo-1600.jpg": "a
          "demo-day-1600.jpg": "demo-day-800.jpg", "community-photo-1600.jpg": "community-photo-800.jpg",
          "pitch-results-1600.jpg": "pitch-results-800.jpg", "vc-challenge-1600.jpg": "vc-challenge-800.jpg",
          "audience-laugh-1600.jpg": "audience-laugh-800.jpg", "judges-chat-1600.jpg": "judges-chat-800.jpg",
-         "audience-focus-1600.jpg": "audience-focus-800.jpg", "audience-front-1600.jpg": "audience-front-800.jpg"}
+         "audience-focus-1600.jpg": "audience-focus-800.jpg", "audience-front-1600.jpg": "audience-front-800.jpg",
+         "blog-hero-1600.jpg": "blog-hero-800.jpg"}
 
 
 def read(p):

@@ -681,9 +681,11 @@ ul { margin: 0; padding: 0; list-style: none; }
    ========================================================================== */
 .blog-rss { color: var(--purple-text); border-bottom: 1px solid currentColor; }
 /* Post text is English in every language; say so only when the chrome isn't. */
-.lang-note { margin-top: 18px; }
+.lang-note { margin: 18px 0 0; }
 html:lang(en) .lang-note { display: none; }
-.blog-index { padding-top: 0; }
+.blog-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; margin-bottom: 28px; }
+.blog-bar .lang-note { margin: 0; }
+.blog-rss { margin-left: auto; }
 
 .post-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-bottom: 18px; }
 
