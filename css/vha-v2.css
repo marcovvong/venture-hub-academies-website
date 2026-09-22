@@ -307,6 +307,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .proof__n { font-size: clamp(38px, 5vw, 72px); font-weight: 800; letter-spacing: -.045em; line-height: .9; }
 .proof__n small { font-size: .52em; font-weight: 800; letter-spacing: -.02em; margin-right: 1px; }
 .proof__l { margin-top: 10px; font-size: 15px; color: var(--muted); font-weight: 500; }
+.proof__i { display: block; width: clamp(30px, 2.8vw, 40px); height: auto; margin-bottom: 20px; color: var(--purple); }
+.proof__item:nth-child(even) .proof__i { color: var(--ink); }
 .proof__item:nth-child(1) { border-color: var(--purple); }
 .proof__item:nth-child(2) { border-color: var(--black); }
 .proof__item:nth-child(3) { border-color: var(--purple); }
