@@ -21,7 +21,10 @@ SLUG = {f: s for s, f, _ in PAGES}
 # Photographs are referenced many times; embed each once and assign at runtime
 # so the file does not carry the same base64 blob repeatedly.
 SMALL = {"home-event-1920.jpg": "home-event-960.jpg", "about-photo-1600.jpg": "about-photo-800.jpg",
-         "demo-day-1600.jpg": "demo-day-800.jpg", "community-photo-1600.jpg": "community-photo-800.jpg"}
+         "demo-day-1600.jpg": "demo-day-800.jpg", "community-photo-1600.jpg": "community-photo-800.jpg",
+         "pitch-results-1600.jpg": "pitch-results-800.jpg", "vc-challenge-1600.jpg": "vc-challenge-800.jpg",
+         "audience-laugh-1600.jpg": "audience-laugh-800.jpg", "judges-chat-1600.jpg": "judges-chat-800.jpg",
+         "audience-focus-1600.jpg": "audience-focus-800.jpg", "audience-front-1600.jpg": "audience-front-800.jpg"}
 
 
 def read(p):

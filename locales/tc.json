@@ -84,7 +84,7 @@
       "title": "呈現真實數據。<br>以證據融資。"
     },
     "hero": {
-      "alt": "投資者在 Venture Hub Academy 座談上發言。",
+      "alt": "兩位創辦人公布觀眾投票選出的最具投資價值初創企業。",
       "cta1": "立即申請",
       "cta2": "查看兩個階段",
       "eyebrow": "加速器",
@@ -191,7 +191,7 @@
       "why": "為什麼您現在特別需要在亞洲／亞太獲得資本、算力或市場準入？"
     },
     "hero": {
-      "alt": "投資者在 Venture Hub Academy 座談上發言。",
+      "alt": "主持人介紹 VC Challenge 的評審。",
       "cta1": "開始申請",
       "cta2": "查看計劃",
       "eyebrow": "申請",
@@ -231,7 +231,19 @@
   },
   "com": {
     "activity": {
+      "challenge": {
+        "alt": "主持人介紹 VC Challenge 的評審。",
+        "caption": "VC Challenge"
+      },
       "eyebrow": "動態",
+      "focus": {
+        "alt": "觀眾專注聆聽路演。",
+        "caption": "現場"
+      },
+      "judges": {
+        "alt": "兩位評審在路演間隙於觀眾席交談。",
+        "caption": "路演間隙"
+      },
       "night": {
         "alt": "創辦人在 Venture Hub Academy 活動上交流。",
         "caption": "社群之夜 · 香港"
@@ -247,6 +259,10 @@
       "session": {
         "alt": "Venture Hub Academy 活動的現場觀眾。",
         "caption": "創辦人專場"
+      },
+      "showcase": {
+        "alt": "香港大學演講廳內 Venture Showcase 的觀眾。",
+        "caption": "Venture Showcase · 港大"
       },
       "title": "這裡總有新動態。"
     },
@@ -279,7 +295,7 @@
       "title": "遍布網絡的活動。"
     },
     "hero": {
-      "alt": "創辦人在 Venture Hub Academy 香港活動上交流。",
+      "alt": "Venture Hub Academy 活動現場，觀眾席上的創辦人與投資者開懷大笑。",
       "cta1": "加入社群",
       "cta2": "查看計劃",
       "eyebrow": "社群",

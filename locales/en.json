@@ -84,7 +84,7 @@
       "title": "Present live metrics.<br>Raise on evidence."
     },
     "hero": {
-      "alt": "Investors on stage during a Venture Hub Academy panel.",
+      "alt": "Two founders presenting the audience vote for the most investable startup.",
       "cta1": "Apply Now",
       "cta2": "See the phases",
       "eyebrow": "Accelerator",
@@ -191,7 +191,7 @@
       "why": "Why do you need capital, compute, or market access specifically in Asia/APAC right now?"
     },
     "hero": {
-      "alt": "Investors on stage during a Venture Hub Academy panel.",
+      "alt": "The host introducing the judges of the VC Challenge.",
       "cta1": "Start application",
       "cta2": "See the program",
       "eyebrow": "Apply",
@@ -231,7 +231,19 @@
   },
   "com": {
     "activity": {
+      "challenge": {
+        "alt": "The host introducing the judges of the VC Challenge.",
+        "caption": "VC Challenge"
+      },
       "eyebrow": "Activity",
+      "focus": {
+        "alt": "Audience members listening closely to a pitch.",
+        "caption": "In the room"
+      },
+      "judges": {
+        "alt": "Two judges talking in the audience between pitches.",
+        "caption": "Between pitches"
+      },
       "night": {
         "alt": "Founders networking at a Venture Hub Academy event.",
         "caption": "Community night · Hong Kong"
@@ -247,6 +259,10 @@
       "session": {
         "alt": "Audience at a Venture Hub Academy session.",
         "caption": "Founder session"
+      },
+      "showcase": {
+        "alt": "The audience at the Venture Showcase in a University of Hong Kong lecture theatre.",
+        "caption": "Venture Showcase · HKU"
       },
       "title": "Something is always happening."
     },
@@ -279,7 +295,7 @@
       "title": "Events across the network."
     },
     "hero": {
-      "alt": "Founders networking at a Venture Hub Academy event in Hong Kong.",
+      "alt": "Founders and investors sharing a laugh in the audience at a Venture Hub Academy event.",
       "cta1": "Join the Community",
       "cta2": "See the program",
       "eyebrow": "Community",

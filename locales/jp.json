@@ -84,7 +84,7 @@
       "title": "実績データを示し、<br>エビデンスで資金調達を。"
     },
     "hero": {
-      "alt": "Venture Hub Academyのパネルで登壇する投資家。",
+      "alt": "最も投資価値の高いスタートアップを決める観客投票の結果を発表する2人の創業者。",
       "cta1": "今すぐ応募",
       "cta2": "2つのフェーズを見る",
       "eyebrow": "アクセラレーター",
@@ -191,7 +191,7 @@
       "why": "なぜ今、アジア太平洋地域における資本・コンピューティング・市場アクセスが必要なのですか？"
     },
     "hero": {
-      "alt": "Venture Hub Academyのパネルで登壇する投資家。",
+      "alt": "VC Challengeの審査員を紹介する司会者。",
       "cta1": "応募を始める",
       "cta2": "プログラムを見る",
       "eyebrow": "応募",
@@ -231,7 +231,19 @@
   },
   "com": {
     "activity": {
+      "challenge": {
+        "alt": "VC Challengeの審査員を紹介する司会者。",
+        "caption": "VC Challenge"
+      },
       "eyebrow": "アクティビティ",
+      "focus": {
+        "alt": "ピッチに聞き入る観客。",
+        "caption": "会場の様子"
+      },
+      "judges": {
+        "alt": "ピッチの合間に客席で話す2人の審査員。",
+        "caption": "ピッチの合間に"
+      },
       "night": {
         "alt": "Venture Hub Academyのイベントで交流する創業者たち。",
         "caption": "コミュニティナイト · 香港"
@@ -247,6 +259,10 @@
       "session": {
         "alt": "Venture Hub Academyのセッションの参加者。",
         "caption": "創業者セッション"
+      },
+      "showcase": {
+        "alt": "香港大学の講義室で開かれたVenture Showcaseの観客。",
+        "caption": "Venture Showcase · 香港大学"
       },
       "title": "いつも何かが動いている。"
     },
@@ -279,7 +295,7 @@
       "title": "ネットワーク各地でのイベント。"
     },
     "hero": {
-      "alt": "香港で開催されたVenture Hub Academyのイベントで交流する創業者たち。",
+      "alt": "Venture Hub Academyのイベントで、客席で笑い合う創業者と投資家たち。",
       "cta1": "コミュニティに参加",
       "cta2": "プログラムを見る",
       "eyebrow": "コミュニティ",
