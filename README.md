@@ -16,7 +16,7 @@ No framework, no dependencies to install. The `.html` files at the root are the 
 | Community | `community.html` | The three tiers, activity, events |
 | About | `about.html` | Who we back, criteria, the two engines, the studio, backing |
 | Apply | `apply.html` | Process and the application form |
-| Blog | `blog.html` + `blog/*.html` | Our point of view on AI, one page per post |
+| Blog | `blog/index.html` + `blog/*.html` | Our point of view on AI, one page per post. The index is `blog/index.html` (served as `/blog/`), not `blog.html`: the host drops `.html`, and `/blog` would collide with the `blog/` folder and return 403 |
 
 ---
 

@@ -15,8 +15,7 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/Desktop/VHA-we
 
 PAGES = [("home", "index.html", "Home"), ("accelerator", "accelerator.html", "Accelerator"),
          ("community", "community.html", "Community"),
-         ("about", "about.html", "About"), ("apply", "apply.html", "Apply"),
-         ("blog", "blog.html", "Blog")]
+         ("about", "about.html", "About"), ("apply", "apply.html", "Apply")]
 SLUG = {f: s for s, f, _ in PAGES}
 
 # Photographs are referenced many times; embed each once and assign at runtime
@@ -72,6 +71,9 @@ def build():
             return 'href="#/%s" data-goto="%s"' % (t, t) if t else m.group(0)
         return re.sub(r'href="([a-z-]+\.html)"', link, x)
     chrome, footer = fix_chrome(chrome), fix_chrome(footer)
+    # The blog is not bundled (posts are separate pages); send its link to the live site.
+    live_blog = 'href="https://academy.venturehub.tech/blog/"'
+    chrome, footer = chrome.replace('href="blog/"', live_blog), footer.replace('href="blog/"', live_blog)
     for logo, mime in [("assets/logo/vha-mark-black-256.png", "image/png"),
                        ("assets/logo/vha-mark-white-256.png", "image/png")]:
         d = uri(logo, mime)

@@ -26,7 +26,7 @@ NAV = [
     ("Accelerator",    "accelerator.html", "nav.acc"),
     ("Community",      "community.html",   "nav.com"),
     ("About",          "about.html",       "nav.about"),
-    ("Blog",           "blog.html",        "nav.blog"),
+    ("Blog",           "blog/",            "nav.blog"),
 ]
 
 # --- photography: all from the Venture Showcase at HKU, 23 May 2026 ---------
@@ -372,6 +372,12 @@ MAP_LIBS = """<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity=
 """
 
 
+def page_url(filename):
+    """The public path: a folder's index.html is served as the folder itself,
+    so the canonical for blog/index.html is blog/ and for index.html the root."""
+    return filename[:-len("index.html")] if filename.endswith("index.html") else filename
+
+
 def _from_subfolder(html, depth):
     """Point root-relative URLs back up to the site root.
 
@@ -393,7 +399,7 @@ def write(filename, title, desc, body, current, seo_key, extra_head="", extra_js
     as untranslated in all five languages."""
     if "data-apac-map" in body:
         extra_head = MAP_LIBS + extra_head
-    url = "" if filename == "index.html" else filename   # canonical is the bare root
+    url = page_url(filename)
     # The generated markup is English; i18n.js swaps it in place on load when
     # ?lang= names another language, and rewrites internal links to carry it.
     # i18n.js assigns these with document.title = ... and setAttribute, neither
@@ -1144,10 +1150,13 @@ def page_blog(posts):
     </div>
   </section>
 """ + cta()
-    return write("blog.html",
+    # The index lives at blog/index.html, not blog.html: the host drops .html,
+    # so blog.html is served as /blog - which collides with the blog/ folder
+    # holding the posts and answers 403. As the folder's index it is /blog/.
+    return write("blog/index.html",
                  "Blog &mdash; Venture Hub Academy",
                  "Our point of view on AI, company building and APAC markets, from the Venture Hub Academy team.",
-                 body, "blog.html", "blog", extra_head=RSS_LINK)
+                 body, "blog/", "blog", extra_head=RSS_LINK)
 
 
 def page_post(posts, i):
@@ -1171,7 +1180,7 @@ def page_post(posts, i):
     body = f"""  <article class="post">
     <header class="post__head">
       <div class="wrap post__col">
-        <a href="blog.html" class="post__back meta" data-internal>&larr; <span data-i18n="blog.all">{T["all"]}</span></a>
+        <a href="blog/" class="post__back meta" data-internal>&larr; <span data-i18n="blog.all">{T["all"]}</span></a>
         {post_meta(p, author=True)}
         <h1 class="post__title" lang="en">{escape(p["title"])}</h1>
         <p class="body-l post__lede" lang="en">{escape(p["summary"])}</p>{tags}
@@ -1192,7 +1201,7 @@ def page_post(posts, i):
     return write(p["file"],
                  "%s &mdash; Venture Hub Academy" % escape(p["title"]),
                  escape(p["summary"]),
-                 body, "blog.html", None, extra_head=RSS_LINK)
+                 body, "blog/", None, extra_head=RSS_LINK)
 
 
 def clear_old_posts():
@@ -1355,7 +1364,7 @@ def check_seo(pages):
     entirely)."""
     problems = []
 
-    expected = {SITE if p == "index.html" else SITE + p for p in pages}
+    expected = {SITE + page_url(p) for p in pages}
     with open(os.path.join(ROOT, "sitemap.xml"), encoding="utf-8") as f:
         listed = set(re.findall(r"<loc>([^<]+)</loc>", f.read()))
     if listed != expected:
@@ -1365,7 +1374,7 @@ def check_seo(pages):
     for name in pages:
         with open(os.path.join(ROOT, name), encoding="utf-8") as f:
             html = f.read()
-        url = SITE if name == "index.html" else SITE + name
+        url = SITE + page_url(name)
         canon = re.findall(r'<link rel="canonical" href="([^"]+)"', html)
         og = re.findall(r'<meta property="og:url" content="([^"]+)"', html)
         if canon != [url]:
@@ -1392,14 +1401,14 @@ def check_seo(pages):
 def build_sitemap(pages, lastmod=None):
     lastmod = lastmod or {}
     prio = {"index.html": ("weekly", "1.0"), "apply.html": ("monthly", "0.9"),
-            "blog.html": ("daily", "0.8"),
+            "blog/index.html": ("daily", "0.8"),
             "accelerator.html": ("monthly", "0.9"), "community.html": ("monthly", "0.8"),
             "about.html": ("monthly", "0.7")}
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', '']
     for p in pages:
         cf, pr = prio.get(p, ("monthly", "0.6" if p.startswith("blog/") else "0.7"))
-        loc = SITE if p == "index.html" else SITE + p
+        loc = SITE + page_url(p)
         out += ['  <url>', f'    <loc>{loc}</loc>']
         if p in lastmod:
             out.append(f'    <lastmod>{lastmod[p]}</lastmod>')

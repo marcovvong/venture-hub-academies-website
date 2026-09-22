@@ -175,6 +175,8 @@ def load_posts():
             if not meta.get(field):
                 raise SystemExit("%s: the header needs a %s" % (path, field))
         slug = m.group(2)
+        if slug == "index":
+            raise SystemExit("%s: 'index' is the blog page itself - pick another name" % path)
         if slug in seen:
             raise SystemExit("%s and %s would both publish at blog/%s.html"
                              % (seen[slug], path, slug))
@@ -217,7 +219,7 @@ def build_feed(posts, site):
             % (escape(p["title"]), site, p["file"], site, p["file"],
                when.strftime("%a, %d %b %Y %H:%M:%S %z"), escape(p["summary"])))
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n<channel>\n'
-           "  <title>Venture Hub Academy Blog</title>\n  <link>%sblog.html</link>\n"
+           "  <title>Venture Hub Academy Blog</title>\n  <link>%sblog/</link>\n"
            "  <description>Our point of view on AI, company building and APAC markets.</description>\n"
            "  <language>en</language>\n%s\n</channel>\n</rss>\n" % (site, "\n".join(items)))
     os.makedirs(os.path.join(ROOT, "blog"), exist_ok=True)

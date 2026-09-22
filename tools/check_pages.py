@@ -24,8 +24,9 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # The newest post stands in for all of them: they share one template.
-POSTS = sorted(glob.glob(os.path.join(ROOT, "blog", "*.html")), key=os.path.getmtime)[-1:]
-PAGES = (["index.html", "accelerator.html", "community.html", "about.html", "apply.html", "blog.html"]
+POSTS = sorted((p for p in glob.glob(os.path.join(ROOT, "blog", "*.html"))
+                if not p.endswith("index.html")), key=os.path.getmtime)[-1:]
+PAGES = (["index.html", "accelerator.html", "community.html", "about.html", "apply.html", "blog/index.html"]
          + [os.path.relpath(p, ROOT) for p in POSTS])
 LANGS = {"en": "en", "sc": "zh-Hans", "tc": "zh-Hant", "jp": "ja", "th": "th", "km": "km"}
 WIDTHS = [360, 390, 768, 1024, 1440]
